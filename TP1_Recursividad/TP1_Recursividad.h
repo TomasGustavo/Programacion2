@@ -11,3 +11,26 @@
 #define ANSI_bMAGENTA "\e[95m"
 #define ANSI_bCYAN "\e[96m"
 #define ANSI_RESET "\e[0m"
+
+
+bool palindromo(char* cadena[]);
+
+int producto(int m, int n);
+
+int terminoSeridFibonacci (int num);
+
+float division(int m, int n);
+
+void agregarSeparadorMiles(char* string[]);
+
+char* chinos(int n);
+
+char* ondaDigital(char* onda[]);
+
+int* subconjuntoQueSumanN (int* cadena[], int n);
+
+bool divisiblePor7 (int n);
+
+int* explosion(int n, int b);
+
+
