@@ -1,3 +1,6 @@
+#ifndef TP1_RECURSIVIDAD_H
+#define TP1_RECURSIVIDAD_H
+
 #include <stdbool.h>
 #define ANSI_RED "\e[31m"
 #define ANSI_GREEN "\e[32m"
@@ -13,26 +16,24 @@
 #define ANSI_bCYAN "\e[96m"
 #define ANSI_RESET "\e[0m"
 
-
-
-bool palindromo(char* cadena[]);
+bool palindromo(char *cadena[]);
 
 int producto(int m, int n);
 
-int terminoSeridFibonacci (int num);
+int terminoSeridFibonacci(int num);
 
 float division(int m, int n);
 
-void agregarSeparadorMiles(char* string[]);
+void agregarSeparadorMiles(char *string[]);
 
-char* chinos(int n);
+char *chinos(int n);
 
-char* ondaDigital(char* onda[]);
+char *ondaDigital(char *onda[]);
 
-int* subconjuntoQueSumanN (int* cadena[], int n);
+int *subconjuntoQueSumanN(int *cadena[], int n);
 
-bool divisiblePor7 (int n);
+bool divisiblePor7(int n);
 
-int* explosion(int n, int b);
+int *explosion(int n, int b);
 
-
+#endif // TP1_RECURSIVIDAD_H
