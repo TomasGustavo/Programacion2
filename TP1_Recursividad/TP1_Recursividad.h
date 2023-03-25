@@ -1,3 +1,4 @@
+#include <stdbool.h>
 #define ANSI_RED "\e[31m"
 #define ANSI_GREEN "\e[32m"
 #define ANSI_YELLOW "\e[33m"
@@ -11,6 +12,7 @@
 #define ANSI_bMAGENTA "\e[95m"
 #define ANSI_bCYAN "\e[96m"
 #define ANSI_RESET "\e[0m"
+
 
 
 bool palindromo(char* cadena[]);
