@@ -18,27 +18,24 @@
     }
     printf("%c", opcion);
 } */
-
-int main()
-{
-
-    // Validación de la opción ingresada
-    char input[100];
-    int i = 0;
-    printf("Ingrese un texto: ");
-    scanf("%s", &input); // Leer la entrada del usuario
-    while (input[i])
-    { // Mientras haya caracteres en la cadena
-        if (!isalpha(input[i]))
-        { // Si el carácter no es una letra
-          // if (!isdigit(input[i]))
-          // { // Si el carácter no es una numero
-            printf("Error: se ingresó un carácter que no valido.\n");
-            printf("Ingrese un texto: ");
-            scanf("%s", &input); // Leer la entrada del usuario
-            i = 0;
-        }
-        i++;
-    }
-    printf("La entrada es válida.\n");
-}
+   
+    /*   // Validación de la opción ingresada
+       char input[100];
+       int i = 0;
+       printf("Ingrese un texto: ");
+       scanf("%s", &input); // Leer la entrada del usuario
+       while (input[i])
+       { // Mientras haya caracteres en la cadena
+           if (!isalpha(input[i]))
+           { // Si el carácter no es una letra
+             // if (!isdigit(input[i]))
+             // { // Si el carácter no es una numero
+               printf("Error: se ingresó un carácter que no valido.\n");
+               printf("Ingrese un texto: ");
+               scanf("%s", &input); // Leer la entrada del usuario
+               i = 0;
+           }
+           i++;
+       }
+       printf("La entrada es válida.\n"); 
+}*/
