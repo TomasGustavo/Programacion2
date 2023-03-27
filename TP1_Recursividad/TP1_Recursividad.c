@@ -41,4 +41,4 @@ int main()
         i++;
     }
     printf("La entrada es válida.\n");
-}S
+}

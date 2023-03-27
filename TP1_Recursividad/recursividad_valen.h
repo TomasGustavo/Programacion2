@@ -28,7 +28,7 @@ void agregarSeparadorMiles(char *string[]);
 
 char *chinos(int n);
 
-char *ondaDigital(char *onda[]);
+char* ondaDigital(char *onda);
 
 int *subconjuntoQueSumanN(int *cadena[], int n);
 
