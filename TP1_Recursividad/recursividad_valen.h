@@ -16,7 +16,7 @@
 #define ANSI_bCYAN "\e[96m"
 #define ANSI_RESET "\e[0m"
 
-bool palindromo(char *cadena[]);
+bool palindromo(char *cadena, int principio, int final);
 
 int producto(int m, int n);
 
@@ -24,7 +24,7 @@ int terminoSerieFibonacci(int num);
 
 float division(int m, int n);
 
-void agregarSeparadorMiles(char *string[]);
+char* agregarSeparadorMiles(char *string);
 
 char *chinos(int n);
 

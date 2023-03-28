@@ -4,6 +4,23 @@
 #include <string.h>
 #include "recursividad_valen.h"
 
+
+//PUNTO 1
+bool palindromo(char *cadena, int principio, int final){
+    bool respuesta;
+    if ((principio == final)  || (final < principio)){
+        respuesta = true;
+    } else {
+        if (cadena[principio] == cadena[final]){
+            respuesta = palindromo(cadena, principio+1, final-1);
+        } else{
+            respuesta = false;
+        }
+    }
+    return respuesta;
+}
+
+
 // PUNTO 2
 int producto(int m, int n){
     int resultado;
@@ -42,6 +59,11 @@ int terminoSerieFibonacci(int num){
     if (num <= 1) resultado = num;
     else resultado = terminoSerieFibonacci(num-1) + terminoSerieFibonacci(num-2);  
     return resultado;
+}
+
+//PUNTO 5 
+char* agregarSeparadorMiles(char *string){
+
 }
 
 //PUNTO 6
@@ -164,10 +186,27 @@ int main (){
     return 0;
     */
 
-   char *cadenaDelUsuario = (char*) calloc(100, sizeof(char));
+   /* Main Punto 7B
+       char *cadenaDelUsuario = (char*) calloc(100, sizeof(char));
 
     printf("Ingresa una cadena: ");
     scanf("%s", cadenaDelUsuario); 
     ondaDigitalPrint(cadenaDelUsuario,0);
+   */
+
+    char *cadenaDelUsuario = (char*) calloc(100, sizeof(char));
+    bool res;
+    int longitud;
+
+    printf("Ingresa una cadena a ver que es: ");
+    scanf("%s", cadenaDelUsuario); 
+    longitud = strlen(cadenaDelUsuario) -1;
+    res = palindromo(cadenaDelUsuario, 0, longitud);
+
+    if (res == true) {
+        printf("Es palindromo");
+    } else {
+        printf("no es palindromo");
+    }
 }
 
