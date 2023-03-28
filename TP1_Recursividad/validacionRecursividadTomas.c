@@ -59,19 +59,16 @@ char* MayuscMinusc(char* cadena, int opc){      // intento de funcion de pasar u
     while (cadena[i]){                              // recorre la cadena hasta el caracter nulo '\0'
         if (opc == 1){
            //printf("%c",cadena[i]);       
-            char x = cadena[i];         // si opc ==1 paso el char de la posicion i a mayusc.
-            x = toupper(x);
-            cadena[i] = x;
-            printf("........");
+           cadena[i] = toupper(cadena[i]);          // si opc == 1 paso el char de la posicion i a mayusc.
                                                   
                 
         }
-        /*else if (opc==0){
+        else if (opc==0){
            
-            cadena[i] = tolower((char)(cadena[i]));         // si opc == 0 paso el char de la posicion i a minusc.
+            cadena[i] = tolower(cadena[i]);         // si opc == 0 paso el char de la posicion i a minusc.
             
                 
-        }*/
+        }
         i++;
     }
     
@@ -97,10 +94,18 @@ void mostrarcadenaNum(int cadena[]){
     printf("\n");
 }
 
+void cargarString(char* cadena){
+    int i=0;
+
+    printf("ingresar datos: ");
+    scanf("%s",cadena);
+    
+}
+
 int main(){
     char *cadena = (char*) malloc(sizeof(char)*35);
-    cadena = "abcdefghijknmlopqrstuvwxyz";
     
+    cargarString(cadena);
     //int cadenaNum [15]={1,-2,3,-4,5,6,7,8,-9};
     //int *ptr = cadenaNum;
      
@@ -117,11 +122,12 @@ int main(){
    //mostrarcadenaNum(ptr);
    //ptr = CambiarSigno(cadenaNum,1);
    //mostrarcadenaNum(ptr);
-   //mostrarcadenaChar(cadena);
+   mostrarcadenaChar(cadena);
    cadena = MayuscMinusc(cadena,1);
    mostrarcadenaChar(cadena);
     /*char* x = "a";
     printf("%c",*x);
     x = toupper(*x);
     printf("%c",x);*/
+    free(cadena);
 }
