@@ -4,6 +4,8 @@
 #include <string.h>
 #include <ctype.h>
 
+
+// funcion para validacion de strings (solo char alfabeticos).
 int ValidarStringAlfa(char cadena[]){
     int i=0;
 
@@ -18,6 +20,8 @@ int ValidarStringAlfa(char cadena[]){
     
 }  
 
+
+// funcion para validacion de cadena de solo digitos.
 int ValidarCadenaNum (int cadena[]){
     int i=0;
 
@@ -30,6 +34,7 @@ int ValidarCadenaNum (int cadena[]){
     return 0;
 }
 
+// funcion para cambiar signos de numeros (-) a (+) y visecersa.
 int* CambiarSigno(int* cadena, int opc){
     int i=0;
     while(cadena[i]){
@@ -45,6 +50,7 @@ int* CambiarSigno(int* cadena, int opc){
     return cadena;
 }
 
+// funcion strlen()
 int LargoCadena(void *cadena){
 
     int largo = strlen(cadena);
@@ -52,8 +58,9 @@ int LargoCadena(void *cadena){
     return largo;
 }
 
-char* MayuscMinusc(char* cadena, int opc){      // intento de funcion de pasar un string a todos mayusc o minus
-    int i=0;                                      // no me anda el toupper o tolower no se porque.
+// funcion para pasar un string a todos mayusc o minus.
+char* MayuscMinusc(char* cadena, int opc){      
+    int i=0;                                       
     
 
     while (cadena[i]){                              // recorre la cadena hasta el caracter nulo '\0'
@@ -75,6 +82,8 @@ char* MayuscMinusc(char* cadena, int opc){      // intento de funcion de pasar u
     return cadena;
 }
 
+
+// funcion para mostrar string.
 void mostrarcadenaChar(char *cadena){
     int i = 0;
     int largo = LargoCadena(cadena);
@@ -84,6 +93,8 @@ void mostrarcadenaChar(char *cadena){
     }
     printf("\n");
 }
+
+// funcion para mostrar cadena de numeros.
 void mostrarcadenaNum(int cadena[]){
     int i = 0;
 
@@ -94,6 +105,8 @@ void mostrarcadenaNum(int cadena[]){
     printf("\n");
 }
 
+
+// funcion para cargar un string.
 void cargarString(char* cadena){
     int i=0;
 
@@ -102,7 +115,7 @@ void cargarString(char* cadena){
     
 }
 
-int main(){
+/*int main(){
     char *cadena = (char*) malloc(sizeof(char)*35);
     
     cargarString(cadena);
@@ -122,12 +135,12 @@ int main(){
    //mostrarcadenaNum(ptr);
    //ptr = CambiarSigno(cadenaNum,1);
    //mostrarcadenaNum(ptr);
-   mostrarcadenaChar(cadena);
-   cadena = MayuscMinusc(cadena,1);
-   mostrarcadenaChar(cadena);
+   //mostrarcadenaChar(cadena);
+   //cadena = MayuscMinusc(cadena,1);
+  // mostrarcadenaChar(cadena);
     /*char* x = "a";
     printf("%c",*x);
     x = toupper(*x);
     printf("%c",x);*/
-    free(cadena);
-}
+    //free(cadena);
+//}
