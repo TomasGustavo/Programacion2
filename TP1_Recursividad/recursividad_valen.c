@@ -102,6 +102,23 @@ char* ondaDigital(char *onda){
     return resultado;
 }
 
+//PUNTO 7 CON PRINTF QUE MUESTRA BIEN LOS CARACTERES DE LA ONDA
+void ondaDigitalPrint(char *onda, int i){
+
+    if ((i > 0) && (onda[i] != onda[i-1])){
+           printf("│");
+    }
+    
+    if((onda[i])== 'h') {
+        printf("¯") ; 
+    } else {
+        printf("_");
+        }
+        
+    if (i < (strlen(onda) -1)) {
+        ondaDigitalPrint(onda,i+1);
+    }
+}
 
 int main (){
     /* MAIN PUNTO 2 
@@ -135,14 +152,22 @@ int main (){
      printf("Resultado: %s", resultado);
     */
  
+    /* MAIN PUNTO 7A
     char *cadenaDelUsuario = (char*) calloc(100, sizeof(char));
     char *cadenaDeRespuesta = (char*) calloc(100 ,sizeof(char));
 
     printf("Ingresa una cadena: ");
     scanf("%s", cadenaDelUsuario); 
     cadenaDeRespuesta = ondaDigital(cadenaDelUsuario);
-    printf("La cadena que ingresaste es: %s", cadenaDeRespuesta);
+   printf("La onda es: %s", cadenaDeRespuesta);
 
     return 0;
+    */
+
+   char *cadenaDelUsuario = (char*) calloc(100, sizeof(char));
+
+    printf("Ingresa una cadena: ");
+    scanf("%s", cadenaDelUsuario); 
+    ondaDigitalPrint(cadenaDelUsuario,0);
 }
 

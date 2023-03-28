@@ -30,6 +30,8 @@ char *chinos(int n);
 
 char* ondaDigital(char *onda);
 
+void ondaDigitalPrint(char *onda, int i);
+
 int *subconjuntoQueSumanN(int *cadena[], int n);
 
 bool divisiblePor7(int n);
