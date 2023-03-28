@@ -24,7 +24,7 @@ int terminoSerieFibonacci(int num);
 
 float division(int m, int n);
 
-char* agregarSeparadorMiles(char *string);
+void agregarSeparadorMiles(char *cadena, int longitud, int contador);
 
 char *chinos(int n);
 

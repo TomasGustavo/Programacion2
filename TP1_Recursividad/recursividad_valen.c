@@ -20,7 +20,6 @@ bool palindromo(char *cadena, int principio, int final){
     return respuesta;
 }
 
-
 // PUNTO 2
 int producto(int m, int n){
     int resultado;
@@ -62,8 +61,20 @@ int terminoSerieFibonacci(int num){
 }
 
 //PUNTO 5 
-char* agregarSeparadorMiles(char *string){
+void agregarSeparadorMiles(char *cadena, int longitud, int contador){
 
+    if (longitud == 0) {
+        printf("%c",cadena[longitud]);
+    } else {
+        if (contador == 1) {
+            agregarSeparadorMiles(cadena, longitud-1, 3);
+            printf(".");
+            printf("%c",cadena[longitud]);
+        } else {
+            agregarSeparadorMiles(cadena, longitud-1, contador - 1);
+            printf("%c",cadena[longitud]);
+        }
+    }
 }
 
 //PUNTO 6
@@ -194,6 +205,7 @@ int main (){
     ondaDigitalPrint(cadenaDelUsuario,0);
    */
 
+    /* PUNTO 1 MAIN
     char *cadenaDelUsuario = (char*) calloc(100, sizeof(char));
     bool res;
     int longitud;
@@ -208,5 +220,19 @@ int main (){
     } else {
         printf("no es palindromo");
     }
+    */
+
+   /* MAIN PUNTO 5
+   char *cadenaDelUsuario = (char*) calloc(100, sizeof(char));
+    int longitud;
+
+    printf("Ingresa una cadena de numeros: ");
+    scanf("%s", cadenaDelUsuario); 
+    longitud = strlen(cadenaDelUsuario) -1;
+    printf("La cadena rta es: ");
+    agregarSeparadorMiles(cadenaDelUsuario, longitud, 3);
+    
+   */
+    
 }
 
