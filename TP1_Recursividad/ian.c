@@ -61,6 +61,36 @@ return cociente;
 }
 
 
+//ejercicio 9
+bool divisiblePor7(int n){
+    bool condicion;
+    int cifra_derecha;
+    int numero_izquierda;
+    if (n < 0)
+    {
+        n = n * -1;
+    }
+    
+    if(n < 70){
+        if (n % 7 == 0)
+        {
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    else{
+        cifra_derecha = n % 10; //calculos para obtener la cifra derecha
+        numero_izquierda = n / 10;
+        cifra_derecha = cifra_derecha * 2;
+        numero_izquierda = numero_izquierda - cifra_derecha;
+        condicion = divisiblePor7(numero_izquierda);
+        return condicion;
+    }
+}
+
+
 int main(){
     //ejercicio 2
     /*
@@ -97,5 +127,25 @@ int main(){
     }
     resultado_4 = division(dividendo, divisor);
     printf("%d / %d = %0.4f", dividendo, divisor, resultado_4);
+    
+    
+    //ejercicio 9
+    int numero_ej9;
+    bool resultado_9;
+    printf("ingrese un numero para saber si es divisble por 7: ");
+    scanf("%d", &numero_ej9);
+    resultado_9 = divisiblePor7(numero_ej9);
+    if (resultado_9 == false)
+    {
+        printf("el numero %d no es divisible por 7", numero_ej9);
+    }
+    else if (resultado_9 == true){
+        printf("el numero %d es divisible por 7", numero_ej9);
+    }   
 
 }
+
+
+
+
+
