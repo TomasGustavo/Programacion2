@@ -24,12 +24,12 @@ int terminoSerieFibonacci(int num);
 
 float division(int m, int n);
 
-void agregarSeparadorMiles(char *string[]);
+void agregarSeparadorMiles(char *string[],int largo);
 
 char *chinos(int n);
 
 
-char *ondaDigital(char *onda[]);
+char *ondaDigital(char* onda, char* resultado, int largo,  int index);
 
 int *subconjuntoQueSumanN(int *cadena[], int n);
 
