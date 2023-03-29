@@ -96,7 +96,7 @@ void main()
     {
         menu_principal();
         scanf("%i", &opcion);
-        while (opcion < 0 || opcion > 8)
+        while (opcion < 0 || opcion > 10)
         {
             printf(ANSI_RED "Opción incorrecta\n" ANSI_RESET);
             printf(ANSI_BLUE "  Por favor seleccione una opción: " ANSI_YELLOW);
@@ -127,6 +127,12 @@ void main()
             printf("menu_principal 7");
             break;
         case 8:
+            printf("menu_principal 8");
+            break;
+        case 9:
+            printf("menu_principal 8");
+            break;
+        case 10:
             printf("menu_principal 8");
             break;
         case 0:

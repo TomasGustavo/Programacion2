@@ -36,6 +36,6 @@ int *subconjuntoQueSumanN(int *cadena[], int n);
 
 bool divisiblePor7(int n);
 
-int *explosion(int n, int b);
+void explosion(int n, int b, int* arreglo, int i);
 
 #endif // TP1_RECURSIVIDAD_H

@@ -153,6 +153,29 @@ void ondaDigitalPrint(char *onda, int i){
     }
 }
 
+//PUNTO 10
+void explosion(int n, int b, int* arreglo, int i){
+    int n1,n2;
+
+    n1 = n/b;
+    n2 = n-(n/b);
+
+    if (n1 > b) {
+        explosion(n1,b, arreglo,i);
+    } else {
+        arreglo[i] = n1;
+        i++;
+    }
+
+    if (n2 > b) {
+        explosion(n2,b,arreglo,i);
+    } else {
+        arreglo [i] = n2;
+        i++;
+    }
+}
+
+
 
     /* MAIN PUNTO 2 
     int prod, m, n;
@@ -233,6 +256,29 @@ void ondaDigitalPrint(char *onda, int i){
     agregarSeparadorMiles(cadenaDelUsuario, longitud, 3);
     
    */
+/*PUNTO 10
+    int main()
+{
+    int* arreglo = calloc(20, sizeof(int));
+    int n, b, i;
     
+    printf("Ingrese un numero n: ");
+    scanf("%i", &n);
+    printf("Ingrese un numero b: ");
+    scanf("%i", &b);
+
+    explosion(n,b,arreglo,0);
+
+    i = 0;
+
+    while (arreglo[i] != NULL) {
+        printf("%d ", arreglo[i]);
+        i++;
+    }
+    return 0;
+}
+
+    
+*/
 
 
