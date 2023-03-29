@@ -153,7 +153,7 @@ void ondaDigitalPrint(char *onda, int i){
     }
 }
 
-int main (){
+
     /* MAIN PUNTO 2 
     int prod, m, n;
     printf("Ingrese un numero: ");
@@ -234,5 +234,5 @@ int main (){
     
    */
     
-}
+
 

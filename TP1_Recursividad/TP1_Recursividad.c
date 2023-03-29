@@ -1,7 +1,11 @@
 #include <stdio.h>
 #include <conio.h>
 #include <ctype.h>
-#include "TP1_Recursividad.h"
+#include <stdlib.h>
+#include <stdbool.h>
+#include <string.h>
+// #include "TP1_Recursividad.h"
+#include "recursividad_valen.h"
 
 // Función principal
 /* void main()
@@ -40,6 +44,25 @@
    printf("La entrada es válida.\n");
 }*/
 
+void main_palindromo()
+{
+    char *cadenaDelUsuario = (char *)calloc(100, sizeof(char));
+    bool res;
+    int longitud;
+    printf("Ingresa una cadena a ver que es: ");
+    scanf("%s", cadenaDelUsuario);
+    longitud = strlen(cadenaDelUsuario) - 1;
+    res = palindromo(cadenaDelUsuario, 0, longitud);
+    if (res == true)
+    {
+        printf("Es palindromo");
+    }
+    else
+    {
+        printf("no es palindromo");
+    }
+}
+
 void menu_principal()
 {
     printf(ANSI_BLUE "  ============================================================================\n");
@@ -62,12 +85,13 @@ void menu_principal()
     printf(" ------------------------------------------------------------------------------\n");
     printf("\n");
     printf("  Por favor seleccione una opción: " ANSI_YELLOW);
-};
+}
 
 void main()
 {
     bool salir = false;
-     int opcion;
+    int opcion;
+
     while (!salir)
     {
         menu_principal();
@@ -81,7 +105,8 @@ void main()
         switch (opcion)
         {
         case 1:
-            printf("menu_principal 1");
+            main_palindromo();
+            getch();
             break;
         case 2:
             printf("menu_principal 2");
