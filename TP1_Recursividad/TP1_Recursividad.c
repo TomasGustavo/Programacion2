@@ -18,24 +18,95 @@
     }
     printf("%c", opcion);
 } */
-   
-    /*   // Validación de la opción ingresada
-       char input[100];
-       int i = 0;
-       printf("Ingrese un texto: ");
-       scanf("%s", &input); // Leer la entrada del usuario
-       while (input[i])
-       { // Mientras haya caracteres en la cadena
-           if (!isalpha(input[i]))
-           { // Si el carácter no es una letra
-             // if (!isdigit(input[i]))
-             // { // Si el carácter no es una numero
-               printf("Error: se ingresó un carácter que no valido.\n");
-               printf("Ingrese un texto: ");
-               scanf("%s", &input); // Leer la entrada del usuario
-               i = 0;
-           }
-           i++;
+
+/*   // Validación de la opción ingresada
+   char input[100];
+   int i = 0;
+   printf("Ingrese un texto: ");
+   scanf("%s", &input); // Leer la entrada del usuario
+   while (input[i])
+   { // Mientras haya caracteres en la cadena
+       if (!isalpha(input[i]))
+       { // Si el carácter no es una letra
+         // if (!isdigit(input[i]))
+         // { // Si el carácter no es una numero
+           printf("Error: se ingresó un carácter que no valido.\n");
+           printf("Ingrese un texto: ");
+           scanf("%s", &input); // Leer la entrada del usuario
+           i = 0;
        }
-       printf("La entrada es válida.\n"); 
+       i++;
+   }
+   printf("La entrada es válida.\n");
 }*/
+
+void menu_principal()
+{
+    printf(ANSI_BLUE "  ============================================================================\n");
+    printf(" |                             TP1 RECURSIVIDAD                              |\n");
+    printf("  ============================================================================\n");
+    printf("\n");
+    printf("  1   Palíndromo\n");
+    printf("  2   Producto a partir de sumas sucesivas\n");
+    printf("  3   Termino de la serie de Fibonacci\n");
+    printf("  4   Cociente a partir de restas sucesivas\n");
+    printf("  5   Punto de los miles\n");
+    printf("  6   Mafia china\n");
+    printf("  7   Onda digital\n");
+    printf("  8   Subconjunto\n");
+    printf("  9   Divisible por 7\n");
+    printf("  10  Numero explosivo\n");
+    printf("\n");
+    printf("  0   Salir\n");
+    printf("\n");
+    printf(" ------------------------------------------------------------------------------\n");
+    printf("\n");
+    printf("  Por favor seleccione una opción: " ANSI_YELLOW);
+};
+
+void main()
+{
+    bool salir = false;
+     int opcion;
+    while (!salir)
+    {
+        menu_principal();
+        scanf("%i", &opcion);
+        while (opcion < 0 || opcion > 8)
+        {
+            printf(ANSI_RED "Opción incorrecta\n" ANSI_RESET);
+            printf(ANSI_BLUE "  Por favor seleccione una opción: " ANSI_YELLOW);
+            scanf("%i", &opcion);
+        }
+        switch (opcion)
+        {
+        case 1:
+            printf("menu_principal 1");
+            break;
+        case 2:
+            printf("menu_principal 2");
+            break;
+        case 3:
+            printf("menu_principal 3");
+            break;
+        case 4:
+            printf("menu_principal 4");
+            break;
+        case 5:
+            printf("menu_principal 5");
+            break;
+        case 6:
+            printf("menu_principal 6");
+            break;
+        case 7:
+            printf("menu_principal 7");
+            break;
+        case 8:
+            printf("menu_principal 8");
+            break;
+        case 0:
+            salir = true;
+            break;
+        }
+    }
+}
