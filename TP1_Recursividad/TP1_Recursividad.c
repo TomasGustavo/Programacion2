@@ -7,7 +7,83 @@
 // #include "TP1_Recursividad.h"
 #include "recursividad_valen.h"
 
-// Función principal
+// PUNTO 8 - SUBCONJUNTO
+
+char *buscaSumaSubconjunto(int tamano, int nivel, int suma, char *salidaparcial, int *ent, int *subset, int subsetSize)
+{
+    int i;
+    char *salida = (char *)malloc(sizeof(char) * 1000);
+    strcpy(salida, "");
+
+    if (tamano == nivel)
+    {
+        if (suma == 0)
+        {
+            strcat(salida, "{");
+            for (i = 0; i < subsetSize; i++)
+            {
+                char temp[10];
+                sprintf(temp, "%d ", subset[i]);
+                strcat(salida, temp);
+            }
+            strcat(salida, "}\n");
+            strcpy(salidaparcial, salida);
+        }
+        return salidaparcial;
+    }
+
+    strcpy(salida, buscaSumaSubconjunto(tamano, nivel + 1, suma, salidaparcial, ent, subset, subsetSize));
+    salidaparcial[0] = '\0';
+    subset[subsetSize] = ent[nivel];
+    subsetSize++;
+    strcat(salida, buscaSumaSubconjunto(tamano, nivel + 1, suma - ent[nivel], salidaparcial, ent, subset, subsetSize));
+    return salida;
+}
+
+int main_subconjunto()
+{
+    char entrada[100];
+    int tamano, suma;
+
+    printf("Ingrese el tamano del conjunto: ");
+    // fgets(entrada, 100, stdin);
+    // entrada[strcspn(entrada, "\n")] = '\0';
+    scanf("%d", &tamano);
+    while (tamano <= 0)
+    {
+        printf("Entrada invalida. Ingrese un valor entero positivo para el tamano del conjunto: ");
+        scanf("%d", &tamano);
+    }
+
+    int ent[tamano];
+    for (int i = 0; i < tamano; i++)
+    {
+        printf("Ingrese el valor %d del conjunto: ", i + 1);
+        scanf("%d", &ent[i]);
+        while (ent[i] <= 0)
+        {
+            printf("Entrada invalida. Ingrese un valor entero para el valor %d del conjunto: ", i + 1);
+            scanf("%d", &ent[i]);
+        }
+    }
+
+    printf("Ingrese el valor de la suma deseada: ");
+    scanf("%d", &suma);
+    while (suma <= 0)
+    {
+        printf("Entrada invalida. Ingrese un valor entero positivo para la suma deseada: ");
+        scanf("%d", &suma);
+    }
+    int subset[tamano];
+    int nivel = 0, subsetSize = 0;
+    char salidaparcial[1000];
+    strcpy(salidaparcial, "");
+    char *resultado = buscaSumaSubconjunto(tamano, nivel, suma, salidaparcial, ent, subset, subsetSize);
+    printf("%s", resultado);
+    return 0;
+}
+
+// Función principal8
 /* void main()
 {
 
@@ -127,7 +203,8 @@ void main()
             printf("menu_principal 7");
             break;
         case 8:
-            printf("menu_principal 8");
+            main_subconjunto();
+            getch();
             break;
         case 9:
             printf("menu_principal 8");
