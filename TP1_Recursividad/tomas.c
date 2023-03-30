@@ -9,12 +9,12 @@
 
 // ejercicio 1
 bool palindromo(char* cadena,int inicio, int final){
-    int i=0;
+    
 
     if (inicio==final || inicio>final){         //si la cadena tiene 1 solo caracter o ya la recorri entera ==> palindromo
         return true;
     }
-    else if (cadena[inicio]== cadena[final]){       // comparo primer char con el ultimo 
+    else if (cadena[inicio]== cadena[final-1]){       // comparo primer char con el ultimo 
         return palindromo(cadena,inicio+1,final-1); // si es true, vuelvo a llamar a la funcion sumando var inicio y restando var final para ir recorriendo la cadena
     }
     else{
@@ -29,7 +29,7 @@ int producto(int m,int n){
     bool negativo = false;
     
     if(n<0){
-        n*(-1);
+        n = n*(-1);
         negativo=true;      // si n es negativo le cambio el signo para poder usar recursividad restando n
     }
     
@@ -80,7 +80,7 @@ void agregarSeparadorMiles(char *string[], int largo){
 }
 
 // ejercicio 6
-
+/**/
 char *chinos(int n){
     char* cadena;
     char* cadenaAnterior;
@@ -100,7 +100,7 @@ char *chinos(int n){
 // ejercicio 7
 
 // se puede hacer mas bonito y sin tantos if's. dejarlo mas limpio
-char *ondaDigital(char* onda, char* resultado, int j,  int i){
+/*char *ondaDigital(char* onda, char* resultado, int j,  int i){
 
     if (LargoCadena(onda)==0){
         return;
@@ -135,6 +135,7 @@ char *ondaDigital(char* onda, char* resultado, int j,  int i){
     
 
 }
+*/
 
 // ejercicio 8
 
@@ -161,8 +162,6 @@ bool divisiblePor7(int n){
     }
 
 }
-
-
 
 
 
