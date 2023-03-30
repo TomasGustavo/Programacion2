@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
-#include "TP1_Recursividad.h"
+#include "ian.h"
 
 //ejercicio 2
 int producto(int m, int n){
@@ -31,7 +31,7 @@ return terminoSeridFibonacci(num - 1) + terminoSeridFibonacci(num - 2);
 
 //ejercicio 4
 
-float division(int m, int n){ 
+float division(int m, int n, int limite_Decimal){ 
 /*esta funcion se encarga de restar en cada sucesion el valor del dividendo(m) 
 con el del divisor(n) hasta que el resto sea menor a n*/ 
 float resto = m;  
@@ -46,12 +46,24 @@ if (n < 0 && m > 0){
 
 /*una vez que el resto sea menor a n se divide el resto por el n 
 para saber si el cociente(resultado) tiene valores decimales*/ 
-if (resto < n){ 
-    cociente = resto / n;
+else if (resto < n && limite_Decimal != 0)
+{       
+        
+        resto = resto * 10;
+        cociente = division(resto-n, n, limite_Decimal - 1);
+        cociente++;
+        cociente = cociente * 0.1; /*esta parte se encarga de desplazar a la parte decimal 
+        los valores correspondientes a la misma*/
+        return cociente;
+        
+}
+else if (limite_Decimal == 0){
+    /* si el numero decimal es muy grande el limite_Decimal 
+    se va a encargar de cortar la funcion con 4 digitos decimales*/
     return cociente;
 }
 else {
-cociente = division(m-n, n);
+cociente = division(m-n, n, limite_Decimal);
 
 /*luego se usa el cociente como contador una vez retornada la sucesion 
 para obtener el resultado segun la cantidad de sucesiones*/ 
@@ -125,7 +137,7 @@ int main(){
             printf("no se puede dividir por 0\n");
         }     
     }
-    resultado_4 = division(dividendo, divisor);
+    resultado_4 = division(dividendo, divisor, 5);
     printf("%d / %d = %0.4f", dividendo, divisor, resultado_4);
     
     
