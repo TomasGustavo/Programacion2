@@ -6,9 +6,34 @@
 #include <string.h>
 #include "TP1_Recursividad.h"
 
+// Elimina los espacios de una cadena
 
+void eliminarEspacios(char* cadena) {
+    int i, j;
+    int n = strlen(cadena);
+    for (i = 0; i < n; i++) {
+        if (cadena[i] == ' ') {
+            for (j = i; j < n; j++) {
+                cadena[j] = cadena[j+1];
+            }
+            n--;
+            i--;
+        }
+    }
+}
 
-int main_subconjunto()
+// Valida si todos los elementos de una cadena son letras
+bool sonLetras(char* cadena) {
+    bool res = true;
+    for (int i = 0; cadena[i] != '\0'; i++) {
+        if (!isalpha(cadena[i])) {
+            res = false;
+        }
+    }
+    return res;
+}
+
+void main_subconjunto()
 {
     char entrada[100];
     int tamano, suma;
@@ -48,7 +73,7 @@ int main_subconjunto()
     strcpy(salidaparcial, "");
     char *resultado = buscaSumaSubconjunto(tamano, nivel, suma, salidaparcial, ent, subset, subsetSize);
     printf("%s", resultado);
-    return 0;
+
 }
 
 // Función principal8
@@ -107,6 +132,48 @@ void main_palindromo()
     }
 }
 
+// PUNTO 10
+void main_bomba(){
+    int* arreglo = calloc(40, sizeof(int));
+    int n, b, i, validador;
+    
+    //Ingreso del primer valor
+    printf("Ingrese un numero n mayor a 1: ");
+    validador = scanf("%i", &n);
+
+    printf("%i", validador);
+    //Validacion del primer valor (mayor a 1 ya que si no B deberia ser 0 debido a que tiene que ser menor que N)
+    while ((validador == 0 ) || (n <=1)){
+        if (validador == 0 ) printf("Por favor ingrese un numero: ");
+        else if (n <=1) printf("Por favor ingrese un numero mayor a 1: ");
+        while (getchar() != '\n') 
+        validador = scanf("%i", &n);
+    }
+
+    //Ingreso del segundo valor
+    printf("Ingrese un numero b mayor a 1: ");
+    validador = scanf("%i", &b);
+
+    //Validacion del segundo valor
+    while ((validador != 1) || (b <=1) || (n <= b)){
+        if (validador != 1) printf("Por favor ingrese un numero: ");
+        else if (b <= 1)  printf("Por favor ingrese un numero mayor a 1: ");
+        else if (n <= b) printf("N tiene que ser mayor a B: ");
+        
+        while (getchar() != '\n');
+        validador = scanf("%i", &b);
+    }
+
+    explosion(n,b,arreglo,0);
+    i = 0;
+    while (arreglo[i] != NULL) {
+        printf("%d ", arreglo[i]);
+        i++;
+    }
+
+    free(arreglo);
+}
+
 void menu_principal()
 {
     printf(ANSI_BLUE "  ============================================================================\n");
@@ -131,7 +198,7 @@ void menu_principal()
     printf("  Por favor seleccione una opción: " ANSI_YELLOW);
 }
 
-void main()
+int main()
 {
     bool salir = false;
     int opcion;
@@ -144,6 +211,7 @@ void main()
         {
             printf(ANSI_RED "Opción incorrecta\n" ANSI_RESET);
             printf(ANSI_BLUE "  Por favor seleccione una opción: " ANSI_YELLOW);
+            while (getchar() != '\n');
             scanf("%i", &opcion);
         }
         switch (opcion)
@@ -178,11 +246,13 @@ void main()
             printf("menu_principal 8");
             break;
         case 10:
-            printf("menu_principal 8");
+            main_bomba();
+            getch();
             break;
         case 0:
             salir = true;
             break;
         }
     }
+    return 0;
 }
