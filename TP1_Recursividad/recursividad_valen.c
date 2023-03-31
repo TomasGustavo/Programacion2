@@ -5,20 +5,7 @@
 #include "recursividad_valen.h"
 
 
-//PUNTO 1
-bool palindromo(char *cadena, int principio, int final){
-    bool respuesta;
-    if ((principio == final)  || (final < principio)){
-        respuesta = true;
-    } else {
-        if (cadena[principio] == cadena[final]){
-            respuesta = palindromo(cadena, principio+1, final-1);
-        } else{
-            respuesta = false;
-        }
-    }
-    return respuesta;
-}
+
 
 // PUNTO 2
 int producto(int m, int n){
@@ -153,27 +140,7 @@ void ondaDigitalPrint(char *onda, int i){
     }
 }
 
-//PUNTO 10
-void explosion(int n, int b, int* arreglo, int i){
-    int n1,n2;
 
-    n1 = n/b;
-    n2 = n-(n/b);
-
-    if (n1 > b) {
-        explosion(n1,b, arreglo,i);
-    } else {
-        arreglo[i] = n1;
-        i++;
-    }
-
-    if (n2 > b) {
-        explosion(n2,b,arreglo,i);
-    } else {
-        arreglo [i] = n2;
-        i++;
-    }
-}
 
 
 
