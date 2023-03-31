@@ -18,9 +18,11 @@
 
 bool palindromo(char *cadena, int principio, int final);
 
-char *chinos(int n);
+long long producto(int m, int n);
 
 long long terminoSerieFibonacci(int num);
+
+char *chinos(int n);
 
 char *buscaSumaSubconjunto(int tamano, int nivel, int suma, char *salidaparcial, int *ent, int *subset, int subsetSize);
 

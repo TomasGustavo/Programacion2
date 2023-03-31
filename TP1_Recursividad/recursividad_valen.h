@@ -18,7 +18,7 @@
 
 
 
-int producto(int m, int n);
+
 
 int terminoSerieFibonacci(int num);
 

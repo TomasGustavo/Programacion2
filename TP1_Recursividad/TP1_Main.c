@@ -4,10 +4,39 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
+#include <limits.h>
 #include "TP1_Recursividad.h"
 
-// Elimina los espacios de una cadena
+//da verdadero si la cadena es vacia
+bool es_vacia(char* cadena) {
+    if (cadena[0] == '\0') { // Si el primer carácter es el carácter nulo, la cadena es vacía
+        return true;
+    }
+    else {
+        return false;
+    }
+}
 
+bool primer_caracter_espacio(char* cadena) {
+    if (cadena[0] == ' ') { // Si el primer carácter es el carácter es espacio, la cadena es invalida
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+bool ultimo_caracter_espacio(char* cadena) {
+    if ((strlen(cadena) -1) == ' ') { // Si el ultimo carácter es el carácter es espacio, la cadena es invalida
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+
+// Elimina los espacios de una cadena
 void eliminarEspacios(char* cadena) {
     int i, j;
     int n = strlen(cadena);
@@ -26,11 +55,22 @@ void eliminarEspacios(char* cadena) {
 bool sonLetras(char* cadena) {
     bool res = true;
     for (int i = 0; cadena[i] != '\0'; i++) {
-        if (!isalpha(cadena[i])) {
+        if ((!isalpha(cadena[i])) && (cadena[i] != ' ')) {
             res = false;
         }
     }
     return res;
+}
+
+//Pasa todos los caracteres de la cadena a minuscula
+
+void a_minusculas(char* cadena) {
+    int i = 0;
+
+    while (cadena[i] != '\0') { 
+        cadena[i] = tolower(cadena[i]); 
+        i++; 
+    }
 }
 
 // PUNTO 1
@@ -38,9 +78,23 @@ void main_palindromo()
 {
     char *cadenaDelUsuario = (char *)calloc(100, sizeof(char));
     bool res;
-    int longitud;
-    printf("Ingresa una cadena a ver que es: ");
-    scanf("%s", cadenaDelUsuario);
+    int longitud, c;
+    printf("Ingresa una palabra o expresion: ");
+    while ((c = getchar()) != '\n' && c != EOF);
+    fgets(cadenaDelUsuario, 100, stdin);
+
+    while ((es_vacia(cadenaDelUsuario)) || (primer_caracter_espacio(cadenaDelUsuario)) ||
+    (ultimo_caracter_espacio(cadenaDelUsuario)) || (!sonLetras(cadenaDelUsuario))){
+        if (es_vacia(cadenaDelUsuario)) printf("La cadena no puede estar vacia");
+        else if (primer_caracter_espacio(cadenaDelUsuario)) printf("El primer caracter no puede ser espacio: ");
+        else if (ultimo_caracter_espacio(cadenaDelUsuario)) printf("El ultimo caracter no puede ser espacio: ");
+        else if (!sonLetras(cadenaDelUsuario)) printf("Solo puede ingresar letras y espacios: ");
+        while ((c = getchar()) != '\n' && c != EOF);
+        fgets(cadenaDelUsuario, 100, stdin);
+    }
+    
+    a_minusculas(cadenaDelUsuario);
+    eliminarEspacios(cadenaDelUsuario);
     longitud = strlen(cadenaDelUsuario) - 1;
     res = palindromo(cadenaDelUsuario, 0, longitud);
     if (res == true)
@@ -51,6 +105,35 @@ void main_palindromo()
     {
         printf("no es palindromo");
     }
+}
+
+// PUNTO 2
+void main_producto(){
+    int m, n, validador;
+    long long prod;
+
+    printf("Ingrese un numero: ");
+    validador = scanf("%i", &m);
+    printf("%i %i", validador, m);
+    while ((validador != 1) || (m > INT_MAX)){
+        if (validador != 1 ) printf("Por favor ingrese un numero: ");
+        else if (m > INT_MAX) printf("Por favor ingrese un numero menor a %i: ", INT_MAX);
+        while (getchar() != '\n');
+        validador = scanf("%i", &m);
+    }
+
+    printf("Ingrese otro numero: ");
+    validador = scanf("%i", &n);
+
+    while ((validador != 1) || (n > INT_MAX)){
+        if (validador != 1 ) printf("Por favor ingrese un numero: ");
+        else if (n > INT_MAX) printf("Por favor ingrese un numero menor a %i: ", INT_MAX);
+        while (getchar() != '\n');
+        validador = scanf("%i", &n);
+    }
+
+    prod = producto(m,n);
+    printf("Resultado: %lld", prod);
 }
 
 // PUNTO 3
@@ -68,7 +151,7 @@ void main_fibo(){
         validador = scanf("%i", &n);
     }
     resultado = terminoSerieFibonacci(n);
-     printf("Resultado: %i", resultado);
+     printf("Resultado: %lld", resultado);
 }
 
 // PUNTO 6
@@ -94,7 +177,7 @@ void main_chinos(){
 //PUNTO 8
 void main_subconjunto()
 {
-    char entrada[100];
+    //char entrada[100];
     int tamano, suma;
 
     printf("Ingrese el tamano del conjunto: ");
@@ -262,7 +345,8 @@ int main()
             getch();
             break;
         case 2:
-            printf("menu_principal 2");
+            main_producto();
+            getch();
             break;
         case 3:
             main_fibo();

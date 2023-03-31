@@ -7,37 +7,7 @@
 
 
 
-// PUNTO 2
-int producto(int m, int n){
-    int resultado;
-    bool negativo = false;
 
-    /*Si n es negativo, lo convierte a positivo para que funcione la recursion,
-     pero el boolean lo recuerda para mas adelante */
-
-    if (n < 0){
-        n = n * (-1);
-        negativo = true;
-    }
-
-    /*Si n es 0 (caso base) devuelve 0 y si es mayor, vuelve
-    a llamar a la funcion con n-1 (tiede al caso base)*/
-    if (n==0){
-        resultado = 0;
-    }
-    else{
-        resultado = m + producto(m, n-1);
-    }
-
-    /*si n era negativo al entrar a la funcion, ahora multiplica al resultado 
-    por -1*/
-    if (negativo == true){
-        resultado = resultado * (-1);
-    }
-
-    
-    return resultado;
-}
 
 
 
