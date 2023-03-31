@@ -115,32 +115,4 @@ void cargarString(char* cadena){
     
 }
 
-/*int main(){
-    char *cadena = (char*) malloc(sizeof(char)*35);
-    
-    cargarString(cadena);
-    //int cadenaNum [15]={1,-2,3,-4,5,6,7,8,-9};
-    //int *ptr = cadenaNum;
-     
-    /*int result;
-    result = ValidarStringAlfa(cadena);
 
-    if(result == 0){
-        printf("cadena con caracteres correctos\n");
-    }
-    else{
-        printf("hay al menos 1 caracter incorrecto en la cadena.\n");
-    }
-    */
-   //mostrarcadenaNum(ptr);
-   //ptr = CambiarSigno(cadenaNum,1);
-   //mostrarcadenaNum(ptr);
-   //mostrarcadenaChar(cadena);
-   //cadena = MayuscMinusc(cadena,1);
-  // mostrarcadenaChar(cadena);
-    /*char* x = "a";
-    printf("%c",*x);
-    x = toupper(*x);
-    printf("%c",x);*/
-    //free(cadena);
-//}

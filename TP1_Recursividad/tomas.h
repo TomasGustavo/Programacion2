@@ -24,17 +24,17 @@ int terminoSerieFibonacci(int num);
 
 float division(int m, int n);
 
-void agregarSeparadorMiles(char *string[],int largo);
+void AgregarMiles(char* str, int len);
 
 char *chinos(int n);
 
 
-char *ondaDigital(char* onda, char* resultado, int largo,  int index);
+void ondaDigital(char *onda, int i);
 
-int *subconjuntoQueSumanN(int *cadena[], int n);
+void subconjuntoQueSumanN(int *cadena,int size,int n,int index,int * temp,int j);
 
 bool divisiblePor7(int n);
 
-int *explosion(int n, int b);
+void explosion(int n, int b,int*array,int i);
 
 #endif // TP1_RECURSIVIDAD_H

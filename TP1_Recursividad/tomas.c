@@ -61,22 +61,49 @@ int terminoSerieFibonacci(int num){
 
 // ejercicio 4
 
+float division(int m, int n) {
+    bool negativo = false;
+    // Caso base
+    if(n<0){            // si n es negativo pongo en true la variable y multiplico por -1 n para que funcione la recurvidad.
+        n = n*(-1);
+        negativo = true;
+        if(m<0){
+            m = m*(-1);     // pero si m tambien en negativo, lo paso a positivo tambien y vuevlo a poner en false la variable para que al final no multiplique por -1, porque menos por menos = mas
+            negativo=false;
+        }
+    }
+    if (m < n) {
+        return (float) m / n;  // si el dividendo es menos que el divison retorno la division "real(con ,)" de los 2
+    }
+    // Caso recursivo
+    float cociente = division(m - n, n); // sino llamo recursivamente a la funcion guardandola en la variable
+    if(negativo==true){
+        return (cociente+1)*(-1);      // si negativo es true multiplico el cociente por -1 para retornar el valor verdadero
+    }
+    else{                           // retorno el cociente+1 asi en cada llamado le voy sumando las vueltas que dio.
+        return cociente+1;
+    }
+}
 // ejercicio 5
 
-void agregarSeparadorMiles(char *string[], int largo){
-
-    if (largo <= 3){         // si el largo de la cadena es 3 o menos no hago nada, retorno.
+void AgregarMiles(char* str, int len) {
+    bool x;
+    
+    //si el largo es menos o igual a 3 solo retorna
+    if (len <= 3) {
         return;
     }
 
-    /* llamo recursivamente a la funcion restandole 3 al largo de la cadena para que ponga bien el punto
-       uso memmove para mover la cadena 3 espacio hacia la derecha: le paso 1ro la posicion a partir de la cual copiar, la posicion donde voy a empezar a compiar los datos y la cantidad de datos (bytes) a copiar
-       y por ultimo agrego en la posicion largo el punto, largo= largo-3 entonces pone el punto en el "espacio vacio" que quedo despues de hacer el desplazamiento con memmove.
-
-    */
-    agregarSeparadorMiles(string, largo-3);
-    memmove(string+largo+1,string+largo-2,3);
-    string[largo]=".";
+    // recursivamente agrega un punto cada 3 digitos
+    
+    AgregarMiles(str, len - 3);
+    memmove(&str[len - 2], &str[len - 3], 3*(len/2)+2);
+    if(len>=7){
+        str[len-2] = '.';
+    }
+    else{
+        str[len-3] = '.'; 
+    }    
 }
 
 // ejercicio 6
@@ -99,46 +126,48 @@ char *chinos(int n){
 
 // ejercicio 7
 
-// se puede hacer mas bonito y sin tantos if's. dejarlo mas limpio
-/*char *ondaDigital(char* onda, char* resultado, int j,  int i){
+void ondaDigital(char *onda, int i){
 
-    if (LargoCadena(onda)==0){
-        return;
+    if ((i > 0) && (onda[i] != onda[i-1])){
+           printf("│");
     }
     
-    if(onda[i]=="L" && onda[i-1]!="H"){
-        resultado[j]="_";
-        i++;
-        j++;
+    if((onda[i])== 'H') {
+        printf("¯") ; 
+    } else {
+        printf("_");
+        }
+        
+    if (i < (strlen(onda) -1)) {
+        ondaDigital(onda,i+1);
     }
-    else if (onda[i]=="L" && onda[i-1]=="H"){
-        resultado[j]="|";
-        resultado[j+1]="_";
-        i++;
-        j+=2;
-    }
-    if(onda[i]=="H" && onda[i-1]!="L"){
-        resultado[j]="-";
-        i++;
-        j++;
-    }
-    else if (onda[i]=="H" && onda[i-1]=="L"){
-        resultado[j]="|";
-        resultado[j+1]="-";
-        i++;
-        j+=2;
-    }
-
-    if(i<LargoCadena(onda)-1){
-        ondaDigital(onda,resultado,j,i);
-    }
-    
-
 }
-*/
+
 
 // ejercicio 8
-
+void subconjuntoQueSumanN(int *cadena,int size,int n,int index,int * temp,int j){
+    
+    if (index==size){
+        int s=0;
+        for (int i=0;i<j;i++){
+            s+=temp[i];
+        }
+        if (s==n){
+            printf("{");
+            for(int i=0;i<j;i++){
+                printf("%i",temp[i]);
+                if(i!=j-1){
+                    printf(",");
+                }
+            }
+            printf("}");
+        }
+        return;
+    }
+    temp[j]=cadena[index];
+    subconjuntoQueSumanN(cadena,size,n,index+1,temp,j+1);
+    subconjuntoQueSumanN(cadena,size,n,index+1,temp,j);
+}
 // ejercicio 9
 
 bool divisiblePor7(int n){
@@ -163,6 +192,31 @@ bool divisiblePor7(int n){
 
 }
 
+void explosion(int n, int b,int*array,int i){
+    int n1,n2;
+    
+
+    if(n>b){
+        n1 = n/b;
+        n2 = n - n1;
+        
+        if(n1>b){
+            return explosion(n1,b,array,i);
+        }
+        else{
+           array[i]=n1;
+            i++;
+        }
+        if(n2>b){
+            return explosion(n2,b,array,i);
+        }
+        else{
+            array[i]= n2;
+            i++;
+        }
+    }
+            
+}
 
 
 
