@@ -39,13 +39,7 @@ int producto(int m, int n){
     return resultado;
 }
 
-//PUNTO 3
-int terminoSerieFibonacci(int num){
-    int resultado;
-    if (num <= 1) resultado = num;
-    else resultado = terminoSerieFibonacci(num-1) + terminoSerieFibonacci(num-2);  
-    return resultado;
-}
+
 
 //PUNTO 5 
 void agregarSeparadorMiles(char *cadena, int longitud, int contador){

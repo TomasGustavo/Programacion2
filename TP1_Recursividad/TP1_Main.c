@@ -33,7 +33,7 @@ bool sonLetras(char* cadena) {
     return res;
 }
 
-//PUNTO 1
+// PUNTO 1
 void main_palindromo()
 {
     char *cadenaDelUsuario = (char *)calloc(100, sizeof(char));
@@ -53,8 +53,25 @@ void main_palindromo()
     }
 }
 
-// PUNTO 6
+// PUNTO 3
+void main_fibo(){
+    int n, validador;
+    long long resultado;
+    printf("Ingrese un numero: ");
+    validador = scanf("%i", &n);
 
+    while ((validador != 1) || (n < 0) || (n > 40)){
+        if (validador != 1 ) printf("Por favor ingrese un numero: ");
+        else if (n < 0) printf("Por favor ingrese un numero mayor o igual a 0: ");
+        else if (n > 40) printf("Por favor ingrese un numero menor o igual a 40: ");
+        while (getchar() != '\n');
+        validador = scanf("%i", &n);
+    }
+    resultado = terminoSerieFibonacci(n);
+     printf("Resultado: %i", resultado);
+}
+
+// PUNTO 6
 void main_chinos(){
     int n, validador;
     char* resultado;
@@ -66,7 +83,7 @@ void main_chinos(){
         if (validador != 1 ) printf("Por favor ingrese un numero: ");
         else if (n <=0) printf("Por favor ingrese un numero mayor a 0: ");
         else if (n > 30) printf("Por favor ingrese un numero menor a 30: ");
-        while (getchar() != '\n') 
+        while (getchar() != '\n');
         validador = scanf("%i", &n);
     }
     resultado = chinos(n);
@@ -170,7 +187,7 @@ void main_bomba(){
     while ((validador == 0 ) || (n <=1)){
         if (validador == 0 ) printf("Por favor ingrese un numero: ");
         else if (n <=1) printf("Por favor ingrese un numero mayor a 1: ");
-        while (getchar() != '\n') 
+        while (getchar() != '\n');
         validador = scanf("%i", &n);
     }
 
@@ -248,7 +265,8 @@ int main()
             printf("menu_principal 2");
             break;
         case 3:
-            printf("menu_principal 3");
+            main_fibo();
+            getch();
             break;
         case 4:
             printf("menu_principal 4");

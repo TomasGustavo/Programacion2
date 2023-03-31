@@ -22,6 +22,14 @@ bool palindromo(char *cadena, int principio, int final){
     return respuesta;
 }
 
+// PUNTO 3 - FIBONACCI
+long long terminoSerieFibonacci(int num){
+    long long resultado;
+    if (num <= 1) resultado = num;
+    else resultado = terminoSerieFibonacci(num-1) + terminoSerieFibonacci(num-2);  
+    return resultado;
+}
+
 // PUNTO 6 - CHINOS
 char *chinos(int n){
     char* cadena;
