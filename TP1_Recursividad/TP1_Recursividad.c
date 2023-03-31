@@ -22,6 +22,25 @@ bool palindromo(char *cadena, int principio, int final){
     return respuesta;
 }
 
+// PUNTO 6 - CHINOS
+char *chinos(int n){
+    char* cadena;
+    char *cadenaAnt;
+    int longitud;
+
+    if (n==1){
+        cadena = (char*) malloc(6 * sizeof(char));
+        strcpy(cadena, "(-.-)");
+    } else {
+        cadenaAnt = chinos(n - 1);
+        longitud = strlen(cadenaAnt) + 7;
+        cadena = (char*) malloc(sizeof(char) * longitud);
+        sprintf(cadena, "(-.%s.-)", cadenaAnt);
+    }
+    
+    return cadena;
+}
+
 // PUNTO 8 - SUBCONJUNTO
 char *buscaSumaSubconjunto(int tamano, int nivel, int suma, char *salidaparcial, int *ent, int *subset, int subsetSize)
 {

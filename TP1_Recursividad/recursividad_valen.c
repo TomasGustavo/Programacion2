@@ -64,24 +64,7 @@ void agregarSeparadorMiles(char *cadena, int longitud, int contador){
     }
 }
 
-//PUNTO 6
-char *chinos(int n){
-    char* cadena;
-    char *cadenaAnt;
-    int longitud;
 
-    if (n==1){
-        cadena = (char*) malloc(6 * sizeof(char));
-        strcpy(cadena, "(-.-)");
-    } else {
-        cadenaAnt = chinos(n - 1);
-        longitud = strlen(cadenaAnt) + 7;
-        cadena = (char*) malloc(sizeof(char) * longitud);
-        sprintf(cadena, "(-.%s.-)", cadenaAnt);
-    }
-    
-    return cadena;
-}
 
 //PUNTO 7
 void ondaDigitalAux(char* onda,char* cadena, int i, int j){
@@ -140,10 +123,6 @@ void ondaDigitalPrint(char *onda, int i){
     }
 }
 
-
-
-
-
     /* MAIN PUNTO 2 
     int prod, m, n;
     printf("Ingrese un numero: ");
@@ -165,14 +144,7 @@ void ondaDigitalPrint(char *onda, int i){
      */
   
     /* MAIN PUNTO 6
-    int n;
-    char* resultado;
-
-    printf("Ingrese un numero: ");
-    scanf("%i", &n);
-    resultado = chinos(n);
-
-     printf("Resultado: %s", resultado);
+    
     */
  
     /* MAIN PUNTO 7A

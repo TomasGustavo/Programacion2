@@ -33,6 +33,48 @@ bool sonLetras(char* cadena) {
     return res;
 }
 
+//PUNTO 1
+void main_palindromo()
+{
+    char *cadenaDelUsuario = (char *)calloc(100, sizeof(char));
+    bool res;
+    int longitud;
+    printf("Ingresa una cadena a ver que es: ");
+    scanf("%s", cadenaDelUsuario);
+    longitud = strlen(cadenaDelUsuario) - 1;
+    res = palindromo(cadenaDelUsuario, 0, longitud);
+    if (res == true)
+    {
+        printf("Es palindromo");
+    }
+    else
+    {
+        printf("no es palindromo");
+    }
+}
+
+// PUNTO 6
+
+void main_chinos(){
+    int n, validador;
+    char* resultado;
+
+    printf("Ingrese un numero: ");
+    validador = scanf("%i", &n);
+
+    while ((validador != 1) || (n <=0) || (n > 30)){
+        if (validador != 1 ) printf("Por favor ingrese un numero: ");
+        else if (n <=0) printf("Por favor ingrese un numero mayor a 0: ");
+        else if (n > 30) printf("Por favor ingrese un numero menor a 30: ");
+        while (getchar() != '\n') 
+        validador = scanf("%i", &n);
+    }
+    resultado = chinos(n);
+
+     printf("Resultado: %s", resultado);
+}
+          
+//PUNTO 8
 void main_subconjunto()
 {
     char entrada[100];
@@ -113,24 +155,6 @@ void main_subconjunto()
    printf("La entrada es válida.\n");
 }*/
 
-void main_palindromo()
-{
-    char *cadenaDelUsuario = (char *)calloc(100, sizeof(char));
-    bool res;
-    int longitud;
-    printf("Ingresa una cadena a ver que es: ");
-    scanf("%s", cadenaDelUsuario);
-    longitud = strlen(cadenaDelUsuario) - 1;
-    res = palindromo(cadenaDelUsuario, 0, longitud);
-    if (res == true)
-    {
-        printf("Es palindromo");
-    }
-    else
-    {
-        printf("no es palindromo");
-    }
-}
 
 // PUNTO 10
 void main_bomba(){
@@ -233,7 +257,8 @@ int main()
             printf("menu_principal 5");
             break;
         case 6:
-            printf("menu_principal 6");
+            main_chinos();
+            getch();
             break;
         case 7:
             printf("menu_principal 7");
