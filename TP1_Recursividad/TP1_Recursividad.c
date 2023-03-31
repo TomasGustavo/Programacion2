@@ -4,11 +4,84 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
-// #include "TP1_Recursividad.h"
-#include "recursividad_valen.h"
+#include "TP1_Recursividad.h"
+
+
+// PUNTO 1 - PALINDROMO
+bool palindromo(char *cadena, int principio, int final){
+    bool respuesta;
+    if ((principio == final)  || (final < principio)){
+        respuesta = true;
+    } else {
+        if (cadena[principio] == cadena[final]){
+            respuesta = palindromo(cadena, principio+1, final-1);
+        } else{
+            respuesta = false;
+        }
+    }
+    return respuesta;
+}
+
+// PUNTO 2 - PRODUCTO
+long long producto(int m, int n){
+    long long resultado;
+    bool negativo = false;
+
+    /*Si n es negativo, lo convierte a positivo para que funcione la recursion,
+     pero el boolean lo recuerda para mas adelante */
+
+    if (n < 0){
+        n = n * (-1);
+        negativo = true;
+    }
+
+    /*Si n es 0 (caso base) devuelve 0 y si es mayor, vuelve
+    a llamar a la funcion con n-1 (tiede al caso base)*/
+    if (n==0){
+        resultado = 0;
+    }
+    else{
+        resultado = m + producto(m, n-1);
+    }
+
+    /*si n era negativo al entrar a la funcion, ahora multiplica al resultado 
+    por -1*/
+    if (negativo == true){
+        resultado = resultado * (-1);
+    }
+
+    
+    return resultado;
+}
+
+// PUNTO 3 - FIBONACCI
+long long terminoSerieFibonacci(int num){
+    long long resultado;
+    if (num <= 1) resultado = num;
+    else resultado = terminoSerieFibonacci(num-1) + terminoSerieFibonacci(num-2);  
+    return resultado;
+}
+
+// PUNTO 6 - CHINOS
+char *chinos(int n){
+    char* cadena;
+    char *cadenaAnt;
+    int longitud;
+
+    if (n==1){
+        cadena = (char*) malloc(6 * sizeof(char));
+        strcpy(cadena, "(-.-)");
+    } else {
+        cadenaAnt = chinos(n - 1);
+        longitud = strlen(cadenaAnt) + 7;
+        cadena = (char*) malloc(sizeof(char) * longitud);
+        sprintf(cadena, "(-.%s.-)", cadenaAnt);
+    }
+    
+    return cadena;
+}
 
 // PUNTO 8 - SUBCONJUNTO
-
 char *buscaSumaSubconjunto(int tamano, int nivel, int suma, char *salidaparcial, int *ent, int *subset, int subsetSize)
 {
     int i;
@@ -40,181 +113,24 @@ char *buscaSumaSubconjunto(int tamano, int nivel, int suma, char *salidaparcial,
     return salida;
 }
 
-int main_subconjunto()
-{
-    char entrada[100];
-    int tamano, suma;
+// PUNTO 10 - BOMBA
+void explosion(int n, int b, int* arreglo, int i){
+    int n1,n2;
 
-    printf("Ingrese el tamano del conjunto: ");
-    // fgets(entrada, 100, stdin);
-    // entrada[strcspn(entrada, "\n")] = '\0';
-    scanf("%d", &tamano);
-    while (tamano <= 0)
-    {
-        printf("Entrada invalida. Ingrese un valor entero positivo para el tamano del conjunto: ");
-        scanf("%d", &tamano);
+    n1 = n/b;
+    n2 = n-(n/b);
+
+    if (n1 > b) {
+        explosion(n1,b, arreglo,i);
+    } else {
+        arreglo[i] = n1;
+        i++;
     }
 
-    int ent[tamano];
-    for (int i = 0; i < tamano; i++)
-    {
-        printf("Ingrese el valor %d del conjunto: ", i + 1);
-        scanf("%d", &ent[i]);
-        while (ent[i] <= 0)
-        {
-            printf("Entrada invalida. Ingrese un valor entero para el valor %d del conjunto: ", i + 1);
-            scanf("%d", &ent[i]);
-        }
-    }
-
-    printf("Ingrese el valor de la suma deseada: ");
-    scanf("%d", &suma);
-    while (suma <= 0)
-    {
-        printf("Entrada invalida. Ingrese un valor entero positivo para la suma deseada: ");
-        scanf("%d", &suma);
-    }
-    int subset[tamano];
-    int nivel = 0, subsetSize = 0;
-    char salidaparcial[1000];
-    strcpy(salidaparcial, "");
-    char *resultado = buscaSumaSubconjunto(tamano, nivel, suma, salidaparcial, ent, subset, subsetSize);
-    printf("%s", resultado);
-    return 0;
-}
-
-// Función principal8
-/* void main()
-{
-
-    // Validación de la opción ingresada
-    int opcion;
-    opcion = getch();
-    while (toupper((char)opcion) != 'S' && toupper((char)opcion) != 'N')
-    {
-        printf("  La opcion que ingreso es incorrecta.\n");
-        printf("  Presione cualquier tecla para volver a ingresar una opcion . . .\n");
-        opcion = getch();
-    }
-    printf("%c", opcion);
-} */
-
-/*   // Validación de la opción ingresada
-   char input[100];
-   int i = 0;
-   printf("Ingrese un texto: ");
-   scanf("%s", &input); // Leer la entrada del usuario
-   while (input[i])
-   { // Mientras haya caracteres en la cadena
-       if (!isalpha(input[i]))
-       { // Si el carácter no es una letra
-         // if (!isdigit(input[i]))
-         // { // Si el carácter no es una numero
-           printf("Error: se ingresó un carácter que no valido.\n");
-           printf("Ingrese un texto: ");
-           scanf("%s", &input); // Leer la entrada del usuario
-           i = 0;
-       }
-       i++;
-   }
-   printf("La entrada es válida.\n");
-}*/
-
-void main_palindromo()
-{
-    char *cadenaDelUsuario = (char *)calloc(100, sizeof(char));
-    bool res;
-    int longitud;
-    printf("Ingresa una cadena a ver que es: ");
-    scanf("%s", cadenaDelUsuario);
-    longitud = strlen(cadenaDelUsuario) - 1;
-    res = palindromo(cadenaDelUsuario, 0, longitud);
-    if (res == true)
-    {
-        printf("Es palindromo");
-    }
-    else
-    {
-        printf("no es palindromo");
-    }
-}
-
-void menu_principal()
-{
-    printf(ANSI_BLUE "  ============================================================================\n");
-    printf(" |                             TP1 RECURSIVIDAD                              |\n");
-    printf("  ============================================================================\n");
-    printf("\n");
-    printf("  1   Palíndromo\n");
-    printf("  2   Producto a partir de sumas sucesivas\n");
-    printf("  3   Termino de la serie de Fibonacci\n");
-    printf("  4   Cociente a partir de restas sucesivas\n");
-    printf("  5   Punto de los miles\n");
-    printf("  6   Mafia china\n");
-    printf("  7   Onda digital\n");
-    printf("  8   Subconjunto\n");
-    printf("  9   Divisible por 7\n");
-    printf("  10  Numero explosivo\n");
-    printf("\n");
-    printf("  0   Salir\n");
-    printf("\n");
-    printf(" ------------------------------------------------------------------------------\n");
-    printf("\n");
-    printf("  Por favor seleccione una opción: " ANSI_YELLOW);
-}
-
-void main()
-{
-    bool salir = false;
-    int opcion;
-
-    while (!salir)
-    {
-        menu_principal();
-        scanf("%i", &opcion);
-        while (opcion < 0 || opcion > 10)
-        {
-            printf(ANSI_RED "Opción incorrecta\n" ANSI_RESET);
-            printf(ANSI_BLUE "  Por favor seleccione una opción: " ANSI_YELLOW);
-            scanf("%i", &opcion);
-        }
-        switch (opcion)
-        {
-        case 1:
-            main_palindromo();
-            getch();
-            break;
-        case 2:
-            printf("menu_principal 2");
-            break;
-        case 3:
-            printf("menu_principal 3");
-            break;
-        case 4:
-            printf("menu_principal 4");
-            break;
-        case 5:
-            printf("menu_principal 5");
-            break;
-        case 6:
-            printf("menu_principal 6");
-            break;
-        case 7:
-            printf("menu_principal 7");
-            break;
-        case 8:
-            main_subconjunto();
-            getch();
-            break;
-        case 9:
-            printf("menu_principal 8");
-            break;
-        case 10:
-            printf("menu_principal 8");
-            break;
-        case 0:
-            salir = true;
-            break;
-        }
+    if (n2 > b) {
+        explosion(n2,b,arreglo,i);
+    } else {
+        arreglo [i] = n2;
+        i++;
     }
 }

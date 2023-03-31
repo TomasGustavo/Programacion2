@@ -16,9 +16,9 @@
 #define ANSI_bCYAN "\e[96m"
 #define ANSI_RESET "\e[0m"
 
-bool palindromo(char *cadena, int principio, int final);
 
-int producto(int m, int n);
+
+
 
 int terminoSerieFibonacci(int num);
 
@@ -36,6 +36,6 @@ int *subconjuntoQueSumanN(int *cadena[], int n);
 
 bool divisiblePor7(int n);
 
-void explosion(int n, int b, int* arreglo, int i);
+
 
 #endif // TP1_RECURSIVIDAD_H

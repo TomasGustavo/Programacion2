@@ -16,25 +16,16 @@
 #define ANSI_bCYAN "\e[96m"
 #define ANSI_RESET "\e[0m"
 
-bool palindromo(char *cadena[]);
+bool palindromo(char *cadena, int principio, int final);
 
-int producto(int m, int n);
+long long producto(int m, int n);
 
-int terminoSerieFibonacci(int num);
-
-float division(int m, int n);
-
-void agregarSeparadorMiles(char *string[]);
+long long terminoSerieFibonacci(int num);
 
 char *chinos(int n);
 
+char *buscaSumaSubconjunto(int tamano, int nivel, int suma, char *salidaparcial, int *ent, int *subset, int subsetSize);
 
-char *ondaDigital(char *onda[]);
-
-int *subconjuntoQueSumanN(int *cadena[], int n);
-
-bool divisiblePor7(int n);
-
-int *explosion(int n, int b);
+void explosion(int n, int b, int* arreglo, int i);
 
 #endif // TP1_RECURSIVIDAD_H

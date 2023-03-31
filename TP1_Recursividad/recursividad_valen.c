@@ -5,60 +5,11 @@
 #include "recursividad_valen.h"
 
 
-//PUNTO 1
-bool palindromo(char *cadena, int principio, int final){
-    bool respuesta;
-    if ((principio == final)  || (final < principio)){
-        respuesta = true;
-    } else {
-        if (cadena[principio] == cadena[final]){
-            respuesta = palindromo(cadena, principio+1, final-1);
-        } else{
-            respuesta = false;
-        }
-    }
-    return respuesta;
-}
 
-// PUNTO 2
-int producto(int m, int n){
-    int resultado;
-    bool negativo = false;
 
-    /*Si n es negativo, lo convierte a positivo para que funcione la recursion,
-     pero el boolean lo recuerda para mas adelante */
 
-    if (n < 0){
-        n = n * (-1);
-        negativo = true;
-    }
 
-    /*Si n es 0 (caso base) devuelve 0 y si es mayor, vuelve
-    a llamar a la funcion con n-1 (tiede al caso base)*/
-    if (n==0){
-        resultado = 0;
-    }
-    else{
-        resultado = m + producto(m, n-1);
-    }
 
-    /*si n era negativo al entrar a la funcion, ahora multiplica al resultado 
-    por -1*/
-    if (negativo == true){
-        resultado = resultado * (-1);
-    }
-
-    
-    return resultado;
-}
-
-//PUNTO 3
-int terminoSerieFibonacci(int num){
-    int resultado;
-    if (num <= 1) resultado = num;
-    else resultado = terminoSerieFibonacci(num-1) + terminoSerieFibonacci(num-2);  
-    return resultado;
-}
 
 //PUNTO 5 
 void agregarSeparadorMiles(char *cadena, int longitud, int contador){
@@ -77,24 +28,7 @@ void agregarSeparadorMiles(char *cadena, int longitud, int contador){
     }
 }
 
-//PUNTO 6
-char *chinos(int n){
-    char* cadena;
-    char *cadenaAnt;
-    int longitud;
 
-    if (n==1){
-        cadena = (char*) malloc(6 * sizeof(char));
-        strcpy(cadena, "(-.-)");
-    } else {
-        cadenaAnt = chinos(n - 1);
-        longitud = strlen(cadenaAnt) + 7;
-        cadena = (char*) malloc(sizeof(char) * longitud);
-        sprintf(cadena, "(-.%s.-)", cadenaAnt);
-    }
-    
-    return cadena;
-}
 
 //PUNTO 7
 void ondaDigitalAux(char* onda,char* cadena, int i, int j){
@@ -153,30 +87,6 @@ void ondaDigitalPrint(char *onda, int i){
     }
 }
 
-//PUNTO 10
-void explosion(int n, int b, int* arreglo, int i){
-    int n1,n2;
-
-    n1 = n/b;
-    n2 = n-(n/b);
-
-    if (n1 > b) {
-        explosion(n1,b, arreglo,i);
-    } else {
-        arreglo[i] = n1;
-        i++;
-    }
-
-    if (n2 > b) {
-        explosion(n2,b,arreglo,i);
-    } else {
-        arreglo [i] = n2;
-        i++;
-    }
-}
-
-
-
     /* MAIN PUNTO 2 
     int prod, m, n;
     printf("Ingrese un numero: ");
@@ -198,14 +108,7 @@ void explosion(int n, int b, int* arreglo, int i){
      */
   
     /* MAIN PUNTO 6
-    int n;
-    char* resultado;
-
-    printf("Ingrese un numero: ");
-    scanf("%i", &n);
-    resultado = chinos(n);
-
-     printf("Resultado: %s", resultado);
+    
     */
  
     /* MAIN PUNTO 7A
@@ -256,29 +159,7 @@ void explosion(int n, int b, int* arreglo, int i){
     agregarSeparadorMiles(cadenaDelUsuario, longitud, 3);
     
    */
-/*PUNTO 10
-    int main()
-{
-    int* arreglo = calloc(20, sizeof(int));
-    int n, b, i;
-    
-    printf("Ingrese un numero n: ");
-    scanf("%i", &n);
-    printf("Ingrese un numero b: ");
-    scanf("%i", &b);
 
-    explosion(n,b,arreglo,0);
 
-    i = 0;
-
-    while (arreglo[i] != NULL) {
-        printf("%d ", arreglo[i]);
-        i++;
-    }
-    return 0;
-}
-
-    
-*/
 
 
