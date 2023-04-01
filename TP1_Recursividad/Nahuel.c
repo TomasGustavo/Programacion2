@@ -36,13 +36,51 @@ void print_chinese(int level)
     }
 }
 
+char *PuntosMiles(long long int miles)
+{
+    char *result = malloc(30);
+    if (miles < 1000)
+    {
+        (sprintf(result, "%lld", miles));
+    }
+    else
+    {
+        char *temp = PuntosMiles(miles / 1000);
+        if ((miles % 1000) < 10)
+        {
+            sprintf(result, "%s.%03lld", temp, miles % 1000);
+        }
+        else
+        {
+            if ((miles % 1000) < 100)
+            {
+                sprintf(result, "%s.%03lld", temp, miles % 1000);
+            }
+            else
+            {
+                if ((miles % 1000) < 1000)
+                {
+                    sprintf(result, "%s.%03lld", temp, miles % 1000);
+                }
+            }
+        }
+        free(temp);
+    }
+    return result;
+}
+
 int main()
 {
-    int level;
-    printf("Ingrese nivel de mafia: ");
-    scanf("%d", &level);
-    srand(time(NULL)); // genera números aleatorios
-    print_chinese(level);
-    printf("\n");
-    return 0;
+    long long int numero;
+    printf("ingrese el numero para converti los puntos:");
+    scanf("%lld", &numero);
+    printf("%s",PuntosMiles(numero));
+
+    /*   int level;
+       printf("Ingrese nivel de mafia: ");
+       scanf("%d", &level);
+       srand(time(NULL)); // genera números aleatorios
+       print_chinese(level);
+       printf("\n");
+       return 0; */
 }
