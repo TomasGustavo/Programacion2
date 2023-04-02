@@ -8,7 +8,7 @@
                 "-fdiagnostics-color=always",
                 "-g",
                 "${file}",
-                "TP1_Recursividad.c",
+                "${fileDirname}\\TP1_Recursividad.c",
                 "-o",
                 "${fileDirname}\\${fileBasenameNoExtension}.exe",
                 "-Wall"

@@ -2,7 +2,8 @@
     "files.associations": {
         "*.pl": "prolog",
         "recursividad_valen.h": "c",
-        "stdlib.h": "c"
+        "stdlib.h": "c",
+        "tp1_recursividad.h": "c"
     },
     "spellright.language": [
         "en",
