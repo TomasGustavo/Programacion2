@@ -98,7 +98,7 @@ void main_palindromo()
     }
     
     a_minusculas(cadenaDelUsuario);
-    eliminarEspacios(cadenaDelUsuario);
+    //eliminarEspacios(cadenaDelUsuario);
     longitud = strlen(cadenaDelUsuario);
     res = palindromo(cadenaDelUsuario, 0, longitud-2);
     if (res == true)
@@ -115,23 +115,28 @@ void main_palindromo()
 void main_producto(){
     int m, n, validador;
     long long prod;
+    int maxM = 999999;
+    int maxN = 999;
 
     printf("Ingrese un numero: ");
     validador = scanf("%i", &m);
-    printf("%i %i", validador, m);
-    while ((validador != 1) || (m > INT_MAX)){
+    fflush(stdin);
+    //printf("%i %i", validador, m);
+    while ((validador != 1) || (m > maxM) || m== '\0' || m=='\n'){
         if (validador != 1 ) printf("Por favor ingrese un numero: ");
-        else if (m > INT_MAX) printf("Por favor ingrese un numero menor a %i: ", INT_MAX);
+        else if (m > maxM) printf("Por favor ingrese un numero menor a %i: ", maxM);
+        else if (m == '\0' ) printf("Por favor ingrese un numero un numero valido: ");
+        else if (m == '\n' ) printf("Por favor ingrese un numero un numero valido: ");
         while (getchar() != '\n');
         validador = scanf("%i", &m);
     }
 
     printf("Ingrese otro numero: ");
     validador = scanf("%i", &n);
-
-    while ((validador != 1) || (n > INT_MAX)){
+    fflush(stdin);
+    while ((validador != 1) || (n > maxN)){
         if (validador != 1 ) printf("Por favor ingrese un numero: ");
-        else if (n > INT_MAX) printf("Por favor ingrese un numero menor a %i: ", INT_MAX);
+        else if (n > maxN) printf("Por favor ingrese un numero menor a %i: ", maxN);
         while (getchar() != '\n');
         validador = scanf("%i", &n);
     }
@@ -156,6 +161,107 @@ void main_fibo(){
     }
     resultado = terminoSerieFibonacci(n);
      printf("Resultado: %lld", resultado);
+}
+// PUNTO 4
+void main_division(){
+    int dividendo, divisor; 
+        float resultado_4;
+        int no_caracter_4, no_caracter_4_1;
+        while (divisor == 0)
+        {
+            //system("cls");
+            printf("\nIngrese el dividendo(max digitos: 4): ");
+            no_caracter_4 = scanf("%d", &dividendo);
+            printf("Ingrese el divisor(max digitos: 4): ");
+            no_caracter_4_1 = scanf("%d", &divisor);
+            fflush(stdin);
+            if (no_caracter_4 == 0 || no_caracter_4_1 == 0){
+                divisor = 0;
+                printf("\nNo estan permitidos los caracteres y los numeros flotantes\n");
+            }  
+            else if(dividendo > 10000 || divisor > 10000 || dividendo < -10000 || divisor < -10000){
+                divisor = 0;
+                printf("\nIngrese como maximo 4 digitos por favor\n");
+            }
+            else if (divisor == 0)
+            {
+                printf("No se puede dividir por 0\n");
+            }
+            printf("presione ENTER para continuar\n");
+            //while(getchar() != '\n');   
+            getchar();
+            fflush(stdin);
+        }
+        resultado_4 = division(dividendo, divisor, 5);
+        /*si ambos (dividendo y divisor) eran negativos se deja el resultado positivo*/
+        if (dividendo < 0 && divisor < 0){resultado_4 = resultado_4 * 1;}
+        /*si el dividendo o el divisor eran negativos se le aplica el resultado negativo a el resultado*/
+        else if(dividendo < 0 || divisor < 0){resultado_4 = resultado_4 * -1;}
+        
+        printf("%d / %d = %0.4f", dividendo, divisor, resultado_4);
+        getchar();
+}
+//ejercicio 4
+
+float division(int m, int n, int limite_Decimal){ 
+/*esta funcion se encarga de restar en cada sucesion el valor del dividendo(m) 
+con el del divisor(n) hasta que el resto sea menor a n  y 
+realizara restas sucesivas para los decimales de una manera similar a los enteros*/ 
+
+if(n < 0 && m < 0){
+    /*como ambos valores son negativos 
+    se convierten en positivo para el resultado final*/
+    m = m * -1;
+    n = n * -1;
+}
+else if(n < 0){
+    n = n * -1;
+}
+else if(m < 0){ 
+    m = m * -1;
+}
+
+float resto = m;  
+float cociente = 0;
+/*una vez que el resto sea menor a n se divide el resto por el n 
+para saber si el cociente(resultado) tiene valores decimales*/ 
+if (resto == 0){ 
+    cociente = resto;
+    return cociente;
+}
+
+else if (resto < n && limite_Decimal != 0)
+{       resto = resto*10;       
+        if (resto < n && resto > -n)
+        {
+            /*en caso que el resto siga siendo menor a n, 
+            esta parte se encarga de solo mover un 0 a la derecha como valor decimal*/
+            cociente = division(resto, n, limite_Decimal);
+            cociente = cociente * 0.1;
+            return cociente;
+        }
+        else{
+            cociente = division(resto-n, n, limite_Decimal - 1);
+            cociente++;
+            cociente = cociente * 0.1; /*esta parte se encarga de desplazar a la parte decimal 
+            los valores correspondientes a la misma*/
+            return cociente;
+        }
+        
+}
+else if (limite_Decimal == 0){
+    /* si el numero decimal es muy grande el limite_Decimal 
+    se va a encargar de cortar la funcion con 4 digitos decimales*/
+    return cociente;
+}
+else {
+cociente = division(m-n, n, limite_Decimal);
+
+/*luego se usa el cociente como contador una vez retornada la sucesion 
+para obtener el resultado segun la cantidad de sucesiones*/ 
+cociente++;  
+return cociente;
+}
 }
 
 // PUNTO 6
@@ -357,7 +463,7 @@ int main()
             getch();
             break;
         case 4:
-            printf("menu_principal 4");
+            main_division();
             break;
         case 5:
             printf("menu_principal 5");
