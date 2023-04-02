@@ -5,11 +5,11 @@
 #include <stdbool.h>
 #include <string.h>
 #include <limits.h>
-#include "TP1_Recursividad.h"
+#include "TP1_Recursividad.c"
 
 //da verdadero si la cadena es vacia
 bool es_vacia(char* cadena) {
-    if (cadena[0] == '\0') { // Si el primer carácter es el carácter nulo, la cadena es vacía
+    if (cadena[0] == '\0' || cadena[0] == '\n') { // Si el primer carácter es el carácter nulo, la cadena es vacía
         return true;
     }
     else {
@@ -18,6 +18,7 @@ bool es_vacia(char* cadena) {
 }
 
 bool primer_caracter_espacio(char* cadena) {
+
     if (cadena[0] == ' ') { // Si el primer carácter es el carácter es espacio, la cadena es invalida
         return true;
     }
@@ -27,7 +28,8 @@ bool primer_caracter_espacio(char* cadena) {
 }
 
 bool ultimo_caracter_espacio(char* cadena) {
-    if ((strlen(cadena) -1) == ' ') { // Si el ultimo carácter es el carácter es espacio, la cadena es invalida
+    int len = strlen(cadena)-2;
+    if (cadena[len] == ' ') { // Si el ultimo carácter es el carácter es espacio, la cadena es invalida
         return true;
     }
     else {
@@ -54,7 +56,7 @@ void eliminarEspacios(char* cadena) {
 // Valida si todos los elementos de una cadena son letras
 bool sonLetras(char* cadena) {
     bool res = true;
-    for (int i = 0; cadena[i] != '\0'; i++) {
+    for (int i = 0; i<strlen(cadena)-1; i++) {
         if ((!isalpha(cadena[i])) && (cadena[i] != ' ')) {
             res = false;
         }
@@ -80,23 +82,25 @@ void main_palindromo()
     bool res;
     int longitud, c;
     printf("Ingresa una palabra o expresion: ");
-    while ((c = getchar()) != '\n' && c != EOF);
+    fflush(stdin);
     fgets(cadenaDelUsuario, 100, stdin);
-
+    
+    
     while ((es_vacia(cadenaDelUsuario)) || (primer_caracter_espacio(cadenaDelUsuario)) ||
     (ultimo_caracter_espacio(cadenaDelUsuario)) || (!sonLetras(cadenaDelUsuario))){
-        if (es_vacia(cadenaDelUsuario)) printf("La cadena no puede estar vacia");
+        if (es_vacia(cadenaDelUsuario)) printf("La cadena no puede estar vacia: ");
         else if (primer_caracter_espacio(cadenaDelUsuario)) printf("El primer caracter no puede ser espacio: ");
         else if (ultimo_caracter_espacio(cadenaDelUsuario)) printf("El ultimo caracter no puede ser espacio: ");
         else if (!sonLetras(cadenaDelUsuario)) printf("Solo puede ingresar letras y espacios: ");
-        while ((c = getchar()) != '\n' && c != EOF);
+        //printf("presione enter\n");
+       
         fgets(cadenaDelUsuario, 100, stdin);
     }
     
     a_minusculas(cadenaDelUsuario);
     eliminarEspacios(cadenaDelUsuario);
-    longitud = strlen(cadenaDelUsuario) - 1;
-    res = palindromo(cadenaDelUsuario, 0, longitud);
+    longitud = strlen(cadenaDelUsuario);
+    res = palindromo(cadenaDelUsuario, 0, longitud-2);
     if (res == true)
     {
         printf("Es palindromo");
