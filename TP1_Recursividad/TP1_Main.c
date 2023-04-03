@@ -6,6 +6,7 @@
 #include <string.h>
 #include <limits.h>
 #include "TP1_Recursividad.h"
+#include "TP1_Recursividad.c"
 
 // da verdadero si la cadena es vacia
 bool es_vacia(char *cadena)
@@ -326,6 +327,43 @@ void main_chinos()
     chinos(n);
 }
 
+// PUNTO 7
+
+void main_ondas(){
+    char* onda = (char*)calloc(100,sizeof(char));
+    printf("Ingrese una cadena: ");
+    fgets(onda,100,stdin);
+    bool validador=true;
+    //a_minusculas(onda);
+    for(int i=0;i<strlen(onda)-1;i++){
+        if ((onda[i]!='h' && onda[i]!='H') && (onda[i]!='l' && onda[i]!='L')){
+            validador = false;
+        }
+        
+    }
+    if (onda[0]=='\n'){
+        validador = false;
+    }
+    while (validador == false){
+        printf("Datos invalidos, la cadena solo puede estar compuesta por 'H/h' o 'L/l'\n");
+        printf("Ingrese nuevamente: ");
+        fgets(onda,100,stdin);
+        //a_minusculas(onda);
+        validador=true;
+        for(int i=0;i<strlen(onda)-1;i++){
+            if ((onda[i]!='h' && onda[i]!='H') && (onda[i]!='l' && onda[i]!='L')){
+                validador = false;
+            }
+        }
+        if (onda[0]=='\n'){
+            validador = false;
+        }
+    }
+    printf("CADENA VALIDA\n");
+    a_minusculas(onda);
+    ondaDigital(onda,0);
+}
+
 // PUNTO 8
 void main_subconjunto()
 {
@@ -406,7 +444,7 @@ void main_subconjunto()
    printf("La entrada es válida.\n");
 }*/
 
-// PUNTO 10
+// PUNTO 10/**/
 void main_bomba()
 {
     int *arreglo = calloc(40, sizeof(int));
@@ -527,7 +565,8 @@ int main()
             getch();
             break;
         case 7:
-            printf("menu_principal 7");
+            main_ondas();
+            getch();
             break;
         case 8:
             main_subconjunto();

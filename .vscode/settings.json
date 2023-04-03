@@ -3,7 +3,8 @@
         "*.pl": "prolog",
         "recursividad_valen.h": "c",
         "stdlib.h": "c",
-        "tp1_recursividad.h": "c"
+        "tp1_recursividad.h": "c",
+        "stdbool.h": "c"
     },
     "spellright.language": [
         "en",

@@ -28,6 +28,8 @@ void agregarSeparadorMiles(char *cadena, int longitud, int contador);
 
 void chinos(int n);
 
+void ondaDigital(char *onda, int i);
+
 char *buscaSumaSubconjunto(int tamano, int nivel, int suma, char *salidaparcial, int *ent, int *subset, int subsetSize);
 
 void explosion(int n, int b, int *arreglo, int i);

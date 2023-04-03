@@ -183,6 +183,25 @@ void chinos(int n)
     }
 }
 
+// PUNTO 7
+void ondaDigital(char *onda, int i){
+
+    if ((i > 0) && (onda[i] != onda[i-1])){
+           printf("│");
+    }
+    
+    if((onda[i])== 'h') {
+        printf("¯") ; 
+    } else {
+        printf("_");
+        }
+        
+    if (i < (strlen(onda) -2)) {
+        ondaDigital(onda,i+1);
+    }
+}
+
+
 // PUNTO 8 - SUBCONJUNTO
 char *buscaSumaSubconjunto(int tamano, int nivel, int suma, char *salidaparcial, int *ent, int *subset, int subsetSize)
 {
