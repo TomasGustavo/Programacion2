@@ -6,7 +6,7 @@
 #include <string.h>
 #include <limits.h>
 #include "TP1_Recursividad.h"
-#include "TP1_Recursividad.c"
+//#include "TP1_Recursividad.c"
 
 // da verdadero si la cadena es vacia
 bool es_vacia(char *cadena)
@@ -118,7 +118,7 @@ void main_palindromo()
 {
     char *cadenaDelUsuario = (char *)calloc(100, sizeof(char));
     bool res;
-    int longitud, c;
+    int longitud;
     printf("Ingresa una palabra o expresion: ");
     fflush(stdin);
     fgets(cadenaDelUsuario, 100, stdin);
@@ -127,13 +127,13 @@ void main_palindromo()
            (ultimo_caracter_espacio(cadenaDelUsuario)) || (!sonLetras(cadenaDelUsuario)))
     {
         if (es_vacia(cadenaDelUsuario))
-            printf("La cadena no puede estar vacia: ");
+            printf("La cadena no puede estar vacia, ingrese una nueva cadena: ");
         else if (primer_caracter_espacio(cadenaDelUsuario))
-            printf("El primer caracter no puede ser espacio: ");
+            printf("El primer caracter no puede ser espacio, ingrese una nueva cadena: ");
         else if (ultimo_caracter_espacio(cadenaDelUsuario))
-            printf("El ultimo caracter no puede ser espacio: ");
+            printf("El ultimo caracter no puede ser espacio, ingrese una nueva cadena: ");
         else if (!sonLetras(cadenaDelUsuario))
-            printf("Solo puede ingresar letras y espacios: ");
+            printf("Solo puede ingresar letras y espacios, ingrese una nueva cadena: ");
         // printf("presione enter\n");
 
         fgets(cadenaDelUsuario, 100, stdin);
@@ -284,14 +284,14 @@ void main_miles(){
     || !sonNumeros(cadenaDelUsuario))
     {
         if (es_vacia(cadenaDelUsuario)) printf("Por favor ingrese un numero: ");
-        else if (strlen(cadenaDelUsuario) > 99) printf("El numero debe tener menos de 99 digitos: ");
-        else if (!sonNumeros(cadenaDelUsuario)) printf("Solo puede ingresar numeros: ");
+        else if (strlen(cadenaDelUsuario) > 99) printf("El numero debe tener menos de 99 digitos, ingrese un nuevo numero: ");
+        else if (!sonNumeros(cadenaDelUsuario)) printf("Solo puede ingresar numeros, ingrese un nuevo numero: ");
         fgets(cadenaDelUsuario, 100, stdin);
     }
     
     eliminar_ceros_izquierda(cadenaDelUsuario);
     longitud = strlen(cadenaDelUsuario) -2;
-    printf("La cadena rta es: ");
+    printf("La cadena con puntos de miles es: ");
     agregarSeparadorMiles(cadenaDelUsuario, longitud, 3);
     free(cadenaDelUsuario);
         fflush(stdin);
@@ -480,17 +480,15 @@ void main_bomba()
     int n, b, i, validador;
 
     // Ingreso del primer valor
-    printf("Ingrese un numero n mayor a 1: ");
+    printf("Ingrese un numero n positivo: ");
     validador = scanf("%i", &n);
-
-    printf("%i", validador);
-    // Validacion del primer valor (mayor a 1 ya que si no B deberia ser 0 debido a que tiene que ser menor que N)
-    while ((validador == 0) || (n <= 1))
+    
+    while ((validador == 0) || (n <= 0))
     {
         if (validador == 0)
             printf("Por favor ingrese un numero: ");
-        else if (n <= 1)
-            printf("Por favor ingrese un numero mayor a 1: ");
+        else if (n <= 0)
+            printf("Por favor ingrese un numero mayor a 0: ");
         while (getchar() != '\n')
             ;
         validador = scanf("%i", &n);
@@ -501,14 +499,12 @@ void main_bomba()
     validador = scanf("%i", &b);
 
     // Validacion del segundo valor
-    while ((validador != 1) || (b <= 1) || (n <= b))
+    while ((validador != 1) || (b <= 1))
     {
         if (validador != 1)
             printf("Por favor ingrese un numero: ");
         else if (b <= 1)
             printf("Por favor ingrese un numero mayor a 1: ");
-        else if (n <= b)
-            printf("N tiene que ser mayor a B: ");
 
         while (getchar() != '\n')
             ;
@@ -517,12 +513,13 @@ void main_bomba()
 
     explosion(n, b, arreglo, 0);
     i = 0;
+    printf("explosion(%i,%i) => [", n,b);
     while (arreglo[i] != NULL)
     {
         printf("%d ", arreglo[i]);
         i++;
     }
-
+    printf("]");
     free(arreglo);
 }
 

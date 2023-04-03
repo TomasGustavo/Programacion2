@@ -267,27 +267,30 @@ bool divisiblePor7(int n){
 void explosion(int n, int b, int *arreglo, int i)
 {
     int n1, n2;
+    if (n <= b){
+        arreglo[i] = n;
+    } else {
+        n1 = n / b;
+        n2 = n - (n / b);
 
-    n1 = n / b;
-    n2 = n - (n / b);
+        if (n1 > b)
+        {
+            explosion(n1, b, arreglo, i);
+        }
+        else
+        {
+            arreglo[i] = n1;
+            i++;
+        }
 
-    if (n1 > b)
-    {
-        explosion(n1, b, arreglo, i);
-    }
-    else
-    {
-        arreglo[i] = n1;
-        i++;
-    }
-
-    if (n2 > b)
-    {
-        explosion(n2, b, arreglo, i);
-    }
-    else
-    {
-        arreglo[i] = n2;
-        i++;
+        if (n2 > b)
+        {
+            explosion(n2, b, arreglo, i);
+        }
+        else
+        {
+            arreglo[i] = n2;
+            i++;
+        }
     }
 }
