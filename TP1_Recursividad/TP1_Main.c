@@ -279,11 +279,11 @@ void main_miles(){
     fflush(stdin);
     fgets(cadenaDelUsuario, 100, stdin);
 
-    while (es_vacia(cadenaDelUsuario) || strlen(cadenaDelUsuario) > 100 
+    while (es_vacia(cadenaDelUsuario) || strlen(cadenaDelUsuario) > 99
     || !sonNumeros(cadenaDelUsuario))
     {
         if (es_vacia(cadenaDelUsuario)) printf("Por favor ingrese un numero: ");
-        else if (strlen(cadenaDelUsuario) > 100) printf("El numero debe tener menos de 99 digitos: ");
+        else if (strlen(cadenaDelUsuario) > 99) printf("El numero debe tener menos de 99 digitos: ");
         else if (!sonNumeros(cadenaDelUsuario)) printf("Solo puede ingresar numeros: ");
         fgets(cadenaDelUsuario, 100, stdin);
     }
