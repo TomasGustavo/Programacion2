@@ -444,9 +444,6 @@ void main_subconjunto()
    printf("La entrada es válida.\n");
 }*/
 
-<<<<<<< HEAD
-// PUNTO 10/**/
-=======
 // PUNTO 9
 void main_divisible_7(){
     int numero_ej9;
@@ -477,7 +474,6 @@ void main_divisible_7(){
     }   
 }
 // PUNTO 10
->>>>>>> cab392b05661d22702bad087e0d360afb4499047
 void main_bomba()
 {
     int *arreglo = calloc(40, sizeof(int));
