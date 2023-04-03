@@ -234,6 +234,35 @@ char *buscaSumaSubconjunto(int tamano, int nivel, int suma, char *salidaparcial,
     return salida;
 }
 
+// PUNTO 9 - DIVISIBLE POR 7
+bool divisiblePor7(int n){
+    bool condicion;
+    int cifra_derecha;
+    int numero_izquierda;
+    if (n < 0)
+    {
+        n = n * -1;
+    }
+    
+    if(n < 70){
+        if (n % 7 == 0)
+        {
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    else{
+        cifra_derecha = n % 10;
+        numero_izquierda = n / 10;
+        cifra_derecha = cifra_derecha * 2;
+        numero_izquierda = numero_izquierda - cifra_derecha;
+        condicion = divisiblePor7(numero_izquierda);
+        return condicion;
+    }
+}
+
 // PUNTO 10 - BOMBA
 void explosion(int n, int b, int *arreglo, int i)
 {
