@@ -6,16 +6,22 @@
 #include <string.h>
 #include "TP1_Recursividad.h"
 
-
 // PUNTO 1 - PALINDROMO
-bool palindromo(char *cadena, int principio, int final){
+bool palindromo(char *cadena, int principio, int final)
+{
     bool respuesta;
-    if ((principio == final)  || (final < principio)){
+    if ((principio == final) || (final < principio))
+    {
         respuesta = true;
-    } else {
-        if (cadena[principio] == cadena[final]){
-            respuesta = palindromo(cadena, principio+1, final-1);
-        } else{
+    }
+    else
+    {
+        if (cadena[principio] == cadena[final])
+        {
+            respuesta = palindromo(cadena, principio + 1, final - 1);
+        }
+        else
+        {
             respuesta = false;
         }
     }
@@ -23,42 +29,44 @@ bool palindromo(char *cadena, int principio, int final){
 }
 
 // PUNTO 2 - PRODUCTO
-long long producto(int m, int n){
+long long producto(int m, int n)
+{
     long long resultado;
     bool negativo = false;
-
     /*Si n es negativo, lo convierte a positivo para que funcione la recursion,
      pero el boolean lo recuerda para mas adelante */
-
-    if (n < 0){
+    if (n < 0)
+    {
         n = n * (-1);
         negativo = true;
     }
-
     /*Si n es 0 (caso base) devuelve 0 y si es mayor, vuelve
     a llamar a la funcion con n-1 (tiede al caso base)*/
-    if (n==0){
+    if (n == 0)
+    {
         resultado = 0;
     }
-    else{
-        resultado = m + producto(m, n-1);
+    else
+    {
+        resultado = m + producto(m, n - 1);
     }
-
-    /*si n era negativo al entrar a la funcion, ahora multiplica al resultado 
+    /*si n era negativo al entrar a la funcion, ahora multiplica al resultado
     por -1*/
-    if (negativo == true){
+    if (negativo == true)
+    {
         resultado = resultado * (-1);
     }
-
-    
     return resultado;
 }
 
 // PUNTO 3 - FIBONACCI
-long long terminoSerieFibonacci(int num){
+long long terminoSerieFibonacci(int num)
+{
     long long resultado;
-    if (num <= 1) resultado = num;
-    else resultado = terminoSerieFibonacci(num-1) + terminoSerieFibonacci(num-2);  
+    if (num <= 1)
+        resultado = num;
+    else
+        resultado = terminoSerieFibonacci(num - 1) + terminoSerieFibonacci(num - 2);
     return resultado;
 }
 
@@ -142,7 +150,7 @@ void agregarSeparadorMiles(char *cadena, int longitud, int contador){
 }
 
 // PUNTO 6 - CHINOS
-char *chinos(int n){
+/* char *chinos(int n){
     char* cadena;
     char *cadenaAnt;
     int longitud;
@@ -156,8 +164,23 @@ char *chinos(int n){
         cadena = (char*) malloc(sizeof(char) * longitud);
         sprintf(cadena, "(-.%s.-)", cadenaAnt);
     }
-    
+
     return cadena;
+} */
+
+void chinos(int n)
+{
+    int color = rand() % 6 + 31; // generar un código de color aleatorio entre 31 y 37
+    if (n == 1)
+    {
+        printf("\033[%dm%s\033[0m", color, "(-.-)");
+    }
+    else
+    {
+        printf("\033[%dm%s", color, "(-.");
+        chinos(n - 1);
+        printf("\033[%dm%s", color, ".-)");
+    }
 }
 
 // PUNTO 8 - SUBCONJUNTO
@@ -193,23 +216,30 @@ char *buscaSumaSubconjunto(int tamano, int nivel, int suma, char *salidaparcial,
 }
 
 // PUNTO 10 - BOMBA
-void explosion(int n, int b, int* arreglo, int i){
-    int n1,n2;
+void explosion(int n, int b, int *arreglo, int i)
+{
+    int n1, n2;
 
-    n1 = n/b;
-    n2 = n-(n/b);
+    n1 = n / b;
+    n2 = n - (n / b);
 
-    if (n1 > b) {
-        explosion(n1,b, arreglo,i);
-    } else {
+    if (n1 > b)
+    {
+        explosion(n1, b, arreglo, i);
+    }
+    else
+    {
         arreglo[i] = n1;
         i++;
     }
 
-    if (n2 > b) {
-        explosion(n2,b,arreglo,i);
-    } else {
-        arreglo [i] = n2;
+    if (n2 > b)
+    {
+        explosion(n2, b, arreglo, i);
+    }
+    else
+    {
+        arreglo[i] = n2;
         i++;
     }
 }
