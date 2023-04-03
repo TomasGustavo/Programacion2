@@ -75,6 +75,26 @@ void a_minusculas(char* cadena) {
     }
 }
 
+//Valida si todos los elementos de una cadena son numeros
+bool sonNumeros(char* cadena) {
+    bool res = true;
+    for (int i = 0; i<strlen(cadena)-1; i++) {
+        if (!isdigit(cadena[i])) {
+            res = false;
+        }
+    }
+    return res;
+}
+
+//Elimina los ceros a la izquierda de una cadena
+void eliminar_ceros_izquierda(char *cadena) {
+    while (cadena[0] == '0') {
+        for(int j=0; j < strlen(cadena); j++){
+            cadena[j] = cadena[j+1];
+        }
+    }
+}
+
 // PUNTO 1
 void main_palindromo()
 {
@@ -109,6 +129,7 @@ void main_palindromo()
     {
         printf("no es palindromo");
     }
+    free(cadenaDelUsuario);
 }
 
 // PUNTO 2
@@ -162,6 +183,7 @@ void main_fibo(){
     resultado = terminoSerieFibonacci(n);
      printf("Resultado: %lld", resultado);
 }
+
 // PUNTO 4
 void main_division(){
     int dividendo, divisor; 
@@ -201,67 +223,30 @@ void main_division(){
         printf("%d / %d = %0.4f", dividendo, divisor, resultado_4);
         getchar();
 }
-//ejercicio 4
 
-float division(int m, int n, int limite_Decimal){ 
-/*esta funcion se encarga de restar en cada sucesion el valor del dividendo(m) 
-con el del divisor(n) hasta que el resto sea menor a n  y 
-realizara restas sucesivas para los decimales de una manera similar a los enteros*/ 
+// PUNTO 5
+void main_miles(){
+    char *cadenaDelUsuario = (char*) calloc(100, sizeof(char));
+    int longitud;
 
-if(n < 0 && m < 0){
-    /*como ambos valores son negativos 
-    se convierten en positivo para el resultado final*/
-    m = m * -1;
-    n = n * -1;
-}
-else if(n < 0){
-    n = n * -1;
-}
-else if(m < 0){ 
-    m = m * -1;
-}
+    printf("Ingresa un numero: ");
+    fflush(stdin);
+    fgets(cadenaDelUsuario, 100, stdin);
 
-float resto = m;  
-float cociente = 0;
-/*una vez que el resto sea menor a n se divide el resto por el n 
-para saber si el cociente(resultado) tiene valores decimales*/ 
-if (resto == 0){ 
-    cociente = resto;
-    return cociente;
-}
-
-else if (resto < n && limite_Decimal != 0)
-{       resto = resto*10;       
-        if (resto < n && resto > -n)
-        {
-            /*en caso que el resto siga siendo menor a n, 
-            esta parte se encarga de solo mover un 0 a la derecha como valor decimal*/
-            cociente = division(resto, n, limite_Decimal);
-            cociente = cociente * 0.1;
-            return cociente;
-        }
-        else{
-            cociente = division(resto-n, n, limite_Decimal - 1);
-            cociente++;
-            cociente = cociente * 0.1; /*esta parte se encarga de desplazar a la parte decimal 
-            los valores correspondientes a la misma*/
-            return cociente;
-        }
-        
-}
-else if (limite_Decimal == 0){
-    /* si el numero decimal es muy grande el limite_Decimal 
-    se va a encargar de cortar la funcion con 4 digitos decimales*/
-    return cociente;
-}
-else {
-cociente = division(m-n, n, limite_Decimal);
-
-/*luego se usa el cociente como contador una vez retornada la sucesion 
-para obtener el resultado segun la cantidad de sucesiones*/ 
-cociente++;  
-return cociente;
-}
+    while (es_vacia(cadenaDelUsuario) || strlen(cadenaDelUsuario) > 100 
+    || !sonNumeros(cadenaDelUsuario))
+    {
+        if (es_vacia(cadenaDelUsuario)) printf("Por favor ingrese un numero: ");
+        else if (strlen(cadenaDelUsuario) > 100) printf("El numero debe tener menos de 99 digitos: ");
+        else if (!sonNumeros(cadenaDelUsuario)) printf("Solo puede ingresar numeros: ");
+        fgets(cadenaDelUsuario, 100, stdin);
+    }
+    
+    eliminar_ceros_izquierda(cadenaDelUsuario);
+    longitud = strlen(cadenaDelUsuario) -2;
+    printf("La cadena rta es: ");
+    agregarSeparadorMiles(cadenaDelUsuario, longitud, 3);
+    free(cadenaDelUsuario);
 }
 
 // PUNTO 6
@@ -281,7 +266,8 @@ void main_chinos(){
     }
     resultado = chinos(n);
 
-     printf("Resultado: %s", resultado);
+    printf("Resultado: %s", resultado);
+    free(resultado);
 }
           
 //PUNTO 8
@@ -464,9 +450,11 @@ int main()
             break;
         case 4:
             main_division();
+            getch();
             break;
         case 5:
-            printf("menu_principal 5");
+            main_miles();
+            getch();
             break;
         case 6:
             main_chinos();

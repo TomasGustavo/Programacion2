@@ -24,8 +24,6 @@ int terminoSerieFibonacci(int num);
 
 float division(int m, int n);
 
-void agregarSeparadorMiles(char *cadena, int longitud, int contador);
-
 char *chinos(int n);
 
 char* ondaDigital(char *onda);

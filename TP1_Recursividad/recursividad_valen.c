@@ -1,13 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <ctype.h>
 #include <string.h>
 #include "recursividad_valen.h"
-
-
-
-
-
 
 
 
@@ -148,17 +144,9 @@ void ondaDigitalPrint(char *onda, int i){
     }
     */
 
-   /* MAIN PUNTO 5
-   char *cadenaDelUsuario = (char*) calloc(100, sizeof(char));
-    int longitud;
 
-    printf("Ingresa una cadena de numeros: ");
-    scanf("%s", cadenaDelUsuario); 
-    longitud = strlen(cadenaDelUsuario) -1;
-    printf("La cadena rta es: ");
-    agregarSeparadorMiles(cadenaDelUsuario, longitud, 3);
-    
-   */
+   
+
 
 
 
