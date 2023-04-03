@@ -59,6 +59,7 @@ if (resto == 0){
 }
 else if (resto < n && limite_Decimal != 0)
 {       
+        resto = resto * 10;
         if (resto < n && resto > -n)
         {
             /*en caso que el resto siga siendo menor a n, 
@@ -145,47 +146,45 @@ int main(){
     printf("\n")*/
     
     //ejercicio 4
-    int dividendo, divisor; 
-    float resultado_4;
-    int no_caracter_4, no_caracter_4_1;
-    while (divisor == 0)
-    {
-        system("cls");
-        printf("\nIngrese el dividendo(max digitos: 4): ");
-        no_caracter_4 = scanf("%d", &dividendo);
-        printf("Ingrese el divisor(max digitos: 4): ");
-        no_caracter_4_1 = scanf("%d", &divisor);
-        fflush(stdin);
-        if (no_caracter_4 == 0 || no_caracter_4_1 == 0){
-            divisor = 0;
-            printf("\nNo estan permitidos los caracteres y los numeros flotantes\n");
-        }  
-        else if(dividendo > 10000 || divisor > 10000 || dividendo < -10000 || divisor < -10000){
-            divisor = 0;
-            printf("\nIngrese como maximo 4 digitos por favor\n");
-        }
-        else if (divisor == 0)
-        {
-            printf("No se puede dividir por 0\n");
-        }
-        printf("presione ENTER para continuar\n");
-        while(getchar() != '\n');   
-    }
-    resultado_4 = division(dividendo, divisor, 5);
-    /*si ambos (dividendo y divisor) eran negativos se deja el resultado positivo*/
-    if (dividendo < 0 && divisor < 0){resultado_4 = resultado_4 * 1;}
-    /*si el dividendo o el divisor eran negativos se le aplica el resultado negativo a el resultado*/
-    else if(dividendo < 0 || divisor < 0){resultado_4 = resultado_4 * -1;}
-    printf("%d / %d = %0.4f", dividendo, divisor, resultado_4);
+    //int dividendo, divisor; 
+    //float resultado_4;
+    //int no_caracter_4, no_caracter_4_1;
+    //while (divisor == 0)
+    //{
+    //    printf("\nIngrese el dividendo(max digitos: 4): ");
+    //    no_caracter_4 = scanf("%d", &dividendo);
+    //    printf("Ingrese el divisor(max digitos: 4): ");
+    //    no_caracter_4_1 = scanf("%d", &divisor);
+    //    fflush(stdin);
+    //    if (no_caracter_4 == 0 || no_caracter_4_1 == 0){
+    //        divisor = 0;
+    //        printf("\nNo estan permitidos los caracteres y los numeros flotantes\n");
+    //    }  
+    //    else if(dividendo > 10000 || divisor > 10000 || dividendo < -10000 || divisor < -10000){
+    //        divisor = 0;
+    //        printf("\nIngrese como maximo 4 digitos por favor\n");
+    //    }
+    //    else if (divisor == 0)
+    //    {
+    //        printf("No se puede dividir por 0\n");
+    //    }
+    //    printf("presione ENTER para continuar\n");
+    //    while(getchar() != '\n');   
+    //}
+    //resultado_4 = division(dividendo, divisor, 5);
+    ///*si ambos (dividendo y divisor) eran negativos se deja el resultado positivo*/
+    //if (dividendo < 0 && divisor < 0){resultado_4 = resultado_4 * 1;}
+    ///*si el dividendo o el divisor eran negativos se le aplica el resultado negativo a el resultado*/
+    //else if(dividendo < 0 || divisor < 0){resultado_4 = resultado_4 * -1;}
+    //printf("%d / %d = %0.4f", dividendo, divisor, resultado_4);
     
     
     //ejercicio 9
-    int numero_ej9;
+    int numero_ej9 = 0;
     bool resultado_9;
     int es_numero_ej9;
-    while (es_numero_ej9 == 0 || numero_ej9 >= 99999999 || numero_ej9 <= -99999999) 
+    while (es_numero_ej9 == 0 || numero_ej9 > 99999999 || numero_ej9 < -99999999) 
     {
-    system("cls");
     printf("ingrese un numero para saber si es divisible por 7 (max de 8 digitos): ");
     es_numero_ej9 = scanf("%d", &numero_ej9);
     fflush(stdin);
@@ -193,7 +192,7 @@ int main(){
     {
         printf("No se permiten caracteres, vuelva a ingresar un dato\n");
     }
-    else if(numero_ej9 >= 99999999 || numero_ej9 <= -99999999){
+    else if(numero_ej9 > 99999999 || numero_ej9 < -99999999){
         printf("Superado el limite de digitos, vuelva a ingresar un dato\n");
     }
     printf("presione ENTER para continuar\n");

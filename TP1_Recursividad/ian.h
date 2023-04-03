@@ -1,5 +1,5 @@
-#ifndef ian.h
-#define ian.h
+#ifndef ian
+#define ian
 
 #include <stdbool.h>
 #define ANSI_RED "\e[31m"

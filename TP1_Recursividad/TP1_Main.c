@@ -406,6 +406,35 @@ void main_subconjunto()
    printf("La entrada es válida.\n");
 }*/
 
+// PUNTO 9
+void main_divisible_7(){
+    int numero_ej9;
+    bool resultado_9;
+    int es_numero_ej9;
+    while (es_numero_ej9 == 0 || numero_ej9 > 99999999 || numero_ej9 < -99999999) 
+    {
+    printf("\ningrese un numero para saber si es divisible por 7 (max de 8 digitos): ");
+    es_numero_ej9 = scanf("%d", &numero_ej9);
+    fflush(stdin);
+    if (es_numero_ej9 == 0)
+    {
+        printf("No se permiten caracteres, vuelva a ingresar un dato\n");
+    }
+    else if(numero_ej9 > 99999999 || numero_ej9 < -99999999){
+        printf("Superado el limite de digitos, vuelva a ingresar un dato\n");
+    }
+    printf("presione ENTER para continuar\n");
+    while (getchar() != '\n');
+    }
+    resultado_9 = divisiblePor7(numero_ej9);
+    if (resultado_9 == false)
+    {
+        printf("el numero %d no es divisible por 7\n", numero_ej9);
+    }
+    else if (resultado_9 == true){
+        printf("el numero %d es divisible por 7\n", numero_ej9);
+    }   
+}
 // PUNTO 10
 void main_bomba()
 {
@@ -534,7 +563,8 @@ int main()
             getch();
             break;
         case 9:
-            printf("menu_principal 8");
+            main_divisible_7();
+            getch();
             break;
         case 10:
             main_bomba();

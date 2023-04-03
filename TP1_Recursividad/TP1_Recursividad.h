@@ -30,6 +30,8 @@ void chinos(int n);
 
 char *buscaSumaSubconjunto(int tamano, int nivel, int suma, char *salidaparcial, int *ent, int *subset, int subsetSize);
 
+bool divisiblePor7(int n);
+
 void explosion(int n, int b, int *arreglo, int i);
 
 #endif // TP1_RECURSIVIDAD_H
