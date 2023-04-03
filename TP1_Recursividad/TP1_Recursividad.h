@@ -24,10 +24,10 @@ long long terminoSerieFibonacci(int num);
 
 float division(int m, int n, int limite_Decimal);
 
-char *chinos(int n);
+void chinos(int n);
 
 char *buscaSumaSubconjunto(int tamano, int nivel, int suma, char *salidaparcial, int *ent, int *subset, int subsetSize);
 
-void explosion(int n, int b, int* arreglo, int i);
+void explosion(int n, int b, int *arreglo, int i);
 
 #endif // TP1_RECURSIVIDAD_H
