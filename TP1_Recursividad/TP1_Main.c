@@ -6,7 +6,7 @@
 #include <string.h>
 #include <limits.h>
 #include "TP1_Recursividad.h"
-//#include "TP1_Recursividad.c"
+// #include "TP1_Recursividad.c"
 
 // da verdadero si la cadena es vacia
 bool es_vacia(char *cadena)
@@ -93,22 +93,28 @@ void a_minusculas(char *cadena)
     }
 }
 
-//Valida si todos los elementos de una cadena son numeros
-bool sonNumeros(char* cadena) {
+// Valida si todos los elementos de una cadena son numeros
+bool sonNumeros(char *cadena)
+{
     bool res = true;
-    for (int i = 0; i<strlen(cadena)-1; i++) {
-        if (!isdigit(cadena[i])) {
+    for (int i = 0; i < strlen(cadena) - 1; i++)
+    {
+        if (!isdigit(cadena[i]))
+        {
             res = false;
         }
     }
     return res;
 }
 
-//Elimina los ceros a la izquierda de una cadena
-void eliminar_ceros_izquierda(char *cadena) {
-    while (cadena[0] == '0') {
-        for(int j=0; j < strlen(cadena); j++){
-            cadena[j] = cadena[j+1];
+// Elimina los ceros a la izquierda de una cadena
+void eliminar_ceros_izquierda(char *cadena)
+{
+    while (cadena[0] == '0')
+    {
+        for (int j = 0; j < strlen(cadena); j++)
+        {
+            cadena[j] = cadena[j + 1];
         }
     }
 }
@@ -254,7 +260,7 @@ void main_division()
         printf("presione ENTER para continuar\n");
         // while(getchar() != '\n');
         getchar();
-            resultado_4 = division(dividendo, divisor, 5);
+        resultado_4 = division(dividendo, divisor, 5);
         /*si ambos (dividendo y divisor) eran negativos se deja el resultado positivo*/
         if (dividendo < 0 && divisor < 0)
         {
@@ -268,34 +274,37 @@ void main_division()
 
         printf("%d / %d = %0.4f", dividendo, divisor, resultado_4);
         getchar();
-}
+    }
 }
 
 // PUNTO 5
-void main_miles(){
-    char *cadenaDelUsuario = (char*) calloc(100, sizeof(char));
+void main_miles()
+{
+    char *cadenaDelUsuario = (char *)calloc(100, sizeof(char));
     int longitud;
 
     printf("Ingresa un numero: ");
     fflush(stdin);
     fgets(cadenaDelUsuario, 100, stdin);
 
-    while (es_vacia(cadenaDelUsuario) || strlen(cadenaDelUsuario) > 99
-    || !sonNumeros(cadenaDelUsuario))
+    while (es_vacia(cadenaDelUsuario) || strlen(cadenaDelUsuario) > 99 || !sonNumeros(cadenaDelUsuario))
     {
-        if (es_vacia(cadenaDelUsuario)) printf("Por favor ingrese un numero: ");
-        else if (strlen(cadenaDelUsuario) > 99) printf("El numero debe tener menos de 99 digitos, ingrese un nuevo numero: ");
-        else if (!sonNumeros(cadenaDelUsuario)) printf("Solo puede ingresar numeros, ingrese un nuevo numero: ");
+        if (es_vacia(cadenaDelUsuario))
+            printf("Por favor ingrese un numero: ");
+        else if (strlen(cadenaDelUsuario) > 99)
+            printf("El numero debe tener menos de 99 digitos, ingrese un nuevo numero: ");
+        else if (!sonNumeros(cadenaDelUsuario))
+            printf("Solo puede ingresar numeros, ingrese un nuevo numero: ");
         fgets(cadenaDelUsuario, 100, stdin);
     }
-    
+
     eliminar_ceros_izquierda(cadenaDelUsuario);
-    longitud = strlen(cadenaDelUsuario) -2;
+    longitud = strlen(cadenaDelUsuario) - 2;
     printf("La cadena con puntos de miles es: ");
     agregarSeparadorMiles(cadenaDelUsuario, longitud, 3);
     free(cadenaDelUsuario);
-        fflush(stdin);
-    }
+    fflush(stdin);
+}
 
 // PUNTO 6
 void main_chinos()
@@ -329,81 +338,90 @@ void main_chinos()
 
 // PUNTO 7
 
-void main_ondas(){
-    char* onda = (char*)calloc(100,sizeof(char));
+void main_ondas()
+{
+    char *onda = (char *)calloc(100, sizeof(char));
     printf("Ingrese una cadena: ");
-    fgets(onda,100,stdin);
-    bool validador=true;
-    //a_minusculas(onda);
-    for(int i=0;i<strlen(onda)-1;i++){
-        if ((onda[i]!='h' && onda[i]!='H') && (onda[i]!='l' && onda[i]!='L')){
+    fgets(onda, 100, stdin);
+    bool validador = true;
+    // a_minusculas(onda);
+    for (int i = 0; i < strlen(onda) - 1; i++)
+    {
+        if ((onda[i] != 'h' && onda[i] != 'H') && (onda[i] != 'l' && onda[i] != 'L'))
+        {
             validador = false;
         }
-        
     }
-    if (onda[0]=='\n'){
+    if (onda[0] == '\n')
+    {
         validador = false;
     }
-    while (validador == false){
+    while (validador == false)
+    {
         printf("Datos invalidos, la cadena solo puede estar compuesta por 'H/h' o 'L/l'\n");
         printf("Ingrese nuevamente: ");
-        fgets(onda,100,stdin);
-        //a_minusculas(onda);
-        validador=true;
-        for(int i=0;i<strlen(onda)-1;i++){
-            if ((onda[i]!='h' && onda[i]!='H') && (onda[i]!='l' && onda[i]!='L')){
+        fgets(onda, 100, stdin);
+        // a_minusculas(onda);
+        validador = true;
+        for (int i = 0; i < strlen(onda) - 1; i++)
+        {
+            if ((onda[i] != 'h' && onda[i] != 'H') && (onda[i] != 'l' && onda[i] != 'L'))
+            {
                 validador = false;
             }
         }
-        if (onda[0]=='\n'){
+        if (onda[0] == '\n')
+        {
             validador = false;
         }
     }
     printf("CADENA VALIDA\n");
     a_minusculas(onda);
-    ondaDigital(onda,0);
+    ondaDigital(onda, 0);
 }
 
 // PUNTO 8
 void main_subconjunto()
 {
-    // char entrada[100];
-    int tamano, suma;
-
-    printf("Ingrese el tamano del conjunto: ");
-    // fgets(entrada, 100, stdin);
-    // entrada[strcspn(entrada, "\n")] = '\0';
-    scanf("%d", &tamano);
-    while (tamano <= 0)
+    int tamano, validador, suma;
+    printf("Ingrese el tamaño del conjunto [1-30]: ");
+    validador = scanf("%i", &tamano);
+    while ((validador != 1) || (tamano <= 0) || (tamano > 30))
     {
-        printf("Entrada invalida. Ingrese un valor entero positivo para el tamano del conjunto: ");
-        scanf("%d", &tamano);
+        printf(ANSI_RED "Entrada invalida.\n" ANSI_RESET);
+        printf("Ingrese el tamaño del conjunto [1-30]: ");
+        while (getchar() != '\n')
+            ;
+        validador = scanf("%i", &tamano);
     }
-
-    int ent[tamano];
+    int conjunto[tamano];
     for (int i = 0; i < tamano; i++)
     {
-        printf("Ingrese el valor %d del conjunto: ", i + 1);
-        scanf("%d", &ent[i]);
-        while (ent[i] <= 0)
+        printf("Ingrese el valor entero de la posicion %d del conjunto: ", i + 1);
+        validador = scanf("%d", &conjunto[i]);
+        while ((validador != 1) || (conjunto[i] <= 0))
         {
-            printf("Entrada invalida. Ingrese un valor entero para el valor %d del conjunto: ", i + 1);
-            scanf("%d", &ent[i]);
+            printf(ANSI_RED "Entrada invalida.\n" ANSI_RESET);
+            printf("Ingrese el valor entero de la posicion %d del conjunto: ", i + 1);
+            while (getchar() != '\n')
+                ;
+            validador = scanf("%d", &conjunto[i]);
         }
     }
-
-    printf("Ingrese el valor de la suma deseada: ");
-    scanf("%d", &suma);
-    while (suma <= 0)
+    printf("Ingrese el valor entero de la suma del subconjunto: ");
+    validador = scanf("%d", &suma);
+    while ((validador != 1) || (suma <= 0))
     {
-        printf("Entrada invalida. Ingrese un valor entero positivo para la suma deseada: ");
-        scanf("%d", &suma);
+        printf(ANSI_RED "Entrada invalida.\n" ANSI_RESET);
+        printf("Ingrese el valor entero de la suma del subconjunto: ");
+        while (getchar() != '\n')
+            ;
+        validador = scanf("%d", &suma);
     }
-    int subset[tamano];
-    int nivel = 0, subsetSize = 0;
-    char salidaparcial[1000];
-    strcpy(salidaparcial, "");
-    char *resultado = buscaSumaSubconjunto(tamano, nivel, suma, salidaparcial, ent, subset, subsetSize);
+    int subconjunto[tamano];
+    int nivel = 0, subconjSize = 0;
+    char salidaparcial[1000] = "";
+    char *resultado = buscaSumaSubconjunto(tamano, nivel, suma, salidaparcial, conjunto, subconjunto, subconjSize);
     printf("%s", resultado);
 }
 
@@ -445,33 +463,37 @@ void main_subconjunto()
 }*/
 
 // PUNTO 9
-void main_divisible_7(){
+void main_divisible_7()
+{
     int numero_ej9;
     bool resultado_9;
     int es_numero_ej9;
-    while (es_numero_ej9 == 0 || numero_ej9 > 99999999 || numero_ej9 < -99999999) 
+    while (es_numero_ej9 == 0 || numero_ej9 > 99999999 || numero_ej9 < -99999999)
     {
-    printf("\ningrese un numero para saber si es divisible por 7 (max de 8 digitos): ");
-    es_numero_ej9 = scanf("%d", &numero_ej9);
-    fflush(stdin);
-    if (es_numero_ej9 == 0)
-    {
-        printf("No se permiten caracteres, vuelva a ingresar un dato\n");
-    }
-    else if(numero_ej9 > 99999999 || numero_ej9 < -99999999){
-        printf("Superado el limite de digitos, vuelva a ingresar un dato\n");
-    }
-    printf("presione ENTER para continuar\n");
-    while (getchar() != '\n');
+        printf("\ningrese un numero para saber si es divisible por 7 (max de 8 digitos): ");
+        es_numero_ej9 = scanf("%d", &numero_ej9);
+        fflush(stdin);
+        if (es_numero_ej9 == 0)
+        {
+            printf("No se permiten caracteres, vuelva a ingresar un dato\n");
+        }
+        else if (numero_ej9 > 99999999 || numero_ej9 < -99999999)
+        {
+            printf("Superado el limite de digitos, vuelva a ingresar un dato\n");
+        }
+        printf("presione ENTER para continuar\n");
+        while (getchar() != '\n')
+            ;
     }
     resultado_9 = divisiblePor7(numero_ej9);
     if (resultado_9 == false)
     {
         printf("el numero %d no es divisible por 7\n", numero_ej9);
     }
-    else if (resultado_9 == true){
+    else if (resultado_9 == true)
+    {
         printf("el numero %d es divisible por 7\n", numero_ej9);
-    }   
+    }
 }
 // PUNTO 10
 void main_bomba()
@@ -482,7 +504,7 @@ void main_bomba()
     // Ingreso del primer valor
     printf("Ingrese un numero n positivo: ");
     validador = scanf("%i", &n);
-    
+
     while ((validador == 0) || (n <= 0))
     {
         if (validador == 0)
@@ -513,7 +535,7 @@ void main_bomba()
 
     explosion(n, b, arreglo, 0);
     i = 0;
-    printf("explosion(%i,%i) => [", n,b);
+    printf("explosion(%i,%i) => [", n, b);
     while (arreglo[i] != NULL)
     {
         printf("%d ", arreglo[i]);
