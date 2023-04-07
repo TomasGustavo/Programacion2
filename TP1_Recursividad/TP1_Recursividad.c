@@ -131,6 +131,7 @@ float division(int m, int n, int limite_Decimal)
     }
     else
     {
+
         cociente = division(m - n, n, limite_Decimal);
 
         /*luego se usa el cociente como contador una vez retornada la sucesion

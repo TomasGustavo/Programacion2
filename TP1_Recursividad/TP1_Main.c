@@ -6,7 +6,6 @@
 #include <string.h>
 #include <limits.h>
 #include "TP1_Recursividad.h"
-// #include "TP1_Recursividad.c"
 
 // da verdadero si la cadena es vacia
 bool es_vacia(char *cadena)
@@ -119,43 +118,83 @@ void eliminar_ceros_izquierda(char *cadena)
     }
 }
 
+bool cadena_larga(char *cadena, int MAX)
+{
+    if (strlen(cadena) == MAX && cadena[MAX - 1] != '\0' && cadena[MAX - 1] != '\n')
+    {
+        // La cadena es igual al tamaño máximo del arreglo y no termina con un salto de línea o carácter nulo
+        // Esto significa que la cadena es demasiado larga para el arreglo
+
+        printf("La cadena es demasiado larga para el arreglo\n");
+    }
+    else
+    {
+        // La cadena tiene un tamaño menor o igual al tamaño máximo del arreglo
+        // Se elimina el carácter de nueva línea si está presente
+        char *newline = strchr(cadena, '\n');
+        if (newline != NULL)
+        {
+            *newline = '\0';
+        }
+
+        printf("La cadena es valida: %s\n", cadena);
+    }
+}
+
 // PUNTO 1
 void main_palindromo()
 {
-    char *cadenaDelUsuario = (char *)calloc(100, sizeof(char));
+    int MAX = 100 + 1;
+    char *cadenaDelUsuario = (char *)malloc(MAX * sizeof(char));
     bool res;
     int longitud;
-    printf("Ingresa una palabra o expresion: ");
-    fflush(stdin);
-    fgets(cadenaDelUsuario, 100, stdin);
-
+    printf(ANSI_BLUE "Ingresa una palabra o expresion de no mas de %d caracteres: " ANSI_YELLOW, MAX - 1);
+    while (getchar() != '\n') // Vaciar el buffer de entrada
+        ;
+    fgets(cadenaDelUsuario, MAX, stdin);
+    longitud = strlen(cadenaDelUsuario);
     while ((es_vacia(cadenaDelUsuario)) || (primer_caracter_espacio(cadenaDelUsuario)) ||
-           (ultimo_caracter_espacio(cadenaDelUsuario)) || (!sonLetras(cadenaDelUsuario)))
+           (ultimo_caracter_espacio(cadenaDelUsuario)))
     {
         if (es_vacia(cadenaDelUsuario))
-            printf("La cadena no puede estar vacia, ingrese una nueva cadena: ");
+        {
+            printf(ANSI_RED "La cadena no puede estar vacia.\n");
+            printf(ANSI_BLUE "Ingrese una nueva cadenade no mas de %d caracteres: " ANSI_YELLOW, MAX - 1);
+        }
         else if (primer_caracter_espacio(cadenaDelUsuario))
-            printf("El primer caracter no puede ser espacio, ingrese una nueva cadena: ");
+        {
+            printf(ANSI_RED "El primer caracter no puede ser espacio.\n");
+            printf(ANSI_BLUE "Ingrese una nueva cadenade no mas de %d caracteres: " ANSI_YELLOW, MAX - 1);
+        }
         else if (ultimo_caracter_espacio(cadenaDelUsuario))
-            printf("El ultimo caracter no puede ser espacio, ingrese una nueva cadena: ");
-        else if (!sonLetras(cadenaDelUsuario))
-            printf("Solo puede ingresar letras y espacios, ingrese una nueva cadena: ");
-        // printf("presione enter\n");
-
+        {
+            printf(ANSI_RED "El ultimo caracter no puede ser espacio.\n");
+            printf(ANSI_BLUE "Ingrese una nueva cadenade no mas de %d caracteres: " ANSI_YELLOW, MAX - 1);
+        }
+        /* else if (cadena_larga(cadenaDelUsuario, MAX))
+         {
+             printf(ANSI_RED "La cadena es demasiado larga para el arreglo\n");
+             printf(ANSI_BLUE "Ingrese una nueva cadena: " ANSI_YELLOW);
+         }
+          else if (!sonLetras(cadenaDelUsuario))
+          {
+              printf(ANSI_RED "Solo puede ingresar letras y espacios.\n");
+              printf(ANSI_BLUE "Ingrese una nueva cadena: " ANSI_YELLOW);
+          } */
+        fflush(stdin); // Vaciar el buffer de entrada
         fgets(cadenaDelUsuario, 100, stdin);
     }
-
     a_minusculas(cadenaDelUsuario);
     // eliminarEspacios(cadenaDelUsuario);
     longitud = strlen(cadenaDelUsuario);
     res = palindromo(cadenaDelUsuario, 0, longitud - 2);
     if (res == true)
     {
-        printf("Es palindromo");
+        printf(ANSI_GREEN "Es palindromo" ANSI_BLUE);
     }
     else
     {
-        printf("no es palindromo");
+        printf(ANSI_RED "No es palindromo" ANSI_BLUE);
     }
     free(cadenaDelUsuario);
 }
@@ -168,41 +207,30 @@ void main_producto()
     int maxM = 999999;
     int maxN = 999;
 
-    printf("Ingrese un numero: ");
+    printf(ANSI_BLUE "Ingrese un numero (valor de m) menor a %d (se truncara si coloca decimales): " ANSI_YELLOW, maxM);
     validador = scanf("%i", &m);
-    fflush(stdin);
-    // printf("%i %i", validador, m);
+    fflush(stdin); // Vaciar el buffer de entrada
     while ((validador != 1) || (m > maxM) || m == '\0' || m == '\n')
     {
-        if (validador != 1)
-            printf("Por favor ingrese un numero: ");
-        else if (m > maxM)
-            printf("Por favor ingrese un numero menor a %i: ", maxM);
-        else if (m == '\0')
-            printf("Por favor ingrese un numero un numero valido: ");
-        else if (m == '\n')
-            printf("Por favor ingrese un numero un numero valido: ");
-        while (getchar() != '\n')
+        printf(ANSI_RED "ERROR\n");
+        printf(ANSI_BLUE "Ingrese un numero (valor de m) menor a %d (se truncara si coloca decimales): " ANSI_YELLOW, maxM);
+        while (getchar() != '\n') // Vaciar el buffer de entrada
             ;
         validador = scanf("%i", &m);
     }
-
-    printf("Ingrese otro numero: ");
+    printf(ANSI_BLUE "Ingrese un numero (valor de n) menor a %d (se truncara si coloca decimales): " ANSI_YELLOW, maxN);
     validador = scanf("%i", &n);
-    fflush(stdin);
+    fflush(stdin); // Vaciar el buffer de entrada
     while ((validador != 1) || (n > maxN))
     {
-        if (validador != 1)
-            printf("Por favor ingrese un numero: ");
-        else if (n > maxN)
-            printf("Por favor ingrese un numero menor a %i: ", maxN);
-        while (getchar() != '\n')
+        printf(ANSI_RED "ERROR\n");
+        printf(ANSI_BLUE "Ingrese un numero (valor de n) menor a %i (se truncara si coloca decimales): " ANSI_YELLOW, maxN);
+        while (getchar() != '\n') // Vaciar el buffer de entrada
             ;
         validador = scanf("%i", &n);
     }
-
     prod = producto(m, n);
-    printf("Resultado: %lld", prod);
+    printf(ANSI_GREEN "El producto de %d x %d es: %lld", m, n, prod);
 }
 
 // PUNTO 3
@@ -210,23 +238,32 @@ void main_fibo()
 {
     int n, validador;
     long long resultado;
-    printf("Ingrese un numero: ");
+    printf(ANSI_BLUE "Ingrese un numero (se truncara si coloca decimales): " ANSI_YELLOW);
     validador = scanf("%i", &n);
-
     while ((validador != 1) || (n < 0) || (n > 40))
     {
         if (validador != 1)
-            printf("Por favor ingrese un numero: ");
+        {
+            printf(ANSI_RED "ERROR\n");
+            printf(ANSI_BLUE "Ingrese un numero (se truncara si coloca decimales): " ANSI_YELLOW);
+        }
         else if (n < 0)
-            printf("Por favor ingrese un numero mayor o igual a 0: ");
+        {
+
+            printf(ANSI_RED "ERROR\n");
+            printf(ANSI_BLUE "Ingrese un numero mayor o igual a 0 (se truncara si coloca decimales): " ANSI_YELLOW);
+        }
         else if (n > 40)
-            printf("Por favor ingrese un numero menor o igual a 40: ");
+        {
+            printf(ANSI_RED "ERROR\n");
+            printf(ANSI_BLUE "Ingrese un numero menor o igual a 40 (se truncara si coloca decimales): " ANSI_YELLOW);
+        }
         while (getchar() != '\n')
             ;
         validador = scanf("%i", &n);
     }
     resultado = terminoSerieFibonacci(n);
-    printf("Resultado: %lld", resultado);
+    printf(ANSI_GREEN "Fibonacci de %d es: %lld", n, resultado);
 }
 
 // PUNTO 4
@@ -235,46 +272,51 @@ void main_division()
     int dividendo, divisor;
     float resultado_4;
     int no_caracter_4, no_caracter_4_1;
-    while (divisor == 0)
+    bool error;
+    do
     {
-        // system("cls");
-        printf("\nIngrese el dividendo(max digitos: 4): ");
+        error = false;
+        printf(ANSI_BLUE "\nIngrese el dividendo (max digitos: 4) (se truncara si coloca decimales): " ANSI_YELLOW);
         no_caracter_4 = scanf("%d", &dividendo);
-        printf("Ingrese el divisor(max digitos: 4): ");
+        while (getchar() != '\n')
+            ;
+        printf(ANSI_BLUE "Ingrese el divisor(max digitos: 4) (se truncara si coloca decimales): " ANSI_YELLOW);
         no_caracter_4_1 = scanf("%d", &divisor);
-        fflush(stdin);
+        while (getchar() != '\n')
+            ;
         if (no_caracter_4 == 0 || no_caracter_4_1 == 0)
         {
             divisor = 0;
-            printf("\nNo estan permitidos los caracteres y los numeros flotantes\n");
+            printf(ANSI_RED "\nNo estan permitidos los caracteres y los numeros flotantes\n");
+            error = true;
         }
         else if (dividendo > 10000 || divisor > 10000 || dividendo < -10000 || divisor < -10000)
         {
             divisor = 0;
-            printf("\nIngrese como maximo 4 digitos por favor\n");
+            printf(ANSI_RED "\nIngrese como maximo 4 digitos por favor\n");
+            error = true;
         }
         else if (divisor == 0)
         {
-            printf("No se puede dividir por 0\n");
+            printf(ANSI_RED "No se puede dividir por 0\n");
+            error = true;
         }
-        printf("presione ENTER para continuar\n");
-        // while(getchar() != '\n');
+        printf("Presione ENTER para continuar\n");
         getchar();
-        resultado_4 = division(dividendo, divisor, 5);
-        /*si ambos (dividendo y divisor) eran negativos se deja el resultado positivo*/
-        if (dividendo < 0 && divisor < 0)
-        {
-            resultado_4 = resultado_4 * 1;
-        }
-        /*si el dividendo o el divisor eran negativos se le aplica el resultado negativo a el resultado*/
-        else if (dividendo < 0 || divisor < 0)
-        {
-            resultado_4 = resultado_4 * -1;
-        }
-
-        printf("%d / %d = %0.4f", dividendo, divisor, resultado_4);
-        getchar();
+    } while (error == true);
+    resultado_4 = division(dividendo, divisor, 5);
+    /*si ambos (dividendo y divisor) eran negativos se deja el resultado positivo*/
+    if (dividendo < 0 && divisor < 0)
+    {
+        resultado_4 = resultado_4 * 1;
     }
+    /*si el dividendo o el divisor eran negativos se le aplica el resultado negativo a el resultado*/
+    else if (dividendo < 0 || divisor < 0)
+    {
+        resultado_4 = resultado_4 * -1;
+    }
+
+    printf(ANSI_GREEN "La division de %d / %d es %0.4f", dividendo, divisor, resultado_4);
 }
 
 // PUNTO 5
@@ -282,25 +324,35 @@ void main_miles()
 {
     char *cadenaDelUsuario = (char *)calloc(100, sizeof(char));
     int longitud;
-
-    printf("Ingresa un numero: ");
-    fflush(stdin);
+    printf(ANSI_BLUE "Ingresa un numero: " ANSI_YELLOW);
+    while (getchar() != '\n')
+        ;
     fgets(cadenaDelUsuario, 100, stdin);
-
     while (es_vacia(cadenaDelUsuario) || strlen(cadenaDelUsuario) > 99 || !sonNumeros(cadenaDelUsuario))
     {
         if (es_vacia(cadenaDelUsuario))
-            printf("Por favor ingrese un numero: ");
+        {
+            printf(ANSI_RED "ERROR\n");
+            printf(ANSI_BLUE "Por favor ingrese un numero: " ANSI_YELLOW);
+        }
+
         else if (strlen(cadenaDelUsuario) > 99)
-            printf("El numero debe tener menos de 99 digitos, ingrese un nuevo numero: ");
+        {
+            printf(ANSI_RED "ERROR\n");
+            printf(ANSI_BLUE "El numero debe tener menos de 99 digitos, ingrese un nuevo numero: " ANSI_YELLOW);
+        }
+
         else if (!sonNumeros(cadenaDelUsuario))
-            printf("Solo puede ingresar numeros, ingrese un nuevo numero: ");
+        {
+            printf(ANSI_RED "ERROR\n");
+            printf(ANSI_BLUE "Solo puede ingresar numeros, ingrese un nuevo numero: " ANSI_YELLOW);
+        }
+        fflush(stdin);
         fgets(cadenaDelUsuario, 100, stdin);
     }
-
     eliminar_ceros_izquierda(cadenaDelUsuario);
     longitud = strlen(cadenaDelUsuario) - 2;
-    printf("La cadena con puntos de miles es: ");
+    printf(ANSI_GREEN "La cadena con puntos de miles es: " ANSI_YELLOW);
     agregarSeparadorMiles(cadenaDelUsuario, longitud, 3);
     free(cadenaDelUsuario);
     fflush(stdin);
@@ -312,17 +364,26 @@ void main_chinos()
     int n, validador;
     char *resultado;
 
-    printf("Ingrese un numero: ");
+    printf(ANSI_RED "Ingrese un numero (se truncara si coloca decimales): " ANSI_YELLOW);
     validador = scanf("%i", &n);
 
     while ((validador != 1) || (n <= 0) || (n > 30))
     {
         if (validador != 1)
-            printf("Por favor ingrese un numero: ");
+        {
+            printf(ANSI_RED "ERROR\n");
+            printf(ANSI_BLUE "Por favor ingrese un numero: " ANSI_YELLOW);
+        }
         else if (n <= 0)
-            printf("Por favor ingrese un numero mayor a 0: ");
+        {
+            printf(ANSI_RED "ERROR\n");
+            printf(ANSI_BLUE "Por favor ingrese un numero mayor a 0: " ANSI_YELLOW);
+        }
         else if (n > 30)
-            printf("Por favor ingrese un numero menor a 30: ");
+        {
+            printf(ANSI_RED "ERROR\n");
+            printf(ANSI_BLUE "Por favor ingrese un numero menor a 30: " ANSI_YELLOW);
+        }
         while (getchar() != '\n')
             ;
         validador = scanf("%i", &n);
@@ -333,6 +394,7 @@ void main_chinos()
     free(resultado);
     // resultado = chinos(n);
     // printf("Resultado: %s", resultado); */
+    printf(ANSI_GREEN "Vista frontal de la delegación nivel %i: \n" ANSI_RESET, n);
     chinos(n);
 }
 
@@ -341,7 +403,9 @@ void main_chinos()
 void main_ondas()
 {
     char *onda = (char *)calloc(100, sizeof(char));
-    printf("Ingrese una cadena: ");
+    printf(ANSI_BLUE "Ingrese una cadena: " ANSI_YELLOW);
+    while (getchar() != '\n')
+        ;
     fgets(onda, 100, stdin);
     bool validador = true;
     // a_minusculas(onda);
@@ -358,10 +422,10 @@ void main_ondas()
     }
     while (validador == false)
     {
-        printf("Datos invalidos, la cadena solo puede estar compuesta por 'H/h' o 'L/l'\n");
-        printf("Ingrese nuevamente: ");
+        printf(ANSI_RED "ERROR\n");
+        printf(ANSI_RED "La cadena solo puede estar compuesta por 'H/h' o 'L/l'\n");
+        printf(ANSI_BLUE "Ingrese una cadena: " ANSI_YELLOW);
         fgets(onda, 100, stdin);
-        // a_minusculas(onda);
         validador = true;
         for (int i = 0; i < strlen(onda) - 1; i++)
         {
@@ -375,7 +439,7 @@ void main_ondas()
             validador = false;
         }
     }
-    printf("CADENA VALIDA\n");
+    printf(ANSI_GREEN "CADENA VALIDA\n");
     a_minusculas(onda);
     ondaDigital(onda, 0);
 }
@@ -384,12 +448,12 @@ void main_ondas()
 void main_subconjunto()
 {
     int tamano, validador, suma;
-    printf("Ingrese el tamaño del conjunto [1-30]: ");
+    printf(ANSI_BLUE "Ingrese el tamaño del conjunto [1-30] (se truncara si coloca decimales): " ANSI_YELLOW);
     validador = scanf("%i", &tamano);
     while ((validador != 1) || (tamano <= 0) || (tamano > 30))
     {
         printf(ANSI_RED "Entrada invalida.\n" ANSI_RESET);
-        printf("Ingrese el tamaño del conjunto [1-30]: ");
+        printf(ANSI_BLUE "Ingrese el tamaño del conjunto [1-30] (se truncara si coloca decimales): " ANSI_YELLOW);
         while (getchar() != '\n')
             ;
         validador = scanf("%i", &tamano);
@@ -397,23 +461,23 @@ void main_subconjunto()
     int conjunto[tamano];
     for (int i = 0; i < tamano; i++)
     {
-        printf("Ingrese el valor entero de la posicion %d del conjunto: ", i + 1);
+        printf(ANSI_BLUE "Ingrese el valor entero [-999.999/999.999] de la posicion %d del conjunto (se truncara si coloca decimales): " ANSI_YELLOW, i + 1);
         validador = scanf("%d", &conjunto[i]);
-        while ((validador != 1) || (conjunto[i] <= 0))
+        while ((validador != 1) || (conjunto[i] <= -1000000) || (conjunto[i] >= 1000000))
         {
             printf(ANSI_RED "Entrada invalida.\n" ANSI_RESET);
-            printf("Ingrese el valor entero de la posicion %d del conjunto: ", i + 1);
+            printf(ANSI_BLUE "Ingrese el valor entero [-999.999/999.999] de la posicion %d del conjunto (se truncara si coloca decimales): " ANSI_YELLOW, i + 1);
             while (getchar() != '\n')
                 ;
             validador = scanf("%d", &conjunto[i]);
         }
     }
-    printf("Ingrese el valor entero de la suma del subconjunto: ");
+    printf(ANSI_BLUE "Ingrese el valor entero [-999.999/999.999] de la suma del subconjunto (se truncara si coloca decimales): " ANSI_YELLOW);
     validador = scanf("%d", &suma);
-    while ((validador != 1) || (suma <= 0))
+    while ((validador != 1) || (suma <= -1000000) || (suma >= 1000000))
     {
         printf(ANSI_RED "Entrada invalida.\n" ANSI_RESET);
-        printf("Ingrese el valor entero de la suma del subconjunto: ");
+        printf(ANSI_BLUE "Ingrese el valor entero [-999.999/999.999] de la suma del subconjunto (se truncara si coloca decimales): " ANSI_YELLOW);
         while (getchar() != '\n')
             ;
         validador = scanf("%d", &suma);
@@ -422,45 +486,8 @@ void main_subconjunto()
     int nivel = 0, subconjSize = 0;
     char salidaparcial[1000] = "";
     char *resultado = buscaSumaSubconjunto(tamano, nivel, suma, salidaparcial, conjunto, subconjunto, subconjSize);
-    printf("%s", resultado);
+    printf(ANSI_GREEN "%s", resultado);
 }
-
-// Función principal8
-/* void main()
-{
-
-    // Validación de la opción ingresada
-    int opcion;
-    opcion = getch();
-    while (toupper((char)opcion) != 'S' && toupper((char)opcion) != 'N')
-    {
-        printf("  La opcion que ingreso es incorrecta.\n");
-        printf("  Presione cualquier tecla para volver a ingresar una opcion . . .\n");
-        opcion = getch();
-    }
-    printf("%c", opcion);
-} */
-
-/*   // Validación de la opción ingresada
-   char input[100];
-   int i = 0;
-   printf("Ingrese un texto: ");
-   scanf("%s", &input); // Leer la entrada del usuario
-   while (input[i])
-   { // Mientras haya caracteres en la cadena
-       if (!isalpha(input[i]))
-       { // Si el carácter no es una letra
-         // if (!isdigit(input[i]))
-         // { // Si el carácter no es una numero
-           printf("Error: se ingresó un carácter que no valido.\n");
-           printf("Ingrese un texto: ");
-           scanf("%s", &input); // Leer la entrada del usuario
-           i = 0;
-       }
-       i++;
-   }
-   printf("La entrada es válida.\n");
-}*/
 
 // PUNTO 9
 void main_divisible_7()
@@ -470,29 +497,28 @@ void main_divisible_7()
     int es_numero_ej9;
     while (es_numero_ej9 == 0 || numero_ej9 > 99999999 || numero_ej9 < -99999999)
     {
-        printf("\ningrese un numero para saber si es divisible por 7 (max de 8 digitos): ");
+        printf(ANSI_BLUE "\nIngrese un numero para saber si es divisible por 7 (max de 8 digitos) (se truncara si coloca decimales): " ANSI_YELLOW);
         es_numero_ej9 = scanf("%d", &numero_ej9);
-        fflush(stdin);
+        while (getchar() != '\n')
+            ;
         if (es_numero_ej9 == 0)
         {
-            printf("No se permiten caracteres, vuelva a ingresar un dato\n");
+            printf(ANSI_RED "ERROR\n");
+            printf(ANSI_RED "No se permiten caracteres, vuelva a ingresar un dato\n");
         }
         else if (numero_ej9 > 99999999 || numero_ej9 < -99999999)
         {
-            printf("Superado el limite de digitos, vuelva a ingresar un dato\n");
+            printf(ANSI_RED "Superado el limite de digitos, vuelva a ingresar un dato\n");
         }
-        printf("presione ENTER para continuar\n");
-        while (getchar() != '\n')
-            ;
     }
     resultado_9 = divisiblePor7(numero_ej9);
     if (resultado_9 == false)
     {
-        printf("el numero %d no es divisible por 7\n", numero_ej9);
+        printf(ANSI_RED "El numero %d no es divisible por 7\n", numero_ej9);
     }
     else if (resultado_9 == true)
     {
-        printf("el numero %d es divisible por 7\n", numero_ej9);
+        printf(ANSI_GREEN "El numero %d es divisible por 7\n", numero_ej9);
     }
 }
 // PUNTO 10
@@ -502,32 +528,38 @@ void main_bomba()
     int n, b, i, validador;
 
     // Ingreso del primer valor
-    printf("Ingrese un numero n positivo: ");
+    printf(ANSI_BLUE "Ingrese un numero n positivo (explosivo) (se truncara si coloca decimales): " ANSI_YELLOW);
     validador = scanf("%i", &n);
 
     while ((validador == 0) || (n <= 0))
     {
         if (validador == 0)
-            printf("Por favor ingrese un numero: ");
+        {
+            printf(ANSI_RED "ERROR\n");
+            printf(ANSI_BLUE "Ingrese un numero n positivo (explosivo) (se truncara si coloca decimales): " ANSI_YELLOW);
+        }
         else if (n <= 0)
-            printf("Por favor ingrese un numero mayor a 0: ");
+        {
+            printf(ANSI_RED "ERROR\n");
+            printf(ANSI_BLUE "Ingrese un numero n (explosivo) mayor a 0 (se truncara si coloca decimales): " ANSI_YELLOW);
+        }
         while (getchar() != '\n')
             ;
         validador = scanf("%i", &n);
     }
 
     // Ingreso del segundo valor
-    printf("Ingrese un numero b mayor a 1: ");
+    printf(ANSI_BLUE "Ingrese un numero b (bomba) mayor a 1 (se truncara si coloca decimales): " ANSI_YELLOW);
     validador = scanf("%i", &b);
 
     // Validacion del segundo valor
     while ((validador != 1) || (b <= 1))
     {
-        if (validador != 1)
-            printf("Por favor ingrese un numero: ");
-        else if (b <= 1)
-            printf("Por favor ingrese un numero mayor a 1: ");
-
+        if ((validador != 1) || (b <= 1))
+        {
+            printf(ANSI_RED "ERROR\n");
+            printf(ANSI_BLUE "Ingrese un numero b (bomba) mayor a 1 (se truncara si coloca decimales): " ANSI_YELLOW);
+        }
         while (getchar() != '\n')
             ;
         validador = scanf("%i", &b);
@@ -535,7 +567,7 @@ void main_bomba()
 
     explosion(n, b, arreglo, 0);
     i = 0;
-    printf("explosion(%i,%i) => [", n, b);
+    printf(ANSI_GREEN "Explosion(%i,%i) => [", n, b);
     while (arreglo[i] != NULL)
     {
         printf("%d ", arreglo[i]);
@@ -547,6 +579,7 @@ void main_bomba()
 
 void menu_principal()
 {
+    printf("\n");
     printf(ANSI_BLUE "  ============================================================================\n");
     printf(" |                             TP1 RECURSIVIDAD                              |\n");
     printf("  ============================================================================\n");
