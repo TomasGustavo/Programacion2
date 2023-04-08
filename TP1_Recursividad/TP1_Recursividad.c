@@ -144,7 +144,6 @@ float division(int m, int n, int limite_Decimal)
 // PUNTO 5 - PUNTOS MILES
 void agregarSeparadorMiles(char *cadena, int longitud, int contador)
 {
-
     if (longitud == 0)
     {
         printf("%c", cadena[longitud]);

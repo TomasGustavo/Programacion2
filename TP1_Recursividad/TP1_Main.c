@@ -95,8 +95,13 @@ void a_minusculas(char *cadena)
 // Valida si todos los elementos de una cadena son numeros
 bool sonNumeros(char *cadena)
 {
+    int i = 0;
     bool res = true;
-    for (int i = 0; i < strlen(cadena) - 1; i++)
+    char x = cadena[i];
+    if (x == 45){
+        i= 1;
+    }
+    for (i = i; i < strlen(cadena) - 1; i++)
     {
         if (!isdigit(cadena[i]))
         {
@@ -322,6 +327,7 @@ void main_division()
 // PUNTO 5
 void main_miles()
 {
+    bool x=false;
     char *cadenaDelUsuario = (char *)calloc(100, sizeof(char));
     int longitud;
     printf(ANSI_BLUE "Ingresa un numero: " ANSI_YELLOW);
@@ -350,10 +356,22 @@ void main_miles()
         fflush(stdin);
         fgets(cadenaDelUsuario, 100, stdin);
     }
+    
+    // pasada las validadciones, si el numero es negativo pongo x es true, transforma el '-' en un espacio, lo elimina;
+    // Luego trabaja la cadena como si fuera de numeros positivos.
+    if(cadenaDelUsuario[0]=='-'){  
+        x = true;
+        cadenaDelUsuario[0] = ' ';
+        eliminarEspacios(cadenaDelUsuario);
+    }
     eliminar_ceros_izquierda(cadenaDelUsuario);
     longitud = strlen(cadenaDelUsuario) - 2;
     printf(ANSI_GREEN "La cadena con puntos de miles es: " ANSI_YELLOW);
+    if(x==true){        // si la cadena era negativa, como elimine mas arriba el '-' lo que hago ahora es imprimirlo antes de imprimir la cadena.
+        printf("-");
+    }
     agregarSeparadorMiles(cadenaDelUsuario, longitud, 3);
+
     free(cadenaDelUsuario);
     fflush(stdin);
 }
