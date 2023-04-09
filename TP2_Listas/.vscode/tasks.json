@@ -1,0 +1,86 @@
+{
+    "tasks": [
+        {
+            "type": "cppbuild",
+            "label": "LISTAS APUNTADORES",
+            "command": "gcc",
+            "args": [
+                "-fdiagnostics-color=always",
+                "-g",
+                "${file}",
+                "${fileDirname}\\listas_apuntadores.c",
+                "${fileDirname}\\tipo_elemento.c",
+                "${fileDirname}\\TP2_listas.c",
+                "-o",
+                "${fileDirname}\\${fileBasenameNoExtension}.exe",
+                "-Wall"
+            ],
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "Tarea generada por Gerr"
+        },
+        {
+            "type": "cppbuild",
+            "label": "LISTAS ARREGLOS",
+            "command": "gcc",
+            "args": [
+                "-fdiagnostics-color=always",
+                "-g",
+                "${file}",
+                "${fileDirname}\\listas_arreglos.c",
+                "${fileDirname}\\tipo_elemento.c",
+                "${fileDirname}\\TP2_listas.c",
+                "-o",
+                "${fileDirname}\\${fileBasenameNoExtension}.exe",
+                "-Wall"
+            ],
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "Tarea generada por Gerr"
+        },
+        {
+            "type": "cppbuild",
+            "label": "LISTAS CURSORES",
+            "command": "gcc",
+            "args": [
+                "-fdiagnostics-color=always",
+                "-g",
+                "${file}",
+                "${fileDirname}\\listas_cursores.c",
+                "${fileDirname}\\tipo_elemento.c",
+                "${fileDirname}\\TP2_listas.c",
+                "-o",
+                "${fileDirname}\\${fileBasenameNoExtension}.exe",
+                "-Wall"
+            ],
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "Tarea generada por Gerr"
+        }
+    ],
+    "version": "2.0.0"
+}
