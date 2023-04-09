@@ -41,7 +41,7 @@ long long producto(int m, int n)
         negativo = true;
     }
     /*Si n es 0 (caso base) devuelve 0 y si es mayor, vuelve
-    a llamar a la funcion con n-1 (tiede al caso base)*/
+    a llamar a la función con n-1 (tiende al caso base)*/
     if (n == 0)
     {
         resultado = 0;
@@ -50,7 +50,7 @@ long long producto(int m, int n)
     {
         resultado = m + producto(m, n - 1);
     }
-    /*si n era negativo al entrar a la funcion, ahora multiplica al resultado
+    /*si n era negativo al entrar a la función, ahora multiplica al resultado
     por -1*/
     if (negativo == true)
     {
@@ -73,7 +73,7 @@ long long terminoSerieFibonacci(int num)
 // PUNTO 4 - DIVISION
 float division(int m, int n, int limite_Decimal)
 {
-    /*esta funcion se encarga de restar en cada sucesion el valor del dividendo(m)
+    /*esta función se encarga de restar en cada sucesión el valor del dividendo(m)
     con el del divisor(n) hasta que el resto sea menor a n  y
     realizara restas sucesivas para los decimales de una manera similar a los enteros*/
 
@@ -126,7 +126,7 @@ float division(int m, int n, int limite_Decimal)
     else if (limite_Decimal == 0)
     {
         /* si el numero decimal es muy grande el limite_Decimal
-        se va a encargar de cortar la funcion con 4 digitos decimales*/
+        se va a encargar de cortar la función con 4 dígitos decimales*/
         return cociente;
     }
     else
@@ -134,8 +134,8 @@ float division(int m, int n, int limite_Decimal)
 
         cociente = division(m - n, n, limite_Decimal);
 
-        /*luego se usa el cociente como contador una vez retornada la sucesion
-        para obtener el resultado segun la cantidad de sucesiones*/
+        /*luego se usa el cociente como contador una vez retornada la sucesión
+        para obtener el resultado según la cantidad de sucesiones*/
         cociente++;
         return cociente;
     }
