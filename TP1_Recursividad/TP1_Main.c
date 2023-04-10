@@ -599,7 +599,7 @@ void main_bomba()
         printf("%d ", arreglo[i]);
         i++;
     }
-    printf("]");
+    printf("]"ANSI_RESET);
     free(arreglo);
 }
 
