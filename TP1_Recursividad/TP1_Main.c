@@ -293,7 +293,7 @@ void main_division()
         if (no_caracter_4 == 0 || no_caracter_4_1 == 0)
         {
             divisor = 0;
-            printf(ANSI_RED "\nNo están permitidos los caracteres y los números flotantes\n");
+            printf(ANSI_RED "\nNo están permitidos los caracteres\n");
             error = true;
         }
         else if (dividendo > 10000 || divisor > 10000 || dividendo < -10000 || divisor < -10000)
@@ -557,17 +557,17 @@ void main_bomba()
     printf(ANSI_BLUE "Ingrese un numero n positivo (explosivo) (se truncara si coloca decimales): " ANSI_YELLOW);
     validador = scanf("%i", &n);
 
-    while ((validador == 0) || (n <= 0))
+    while ((validador == 0) || (n <= 0) || (n > 75))
     {
         if (validador == 0)
         {
             printf(ANSI_RED "ERROR\n");
             printf(ANSI_BLUE "Ingrese un numero n positivo (explosivo) (se truncara si coloca decimales): " ANSI_YELLOW);
         }
-        else if (n <= 0)
+        else if (n <= 0 || n > 75)
         {
             printf(ANSI_RED "ERROR\n");
-            printf(ANSI_BLUE "Ingrese un numero n (explosivo) mayor a 0 (se truncara si coloca decimales): " ANSI_YELLOW);
+            printf(ANSI_BLUE "Ingrese un numero n (explosivo) mayor a 0 y menor o igual a 75 (se truncara si coloca decimales): " ANSI_YELLOW);
         }
         while (getchar() != '\n')
             ;

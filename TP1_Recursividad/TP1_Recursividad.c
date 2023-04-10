@@ -106,7 +106,7 @@ float division(int m, int n, int limite_Decimal)
     else if (resto < n && limite_Decimal != 0)
     {
         resto = resto * 10;
-        if (resto < n && resto > -n)
+        if (resto < n)
         {
             /*en caso que el resto siga siendo menor a n,
             esta parte se encarga de solo mover un 0 a la derecha como valor decimal*/
