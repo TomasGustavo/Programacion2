@@ -111,6 +111,16 @@ void l_borrar(Lista lista, int clave)
     p = lista->inicio;
     while ((p != NULO) && (lista->cursor[p].siguiente != NULO))
     {
+        if(lista->cursor[p].datos->clave == clave){
+            int temp = lista->cursor[p].siguiente;                          // nodo en pos
+            lista->cursor[p].siguiente = lista->cursor[p].siguiente; // nodo en pos + 1
+            lista->cursor[lista->libre].siguiente = temp;
+            lista->libre = temp; // Devuelvo al libre el nodo que elimine (saque de la lista)
+            lista->cantidad--;
+        }
+        else{
+            p = lista->cursor[p].siguiente;
+        }
         // Similar a punteros, solo no olvidar encadenar el libre
         // COMPLETAR CODIGO!
     }
