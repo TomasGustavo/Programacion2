@@ -293,7 +293,9 @@ void explosion(int n, int b, int *arreglo, int i)
     int n1, n2;
     if (n <= b)
     {
-        arreglo[i] = n;
+        printf("%d ", n);
+        // arreglo[i] = n;
+        // i++;
     }
     else
     {
@@ -306,8 +308,9 @@ void explosion(int n, int b, int *arreglo, int i)
         }
         else
         {
-            arreglo[i] = n1;
-            i++;
+            printf("%d ", n1);
+            // arreglo[i] = n1;
+            // i++;
         }
 
         if (n2 > b)
@@ -316,8 +319,9 @@ void explosion(int n, int b, int *arreglo, int i)
         }
         else
         {
-            arreglo[i] = n2;
-            i++;
+            printf("%d ", n2);
+            // arreglo[i] = n2;
+            // i++;
         }
     }
 }

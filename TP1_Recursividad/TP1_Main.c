@@ -590,16 +590,15 @@ void main_bomba()
             ;
         validador = scanf("%i", &b);
     }
-
-    explosion(n, b, arreglo, 0);
     i = 0;
     printf(ANSI_GREEN "Explosion(%i,%i) => [", n, b);
-    while (arreglo[i] != 0)
-    {
-        printf("%d ", arreglo[i]);
-        i++;
-    }
-    printf("]"ANSI_RESET);
+    explosion(n, b, arreglo, 0);
+    /*  while (arreglo[i] != 0)
+      {
+          printf("%d ", arreglo[i]);
+          i++;
+      } */
+    printf("]" ANSI_RESET);
     free(arreglo);
 }
 
