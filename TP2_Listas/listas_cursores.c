@@ -111,14 +111,18 @@ void l_borrar(Lista lista, int clave)
     p = lista->inicio;
     while ((p != NULO) && (lista->cursor[p].siguiente != NULO))
     {
-        if(lista->cursor[p].datos->clave == clave){
-            int temp = lista->cursor[p].siguiente;                          // nodo en pos
-            lista->cursor[p].siguiente = lista->cursor[p].siguiente; // nodo en pos + 1
+        if (lista->cursor[p].datos->clave == clave)
+        {
+            int temp = lista->cursor[p].siguiente;                   // nodo en pos
+            lista->cursor[p].siguiente = lista->cursor[temp].siguiente; // nodo en pos + 1
             lista->cursor[lista->libre].siguiente = temp;
             lista->libre = temp; // Devuelvo al libre el nodo que elimine (saque de la lista)
             lista->cantidad--;
+            p = lista->cursor[p].siguiente;
+            
         }
-        else{
+        else
+        {
             p = lista->cursor[p].siguiente;
         }
         // Similar a punteros, solo no olvidar encadenar el libre
@@ -186,3 +190,67 @@ void l_eliminar(Lista lista, int pos)
         lista->cantidad--;
     }
 }
+
+/*void l_mostrarLista(Lista l){
+     printf("Contenido de la lista: ");
+    for (int i = 0; i < l->cantidad; i++)
+    {
+        printf("%d ", l->cursor[i].datos->clave);
+    }
+    printf("\n");
+}*/
+void l_mostrarLista(Lista lista)
+{ // cursor
+    printf("Contenido de la lista: ");
+
+    int q = lista->inicio;
+    //int temp;
+    while (q!= NULO)
+    {
+        printf("%d ", lista->cursor[q].datos->clave);
+        q = lista->cursor[q].siguiente;
+        //temp = lista->cursor[q].siguiente;
+        //q = temp;
+    }
+
+    printf("\n");
+}
+
+TipoElemento l_recuperar(Lista lista, int pos)
+{
+    
+    return lista->cursor[pos-1].datos;
+}
+
+TipoElemento l_buscar(Lista lista, int clave)
+{
+    int pos = 0;
+    while (pos < lista->cantidad)
+    {
+        if (lista->cursor[pos].datos->clave == clave)
+        {
+            return lista->cursor[pos].datos;
+        }
+        pos++;
+    }
+
+    return NULL;
+}
+
+Iterador iterador(Lista lista)
+{
+    Iterador iter = (Iterador)malloc(sizeof(struct IteradorRep));
+    iter->lista = lista;
+    iter->posicionActual = 0;
+    return iter;
+}
+
+bool hay_siguiente(Iterador iterador)
+{
+    return iterador->posicionActual < iterador->lista->cantidad;
+}
+
+/*TipoElemento siguiente(Iterador iterador)
+{
+    return iterador->lista->cursor[iterador->posicionActual++]->siguiente;
+}*/
