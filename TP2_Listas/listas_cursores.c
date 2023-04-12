@@ -119,7 +119,7 @@ void l_borrar(Lista lista, int clave)
             lista->libre = temp; // Devuelvo al libre el nodo que elimine (saque de la lista)
             lista->cantidad--;
             p = lista->cursor[p].siguiente;
-            
+            // mirar codigo, esta haciendo cagada, actualiza mal los .siguientes y queda que el proximo libre el nulo (por eso despues imprime en bucle infinito)
         }
         else
         {
