@@ -241,7 +241,7 @@ Iterador iterador(Lista lista)
 {
     Iterador iter = (Iterador)malloc(sizeof(struct IteradorRep));
     iter->lista = lista;
-    iter->posicionActual = 0;
+    iter->posicionActual = lista->inicio;
     return iter;
 }
 
@@ -250,7 +250,7 @@ bool hay_siguiente(Iterador iterador)
     return iterador->posicionActual < iterador->lista->cantidad;
 }
 
-/*TipoElemento siguiente(Iterador iterador)
+TipoElemento siguiente(Iterador iterador)
 {
-    return iterador->lista->cursor[iterador->posicionActual++]->siguiente;
-}*/
+    return iterador->lista->cursor[iterador->posicionActual].siguiente;
+}
