@@ -89,7 +89,7 @@ int main()
     l_borrar(L, X->clave);
     l_mostrarLista(L);
     // probamos a borrar la ultima clave
-    X = l_recuperar(L, l_longitud(L));
+    X = l_recuperar(L, l_longitud(L)+1);
     printf("Ultima Clave: %d \n", X->clave);
     l_borrar(L, X->clave);
     l_mostrarLista(L);

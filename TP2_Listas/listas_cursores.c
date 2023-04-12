@@ -218,8 +218,8 @@ void l_mostrarLista(Lista lista)
 
 TipoElemento l_recuperar(Lista lista, int pos)
 {
-    
-    return lista->cursor[pos-1].datos;
+    TipoElemento x = lista->cursor[pos-1].datos;
+    return x;
 }
 
 TipoElemento l_buscar(Lista lista, int clave)
