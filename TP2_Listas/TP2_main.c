@@ -9,6 +9,7 @@
 #include "listas.h"
 #include "tipo_elemento.h"
 
+// PUNTO 2A
 void main_menor(){
     int men, rta;
     int * punteroMenor;
@@ -23,6 +24,7 @@ void main_menor(){
    
 }
 
+// PUNTO 2B
 void main_mayor(){
     int repeticiones, rta;
     int * punteroMayor;
@@ -37,6 +39,46 @@ void main_mayor(){
    
 }
 
+// PUNTO 2C
+void main_promedio(){
+    float prom;
+    int n;
+    Lista l = cargarListaClaves();
+    if (!l_es_vacia(l)) l_mostrarLista(l);
+    
+    if (!l_es_vacia(l)){
+        prom = promedio(l,0,0);
+        printf("El promedio es %.3f\n", prom);
+    } else printf("Noy hay promedio porque la lista es vacia");
+}
+
+// PUNTO 2D
+void main_multiplos(){
+    int n, validador;
+    Lista l = cargarListaClaves();
+    if (!l_es_vacia(l)) l_mostrarLista(l);
+    
+    printf("Ingrese un numero n (los decimales seran truncados): ");
+    fflush(stdin); 
+    validador = scanf("%d", &n);
+
+    while ((validador != 1) || (n <= -10000) || (n >= 10000)){
+        printf(ANSI_RED "Entrada invalida\n");
+        printf(ANSI_BLUE "Ingrese un numero (se truncara si coloca decimales): ");
+        while (getchar() != '\n');
+        validador = scanf("%i", &n);
+    }
+
+
+    if (!l_es_vacia(l)){
+        Lista resultado = multiplos(l,n);
+        if (l_es_vacia(resultado)) printf("No hay multiplos para mostrar");
+        else l_mostrarLista(resultado);
+    } else printf("Noy hay multiplos porque la lista es vacia");
+}
+
+
+// PUNTO 3
 void main_multiplo(){
     int escalar;
     bool rta;
@@ -63,6 +105,7 @@ void main_multiplo(){
     
 }
 
+//PUNTO 6
 void main_sublista(){
     bool rta;
     
@@ -162,11 +205,11 @@ int main()
                     getch();
                     break;
                 case 3:
-                    //main_comparar();
+                    main_promedio();
                     getch();
                     break;
                 case 4:
-                    //main_polinomio();
+                    main_multiplos();
                     getch();
                     break;
                 case 0:

@@ -22,9 +22,13 @@
 
 Lista cargarListaClaves();
 
-int menor (Lista lista, int * posicion);
+int menor(Lista lista, int * posicion);
 
-int mayor (Lista lista, int * repeticiones);
+int mayor(Lista lista, int * repeticiones);
+
+float promedio (Lista l, int i, float suma);
+
+Lista multiplos (Lista l, int n);
 
 bool esMultiplo (Lista l1, Lista l2, int * escalar);
 

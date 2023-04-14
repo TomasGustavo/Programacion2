@@ -86,6 +86,33 @@ int mayor (Lista lista, int * repeticiones) {
     
 }
 
+float promedio (Lista l, int i, float suma){
+    TipoElemento x;
+    if (i >= l_longitud) return suma/i;
+    else {
+        i++;
+        x = l_recuperar(l,i);
+        suma += x->clave;
+        promedio(l, i, suma);
+    }
+    return suma;
+}
+
+Lista multiplos (Lista l, int n){
+    TipoElemento x,x1;
+    Lista nueva = l_crear();
+    Iterador ite = iterador(l);
+    while (hay_siguiente(ite))
+    {
+        x = siguiente(ite);
+        if ((x->clave % n) == 0){
+            x1 = x;
+            l_agregar(nueva,x1);
+        }
+    }
+    return nueva;
+}
+
 bool esMultiplo (Lista l1, Lista l2, int * escalar){
     int e = 0;
     TipoElemento x1, x2;
