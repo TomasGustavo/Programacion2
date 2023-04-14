@@ -14,10 +14,13 @@ void main_menor(){
     int * punteroMenor;
     punteroMenor = &men;
     Lista l = cargarListaClaves();
-    l_mostrarLista(l);
+    if (!l_es_vacia(l)) l_mostrarLista(l);
     
-    rta = menor(l, punteroMenor);
-    printf("El menor es %d en la posicion: %d\n", rta, *punteroMenor);
+    if (!l_es_vacia(l)){
+        rta = menor(l, punteroMenor);
+        printf("El menor es %d en la posicion: %d\n", rta, *punteroMenor);
+    } else printf("Noy hay menor porque la lista es vacia");
+   
 }
 
 void main_mayor(){
@@ -25,10 +28,34 @@ void main_mayor(){
     int * punteroMayor;
     punteroMayor = &repeticiones;
     Lista l = cargarListaClaves();
-    l_mostrarLista(l);
+    if (!l_es_vacia(l)) l_mostrarLista(l);
     
-    rta = mayor(l, punteroMayor);
-    printf("El mayor es %d y se repite %d veces\n", rta, *punteroMayor);
+    if (!l_es_vacia(l)){
+        rta = mayor(l, punteroMayor);
+        printf("El mayor es %d y se repite %d veces\n", rta, *punteroMayor);
+    } else printf("Noy hay mayor porque la lista es vacia");
+   
+}
+
+void main_multiplo(){
+    int escalar;
+    bool rta;
+    int * punteroEscalar;
+    punteroEscalar = &escalar;
+    
+    printf(ANSI_bMAGENTA "Carga de lista 1\n");
+    Lista l1 = cargarListaClaves();
+       if (!l_es_vacia(l1)) l_mostrarLista(l1);
+    
+    printf(ANSI_bMAGENTA "Carga de lista 2\n");
+    Lista l2 = cargarListaClaves();
+       if (!l_es_vacia(l2)) l_mostrarLista(l2);
+
+    rta = esMultiplo(l1, l2, punteroEscalar);
+    if (rta == true) printf(ANSI_bGREEN "Es multiplo ");
+    else printf(ANSI_RED "No es multiplo");
+
+    if (rta == true && *punteroEscalar != 0) printf("y el escalar es %d", *punteroEscalar);
 }
 
 
@@ -127,7 +154,7 @@ int main()
             getch();
             break;
         case 3:
-            //main_multiplo();
+            main_multiplo();
             getch();
             break;
         case 4:

@@ -26,4 +26,6 @@ int menor (Lista lista, int * posicion);
 
 int mayor (Lista lista, int * repeticiones);
 
+bool esMultiplo (Lista l1, Lista l2, int * escalar);
+
 #endif // TP2_LISTAS_H

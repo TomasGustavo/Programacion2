@@ -25,21 +25,23 @@ Lista cargarListaClaves(){
         validador = scanf("%i", &tamano);
     }
 
-    for (int i = 1; i <= tamano; i++)
-    {
-        printf(ANSI_bBLUE "Ingrese un numero (se truncara si coloca decimales): " ANSI_YELLOW, i + 1);
-        validador = scanf("%d", &claveIngresada);
-        while ((validador != 1) || (claveIngresada <= -10000) || (claveIngresada >= 10000))
-        {
-            printf(ANSI_RED "Entrada invalida.\n" ANSI_RESET);
-            printf(ANSI_bBLUE "Ingrese un numero (se truncara si coloca decimales): " ANSI_YELLOW, i + 1);
-            while (getchar() != '\n');
-            validador = scanf("%d", &claveIngresada);
-        }
-        X = te_crear(claveIngresada);
-        l_agregar(L,X);
-    }
-    printf(ANSI_bGREEN "La lista fue cargada con exito \n");
+    if (tamano > 0){
+            for (int i = 1; i <= tamano; i++){
+                printf(ANSI_bBLUE "Ingrese un numero (se truncara si coloca decimales): " ANSI_YELLOW, i + 1);
+                validador = scanf("%d", &claveIngresada);
+                while ((validador != 1) || (claveIngresada <= -10000) || (claveIngresada >= 10000))
+                {
+                    printf(ANSI_RED "Entrada invalida.\n" ANSI_RESET);
+                    printf(ANSI_bBLUE "Ingrese un numero (se truncara si coloca decimales): " ANSI_YELLOW, i + 1);
+                    while (getchar() != '\n');
+                    validador = scanf("%d", &claveIngresada);
+                }
+                X = te_crear(claveIngresada);
+                l_agregar(L,X);
+            }
+            printf(ANSI_bGREEN "La lista fue cargada con exito \n");
+    } else printf(ANSI_bGREEN "La lista vacia creada \n");
+
     return L;
 }
 
@@ -82,4 +84,32 @@ int mayor (Lista lista, int * repeticiones) {
     *repeticiones = cantidad;
     return mayor->clave;
     
+}
+
+bool esMultiplo (Lista l1, Lista l2, int * escalar){
+    int e = 0;
+    TipoElemento x1, x2;
+    Iterador ite1 = iterador(l1);
+    Iterador ite2 = iterador(l2);
+    bool resultado = true;
+
+    if (l_longitud(l1) != l_longitud(l2)) resultado = false;
+    else {
+        x1 = siguiente(ite1);
+        x2 = siguiente(ite2);
+        if ((x1->clave != 0) && (x2->clave % x1->clave == 0)){
+            e = x2->clave / x1->clave;
+            *escalar = e;
+        } else resultado = false;
+
+        while (hay_siguiente(ite1) && resultado == true) {
+            x1 = siguiente(ite1);
+            x2 = siguiente(ite2);
+            if ((x1->clave != 0) && (x2->clave % x1->clave == 0)){
+                if (e != (x2->clave / x1->clave)) *escalar = 0;
+            } else resultado = false;
+            
+        }
+    }
+    return resultado;
 }
