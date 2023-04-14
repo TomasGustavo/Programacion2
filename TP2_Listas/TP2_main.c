@@ -13,7 +13,7 @@
 void main_menor(){
     int men, rta;
     int * punteroMenor;
-    punteroMenor = &men;
+   // punteroMenor = &men;
     Lista l = cargarListaClaves();
     if (!l_es_vacia(l)) l_mostrarLista(l);
     
@@ -28,7 +28,7 @@ void main_menor(){
 void main_mayor(){
     int repeticiones, rta;
     int * punteroMayor;
-    punteroMayor = &repeticiones;
+    //punteroMayor = &repeticiones;
     Lista l = cargarListaClaves();
     if (!l_es_vacia(l)) l_mostrarLista(l);
     
@@ -42,7 +42,6 @@ void main_mayor(){
 // PUNTO 2C
 void main_promedio(){
     float prom;
-    int n;
     Lista l = cargarListaClaves();
     if (!l_es_vacia(l)) l_mostrarLista(l);
     
@@ -138,7 +137,7 @@ void menu_principal()
     printf("  5   Polinomio\n");
     printf("  6   Sublista\n");
     printf("\n");
-    printf("  7   Salir\n");
+    printf("  0   Salir\n");
     printf("\n");
     printf(" ------------------------------------------------------------------------------\n");
     printf("\n");
@@ -166,6 +165,7 @@ void menu_punto2()
 
 int main()
 {
+    bool salir1 = false;
     bool salir = false;
     int opcion;
 
@@ -173,7 +173,7 @@ int main()
     {
         menu_principal();
         scanf("%i", &opcion);
-        while (opcion < 1 || opcion > 7)
+        while (opcion < 0 || opcion > 6 || opcion == 1)
         {
             printf(ANSI_RED "Opción incorrecta\n" ANSI_RESET);
             printf(ANSI_BLUE "  Por favor seleccione una opción: " ANSI_YELLOW);
@@ -183,7 +183,7 @@ int main()
         switch (opcion)
         {
         case 2:
-             while (!salir)
+             while (!salir1)
             {
                 menu_punto2();
                 scanf("%i", &opcion);
@@ -213,12 +213,11 @@ int main()
                     getch();
                     break;
                 case 0:
-                    salir = true;
-                    break;
+                    salir1 = true;
                 }
             }
-            getch();
             break;
+            menu_principal();
         case 3:
             main_multiplo();
             getch();

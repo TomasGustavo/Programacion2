@@ -51,6 +51,7 @@ int menor (Lista lista, int * posicion){
     int posActual = 1;
     Iterador ite = iterador(lista);
     menor = siguiente(ite);
+    *posicion = posActual;
     posActual++;
     while (hay_siguiente(ite)){
         x = siguiente(ite);

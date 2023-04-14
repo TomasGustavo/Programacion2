@@ -296,12 +296,12 @@ Iterador iterador(Lista lista)
 
 bool hay_siguiente(Iterador iterador)
 {
-    return iterador->posicionActual < iterador->lista->cantidad;
+    return (iterador->posicionActual != NULO);
 }
 
 TipoElemento siguiente(Iterador iterador)
 {
     TipoElemento actual = iterador->lista->cursor[iterador->posicionActual].datos;
-    iterador->posicionActual = iterador->lista->cursor->siguiente;
+    iterador->posicionActual = iterador->lista->cursor[iterador->posicionActual].siguiente;
     return actual;
 }
