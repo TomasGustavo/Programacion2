@@ -20,6 +20,18 @@ void main_menor(){
     printf("El menor es %d en la posicion: %d\n", rta, *punteroMenor);
 }
 
+void main_mayor(){
+    int repeticiones, rta;
+    int * punteroMayor;
+    punteroMayor = &repeticiones;
+    Lista l = cargarListaClaves();
+    l_mostrarLista(l);
+    
+    rta = mayor(l, punteroMayor);
+    printf("El mayor es %d y se repite %d veces\n", rta, *punteroMayor);
+}
+
+
 void menu_principal()
 {
     printf("\n");
@@ -96,7 +108,7 @@ int main()
                     getch();
                     break;
                 case 2:
-                    //main_multiplo();
+                    main_mayor();
                     getch();
                     break;
                 case 3:

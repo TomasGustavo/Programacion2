@@ -23,4 +23,7 @@
 Lista cargarListaClaves();
 
 int menor (Lista lista, int * posicion);
+
+int mayor (Lista lista, int * repeticiones);
+
 #endif // TP2_LISTAS_H

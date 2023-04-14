@@ -61,3 +61,25 @@ int menor (Lista lista, int * posicion){
 
     return menor->clave;
 }
+
+int mayor (Lista lista, int * repeticiones) {
+    TipoElemento x, mayor;
+    Iterador ite = iterador(lista);
+    int cantidad = 1;
+    mayor = siguiente(ite);
+
+    while (hay_siguiente(ite))
+    {
+        x = siguiente(ite);
+        if (x->clave > mayor->clave){
+            mayor = x;
+            cantidad = 1;
+        } else if (x->clave == mayor->clave){
+            cantidad++;
+        }
+    }
+
+    *repeticiones = cantidad;
+    return mayor->clave;
+    
+}
