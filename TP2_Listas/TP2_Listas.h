@@ -32,6 +32,10 @@ Lista multiplos (Lista l, int n);
 
 bool esMultiplo (Lista l1, Lista l2, int * escalar);
 
+float polinomio (Lista l, float x);
+
+Lista rango (Lista l, int xMax, int xMin, int i);
+
 bool sublista (Lista l1, Lista l2);
 
 #endif // TP2_LISTAS_H

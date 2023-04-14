@@ -141,6 +141,14 @@ bool esMultiplo (Lista l1, Lista l2, int * escalar){
     return resultado;
 }
 
+float polinomio (Lista l, float x){
+
+}
+
+Lista rango (Lista l, int xMax, int xMin, int i){
+
+}
+
 bool sublista (Lista l1, Lista l2){
     TipoElemento x1,x2;
     bool resultado = true;
