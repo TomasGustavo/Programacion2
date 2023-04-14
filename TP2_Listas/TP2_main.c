@@ -51,11 +51,34 @@ void main_multiplo(){
     Lista l2 = cargarListaClaves();
        if (!l_es_vacia(l2)) l_mostrarLista(l2);
 
-    rta = esMultiplo(l1, l2, punteroEscalar);
-    if (rta == true) printf(ANSI_bGREEN "Es multiplo ");
-    else printf(ANSI_RED "No es multiplo");
+    if (l_es_vacia(l1) && l_es_vacia(l2)){
+        printf(ANSI_RED "No es multiplo ya que son vacias");
+    } else {
+        rta = esMultiplo(l1, l2, punteroEscalar);
+        if (rta == true) printf(ANSI_bGREEN "Es multiplo ");
+        else printf(ANSI_RED "No es multiplo");
 
-    if (rta == true && *punteroEscalar != 0) printf("y el escalar es %d", *punteroEscalar);
+        if (rta == true && *punteroEscalar != 0) printf("y el escalar es %d", *punteroEscalar);
+    }
+    
+}
+
+void main_sublista(){
+    bool rta;
+    
+    printf(ANSI_bMAGENTA "Carga de lista 1\n");
+    Lista l1 = cargarListaClaves();
+       if (!l_es_vacia(l1)) l_mostrarLista(l1);
+    
+    printf(ANSI_bMAGENTA "Carga de lista 2\n");
+    Lista l2 = cargarListaClaves();
+       if (!l_es_vacia(l2)) l_mostrarLista(l2);
+
+    
+    rta = sublista(l1, l2);
+    if (rta == true) printf(ANSI_bGREEN "La segunda lista es sublista de la primera");
+    else printf(ANSI_RED "La segunda lista no es sublista de la primera");
+
 }
 
 
@@ -166,7 +189,7 @@ int main()
             getch();
             break;
         case 6:
-            //main_sublista();
+            main_sublista();
             getch();
             break;
         case 7:

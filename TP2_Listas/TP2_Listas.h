@@ -28,4 +28,6 @@ int mayor (Lista lista, int * repeticiones);
 
 bool esMultiplo (Lista l1, Lista l2, int * escalar);
 
+bool sublista (Lista l1, Lista l2);
+
 #endif // TP2_LISTAS_H

@@ -113,3 +113,29 @@ bool esMultiplo (Lista l1, Lista l2, int * escalar){
     }
     return resultado;
 }
+
+bool sublista (Lista l1, Lista l2){
+    TipoElemento x1,x2;
+    bool resultado = true;
+    Iterador ite1 = iterador(l1);
+    Iterador ite2 = iterador(l2);
+    bool encontro;
+
+    if (l_es_vacia(l2)) resultado = true;
+    else if (l_es_vacia(l1) && l_es_vacia(l2)) resultado = true;
+    else if (l_longitud(l2) > l_longitud(l1)) resultado = false;
+    else{
+        while (hay_siguiente(ite2) && (resultado == true))
+        {
+            x2 = siguiente(ite2);
+            encontro = false;
+            while (hay_siguiente(ite1) && encontro == false)
+            {
+                x1 = siguiente(ite1);
+                if (x1->clave == x2->clave) encontro = true;
+            }
+            if (encontro == false) resultado = false;
+        }
+    }
+    return resultado;
+}
