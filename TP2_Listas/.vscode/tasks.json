@@ -64,6 +64,7 @@
                 "${file}",
                 "${fileDirname}\\listas_cursores.c",
                 "${fileDirname}\\tipo_elemento.c",
+                "${fileDirname}\\TP2_listas.c",
                 "-o",
                 "${fileDirname}\\${fileBasenameNoExtension}.exe",
                 "-Wall"

@@ -5,6 +5,7 @@
 
 // Cabecera para sacar los pares
 Lista pares(Lista L);
+int menor (Lista lista, int * posicion);
 
 //----------------------------------------------------------------------
 // MAIN PRINCIPAL
@@ -36,6 +37,7 @@ int main()
 
     printf("-----------------------------------------------------------------\n");
     l_mostrarLista(L);
+
 
     // Ahora mando a insetar uno para ver si funciona al principio
     X = te_crear(11);
@@ -111,13 +113,13 @@ int main()
     l_mostrarLista(L);
 
     // Lista de pares
-    /*printf("---- LISTA DE CLAVES PARES ---- \n");
+    printf("---- LISTA DE CLAVES PARES ---- \n");
     Lista lp = pares(L);
     l_mostrarLista(lp);
-    */
+
+   
     return 0;
 }
-
 
 // retorno la lista con solo las claves pares
 /*Lista pares(Lista L) {

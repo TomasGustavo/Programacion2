@@ -2,6 +2,8 @@
 #define TP2_LISTAS_H
 
 #include <stdbool.h>
+#include "listas.h"
+#include "tipo_elemento.h"
 #define ANSI_RED "\e[31m"
 #define ANSI_GREEN "\e[32m"
 #define ANSI_YELLOW "\e[33m"
@@ -18,6 +20,7 @@
 #define ANSI_bWHITE "\e[97m"
 #define ANSI_RESET "\e[0m"
 
+Lista cargarListaClaves();
 
-
+int menor (Lista lista, int * posicion);
 #endif // TP2_LISTAS_H

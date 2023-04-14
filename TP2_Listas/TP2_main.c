@@ -6,6 +6,19 @@
 #include <string.h>
 #include <limits.h>
 #include "TP2_Listas.h"
+#include "listas.h"
+#include "tipo_elemento.h"
+
+void main_menor(){
+    int men, rta;
+    int * punteroMenor;
+    punteroMenor = &men;
+    Lista l = cargarListaClaves();
+    l_mostrarLista(l);
+    
+    rta = menor(l, punteroMenor);
+    printf("El menor es %d en la posicion: %d\n", rta, *punteroMenor);
+}
 
 void menu_principal()
 {
@@ -20,6 +33,25 @@ void menu_principal()
     printf("  5   Polinomio\n");
     printf("  6   Sublista\n");
     printf("\n");
+    printf("  7   Salir\n");
+    printf("\n");
+    printf(" ------------------------------------------------------------------------------\n");
+    printf("\n");
+    printf("  Por favor seleccione una opción: " ANSI_YELLOW);
+}
+
+void menu_punto2()
+{
+    printf("\n");
+    printf(ANSI_BLUE "  ============================================================================\n");
+    printf(" |                                 TP2 LISTAS                                |\n");
+    printf("  ============================================================================\n");
+    printf("\n");
+    printf("  1   Menor de los datos\n");
+    printf("  2   Mayor de los datos\n");
+    printf("  3   Promedio\n");
+    printf("  4   Lista de multiplos\n");;
+    printf("\n");
     printf("  0   Salir\n");
     printf("\n");
     printf(" ------------------------------------------------------------------------------\n");
@@ -29,129 +61,79 @@ void menu_principal()
 
 int main()
 {
-    int i = 0;
-    TipoElemento X;
-    Lista L;
+    bool salir = false;
+    int opcion;
 
-    L = l_crear();
-    printf("Lista Creada Correctamente !!! \n");
-
-    if (l_es_vacia(L)) {
-        printf("lista vacia !!! \n");
-    }
-
-    X = te_crear(1000);
-    l_agregar(L, X);
-    l_mostrarLista(L);
-
-    // LLeno la lista
-    i = 1;
-    while (i <= 10) {
-        X = te_crear(i);
-        l_agregar(L, X);
-        i = i + 1;
-    }
-
-    printf("-----------------------------------------------------------------\n");
-    l_mostrarLista(L);
-
-    // Ahora mando a insetar uno para ver si funciona al principio
-    X = te_crear(11);
-    l_insertar(L, X, 1);
-
-    printf("-----------------------------------------------------------------\n");
-    l_mostrarLista(L);
-
-    // Ahora mando a insetar uno para ver si funciona en la quinta posicion
-    X = te_crear(12);
-    l_insertar(L, X, 5);
-
-    printf("-----------------------------------------------------------------\n");
-    l_mostrarLista(L);
-
-    printf("-----------------------------------------------------------------\n");
-    X = l_buscar(L, 1000);
-    if (X != NULL) {
-        printf("Clave Encontrada: %d \n", X->clave);
-    }
-    else {
-        printf("La CLAVE NO FUE ENCONTRADA !!! \n");
-    }
-    // ahora una que no existe
-    X = l_buscar(L, 5000);
-    if (X != NULL) {
-        printf("Clave Encontrada: %d \n", X->clave);
-    }
-    else {
-        printf("La CLAVE NO FUE ENCONTRADA !!! \n");
-    }
-
-    printf("-----------------------------------------------------------------\n");
-    // probamos a eliminar el primero
-    l_eliminar(L, 1);
-    l_mostrarLista(L);
-    // probamos a eliminar el ultimo
-    l_eliminar(L, l_longitud(L));
-    l_mostrarLista(L);
-    // probamos a eliminar en el medio
-    l_eliminar(L, 5);
-    l_mostrarLista(L);
-
-    printf("-----------------------------------------------------------------\n");
-    // probamos a borrar la primer clave
-    X = l_recuperar(L, 1);
-    l_borrar(L, X->clave);
-    l_mostrarLista(L);
-    // probamos a borrar la tercera clave
-    X = l_recuperar(L, 3);
-    l_borrar(L, X->clave);
-    l_mostrarLista(L);
-    // probamos a borrar la ultima clave
-    X = l_recuperar(L, l_longitud(L));
-    printf("Ultima Clave: %d \n", X->clave);
-    l_borrar(L, X->clave);
-    l_mostrarLista(L);
-
-    printf("-----------------------------------------------------------------\n");
-
-    // Agegamos 2 clave repetidas...
-    X = te_crear(15);
-    l_agregar(L, X);
-    X = te_crear(15);
-    l_agregar(L, X);
-    l_mostrarLista(L);
-    l_insertar(L, X, 1);
-    l_mostrarLista(L);
-
-    // Mando a borrar la 15 (3 claves)
-    l_borrar(L, 15);
-    l_mostrarLista(L);
-
-    // Lista de pares
-    printf("---- LISTA DE CLAVES PARES ---- \n");
-    Lista lp = pares(L);
-    l_mostrarLista(lp);
-
-    return 0;
-}
-
-
-// retorno la lista con solo las claves pares
-Lista pares(Lista L) {
-    TipoElemento X;
-    Iterador ite;
-    Lista lp = l_crear();
-
-    // Inicializo el iterador
-    ite = iterador(L);
-
-    // Recorro la lista
-    while (hay_siguiente(ite)) {
-        X = siguiente(ite);
-        if ((X->clave % 2) == 0) {
-            l_agregar(lp, X);
+    while (!salir)
+    {
+        menu_principal();
+        scanf("%i", &opcion);
+        while (opcion < 1 || opcion > 7)
+        {
+            printf(ANSI_RED "Opción incorrecta\n" ANSI_RESET);
+            printf(ANSI_BLUE "  Por favor seleccione una opción: " ANSI_YELLOW);
+            while (getchar() != '\n');
+            scanf("%i", &opcion);
+        }
+        switch (opcion)
+        {
+        case 2:
+             while (!salir)
+            {
+                menu_punto2();
+                scanf("%i", &opcion);
+                while (opcion < 0 || opcion > 4)
+                {
+                    printf(ANSI_RED "Opción incorrecta\n" ANSI_RESET);
+                    printf(ANSI_BLUE "  Por favor seleccione una opción: " ANSI_YELLOW);
+                    while (getchar() != '\n');
+                    scanf("%i", &opcion);
+                }
+                switch (opcion)
+                {
+                case 1:
+                    main_menor();
+                    getch();
+                    break;
+                case 2:
+                    //main_multiplo();
+                    getch();
+                    break;
+                case 3:
+                    //main_comparar();
+                    getch();
+                    break;
+                case 4:
+                    //main_polinomio();
+                    getch();
+                    break;
+                case 0:
+                    salir = true;
+                    break;
+                }
+            }
+            getch();
+            break;
+        case 3:
+            //main_multiplo();
+            getch();
+            break;
+        case 4:
+            //main_comparar();
+            getch();
+            break;
+        case 5:
+            //main_polinomio();
+            getch();
+            break;
+        case 6:
+            //main_sublista();
+            getch();
+            break;
+        case 7:
+            salir = true;
+            break;
         }
     }
-
-    return lp;
+    return 0;
 }

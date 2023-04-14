@@ -301,5 +301,7 @@ bool hay_siguiente(Iterador iterador)
 
 TipoElemento siguiente(Iterador iterador)
 {
-    return iterador->lista->cursor[iterador->posicionActual].datos;
+    TipoElemento actual = iterador->lista->cursor[iterador->posicionActual].datos;
+    iterador->posicionActual = iterador->lista->cursor->siguiente;
+    return actual;
 }
