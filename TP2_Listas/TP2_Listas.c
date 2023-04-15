@@ -142,6 +142,39 @@ bool esMultiplo (Lista l1, Lista l2, int * escalar){
     return resultado;
 }
 
+int ComparaListas(Lista l1,Lista l2){
+    // 0 = l1 mayor; 1 = l1 menor; 2 = iguales;
+    int mayor=0,menor=0;
+    TipoElemento x1,x2;
+    Iterador ite1 = iterador(l1);
+    Iterador ite2 = iterador(l2);
+    
+    while (hay_siguiente(ite1) && hay_siguiente(ite2)){
+        
+        x1 = siguiente(ite1);
+        x2 = siguiente(ite2);
+        
+        if(x1->clave > x2->clave){
+            mayor++;
+        }
+        else if(x1->clave < x2->clave){
+            menor++;
+        }
+
+    }
+    if(mayor>menor){
+        return 0;
+    }
+    else if(mayor<menor){
+        return 1;
+    }
+    else{
+        return 2;
+    }
+
+
+}
+
 float polinomio (Lista l, float x){
 
 }

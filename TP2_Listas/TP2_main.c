@@ -104,6 +104,41 @@ void main_multiplo(){
     
 }
 
+// PUNTO 4
+void main_comparar(){
+    
+    printf(ANSI_bMAGENTA"Carga de lista 1\n"ANSI_RESET);
+    Lista l1 = cargarListaClaves();
+    if(!l_es_vacia(l1)) l_mostrarLista(l1);
+
+    printf(ANSI_bMAGENTA"Carga de lista 2\n"ANSI_RESET);
+    Lista l2 = cargarListaClaves();
+    if(!l_es_vacia(l1)) l_mostrarLista(l2);
+
+    if(l_longitud(l1)!=l_longitud(l2)){
+        printf(ANSI_RED"------ERROR------\nListas de distintos tamaños.\n"ANSI_RESET);
+        return;
+    }
+    else{
+        int rta = ComparaListas(l1,l2);
+        switch(rta){
+            case 0:
+            printf(ANSI_GREEN"Lista 1 mayor que Lista 2\n"ANSI_RESET);
+            getch();
+            break;
+            case 1:
+            printf(ANSI_GREEN"Lista 1 menor que Lista 2\n"ANSI_RESET);
+            getch();
+            break;
+            case 2:
+            printf(ANSI_GREEN"Lista 1 igual que Lista 2\n"ANSI_RESET);
+            getch();
+            break;
+        }
+    }
+    
+}
+
 //PUNTO 6
 void main_sublista(){
     bool rta;
@@ -223,7 +258,7 @@ int main()
             getch();
             break;
         case 4:
-            //main_comparar();
+            main_comparar();
             getch();
             break;
         case 5:
