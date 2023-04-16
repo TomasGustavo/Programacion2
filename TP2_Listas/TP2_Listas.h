@@ -20,22 +20,31 @@
 #define ANSI_bWHITE "\e[97m"
 #define ANSI_RESET "\e[0m"
 
+struct valoresXY;
+typedef struct valoresXY *valorXY;
+
 Lista cargarListaClaves();
 
-int menor(Lista lista, int * posicion);
+int menor(Lista lista, int *posicion);
 
-int mayor(Lista lista, int * repeticiones);
+int mayor(Lista lista, int *repeticiones);
 
-float promedio (Lista l, int i, float suma);
+float promedio(Lista l, int i, float suma);
 
-Lista multiplos (Lista l, int n);
+Lista multiplos(Lista l, int n);
 
-bool esMultiplo (Lista l1, Lista l2, int * escalar);
+bool esMultiplo(Lista l1, Lista l2, int *escalar);
 
-float polinomio (Lista l, float x);
+bool agregarTermino(Lista polinomio, int exponente, int coeficiente);
 
-Lista rango (Lista l, int xMax, int xMin, int i);
+float calcularX(Lista polinomio, float n);
 
-bool sublista (Lista l1, Lista l2);
+Lista rango(Lista polinomio, float xMin, float xMax, float intervalo);
+
+void mostrar_polinomio(Lista polinomio);
+
+bool sublista(Lista l1, Lista l2);
+
+int ComparaListas(Lista l1, Lista l2);
 
 #endif // TP2_LISTAS_H

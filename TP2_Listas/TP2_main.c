@@ -10,154 +10,227 @@
 #include "tipo_elemento.h"
 
 // PUNTO 2A
-void main_menor(){
-    int men, rta;
-    int * punteroMenor;
-   // punteroMenor = &men;
+void main_menor()
+{
+    int rta;
+    int *punteroMenor = 0;
+    // punteroMenor = &men;
     Lista l = cargarListaClaves();
-    if (!l_es_vacia(l)) l_mostrarLista(l);
-    
-    if (!l_es_vacia(l)){
+    if (!l_es_vacia(l))
+        l_mostrarLista(l);
+
+    if (!l_es_vacia(l))
+    {
         rta = menor(l, punteroMenor);
         printf("El menor es %d en la posicion: %d\n", rta, *punteroMenor);
-    } else printf("Noy hay menor porque la lista es vacia");
-   
+    }
+    else
+        printf("Noy hay menor porque la lista es vacia");
 }
 
 // PUNTO 2B
-void main_mayor(){
-    int repeticiones, rta;
-    int * punteroMayor;
-    //punteroMayor = &repeticiones;
+void main_mayor()
+{
+    int rta;
+    int *punteroMayor = 0;
+    // punteroMayor = &repeticiones;
     Lista l = cargarListaClaves();
-    if (!l_es_vacia(l)) l_mostrarLista(l);
-    
-    if (!l_es_vacia(l)){
+    if (!l_es_vacia(l))
+        l_mostrarLista(l);
+
+    if (!l_es_vacia(l))
+    {
         rta = mayor(l, punteroMayor);
         printf("El mayor es %d y se repite %d veces\n", rta, *punteroMayor);
-    } else printf("Noy hay mayor porque la lista es vacia");
-   
+    }
+    else
+        printf("Noy hay mayor porque la lista es vacia");
 }
 
 // PUNTO 2C
-void main_promedio(){
+void main_promedio()
+{
     float prom;
     Lista l = cargarListaClaves();
-    if (!l_es_vacia(l)) l_mostrarLista(l);
-    
-    if (!l_es_vacia(l)){
-        prom = promedio(l,0,0);
+    if (!l_es_vacia(l))
+        l_mostrarLista(l);
+
+    if (!l_es_vacia(l))
+    {
+        prom = promedio(l, 0, 0);
         printf("El promedio es %.3f\n", prom);
-    } else printf("Noy hay promedio porque la lista es vacia");
+    }
+    else
+        printf("Noy hay promedio porque la lista es vacia");
 }
 
 // PUNTO 2D
-void main_multiplos(){
+void main_multiplos()
+{
     int n, validador;
     Lista l = cargarListaClaves();
-    if (!l_es_vacia(l)) l_mostrarLista(l);
-    
+    if (!l_es_vacia(l))
+        l_mostrarLista(l);
     printf("Ingrese un numero n (los decimales seran truncados): ");
-    fflush(stdin); 
+    fflush(stdin);
     validador = scanf("%d", &n);
-
-    while ((validador != 1) || (n <= -10000) || (n >= 10000)){
+    while ((validador != 1) || (n <= -10000) || (n >= 10000))
+    {
         printf(ANSI_RED "Entrada invalida\n");
         printf(ANSI_BLUE "Ingrese un numero (se truncara si coloca decimales): ");
-        while (getchar() != '\n');
+        while (getchar() != '\n')
+            ;
         validador = scanf("%i", &n);
     }
-
-
-    if (!l_es_vacia(l)){
-        Lista resultado = multiplos(l,n);
-        if (l_es_vacia(resultado)) printf("No hay multiplos para mostrar");
-        else l_mostrarLista(resultado);
-    } else printf("Noy hay multiplos porque la lista es vacia");
+    if (!l_es_vacia(l))
+    {
+        Lista resultado = multiplos(l, n);
+        if (l_es_vacia(resultado))
+            printf("No hay multiplos para mostrar");
+        else
+            l_mostrarLista(resultado);
+    }
+    else
+        printf("Noy hay multiplos porque la lista es vacia");
 }
 
-
 // PUNTO 3
-void main_multiplo(){
+void main_multiplo()
+{
     int escalar;
     bool rta;
-    int * punteroEscalar;
+    int *punteroEscalar;
     punteroEscalar = &escalar;
-    
     printf(ANSI_bMAGENTA "Carga de lista 1\n");
     Lista l1 = cargarListaClaves();
-       if (!l_es_vacia(l1)) l_mostrarLista(l1);
-    
+    if (!l_es_vacia(l1))
+        l_mostrarLista(l1);
     printf(ANSI_bMAGENTA "Carga de lista 2\n");
     Lista l2 = cargarListaClaves();
-       if (!l_es_vacia(l2)) l_mostrarLista(l2);
-
-    if (l_es_vacia(l1) && l_es_vacia(l2)){
+    if (!l_es_vacia(l2))
+        l_mostrarLista(l2);
+    if (l_es_vacia(l1) && l_es_vacia(l2))
+    {
         printf(ANSI_RED "No es multiplo ya que son vacias");
-    } else {
-        rta = esMultiplo(l1, l2, punteroEscalar);
-        if (rta == true) printf(ANSI_bGREEN "Es multiplo ");
-        else printf(ANSI_RED "No es multiplo");
-
-        if (rta == true && *punteroEscalar != 0) printf("y el escalar es %d", *punteroEscalar);
     }
-    
+    else
+    {
+        rta = esMultiplo(l1, l2, punteroEscalar);
+        if (rta == true)
+            printf(ANSI_bGREEN "Es multiplo ");
+        else
+            printf(ANSI_RED "No es multiplo");
+
+        if (rta == true && *punteroEscalar != 0)
+            printf("y el escalar es %d", *punteroEscalar);
+    }
 }
 
 // PUNTO 4
-void main_comparar(){
-    
-    printf(ANSI_bMAGENTA"Carga de lista 1\n"ANSI_RESET);
+void main_comparar()
+{
+    printf(ANSI_bMAGENTA "Carga de lista 1\n" ANSI_RESET);
     Lista l1 = cargarListaClaves();
-    if(!l_es_vacia(l1)) l_mostrarLista(l1);
-
-    printf(ANSI_bMAGENTA"Carga de lista 2\n"ANSI_RESET);
+    if (!l_es_vacia(l1))
+        l_mostrarLista(l1);
+    printf(ANSI_bMAGENTA "Carga de lista 2\n" ANSI_RESET);
     Lista l2 = cargarListaClaves();
-    if(!l_es_vacia(l1)) l_mostrarLista(l2);
-
-    if(l_longitud(l1)!=l_longitud(l2)){
-        printf(ANSI_RED"------ERROR------\nListas de distintos tamaños.\n"ANSI_RESET);
+    if (!l_es_vacia(l1))
+        l_mostrarLista(l2);
+    if (l_longitud(l1) != l_longitud(l2))
+    {
+        printf(ANSI_RED "------ERROR------\nListas de distintos tamaños.\n" ANSI_RESET);
         return;
     }
-    else{
-        int rta = ComparaListas(l1,l2);
-        switch(rta){
-            case 0:
-            printf(ANSI_GREEN"Lista 1 mayor que Lista 2\n"ANSI_RESET);
+    else
+    {
+        int rta = ComparaListas(l1, l2);
+        switch (rta)
+        {
+        case 0:
+            printf(ANSI_GREEN "Lista 1 mayor que Lista 2\n" ANSI_RESET);
             getch();
             break;
-            case 1:
-            printf(ANSI_GREEN"Lista 1 menor que Lista 2\n"ANSI_RESET);
+        case 1:
+            printf(ANSI_GREEN "Lista 1 menor que Lista 2\n" ANSI_RESET);
             getch();
             break;
-            case 2:
-            printf(ANSI_GREEN"Lista 1 igual que Lista 2\n"ANSI_RESET);
+        case 2:
+            printf(ANSI_GREEN "Lista 1 igual que Lista 2\n" ANSI_RESET);
             getch();
             break;
         }
     }
-    
 }
 
-//PUNTO 6
-void main_sublista(){
+// PUNTO 6
+void main_sublista()
+{
     bool rta;
-    
     printf(ANSI_bMAGENTA "Carga de lista 1\n");
     Lista l1 = cargarListaClaves();
-       if (!l_es_vacia(l1)) l_mostrarLista(l1);
-    
+    if (!l_es_vacia(l1))
+        l_mostrarLista(l1);
     printf(ANSI_bMAGENTA "Carga de lista 2\n");
     Lista l2 = cargarListaClaves();
-       if (!l_es_vacia(l2)) l_mostrarLista(l2);
-
-    
+    if (!l_es_vacia(l2))
+        l_mostrarLista(l2);
     rta = sublista(l1, l2);
-    if (rta == true) printf(ANSI_bGREEN "La segunda lista es sublista de la primera");
-    else printf(ANSI_RED "La segunda lista no es sublista de la primera");
-
+    if (rta == true)
+        printf(ANSI_bGREEN "La segunda lista es sublista de la primera");
+    else
+        printf(ANSI_RED "La segunda lista no es sublista de la primera");
 }
 
+void main_polinomio()
+{
+    int cant_terminos, coeficiente, exponente;
+    float r_min, r_max, intervalo;
+    Lista polinomio, resultado;
+    polinomio = l_crear();
+    resultado = l_crear();
+    printf("\n");
+    // VALIDAR DATOS > 0 < TAMANIO_MAXIMO
+    printf(ANSI_BLUE "Ingrese la cantidad de terminos del polinomio: " ANSI_YELLOW);
+    while (getchar() != '\n')
+        ;
+    scanf("%d", &cant_terminos);
+    for (int i = 0; i < cant_terminos; i++)
+    {
+        // VALIDAR DATOS >= -100 <= 100
+        printf(ANSI_BLUE "Ingrese el coeficiente del termino %d: " ANSI_YELLOW, i + 1);
+        while (getchar() != '\n')
+            ;
+        scanf("%d", &coeficiente);
+        // VALIDAR DATOS >= 0 <= 10
+        printf(ANSI_BLUE "Ingrese el exponente del termino %d: " ANSI_YELLOW, i + 1);
+        while (getchar() != '\n')
+            ;
+        scanf("%d", &exponente);
+        // VALIDAR QUE LA LISTA NO ESTE LLENA
+        agregarTermino(polinomio, exponente, coeficiente);
+    }
+    printf(ANSI_GREEN "Lista cargada con exito!\n");
+    printf("\n");
+    // VALIDAR DATOS
+    printf(ANSI_BLUE "Ingrese el rango minimo: " ANSI_YELLOW);
+    while (getchar() != '\n')
+        ;
+    scanf("%f", &r_min);
+    // VALIDAR DATOS > r_min
+    printf(ANSI_BLUE "Ingrese el rango maximo: " ANSI_YELLOW);
+    while (getchar() != '\n')
+        ;
+    scanf("%f", &r_max);
+    // VALIDAR DATOS > 0
+    printf(ANSI_BLUE "Ingrese el valor de intervalo: " ANSI_YELLOW);
+    while (getchar() != '\n')
+        ;
+    scanf("%f", &intervalo);
+    resultado = rango(polinomio, r_min, r_max, intervalo);
+    printf("\n");
+    mostrar_polinomio(resultado);
+}
 
 void menu_principal()
 {
@@ -183,13 +256,14 @@ void menu_punto2()
 {
     printf("\n");
     printf(ANSI_BLUE "  ============================================================================\n");
-    printf(" |                                 TP2 LISTAS                                |\n");
+    printf(" |                         2   Operaciones con listas                         |\n");
     printf("  ============================================================================\n");
     printf("\n");
     printf("  1   Menor de los datos\n");
     printf("  2   Mayor de los datos\n");
     printf("  3   Promedio\n");
-    printf("  4   Lista de multiplos\n");;
+    printf("  4   Lista de multiplos\n");
+    ;
     printf("\n");
     printf("  0   Salir\n");
     printf("\n");
@@ -203,7 +277,6 @@ int main()
     bool salir1 = false;
     bool salir = false;
     int opcion;
-
     while (!salir)
     {
         menu_principal();
@@ -212,13 +285,14 @@ int main()
         {
             printf(ANSI_RED "Opción incorrecta\n" ANSI_RESET);
             printf(ANSI_BLUE "  Por favor seleccione una opción: " ANSI_YELLOW);
-            while (getchar() != '\n');
+            while (getchar() != '\n')
+                ;
             scanf("%i", &opcion);
         }
         switch (opcion)
         {
         case 2:
-             while (!salir1)
+            while (!salir1)
             {
                 menu_punto2();
                 scanf("%i", &opcion);
@@ -226,7 +300,8 @@ int main()
                 {
                     printf(ANSI_RED "Opción incorrecta\n" ANSI_RESET);
                     printf(ANSI_BLUE "  Por favor seleccione una opción: " ANSI_YELLOW);
-                    while (getchar() != '\n');
+                    while (getchar() != '\n')
+                        ;
                     scanf("%i", &opcion);
                 }
                 switch (opcion)
@@ -262,7 +337,7 @@ int main()
             getch();
             break;
         case 5:
-            //main_polinomio();
+            main_polinomio();
             getch();
             break;
         case 6:
