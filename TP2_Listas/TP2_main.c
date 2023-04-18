@@ -175,11 +175,11 @@ void main_sublista()
 {
     bool rta;
     printf(ANSI_bMAGENTA "Carga de lista 1\n");
-    Lista l1 = cargarListaClaves();
+    Lista l1 = cargarListaClavesSinRepetir();
     if (!l_es_vacia(l1))
         l_mostrarLista(l1);
     printf(ANSI_bMAGENTA "Carga de lista 2\n");
-    Lista l2 = cargarListaClaves();
+    Lista l2 = cargarListaClavesSinRepetir();
     if (!l_es_vacia(l2))
         l_mostrarLista(l2);
     rta = sublista(l1, l2);

@@ -25,6 +25,8 @@ typedef struct valoresXY *valorXY;
 
 Lista cargarListaClaves();
 
+Lista cargarListaClavesSinRepetir();
+
 int menor(Lista lista, int *posicion);
 
 int mayor(Lista lista, int *repeticiones);

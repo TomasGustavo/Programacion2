@@ -54,6 +54,49 @@ Lista cargarListaClaves()
     return L;
 }
 
+Lista cargarListaClavesSinRepetir()
+{
+    int tamano, validador, claveIngresada;
+    TipoElemento X, X1;
+    Lista L;
+    L = l_crear();
+    printf("Ingrese la cantidad de elementos de la lista: \n");
+    validador = scanf("%i", &tamano);
+    while ((validador != 1) || (tamano < 0) || (tamano > 99))
+    {
+        printf(ANSI_RED "Entrada invalida.\n" ANSI_RESET);
+        printf(ANSI_BLUE "Ingrese el tamaño del conjunto [1-99] (se truncara si coloca decimales): " ANSI_YELLOW);
+        while (getchar() != '\n')
+            ;
+        validador = scanf("%i", &tamano);
+    }
+    if (tamano > 0)
+    {
+        for (int i = 1; i <= tamano; i++)
+        {
+            printf(ANSI_bBLUE "Ingrese un numero (se truncara si coloca decimales): " ANSI_YELLOW, i + 1);
+            validador = scanf("%d", &claveIngresada);
+            X1 = l_buscar(L, claveIngresada);
+            while ((validador != 1) || (claveIngresada <= -10000) || (claveIngresada >= 10000) ||
+            (X1 != NULL))
+            {
+                printf(ANSI_RED "Entrada invalida.\n" ANSI_RESET);
+                printf(ANSI_bBLUE "Ingrese un numero (se truncara si coloca decimales y no se aceptan elementos repetidos): " ANSI_YELLOW, i + 1);
+                while (getchar() != '\n')
+                    ;
+                validador = scanf("%d", &claveIngresada);
+                X1 = l_buscar(L, claveIngresada);
+            }
+            X = te_crear(claveIngresada);
+            l_agregar(L, X);
+        }
+        printf(ANSI_bGREEN "La lista fue cargada con exito \n");
+    }
+    else
+        printf(ANSI_bGREEN "La lista vacia creada \n");
+    return L;
+}
+
 int menor(Lista lista, int *posicion)
 {
     TipoElemento x, menor;
