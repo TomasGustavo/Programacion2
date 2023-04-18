@@ -200,7 +200,7 @@ void main_sublista()
 
 void main_polinomio()
 {
-    int cant_terminos,  exponente,validador;
+    int cant_terminos,  exponente,validador, cantidadDeResultados;
     float r_min, r_max, intervalo,coeficiente;
     const int TAMANIO_MAXIMO = 10;
     Lista polinomio, resultado;
@@ -303,6 +303,10 @@ void main_polinomio()
         printf(ANSI_BLUE "Ingrese el valor de intervalo: " ANSI_YELLOW);
         vaciar_buffer();
         validador = scanf("%f", &intervalo);
+    }
+    cantidadDeResultados = ((r_max - r_min) / intervalo) + 1;
+    if (cantidadDeResultados > 100){
+        printf(ANSI_RED "La cantidad de resultados dentro del rango es mayor a 100. Se mostraran los primeros 100.");
     }
     resultado = rango(polinomio, r_min, r_max, intervalo);
     printf("\n");
