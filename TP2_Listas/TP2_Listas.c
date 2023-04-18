@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
+#include <math.h>
 #include "TP2_Listas.h"
 #include "tipo_elemento.h"
 #include "listas.h"
@@ -78,7 +79,7 @@ Lista cargarListaClavesSinRepetir()
             validador = scanf("%d", &claveIngresada);
             X1 = l_buscar(L, claveIngresada);
             while ((validador != 1) || (claveIngresada <= -10000) || (claveIngresada >= 10000) ||
-            (X1 != NULL))
+                   (X1 != NULL))
             {
                 printf(ANSI_RED "Entrada invalida.\n" ANSI_RESET);
                 printf(ANSI_bBLUE "Ingrese un numero (se truncara si coloca decimales y no se aceptan elementos repetidos): " ANSI_YELLOW, i + 1);
@@ -248,7 +249,7 @@ bool sublista(Lista l1, Lista l2)
 {
     TipoElemento x1, x2;
     bool resultado = true;
-    
+
     Iterador ite2 = iterador(l2);
     bool encontro;
     if (l_es_vacia(l2))
@@ -278,7 +279,7 @@ bool sublista(Lista l1, Lista l2)
 }
 
 // AGREGAR TERMINO A LA LISTA
-bool agregarTermino(Lista polinomio, int exponente, int coeficiente)
+bool agregarTermino(Lista polinomio, int exponente, float coeficiente)
 {
     TipoElemento x;
     bool r;
@@ -286,7 +287,8 @@ bool agregarTermino(Lista polinomio, int exponente, int coeficiente)
         r = false;
     else
     {
-        void *valor_coeficiente = (void *)coeficiente;
+        void *valor_coeficiente = malloc(sizeof(float));
+        *(float *)valor_coeficiente = coeficiente;
         x = te_crear_con_valor(exponente, valor_coeficiente);
         l_agregar(polinomio, x);
         r = true;
@@ -298,12 +300,12 @@ float calcularX(Lista polinomio, float n)
 {
     TipoElemento x;
     float suma = 0;
-    int coeficiente;
+    float coeficiente;
     Iterador ite = iterador(polinomio);
     while (hay_siguiente(ite))
     {
         x = siguiente(ite);
-        coeficiente = x->valor;
+        coeficiente = *(float *)x->valor; // Acceder al valor como float
         suma = suma + (coeficiente * pow(n, x->clave));
     }
     return suma;
@@ -328,14 +330,14 @@ Lista rango(Lista polinomio, float xMin, float xMax, float intervalo)
 void mostrar_polinomio(Lista polinomio)
 {
     TipoElemento x;
-    valorXY valores;
+    struct valoresXY *valores;
     Iterador ite = iterador(polinomio);
     printf(ANSI_GREEN "\t  X\t" ANSI_MAGENTA "|   " ANSI_GREEN "  Y\n");
     printf(ANSI_MAGENTA "      __________|_____________\n");
     while (hay_siguiente(ite))
     {
         x = siguiente(ite);
-        valores = x->valor;
+        valores = x->valor; // Acceder al valor como struct valoresXY
         printf(ANSI_YELLOW "\t%.2lf\t" ANSI_MAGENTA "|   " ANSI_YELLOW "%.2lf \n", valores->X, valores->Y);
     }
 }
