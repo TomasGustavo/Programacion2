@@ -200,8 +200,8 @@ void main_sublista()
 
 void main_polinomio()
 {
-    int cant_terminos, coeficiente, exponente,validador;
-    float r_min, r_max, intervalo;
+    int cant_terminos,  exponente,validador;
+    float r_min, r_max, intervalo,coeficiente;
     const int TAMANIO_MAXIMO = 10;
     Lista polinomio, resultado;
     polinomio = l_crear();
@@ -250,6 +250,7 @@ void main_polinomio()
         }
         
     }
+    
     printf(ANSI_GREEN "Lista cargada con exito!\n");
     printf("\n");
     // VALIDAR DATOS         HECHO =)

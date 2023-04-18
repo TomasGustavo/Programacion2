@@ -205,7 +205,7 @@ bool sublista(Lista l1, Lista l2)
 {
     TipoElemento x1, x2;
     bool resultado = true;
-    Iterador ite1 = iterador(l1);
+    
     Iterador ite2 = iterador(l2);
     bool encontro;
     if (l_es_vacia(l2))
@@ -220,6 +220,7 @@ bool sublista(Lista l1, Lista l2)
         {
             x2 = siguiente(ite2);
             encontro = false;
+            Iterador ite1 = iterador(l1);
             while (hay_siguiente(ite1) && encontro == false)
             {
                 x1 = siguiente(ite1);
