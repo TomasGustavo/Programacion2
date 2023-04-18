@@ -184,10 +184,19 @@ void main_sublista()
         l_mostrarLista(l2);
     rta = sublista(l1, l2);
     if (rta == true)
-        printf(ANSI_bGREEN "La segunda lista es sublista de la primera");
-    else
-        printf(ANSI_RED "La segunda lista no es sublista de la primera");
-}
+        printf(ANSI_bGREEN "La segunda lista es sublista de la primera\n");
+    else {
+       printf(ANSI_RED "La segunda lista no es sublista de la primera\n");
+       rta = sublista(l2,l1);
+       if(rta==true){
+        printf(ANSI_bGREEN "La primera lista es sublista de la segunda\n");       
+       }
+       else{
+        printf(ANSI_RED "La primera lista tampoco es sublista de la segunda\n");       
+       }
+    } 
+    }
+        
 
 void main_polinomio()
 {
