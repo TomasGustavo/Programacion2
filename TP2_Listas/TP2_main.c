@@ -9,12 +9,12 @@
 #include "listas.h"
 #include "tipo_elemento.h"
 
-int vaciar_buffer(void){
+int vaciar_buffer(void)
+{
     char nada[200];
-    fgets(nada,200,stdin);
+    fgets(nada, 200, stdin);
     return 0;
 }
-
 
 // PUNTO 2A
 void main_menor()
@@ -185,23 +185,25 @@ void main_sublista()
     rta = sublista(l1, l2);
     if (rta == true)
         printf(ANSI_bGREEN "La segunda lista es sublista de la primera\n");
-    else {
-       printf(ANSI_RED "La segunda lista no es sublista de la primera\n");
-       rta = sublista(l2,l1);
-       if(rta==true){
-        printf(ANSI_bGREEN "La primera lista es sublista de la segunda\n");       
-       }
-       else{
-        printf(ANSI_RED "La primera lista tampoco es sublista de la segunda\n");       
-       }
-    } 
+    else
+    {
+        printf(ANSI_RED "La segunda lista no es sublista de la primera\n");
+        rta = sublista(l2, l1);
+        if (rta == true)
+        {
+            printf(ANSI_bGREEN "La primera lista es sublista de la segunda\n");
+        }
+        else
+        {
+            printf(ANSI_RED "La primera lista tampoco es sublista de la segunda\n");
+        }
     }
-        
+}
 
 void main_polinomio()
 {
-    int cant_terminos,  exponente,validador, cantidadDeResultados;
-    float r_min, r_max, intervalo,coeficiente;
+    int cant_terminos, exponente, validador, cantidadDeResultados;
+    float r_min, r_max, intervalo, coeficiente;
     const int TAMANIO_MAXIMO = 10;
     Lista polinomio, resultado;
     polinomio = l_crear();
@@ -211,60 +213,66 @@ void main_polinomio()
     printf(ANSI_BLUE "Ingrese la cantidad de terminos del polinomio: " ANSI_YELLOW);
     vaciar_buffer();
     validador = scanf("%d", &cant_terminos);
-    while(cant_terminos<0 || cant_terminos>TAMANIO_MAXIMO || validador!=1){
-        printf(ANSI_RED"----ERROR----\nCantidad de terminos fuera de rango o caracteres incorrectos. Reingrese datos\n"ANSI_RESET);
+    while (cant_terminos < 0 || cant_terminos > TAMANIO_MAXIMO || validador != 1)
+    {
+        printf(ANSI_RED "----ERROR----\nCantidad de terminos fuera de rango o caracteres incorrectos. Reingrese datos\n" ANSI_RESET);
         printf(ANSI_BLUE "Ingrese la cantidad de terminos del polinomio: " ANSI_YELLOW);
         vaciar_buffer();
-        validador = scanf("%d", &cant_terminos);        
+        validador = scanf("%d", &cant_terminos);
     }
     for (int i = 0; i < cant_terminos; i++)
     {
         // VALIDAR DATOS >= -100 <= 100     HECHO =)
         printf(ANSI_BLUE "Ingrese el coeficiente del termino %d: " ANSI_YELLOW, i + 1);
         vaciar_buffer();
-        validador = scanf("%d", &coeficiente);
-        while (coeficiente<-100 || coeficiente>100 || validador!=1){
-            printf(ANSI_RED"----ERROR----\nCantidad de terminos fuera de rango o caracteres incorrectos. Reingrese coeficiente\n"ANSI_RESET);
+        validador = scanf("%f", &coeficiente);
+        while (coeficiente < -100 || coeficiente > 100 || validador != 1)
+        {
+            printf(ANSI_RED "----ERROR----\nCantidad de terminos fuera de rango o caracteres incorrectos. Reingrese coeficiente\n" ANSI_RESET);
             printf(ANSI_BLUE "Ingrese el coeficiente del termino %d: " ANSI_YELLOW, i + 1);
             vaciar_buffer();
-            validador = scanf("%d", &coeficiente);
+            validador = scanf("%f", &coeficiente);
         }
-        
+
         // VALIDAR DATOS >= 0 <= 10         HECHO =)
         printf(ANSI_BLUE "Ingrese el exponente del termino %d: " ANSI_YELLOW, i + 1);
         vaciar_buffer();
         validador = scanf("%d", &exponente);
-        while(exponente<0 || exponente>10 || validador!=1){
-            printf(ANSI_RED"----ERROR----\nCantidad de terminos fuera de rango o caracteres incorrectos. Reingrese exponente\n"ANSI_RESET);
+        while (exponente < 0 || exponente > 10 || validador != 1)
+        {
+            printf(ANSI_RED "----ERROR----\nCantidad de terminos fuera de rango o caracteres incorrectos. Reingrese exponente\n" ANSI_RESET);
             printf(ANSI_BLUE "Ingrese el exponente del termino %d: " ANSI_YELLOW, i + 1);
             vaciar_buffer();
             validador = scanf("%d", &exponente);
         }
         // VALIDAR QUE LA LISTA NO ESTE LLENA           HECHO =)
-        if(l_es_llena(polinomio)){
-            printf(ANSI_RED"LISTA LLENA"ANSI_RESET);
+        if (l_es_llena(polinomio))
+        {
+            printf(ANSI_RED "LISTA LLENA" ANSI_RESET);
             break;
         }
-        else{
+        else
+        {
             agregarTermino(polinomio, exponente, coeficiente);
         }
-        
     }
-    
+
     printf(ANSI_GREEN "Lista cargada con exito!\n");
     printf("\n");
     // VALIDAR DATOS         HECHO =)
     printf(ANSI_BLUE "Ingrese el rango minimo: " ANSI_YELLOW);
     vaciar_buffer();
     validador = scanf("%f", &r_min);
-    while (r_min<-100 || r_min>100 || validador!=1){
-        printf(ANSI_RED"----ERROR----\n");
-        if(r_min<-100 || r_min>100){
-            printf("El valor de rango min tiene que ser entre [-100;100] \n"ANSI_RESET);
+    while (r_min < -100 || r_min > 100 || validador != 1)
+    {
+        printf(ANSI_RED "----ERROR----\n");
+        if (r_min < -100 || r_min > 100)
+        {
+            printf("El valor de rango min tiene que ser entre [-100;100] \n" ANSI_RESET);
         }
-        else{
-            printf("DATO invalido, tiene que ser un numero, ingrese dato nuevamente: \n"ANSI_RESET);
-
+        else
+        {
+            printf("DATO invalido, tiene que ser un numero, ingrese dato nuevamente: \n" ANSI_RESET);
         }
         printf(ANSI_BLUE "Ingrese el rango minimo: " ANSI_YELLOW);
         vaciar_buffer();
@@ -274,14 +282,16 @@ void main_polinomio()
     printf(ANSI_BLUE "Ingrese el rango maximo: " ANSI_YELLOW);
     vaciar_buffer();
     validador = scanf("%f", &r_max);
-    while(r_max<r_min || validador!=1){
-        printf(ANSI_RED"----ERROR----\n");
-        if(r_max<r_min){
-            printf("El valor de rango maximo tiene que ser mayor o igual que el rango minimo \n"ANSI_RESET);
+    while (r_max < r_min || validador != 1)
+    {
+        printf(ANSI_RED "----ERROR----\n");
+        if (r_max < r_min)
+        {
+            printf("El valor de rango maximo tiene que ser mayor o igual que el rango minimo \n" ANSI_RESET);
         }
-        else{
-            printf("DATO invalido, tiene que ser un numero, ingrese dato nuevamente: \n"ANSI_RESET);
-
+        else
+        {
+            printf("DATO invalido, tiene que ser un numero, ingrese dato nuevamente: \n" ANSI_RESET);
         }
         printf(ANSI_BLUE "Ingrese el rango maximo: " ANSI_YELLOW);
         vaciar_buffer();
@@ -291,21 +301,24 @@ void main_polinomio()
     printf(ANSI_BLUE "Ingrese el valor de intervalo: " ANSI_YELLOW);
     vaciar_buffer();
     validador = scanf("%f", &intervalo);
-    while (intervalo<=0 || validador!=1){
-        printf(ANSI_RED"----ERROR----\n");
-        if(intervalo<=0){
-            printf("El intervalo tiene que ser mayor que 0, ingrese dato nuevamente: \n"ANSI_RESET);
+    while (intervalo <= 0 || validador != 1)
+    {
+        printf(ANSI_RED "----ERROR----\n");
+        if (intervalo <= 0)
+        {
+            printf("El intervalo tiene que ser mayor que 0, ingrese dato nuevamente: \n" ANSI_RESET);
         }
-        else{
-            printf("DATO invalido, tiene que ser mayor que 0, ingrese dato nuevamente: \n"ANSI_RESET);
-
+        else
+        {
+            printf("DATO invalido, tiene que ser mayor que 0, ingrese dato nuevamente: \n" ANSI_RESET);
         }
         printf(ANSI_BLUE "Ingrese el valor de intervalo: " ANSI_YELLOW);
         vaciar_buffer();
         validador = scanf("%f", &intervalo);
     }
     cantidadDeResultados = ((r_max - r_min) / intervalo) + 1;
-    if (cantidadDeResultados > 100){
+    if (cantidadDeResultados > 100)
+    {
         printf(ANSI_RED "La cantidad de resultados dentro del rango es mayor a 100. Se mostraran los primeros 100.");
     }
     resultado = rango(polinomio, r_min, r_max, intervalo);
