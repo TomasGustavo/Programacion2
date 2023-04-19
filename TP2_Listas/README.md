@@ -1,5 +1,5 @@
 # Programación II
-Repositorio Programación II 2023
+TP2 Listas
 
 ## Indicaciones de compilación
 
