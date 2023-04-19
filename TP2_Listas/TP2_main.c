@@ -5,6 +5,7 @@
 #include <stdbool.h>
 #include <string.h>
 #include <limits.h>
+#include <math.h>
 #include "TP2_Listas.h"
 #include "listas.h"
 #include "tipo_elemento.h"
@@ -20,7 +21,8 @@ int vaciar_buffer(void){
 void main_menor()
 {
     int rta;
-    int *punteroMenor = 0;
+    int *punteroMenor = calloc(1,sizeof(int));
+    
     // punteroMenor = &men;
     Lista l = cargarListaClaves();
     if (!l_es_vacia(l))
@@ -39,7 +41,7 @@ void main_menor()
 void main_mayor()
 {
     int rta;
-    int *punteroMayor = 0;
+    int *repeticiones = calloc(1,sizeof(int));
     // punteroMayor = &repeticiones;
     Lista l = cargarListaClaves();
     if (!l_es_vacia(l))
@@ -47,8 +49,8 @@ void main_mayor()
 
     if (!l_es_vacia(l))
     {
-        rta = mayor(l, punteroMayor);
-        printf("El mayor es %d y se repite %d veces\n", rta, *punteroMayor);
+        rta = mayor(l, repeticiones);
+        printf("El mayor es %d y se repite %d veces\n", rta, *repeticiones);
     }
     else
         printf("Noy hay mayor porque la lista es vacia");

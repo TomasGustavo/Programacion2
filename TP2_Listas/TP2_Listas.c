@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
+#include <math.h>
 #include "TP2_Listas.h"
 #include "tipo_elemento.h"
 #include "listas.h"
