@@ -9,7 +9,7 @@ Para compilar correctamente este proyecto, son requeridos los siguientes fuentes
 - TP2_Listas.c [codigo con las implementaciones de los ejercicios]
 - tipo_elemento
 ```
-Dependiendo de la implementación que de desee ejecutar, es imprescindible utilizar solo uno de los siguientes fuentes:
+Dependiendo de la implementación que se desee ejecutar, es imprescindible utilizar solo uno de los siguientes fuentes:
 
 ```
 - listas_apuntadores.c
