@@ -35,12 +35,12 @@ Lista cargarListaClaves()
     {
         for (int i = 1; i <= tamano; i++)
         {
-            printf(ANSI_bBLUE "Ingrese un numero que se guardara en la posición %d (se truncara si coloca decimales): " ANSI_YELLOW, i + 1);
+            printf(ANSI_bBLUE "Ingrese un numero que se guardara en la posición %d (se truncara si coloca decimales): " ANSI_YELLOW, i);
             validador = scanf("%d", &claveIngresada);
             while ((validador != 1) || (claveIngresada <= -10000) || (claveIngresada >= 10000))
             {
                 printf(ANSI_RED "Entrada invalida.\n" ANSI_RESET);
-                printf(ANSI_bBLUE "Ingrese un numero que se guardara en la posición %d (se truncara si coloca decimales): " ANSI_YELLOW, i + 1);
+                printf(ANSI_bBLUE "Ingrese un numero que se guardara en la posición %d (se truncara si coloca decimales): " ANSI_YELLOW, i);
                 while (getchar() != '\n')
                     ;
                 validador = scanf("%d", &claveIngresada);
@@ -75,14 +75,14 @@ Lista cargarListaClavesSinRepetir() // O(n^2)
     {
         for (int i = 1; i <= tamano; i++)
         {
-            printf(ANSI_bBLUE "Ingrese un numero que se guardara en la posición %d (se truncara si coloca decimales): " ANSI_YELLOW, i + 1);
+            printf(ANSI_bBLUE "Ingrese un numero que se guardara en la posición %d (se truncara si coloca decimales): " ANSI_YELLOW, i);
             validador = scanf("%d", &claveIngresada);
             X1 = l_buscar(L, claveIngresada); // O(n)
             while ((validador != 1) || (claveIngresada <= -10000) || (claveIngresada >= 10000) ||
                    (X1 != NULL))
             {
                 printf(ANSI_RED "Entrada invalida.\n" ANSI_RESET);
-                printf(ANSI_bBLUE "Ingrese un numero que se guardara en la posición %d (se truncara si coloca decimales y no se aceptan elementos repetidos): " ANSI_YELLOW, i + 1);
+                printf(ANSI_bBLUE "Ingrese un numero que se guardara en la posición %d (se truncara si coloca decimales y no se aceptan elementos repetidos): " ANSI_YELLOW, i);
                 while (getchar() != '\n')
                     ;
                 validador = scanf("%d", &claveIngresada);
