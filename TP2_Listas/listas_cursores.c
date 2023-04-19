@@ -87,49 +87,6 @@ void l_agregar(Lista lista, TipoElemento elemento)
     lista->cantidad++;
 }
 
-/*void l_borrar(Lista lista, int clave)
-{
-    if (l_es_vacia(lista))
-    {
-        return; // Controlo la lista vacía
-    }
-    int q;
-    int p = lista->inicio;
-    // borro las claves que coinciden con el inicio
-    while ((p != NULO) && (lista->cursor[p].datos->clave == clave))
-    {
-        q = p;
-        lista->inicio = lista->cursor[p].siguiente;
-        // recupero el nodo en el libre para no perderlo
-        lista->cursor[q].siguiente = lista->libre;
-        lista->libre = q;
-        // Descuento 1 y arranco de nuevo desde el inicio
-        lista->cantidad--;
-        p = lista->inicio; // Vuelvo a intentar desde el inicio
-    }
-    // Borro las claves en el resto de la lista
-    p = lista->inicio;
-    while ((p != NULO) && (lista->cursor[p].siguiente != NULO))
-    {
-        if (lista->cursor[p].datos->clave == clave)
-        {
-            int temp = lista->cursor[p].siguiente;                   // nodo en pos
-            lista->cursor[p].siguiente = lista->cursor[temp].siguiente; // nodo en pos + 1
-            lista->cursor[lista->libre].siguiente = temp;
-            lista->libre = temp; // Devuelvo al libre el nodo que elimine (saque de la lista)
-            lista->cantidad--;
-            p = lista->cursor[p].siguiente;
-            // mirar codigo, esta haciendo cagada, actualiza mal los .siguientes y queda que el proximo libre el nulo (por eso despues imprime en bucle infinito)
-        }
-        else
-        {
-            p = lista->cursor[p].siguiente;
-        }
-        // Similar a punteros, solo no olvidar encadenar el libre
-        // COMPLETAR CODIGO!
-    }
-}*/
-
 void l_borrar(Lista lista, int clave)
 {
     if (l_es_vacia(lista))
@@ -154,9 +111,9 @@ void l_borrar(Lista lista, int clave)
     p = lista->inicio;
     while ((p != NULO) && (lista->cursor[p].siguiente != NULO))
     {
-        if (lista->cursor[lista->cursor[p].siguiente].datos->clave == clave) // comparo con la clave del siguiente nodo en posicon actual
+        if (lista->cursor[lista->cursor[p].siguiente].datos->clave == clave) // comparo con la clave del siguiente nodo en posición actual
         {
-            int temp = lista->cursor[p].siguiente;                   // nodo en pos
+            int temp = lista->cursor[p].siguiente;                      // nodo en pos
             lista->cursor[p].siguiente = lista->cursor[temp].siguiente; // nodo en pos + 1
             lista->cursor[temp].siguiente = lista->libre;
             lista->libre = temp; // Devuelvo al libre el nodo que elimine (saque de la lista)
@@ -168,7 +125,6 @@ void l_borrar(Lista lista, int clave)
         }
     }
 }
-
 
 void l_insertar(Lista lista, TipoElemento elemento, int pos)
 {
@@ -231,26 +187,18 @@ void l_eliminar(Lista lista, int pos)
     }
 }
 
-/*void l_mostrarLista(Lista l){
-     printf("Contenido de la lista: ");
-    for (int i = 0; i < l->cantidad; i++)
-    {
-        printf("%d ", l->cursor[i].datos->clave);
-    }
-    printf("\n");
-}*/
 void l_mostrarLista(Lista lista)
 { // cursor
     printf("Contenido de la lista: ");
 
     int q = lista->inicio;
-    //int temp;
-    while (q!= NULO)
+    // int temp;
+    while (q != NULO)
     {
         printf("%d ", lista->cursor[q].datos->clave);
         q = lista->cursor[q].siguiente;
-        //temp = lista->cursor[q].siguiente;
-        //q = temp;
+        // temp = lista->cursor[q].siguiente;
+        // q = temp;
     }
 
     printf("\n");
@@ -258,16 +206,19 @@ void l_mostrarLista(Lista lista)
 
 TipoElemento l_recuperar(Lista lista, int pos)
 {
-    if(pos>lista->cantidad){  // si la posicion es amyor que la cantidad devuelve null
-        printf("ERROR. posicion fuera de rango");
-        return (TipoElemento) NULL;
+    if (pos > lista->cantidad)
+    { // si la posición es mayor que la cantidad devuelve null
+        printf("ERROR. posición fuera de rango");
+        return (TipoElemento)NULL;
     }
-    else{
-        int temp = lista->inicio;       // empiezo a recorre del inicio
-        for (int i=0;i<pos-1;i++){
-            temp = lista->cursor[temp].siguiente; // guardo en temp la posicion de donde recupero el dato
+    else
+    {
+        int temp = lista->inicio; // empiezo a recorre del inicio
+        for (int i = 0; i < pos - 1; i++)
+        {
+            temp = lista->cursor[temp].siguiente; // guardo en temp la posición de donde recupero el dato
         }
-        return lista->cursor[temp].datos;  // devuelvo el dato del cursor[posicion]
+        return lista->cursor[temp].datos; // devuelvo el dato del cursor[posición]
     }
 }
 

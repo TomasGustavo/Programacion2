@@ -29,10 +29,10 @@ void main_menor()
     if (!l_es_vacia(l))
     {
         rta = menor(l, punteroMenor);
-        printf("El menor es %d en la posicion: %d\n", rta, *punteroMenor);
+        printf("El menor es %d en la posición: %d\n", rta, *punteroMenor);
     }
     else
-        printf("Noy hay menor porque la lista es vacia");
+        printf("Noy hay menor porque la lista es vacía");
 }
 
 // PUNTO 2B
@@ -51,7 +51,7 @@ void main_mayor()
         printf("El mayor es %d y se repite %d veces\n", rta, *punteroMayor);
     }
     else
-        printf("Noy hay mayor porque la lista es vacia");
+        printf("Noy hay mayor porque la lista es vacía");
 }
 
 // PUNTO 2C
@@ -68,7 +68,7 @@ void main_promedio()
         printf("El promedio es %.3f\n", prom);
     }
     else
-        printf("Noy hay promedio porque la lista es vacia");
+        printf("Noy hay promedio porque la lista es vacía");
 }
 
 // PUNTO 2D
@@ -78,7 +78,7 @@ void main_multiplos()
     Lista l = cargarListaClaves();
     if (!l_es_vacia(l))
         l_mostrarLista(l);
-    printf("Ingrese un numero n (los decimales seran truncados): ");
+    printf("Ingrese un numero n (los decimales serán truncados): ");
     fflush(stdin);
     validador = scanf("%d", &n);
     while ((validador != 1) || (n <= -10000) || (n >= 10000))
@@ -93,12 +93,12 @@ void main_multiplos()
     {
         Lista resultado = multiplos(l, n);
         if (l_es_vacia(resultado))
-            printf("No hay multiplos para mostrar");
+            printf("No hay múltiplos para mostrar");
         else
             l_mostrarLista(resultado);
     }
     else
-        printf("Noy hay multiplos porque la lista es vacia");
+        printf("Noy hay múltiplos porque la lista es vacía");
 }
 
 // PUNTO 3
@@ -118,15 +118,15 @@ void main_multiplo()
         l_mostrarLista(l2);
     if (l_es_vacia(l1) && l_es_vacia(l2))
     {
-        printf(ANSI_RED "No es multiplo ya que son vacias");
+        printf(ANSI_RED "No es múltiplo ya que son vacías");
     }
     else
     {
         rta = esMultiplo(l1, l2, punteroEscalar);
         if (rta == true)
-            printf(ANSI_bGREEN "Es multiplo ");
+            printf(ANSI_bGREEN "Es múltiplo ");
         else
-            printf(ANSI_RED "No es multiplo");
+            printf(ANSI_RED "No es múltiplo");
 
         if (rta == true && *punteroEscalar != 0)
             printf("y el escalar es %d", *punteroEscalar);
@@ -210,13 +210,13 @@ void main_polinomio()
     resultado = l_crear();
     printf("\n");
     // VALIDAR DATOS > 0 < TAMANIO_MAXIMO           HECHO =)
-    printf(ANSI_BLUE "Ingrese la cantidad de terminos del polinomio: " ANSI_YELLOW);
+    printf(ANSI_BLUE "Ingrese la cantidad de términos del polinomio: " ANSI_YELLOW);
     vaciar_buffer();
     validador = scanf("%d", &cant_terminos);
     while (cant_terminos < 0 || cant_terminos > TAMANIO_MAXIMO || validador != 1)
     {
-        printf(ANSI_RED "----ERROR----\nCantidad de terminos fuera de rango o caracteres incorrectos. Reingrese datos\n" ANSI_RESET);
-        printf(ANSI_BLUE "Ingrese la cantidad de terminos del polinomio: " ANSI_YELLOW);
+        printf(ANSI_RED "----ERROR----\nCantidad de términos fuera de rango o caracteres incorrectos. Reingrese datos\n" ANSI_RESET);
+        printf(ANSI_BLUE "Ingrese la cantidad de términos del polinomio: " ANSI_YELLOW);
         vaciar_buffer();
         validador = scanf("%d", &cant_terminos);
     }
@@ -228,7 +228,7 @@ void main_polinomio()
         validador = scanf("%f", &coeficiente);
         while (coeficiente < -100 || coeficiente > 100 || validador != 1)
         {
-            printf(ANSI_RED "----ERROR----\nCantidad de terminos fuera de rango o caracteres incorrectos. Reingrese coeficiente\n" ANSI_RESET);
+            printf(ANSI_RED "----ERROR----\nCantidad de términos fuera de rango o caracteres incorrectos. Reingrese coeficiente\n" ANSI_RESET);
             printf(ANSI_BLUE "Ingrese el coeficiente del termino %d: " ANSI_YELLOW, i + 1);
             vaciar_buffer();
             validador = scanf("%f", &coeficiente);
@@ -240,7 +240,7 @@ void main_polinomio()
         validador = scanf("%d", &exponente);
         while (exponente < 0 || exponente > 10 || validador != 1)
         {
-            printf(ANSI_RED "----ERROR----\nCantidad de terminos fuera de rango o caracteres incorrectos. Reingrese exponente\n" ANSI_RESET);
+            printf(ANSI_RED "----ERROR----\nCantidad de términos fuera de rango o caracteres incorrectos. Reingrese exponente\n" ANSI_RESET);
             printf(ANSI_BLUE "Ingrese el exponente del termino %d: " ANSI_YELLOW, i + 1);
             vaciar_buffer();
             validador = scanf("%d", &exponente);
@@ -257,10 +257,10 @@ void main_polinomio()
         }
     }
 
-    printf(ANSI_GREEN "Lista cargada con exito!\n");
+    printf(ANSI_GREEN "Lista cargada con éxito!\n");
     printf("\n");
     // VALIDAR DATOS         HECHO =)
-    printf(ANSI_BLUE "Ingrese el rango minimo: " ANSI_YELLOW);
+    printf(ANSI_BLUE "Ingrese el rango mínimo: " ANSI_YELLOW);
     vaciar_buffer();
     validador = scanf("%f", &r_min);
     while (r_min < -100 || r_min > 100 || validador != 1)
@@ -274,12 +274,12 @@ void main_polinomio()
         {
             printf("DATO invalido, tiene que ser un numero, ingrese dato nuevamente: \n" ANSI_RESET);
         }
-        printf(ANSI_BLUE "Ingrese el rango minimo: " ANSI_YELLOW);
+        printf(ANSI_BLUE "Ingrese el rango mínimo: " ANSI_YELLOW);
         vaciar_buffer();
         validador = scanf("%f", &r_min);
     }
     // VALIDAR DATOS > r_min            HECHO =)
-    printf(ANSI_BLUE "Ingrese el rango maximo: " ANSI_YELLOW);
+    printf(ANSI_BLUE "Ingrese el rango máximo: " ANSI_YELLOW);
     vaciar_buffer();
     validador = scanf("%f", &r_max);
     while (r_max < r_min || validador != 1)
@@ -287,13 +287,13 @@ void main_polinomio()
         printf(ANSI_RED "----ERROR----\n");
         if (r_max < r_min)
         {
-            printf("El valor de rango maximo tiene que ser mayor o igual que el rango minimo \n" ANSI_RESET);
+            printf("El valor de rango máximo tiene que ser mayor o igual que el rango mínimo \n" ANSI_RESET);
         }
         else
         {
             printf("DATO invalido, tiene que ser un numero, ingrese dato nuevamente: \n" ANSI_RESET);
         }
-        printf(ANSI_BLUE "Ingrese el rango maximo: " ANSI_YELLOW);
+        printf(ANSI_BLUE "Ingrese el rango máximo: " ANSI_YELLOW);
         vaciar_buffer();
         validador = scanf("%f", &r_max);
     }
@@ -356,7 +356,7 @@ void menu_punto2()
     printf("  1   Menor de los datos\n");
     printf("  2   Mayor de los datos\n");
     printf("  3   Promedio\n");
-    printf("  4   Lista de multiplos\n");
+    printf("  4   Lista de múltiplos\n");
     ;
     printf("\n");
     printf("  0   Salir\n");

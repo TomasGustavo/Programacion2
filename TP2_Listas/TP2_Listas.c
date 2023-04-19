@@ -35,12 +35,12 @@ Lista cargarListaClaves()
     {
         for (int i = 1; i <= tamano; i++)
         {
-            printf(ANSI_bBLUE "Ingrese un numero (se truncara si coloca decimales): " ANSI_YELLOW, i + 1);
+            printf(ANSI_bBLUE "Ingrese un numero que se guardara en la posición %d (se truncara si coloca decimales): " ANSI_YELLOW, i + 1);
             validador = scanf("%d", &claveIngresada);
             while ((validador != 1) || (claveIngresada <= -10000) || (claveIngresada >= 10000))
             {
                 printf(ANSI_RED "Entrada invalida.\n" ANSI_RESET);
-                printf(ANSI_bBLUE "Ingrese un numero (se truncara si coloca decimales): " ANSI_YELLOW, i + 1);
+                printf(ANSI_bBLUE "Ingrese un numero que se guardara en la posición %d (se truncara si coloca decimales): " ANSI_YELLOW, i + 1);
                 while (getchar() != '\n')
                     ;
                 validador = scanf("%d", &claveIngresada);
@@ -48,10 +48,10 @@ Lista cargarListaClaves()
             X = te_crear(claveIngresada);
             l_agregar(L, X);
         }
-        printf(ANSI_bGREEN "La lista fue cargada con exito \n");
+        printf(ANSI_bGREEN "La lista fue cargada con éxito \n");
     }
     else
-        printf(ANSI_bGREEN "La lista vacia creada \n");
+        printf(ANSI_bGREEN "La lista vacía creada \n");
     return L;
 }
 
@@ -75,14 +75,14 @@ Lista cargarListaClavesSinRepetir() // O(n^2)
     {
         for (int i = 1; i <= tamano; i++)
         {
-            printf(ANSI_bBLUE "Ingrese un numero (se truncara si coloca decimales): " ANSI_YELLOW, i + 1);
+            printf(ANSI_bBLUE "Ingrese un numero que se guardara en la posición %d (se truncara si coloca decimales): " ANSI_YELLOW, i + 1);
             validador = scanf("%d", &claveIngresada);
             X1 = l_buscar(L, claveIngresada); // O(n)
             while ((validador != 1) || (claveIngresada <= -10000) || (claveIngresada >= 10000) ||
                    (X1 != NULL))
             {
                 printf(ANSI_RED "Entrada invalida.\n" ANSI_RESET);
-                printf(ANSI_bBLUE "Ingrese un numero (se truncara si coloca decimales y no se aceptan elementos repetidos): " ANSI_YELLOW, i + 1);
+                printf(ANSI_bBLUE "Ingrese un numero que se guardara en la posición %d (se truncara si coloca decimales y no se aceptan elementos repetidos): " ANSI_YELLOW, i + 1);
                 while (getchar() != '\n')
                     ;
                 validador = scanf("%d", &claveIngresada);
@@ -91,10 +91,10 @@ Lista cargarListaClavesSinRepetir() // O(n^2)
             X = te_crear(claveIngresada);
             l_agregar(L, X); // O(n) en apuntadores y cursores; O(1) en arreglos
         }
-        printf(ANSI_bGREEN "La lista fue cargada con exito \n");
+        printf(ANSI_bGREEN "La lista fue cargada con éxito \n");
     }
     else
-        printf(ANSI_bGREEN "La lista vacia creada \n");
+        printf(ANSI_bGREEN "La lista vacía creada \n");
     return L;
 }
 
