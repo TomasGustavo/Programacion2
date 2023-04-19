@@ -137,13 +137,13 @@ void main_multiplo()
 void main_comparar()
 {
     printf(ANSI_bMAGENTA "Carga de lista 1\n" ANSI_RESET);
-    Lista l1 = cargarListaClaves();
+    Lista l1 = cargarListaClaves(); // O(n)
     if (!l_es_vacia(l1))
         l_mostrarLista(l1);
     printf(ANSI_bMAGENTA "Carga de lista 2\n" ANSI_RESET);
-    Lista l2 = cargarListaClaves();
+    Lista l2 = cargarListaClaves(); // O(n)
     if (!l_es_vacia(l1))
-        l_mostrarLista(l2);
+        l_mostrarLista(l2); // O(n)
     if (l_longitud(l1) != l_longitud(l2))
     {
         printf(ANSI_RED "------ERROR------\nListas de distintos tamaños.\n" ANSI_RESET);
@@ -151,7 +151,7 @@ void main_comparar()
     }
     else
     {
-        int rta = ComparaListas(l1, l2);
+        int rta = ComparaListas(l1, l2); // O(n)
         switch (rta)
         {
         case 0:
@@ -175,20 +175,20 @@ void main_sublista()
 {
     bool rta;
     printf(ANSI_bMAGENTA "Carga de lista 1\n");
-    Lista l1 = cargarListaClavesSinRepetir();
+    Lista l1 = cargarListaClavesSinRepetir(); // O(n^2)
     if (!l_es_vacia(l1))
-        l_mostrarLista(l1);
+        l_mostrarLista(l1); // O(n)
     printf(ANSI_bMAGENTA "Carga de lista 2\n");
-    Lista l2 = cargarListaClavesSinRepetir();
+    Lista l2 = cargarListaClavesSinRepetir(); // O(n^2)
     if (!l_es_vacia(l2))
-        l_mostrarLista(l2);
-    rta = sublista(l1, l2);
+        l_mostrarLista(l2); // O(n)
+    rta = sublista(l1, l2); // O(n^2)
     if (rta == true)
         printf(ANSI_bGREEN "La segunda lista es sublista de la primera\n");
     else
     {
         printf(ANSI_RED "La segunda lista no es sublista de la primera\n");
-        rta = sublista(l2, l1);
+        rta = sublista(l2, l1); // O(n^2)
         if (rta == true)
         {
             printf(ANSI_bGREEN "La primera lista es sublista de la segunda\n");

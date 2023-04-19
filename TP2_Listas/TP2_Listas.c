@@ -55,12 +55,12 @@ Lista cargarListaClaves()
     return L;
 }
 
-Lista cargarListaClavesSinRepetir()
+Lista cargarListaClavesSinRepetir() // O(n^2)
 {
     int tamano, validador, claveIngresada;
     TipoElemento X, X1;
     Lista L;
-    L = l_crear();
+    L = l_crear(); // O(1)
     printf("Ingrese la cantidad de elementos de la lista: \n");
     validador = scanf("%i", &tamano);
     while ((validador != 1) || (tamano < 0) || (tamano > 99))
@@ -77,7 +77,7 @@ Lista cargarListaClavesSinRepetir()
         {
             printf(ANSI_bBLUE "Ingrese un numero (se truncara si coloca decimales): " ANSI_YELLOW, i + 1);
             validador = scanf("%d", &claveIngresada);
-            X1 = l_buscar(L, claveIngresada);
+            X1 = l_buscar(L, claveIngresada); // O(n)
             while ((validador != 1) || (claveIngresada <= -10000) || (claveIngresada >= 10000) ||
                    (X1 != NULL))
             {
@@ -86,10 +86,10 @@ Lista cargarListaClavesSinRepetir()
                 while (getchar() != '\n')
                     ;
                 validador = scanf("%d", &claveIngresada);
-                X1 = l_buscar(L, claveIngresada);
+                X1 = l_buscar(L, claveIngresada); // O(n)
             }
             X = te_crear(claveIngresada);
-            l_agregar(L, X);
+            l_agregar(L, X); // O(n) en apuntadores y cursores; O(1) en arreglos
         }
         printf(ANSI_bGREEN "La lista fue cargada con exito \n");
     }
@@ -218,7 +218,7 @@ int ComparaListas(Lista l1, Lista l2)
     TipoElemento x1, x2;
     Iterador ite1 = iterador(l1);
     Iterador ite2 = iterador(l2);
-    while (hay_siguiente(ite1) && hay_siguiente(ite2))
+    while (hay_siguiente(ite1) && hay_siguiente(ite2)) // O(n)
     {
         x1 = siguiente(ite1);
         x2 = siguiente(ite2);
@@ -245,7 +245,7 @@ int ComparaListas(Lista l1, Lista l2)
     }
 }
 
-bool sublista(Lista l1, Lista l2)
+bool sublista(Lista l1, Lista l2) // O(n^2)
 {
     TipoElemento x1, x2;
     bool resultado = true;
@@ -260,12 +260,12 @@ bool sublista(Lista l1, Lista l2)
         resultado = false;
     else
     {
-        while (hay_siguiente(ite2) && (resultado == true))
+        while (hay_siguiente(ite2) && (resultado == true)) // O(n)
         {
             x2 = siguiente(ite2);
             encontro = false;
             Iterador ite1 = iterador(l1);
-            while (hay_siguiente(ite1) && encontro == false)
+            while (hay_siguiente(ite1) && encontro == false) // O(n)
             {
                 x1 = siguiente(ite1);
                 if (x1->clave == x2->clave)
