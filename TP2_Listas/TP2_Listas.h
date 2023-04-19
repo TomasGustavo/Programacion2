@@ -25,6 +25,8 @@ typedef struct valoresXY *valorXY;
 
 Lista cargarListaClaves();
 
+Lista cargarListaClavesSinRepetir();
+
 int menor(Lista lista, int *posicion);
 
 int mayor(Lista lista, int *repeticiones);
@@ -35,7 +37,7 @@ Lista multiplos(Lista l, int n);
 
 bool esMultiplo(Lista l1, Lista l2, int *escalar);
 
-bool agregarTermino(Lista polinomio, int exponente, int coeficiente);
+bool agregarTermino(Lista polinomio, int exponente, float coeficiente);
 
 float calcularX(Lista polinomio, float n);
 

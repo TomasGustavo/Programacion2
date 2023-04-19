@@ -35,12 +35,12 @@ Lista cargarListaClaves()
     {
         for (int i = 1; i <= tamano; i++)
         {
-            printf(ANSI_bBLUE "Ingrese un numero (se truncara si coloca decimales): " ANSI_YELLOW, i + 1);
+            printf(ANSI_bBLUE "Ingrese un numero que se guardara en la posición %d (se truncara si coloca decimales): " ANSI_YELLOW, i + 1);
             validador = scanf("%d", &claveIngresada);
             while ((validador != 1) || (claveIngresada <= -10000) || (claveIngresada >= 10000))
             {
                 printf(ANSI_RED "Entrada invalida.\n" ANSI_RESET);
-                printf(ANSI_bBLUE "Ingrese un numero (se truncara si coloca decimales): " ANSI_YELLOW, i + 1);
+                printf(ANSI_bBLUE "Ingrese un numero que se guardara en la posición %d (se truncara si coloca decimales): " ANSI_YELLOW, i + 1);
                 while (getchar() != '\n')
                     ;
                 validador = scanf("%d", &claveIngresada);
@@ -48,10 +48,53 @@ Lista cargarListaClaves()
             X = te_crear(claveIngresada);
             l_agregar(L, X);
         }
-        printf(ANSI_bGREEN "La lista fue cargada con exito \n");
+        printf(ANSI_bGREEN "La lista fue cargada con éxito \n");
     }
     else
-        printf(ANSI_bGREEN "La lista vacia creada \n");
+        printf(ANSI_bGREEN "La lista vacía creada \n");
+    return L;
+}
+
+Lista cargarListaClavesSinRepetir() // O(n^2)
+{
+    int tamano, validador, claveIngresada;
+    TipoElemento X, X1;
+    Lista L;
+    L = l_crear(); // O(1)
+    printf("Ingrese la cantidad de elementos de la lista: \n");
+    validador = scanf("%i", &tamano);
+    while ((validador != 1) || (tamano < 0) || (tamano > 99))
+    {
+        printf(ANSI_RED "Entrada invalida.\n" ANSI_RESET);
+        printf(ANSI_BLUE "Ingrese el tamaño del conjunto [1-99] (se truncara si coloca decimales): " ANSI_YELLOW);
+        while (getchar() != '\n')
+            ;
+        validador = scanf("%i", &tamano);
+    }
+    if (tamano > 0)
+    {
+        for (int i = 1; i <= tamano; i++)
+        {
+            printf(ANSI_bBLUE "Ingrese un numero que se guardara en la posición %d (se truncara si coloca decimales): " ANSI_YELLOW, i + 1);
+            validador = scanf("%d", &claveIngresada);
+            X1 = l_buscar(L, claveIngresada); // O(n)
+            while ((validador != 1) || (claveIngresada <= -10000) || (claveIngresada >= 10000) ||
+                   (X1 != NULL))
+            {
+                printf(ANSI_RED "Entrada invalida.\n" ANSI_RESET);
+                printf(ANSI_bBLUE "Ingrese un numero que se guardara en la posición %d (se truncara si coloca decimales y no se aceptan elementos repetidos): " ANSI_YELLOW, i + 1);
+                while (getchar() != '\n')
+                    ;
+                validador = scanf("%d", &claveIngresada);
+                X1 = l_buscar(L, claveIngresada); // O(n)
+            }
+            X = te_crear(claveIngresada);
+            l_agregar(L, X); // O(n) en apuntadores y cursores; O(1) en arreglos
+        }
+        printf(ANSI_bGREEN "La lista fue cargada con éxito \n");
+    }
+    else
+        printf(ANSI_bGREEN "La lista vacía creada \n");
     return L;
 }
 
@@ -175,7 +218,7 @@ int ComparaListas(Lista l1, Lista l2)
     TipoElemento x1, x2;
     Iterador ite1 = iterador(l1);
     Iterador ite2 = iterador(l2);
-    while (hay_siguiente(ite1) && hay_siguiente(ite2))
+    while (hay_siguiente(ite1) && hay_siguiente(ite2)) // O(n)
     {
         x1 = siguiente(ite1);
         x2 = siguiente(ite2);
@@ -202,11 +245,11 @@ int ComparaListas(Lista l1, Lista l2)
     }
 }
 
-bool sublista(Lista l1, Lista l2)
+bool sublista(Lista l1, Lista l2) // O(n^2)
 {
     TipoElemento x1, x2;
     bool resultado = true;
-    
+
     Iterador ite2 = iterador(l2);
     bool encontro;
     if (l_es_vacia(l2))
@@ -217,12 +260,12 @@ bool sublista(Lista l1, Lista l2)
         resultado = false;
     else
     {
-        while (hay_siguiente(ite2) && (resultado == true))
+        while (hay_siguiente(ite2) && (resultado == true)) // O(n)
         {
             x2 = siguiente(ite2);
             encontro = false;
             Iterador ite1 = iterador(l1);
-            while (hay_siguiente(ite1) && encontro == false)
+            while (hay_siguiente(ite1) && encontro == false) // O(n)
             {
                 x1 = siguiente(ite1);
                 if (x1->clave == x2->clave)
@@ -236,7 +279,7 @@ bool sublista(Lista l1, Lista l2)
 }
 
 // AGREGAR TERMINO A LA LISTA
-bool agregarTermino(Lista polinomio, int exponente, int coeficiente)
+bool agregarTermino(Lista polinomio, int exponente, float coeficiente)
 {
     TipoElemento x;
     bool r;
@@ -244,7 +287,8 @@ bool agregarTermino(Lista polinomio, int exponente, int coeficiente)
         r = false;
     else
     {
-        void *valor_coeficiente = (void *)coeficiente;
+        void *valor_coeficiente = malloc(sizeof(float));
+        *(float *)valor_coeficiente = coeficiente;
         x = te_crear_con_valor(exponente, valor_coeficiente);
         l_agregar(polinomio, x);
         r = true;
@@ -256,12 +300,12 @@ float calcularX(Lista polinomio, float n)
 {
     TipoElemento x;
     float suma = 0;
-    int coeficiente;
+    float coeficiente;
     Iterador ite = iterador(polinomio);
     while (hay_siguiente(ite))
     {
         x = siguiente(ite);
-        coeficiente = x->valor;
+        coeficiente = *(float *)x->valor; // Acceder al valor como float
         suma = suma + (coeficiente * pow(n, x->clave));
     }
     return suma;
@@ -286,14 +330,14 @@ Lista rango(Lista polinomio, float xMin, float xMax, float intervalo)
 void mostrar_polinomio(Lista polinomio)
 {
     TipoElemento x;
-    valorXY valores;
+    struct valoresXY *valores;
     Iterador ite = iterador(polinomio);
     printf(ANSI_GREEN "\t  X\t" ANSI_MAGENTA "|   " ANSI_GREEN "  Y\n");
     printf(ANSI_MAGENTA "      __________|_____________\n");
     while (hay_siguiente(ite))
     {
         x = siguiente(ite);
-        valores = x->valor;
+        valores = x->valor; // Acceder al valor como struct valoresXY
         printf(ANSI_YELLOW "\t%.2lf\t" ANSI_MAGENTA "|   " ANSI_YELLOW "%.2lf \n", valores->X, valores->Y);
     }
 }
