@@ -53,3 +53,6 @@ dkms.conf
 
 # VSCode Config
 # *.json
+
+# Windows folder settings
+*.ini
