@@ -1,0 +1,59 @@
+{
+    "tasks": [
+        {
+            "type": "cppbuild",
+            "label": "PILAS APUNTADORES",
+            "command": "gcc",
+            "args": [
+                "-fdiagnostics-color=always",
+                "-g",
+                "${file}",
+                "${fileDirname}\\pilas_apuntadores.c",
+                "${fileDirname}\\tipo_elemento.c",
+                "${fileDirname}\\TP3_pilas.c",
+                "-o",
+                "${fileDirname}\\${fileBasenameNoExtension}.exe",
+                "-Wall"
+            ],
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "Tarea generada por Gerr"
+        },
+        {
+            "type": "cppbuild",
+            "label": "PILAS ARREGLOS",
+            "command": "gcc",
+            "args": [
+                "-fdiagnostics-color=always",
+                "-g",
+                "${file}",
+                "${fileDirname}\\pilas_arreglos.c",
+                "${fileDirname}\\tipo_elemento.c",
+                "${fileDirname}\\TP3_pilas.c",
+                "-o",
+                "${fileDirname}\\${fileBasenameNoExtension}.exe",
+                "-Wall"
+            ],
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "Tarea generada por Gerr"
+        }
+    ],
+    "version": "2.0.0"
+}
