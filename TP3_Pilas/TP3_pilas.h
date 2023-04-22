@@ -22,5 +22,7 @@
 
 bool buscar_c (Pila p, int x);
 
+Pila eliminar_por_clave(Pila pila, int clave);
+
 
 #endif // TP3_LISTAS_H

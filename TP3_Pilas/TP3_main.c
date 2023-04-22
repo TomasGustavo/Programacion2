@@ -28,7 +28,7 @@ void limpiar_pantalla()
 }
 
 // PUNTO 2A
-void buscar_clave(){
+void main_buscar_clave(){
     Pila pila = p_crear();
     int cant,valor,clave;
     bool rta;
@@ -96,6 +96,68 @@ void buscar_clave(){
 
     pausa();
     limpiar_pantalla();
+}
+
+// PUNTO 2C
+void main_eliminar_por_clave(){
+    Pila pila = p_crear();
+    int cant,valor,clave;
+    printf(ANSI_bBLUE"ingrese cantidad de elementos a cargar [0-99]: "ANSI_RESET);
+    int validador = scanf("%d",&cant);
+    vaciar_buffer();
+    while (validador != 1 || cant<0 || cant>=100){
+        limpiar_pantalla();
+        printf(ANSI_RED"\t\t-------- ERROR -------- \n");
+        printf("DATO INVALIDO, por favor ingrasar un numero entre [0-99]\n\n"ANSI_RESET);
+        pausa();
+        limpiar_pantalla();
+        printf(ANSI_bBLUE"ingrese cantidad de elementos a cargar: "ANSI_RESET);
+        validador = scanf("%d",&cant);
+        vaciar_buffer();
+        
+    }
+    
+    for (int i=0;i<cant;i++){
+        printf(ANSI_bBLUE"ingrese clave del elementos a cargar [-999.999 - 999.999]: "ANSI_RESET);
+        validador = scanf("%d",&valor);
+        vaciar_buffer();
+        while(validador!=1 || valor<-999999 || valor>999999){
+            limpiar_pantalla();
+            printf(ANSI_RED"\t\t-------- ERROR -------- \n");
+            printf("DATO FUERA DE RANGO, por favor ingrasar un numero entre [-999.999 - 999.999]\n\n"ANSI_RESET);
+            pausa();
+            limpiar_pantalla();
+            printf(ANSI_bBLUE"ingrese clave del elementos a cargar [-999.999 - 999.999]: "ANSI_RESET);
+            validador = scanf("%d",&valor); 
+            vaciar_buffer();
+            
+        }
+        TipoElemento elemento = te_crear(valor);
+        p_apilar(pila,elemento);
+        limpiar_pantalla();
+    }
+    printf(ANSI_bGREEN"");
+    p_mostrar(pila);
+    printf("\n"ANSI_RESET);
+
+    printf(ANSI_bBLUE"ingrese clave a eliminar en la pila: "ANSI_RESET);
+    validador = scanf("%d",&clave);
+    vaciar_buffer();
+    while(validador!=1 || clave<-999999 || clave>999999){
+        printf(ANSI_RED"\t\t-------- ERROR -------- \n");
+        printf("DATO FUERA DE RANGO, por favor ingrasar un numero entre [-999.999 - 999.999]\n\n"ANSI_RESET);
+        pausa();
+        printf(ANSI_bBLUE"ingrese clave a eliminar en la pila: "ANSI_RESET);
+        validador = scanf("%d",&clave); 
+        vaciar_buffer();
+    }
+    
+    pila = eliminar_por_clave(pila,clave);
+
+    printf(ANSI_bGREEN"");
+    p_mostrar(pila);
+    printf("\n"ANSI_RESET);
+    pausa();
 }
 
 void menu_principal()
@@ -176,7 +238,7 @@ int main()
                 switch (opcion)
                 {
                 case 1:
-                    buscar_clave();
+                    main_buscar_clave();
                     getch();
                     break;
                 case 2:
@@ -184,7 +246,7 @@ int main()
                     getch();
                     break;
                 case 3:
-
+                    main_eliminar_por_clave();
                     getch();
                     break;
                 case 4:

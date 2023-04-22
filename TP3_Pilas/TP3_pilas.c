@@ -15,19 +15,57 @@ bool buscar_c (Pila p, int x){
     Pila paux = p_crear();
     temp = p_desapilar(p);
     p_apilar(paux,temp);
-    while(temp->clave != x && !p_es_vacia(p)){
+    while(temp->clave != x && !p_es_vacia(p)){      // saco elementos la pila hasta que coicida con el elemento a buscar o hasta que este vacia
         temp = p_desapilar(p);
         p_apilar(paux,temp);
     }
-    if(temp->clave == x){
+    if(temp->clave == x){    // si coinciden los elementos retorno true, sino salio del ciclo porqeu se vacio lo que significa que no encontro el elemento
         rta = true;
     }
     else{
         rta = false;
     }
-    while(!p_es_vacia(paux)){
+    while(!p_es_vacia(paux)){       // vuelvo a poner en orden todos los elementos que saque en la pila original
         temp = p_desapilar(paux);
         p_apilar(p,temp);
     }
+    free(paux);     // libero la memoria que use para la pila auxiliar
     return rta;
+}
+
+// PUNTO 2C 
+Pila eliminar_por_clave(Pila pila, int clave){
+    TipoElemento temp = te_crear(0);
+    Pila paux = p_crear();
+    temp = p_desapilar(pila);
+    p_apilar(paux,temp);
+    while(temp->clave != clave && !p_es_vacia(pila)){
+        temp = p_desapilar(pila);
+        p_apilar(paux,temp);
+    }
+    
+    if(temp->clave == clave){
+        temp = p_desapilar(paux); // desapilo una vez que es el elemento a eliminar
+        //temp = p_desapilar(paux); // desapilo de nuevo para pisar el elemento a eliminar con el siguiente de la pila auxiliar
+    
+        while(!p_es_vacia(paux)){     // recorro la pila auxiliar hasta vaciar apilando los datos que saque en la pila original
+            temp = p_desapilar(paux);
+            p_apilar(pila,temp);
+        }
+        free(paux);
+        return pila;
+    }
+
+    else{
+        while(!p_es_vacia(paux)){     // recorro la pila auxiliar hasta vaciar apilando los datos que saque en la pila original
+            
+            temp = p_desapilar(paux);
+            p_apilar(pila,temp);
+        }
+        free(paux);
+        return pila;
+    }
+    
+    
+    
 }
