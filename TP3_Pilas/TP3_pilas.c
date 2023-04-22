@@ -69,3 +69,24 @@ Pila eliminar_por_clave(Pila pila, int clave){
     
     
 }
+
+
+int contar(Pila pila){
+    Pila paux = p_crear();
+    TipoElemento X = te_crear(0);
+    int contador_elementos;
+    while (p_es_vacia(pila) != true)
+    {
+        X = p_desapilar(pila);
+        contador_elementos++;
+        p_apilar(paux, X);
+    }
+    
+    while (p_es_vacia(paux) != true)
+    {
+        X = p_desapilar(paux);
+        p_apilar(pila, X);
+
+    }
+    return contador_elementos;
+}

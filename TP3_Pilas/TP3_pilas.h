@@ -24,5 +24,6 @@ bool buscar_c (Pila p, int x);
 
 Pila eliminar_por_clave(Pila pila, int clave);
 
+int contar(Pila pila);
 
 #endif // TP3_LISTAS_H
