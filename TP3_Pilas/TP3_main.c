@@ -287,6 +287,27 @@ void main_compara_pilas(){
     p_mostrar(pila2);
     printf("\n"ANSI_RESET);
 }
+
+//punto 2F
+void main_contador(){
+    int contador, cantidad, clave_actual;
+    Pila pila = p_crear();
+    TipoElemento elemento = te_crear(0);
+    printf(ANSI_bBLUE"ingrese la cantidad de elementos a cargar[0-99]: "ANSI_RESET);
+    scanf("%d", &cantidad);
+    for (int i = 0; i < cantidad; i++)
+    {
+        printf(ANSI_bBLUE"ingrese el valor para cargar a la pila:"ANSI_RESET);
+        scanf("%d", &clave_actual);
+        elemento = te_crear(clave_actual);
+        p_apilar(pila, elemento);
+    }
+    
+    p_mostrar(pila);
+
+    contador = contar(pila);
+    printf(ANSI_bGREEN"la cantidad de elementos que contiene la pila es de %d"ANSI_RESET, contador);
+}
 void menu_principal()
 {
     printf("\n");
@@ -385,7 +406,7 @@ int main()
                     getch();
                     break;
                 case 6:
-
+                    main_contador();
                     getch();
                     break;
                 case 0:

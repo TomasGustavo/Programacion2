@@ -71,6 +71,7 @@ Pila eliminar_por_clave(Pila pila, int clave){
     
 }
 
+
 // PUNTO 3
 bool compara_pilas(Pila p1, Pila p2){
     bool rta = true;
@@ -95,4 +96,24 @@ bool compara_pilas(Pila p1, Pila p2){
         p_apilar(p1,x1);
     }
     return rta;
+}
+
+int contar(Pila pila){
+    Pila paux = p_crear();
+    TipoElemento X = te_crear(0);
+    int contador_elementos;
+    while (p_es_vacia(pila) != true)
+    {
+        X = p_desapilar(pila);
+        contador_elementos++;
+        p_apilar(paux, X);
+    }
+    
+    while (p_es_vacia(paux) != true)
+    {
+        X = p_desapilar(paux);
+        p_apilar(pila, X);
+
+    }
+    return contador_elementos;
 }
