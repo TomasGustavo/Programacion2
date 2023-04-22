@@ -8,6 +8,34 @@
 #include "pilas.h"
 #include "tipo_elemento.h"
 
+
+// PUNTO 2A
+void buscar_clave(){
+    Pila pila = p_crear();
+    int cant,valor,clave;
+    bool rta;
+    printf("ingrese cantidad de elementos a cargar: ");
+    scanf("%d",&cant);
+    for (int i=0;i<cant;i++){
+        printf("ingrese clave del elementos a cargar: ");
+        scanf("%d",&valor);
+        TipoElemento elemento = te_crear(valor);
+        p_apilar(pila,elemento);
+    }
+    p_mostrar(pila);
+    printf("\n");
+    printf("ingrese clave a buscar en la pila: ");
+    scanf("%d",&clave);
+    rta = buscar_c(pila,clave);
+    if(rta == true){
+        printf("La clave fue enconrtada en la pila\n");
+    }  
+    else{
+        printf("La clave no fue enconrtada en la pila\n");
+    }
+    p_mostrar(pila);
+}
+
 void menu_principal()
 {
     printf("\n");
@@ -86,7 +114,7 @@ int main()
                 switch (opcion)
                 {
                 case 1:
-
+                    buscar_clave();
                     getch();
                     break;
                 case 2:

@@ -20,6 +20,7 @@
 #define ANSI_bWHITE "\e[97m"
 #define ANSI_RESET "\e[0m"
 
+bool buscar_c (Pila p, int x);
 
 
 #endif // TP3_LISTAS_H
