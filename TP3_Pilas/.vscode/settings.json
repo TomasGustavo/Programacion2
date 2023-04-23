@@ -1,5 +1,8 @@
 {
     "files.associations": {
-        "tipo_elemento.h": "c"
+        "*.pl": "prolog",
+        "tipo_elemento.h": "c",
+        "stdlib.h": "c",
+        "stdbool.h": "c"
     }
 }
