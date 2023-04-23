@@ -20,6 +20,8 @@
 #define ANSI_bWHITE "\e[97m"
 #define ANSI_RESET "\e[0m"
 
+Pila conversor(int numero, int base);
 
+void mostrarhex(Pila pila);
 
 #endif // TP3_LISTAS_H

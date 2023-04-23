@@ -8,6 +8,35 @@
 #include "pilas.h"
 #include "tipo_elemento.h"
 
+void main_conversor()
+{
+    int numero, validador, base;
+    printf(ANSI_BLUE "Ingrese un numero: " ANSI_YELLOW);
+    validador = scanf("%i", &numero);
+    while ((validador != 1) || (numero < 0) || (numero > 9999999))
+    {
+        printf(ANSI_RED "Entrada invalida!\n" ANSI_RESET);
+        printf(ANSI_BLUE "Ingrese un numero: " ANSI_YELLOW);
+        while (getchar() != '\n')
+            ;
+        validador = scanf("%i", &numero);
+    }
+    printf(ANSI_BLUE "Ingrese la base [2-16]: " ANSI_YELLOW);
+    validador = scanf("%i", &base);
+    while ((validador != 1) || (base < 0) || (base > 16))
+    {
+        printf(ANSI_RED "Entrada invalida!\n" ANSI_RESET);
+        printf(ANSI_BLUE "Ingrese la base [2-16]: " ANSI_YELLOW);
+        while (getchar() != '\n')
+            ;
+        validador = scanf("%i", &base);
+    }
+    printf(ANSI_BLUE "%d en base %d es: " ANSI_GREEN, numero, base);
+    Pila pila = conversor(numero, base);
+    mostrarhex(pila);
+    printf(ANSI_BLUE);
+}
+
 void menu_principal()
 {
     printf("\n");
@@ -60,13 +89,15 @@ int main()
     {
         menu_principal();
         scanf("%i", &opcion);
+        while (getchar() != '\n')
+            ;
         while (opcion < 0 || opcion > 8 || opcion == 1)
         {
             printf(ANSI_RED "Opción incorrecta\n" ANSI_RESET);
             printf(ANSI_BLUE "  Por favor seleccione una opción: " ANSI_YELLOW);
+            scanf("%i", &opcion);
             while (getchar() != '\n')
                 ;
-            scanf("%i", &opcion);
         }
         switch (opcion)
         {
@@ -120,7 +151,7 @@ int main()
             getch();
             break;
         case 4:
-
+            main_conversor();
             getch();
             break;
         case 5:
