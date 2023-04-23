@@ -117,3 +117,22 @@ int contar(Pila pila){
     }
     return contador_elementos;
 }
+
+Pila invertir_pila(Pila pila){
+    Pila paux = p_crear();
+    Pila pila_invertida = p_crear();
+    TipoElemento X = te_crear(0);
+    while (p_es_vacia(pila) != true)
+    {
+        X = p_desapilar(pila);
+        p_apilar(paux, X);
+        p_apilar(pila_invertida, X);
+    }
+
+    while (p_es_vacia(paux) != true)
+    {
+        X = p_desapilar(paux);
+        p_apilar(pila, X);
+    }
+    return pila_invertida;
+}

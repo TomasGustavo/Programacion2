@@ -308,6 +308,36 @@ void main_contador(){
     contador = contar(pila);
     printf(ANSI_bGREEN"la cantidad de elementos que contiene la pila es de %d"ANSI_RESET, contador);
 }
+
+//PUNTO 5
+void main_invertida(){
+    int cantidad, clave_actual;
+    Pila pila = p_crear();
+    Pila pila_invertida = p_crear();
+    TipoElemento elemento = te_crear(0);
+    
+    printf(ANSI_bBLUE"ingrese la cantidad de elementos a cargar[0-99]: "ANSI_RESET);
+    scanf("%d", &cantidad);
+    
+    for (int i = 0; i < cantidad; i++)
+    {
+        printf(ANSI_bBLUE"ingrese el valor para cargar a la pila:"ANSI_RESET);
+        scanf("%d", &clave_actual);
+        elemento = te_crear(clave_actual);
+        p_apilar(pila, elemento);
+    }
+    
+    printf(ANSI_bGREEN"pila cargada: \n"ANSI_RESET);
+    p_mostrar(pila);
+
+    pila_invertida = invertir_pila(pila);
+
+    printf(ANSI_bGREEN"pila original: \n"ANSI_RESET);
+    p_mostrar(pila);
+    printf(ANSI_bGREEN"pila invertida: \n"ANSI_RESET);
+    p_mostrar(pila_invertida);
+}
+
 void menu_principal()
 {
     printf("\n");
@@ -402,7 +432,6 @@ int main()
                     getch();
                     break;
                 case 5:
-
                     getch();
                     break;
                 case 6:
@@ -424,7 +453,7 @@ int main()
             getch();
             break;
         case 5:
-
+            main_invertida();
             getch();
             break;
         case 6:
