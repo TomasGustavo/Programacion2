@@ -24,4 +24,14 @@ Pila conversor(int numero, int base);
 
 void mostrarhex(Pila pila);
 
+bool buscar_c (Pila p, int x);
+
+Pila eliminar_por_clave(Pila pila, int clave);
+
+int contar(Pila pila);
+
+bool compara_pilas(Pila p1, Pila p2);
+
+Pila invertir_pila(Pila pila);
+
 #endif // TP3_LISTAS_H
