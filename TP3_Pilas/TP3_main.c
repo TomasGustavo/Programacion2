@@ -450,26 +450,33 @@ void main_elemento_en_comun(){
     p_mostrar(pila2);
     printf("\n"ANSI_RESET);
 
-    
-    Pila pcomun = p_crear();
-    pcomun = elemento_en_comun(pila,pila2);
-
-    if(p_es_vacia(pcomun)){
-        printf(ANSI_RED"Ninguno de los elementos de las pilas coincidieron\n");
+    if(p_es_vacia(pila) || p_es_vacia(pila2)){
+        printf(ANSI_RED"Una de las pilas esta vacia, por ende no van a tener elementos en comun"ANSI_RESET);
     }
 
     else{
-    printf(ANSI_YELLOW"Pila con elementos en comun\n");
-    p_mostrar(pcomun);
-    printf("\n\n"ANSI_RESET);
-    }
+        Pila pcomun = p_crear();
+        pcomun = elemento_en_comun(pila,pila2);
 
-    printf(ANSI_bYELLOW"Pila 1 y 2 DESPUES de llamar a la funcion de comparar\n");
-    printf(ANSI_bGREEN"");
-    p_mostrar(pila);
-    printf("\n");           // las vuelvo a mostrar para confirmar que no se modificaron luego de llamar a comparar
-    p_mostrar(pila2);
-    printf("\n"ANSI_RESET);
+        if(p_es_vacia(pcomun)){
+            printf(ANSI_RED"Ninguno de los elementos de las pilas coincidieron\n");
+        }
+
+        else{
+        printf(ANSI_YELLOW"Pila con elementos en comun\n");
+        p_mostrar(pcomun);
+        printf("\n\n"ANSI_RESET);
+        }
+
+        printf(ANSI_bYELLOW"Pila 1 y 2 DESPUES de llamar a la funcion de comparar\n");
+        printf(ANSI_bGREEN"");
+        p_mostrar(pila);
+        printf("\n");           // las vuelvo a mostrar para confirmar que no se modificaron luego de llamar a comparar
+        p_mostrar(pila2);
+        printf("\n"ANSI_RESET);
+    }
+    
+    
 
 }
 
