@@ -8,36 +8,8 @@
 #include "pilas.h"
 #include "tipo_elemento.h"
 
-void main_conversor()
-{
-    int numero, validador, base;
-    printf(ANSI_BLUE "Ingrese un numero: " ANSI_YELLOW);
-    validador = scanf("%i", &numero);
-    while ((validador != 1) || (numero < 0) || (numero > 9999999))
-    {
-        printf(ANSI_RED "Entrada invalida!\n" ANSI_RESET);
-        printf(ANSI_BLUE "Ingrese un numero: " ANSI_YELLOW);
-        while (getchar() != '\n')
-            ;
-        validador = scanf("%i", &numero);
-    }
-    printf(ANSI_BLUE "Ingrese la base [2-16]: " ANSI_YELLOW);
-    validador = scanf("%i", &base);
-    while ((validador != 1) || (base < 0) || (base > 16))
-    {
-        printf(ANSI_RED "Entrada invalida!\n" ANSI_RESET);
-        printf(ANSI_BLUE "Ingrese la base [2-16]: " ANSI_YELLOW);
-        while (getchar() != '\n')
-            ;
-        validador = scanf("%i", &base);
-    }
-    printf(ANSI_BLUE "%d en base %d es: " ANSI_GREEN, numero, base);
-    Pila pila = conversor(numero, base);
-    mostrarhex(pila);
-    printf(ANSI_BLUE);
 
-int vaciar_buffer(void)
-{
+int vaciar_buffer(void){
     char nada[200];
     fgets(nada, 200, stdin);
     return 0;
@@ -213,6 +185,27 @@ void main_eliminar_por_clave(){
     pausa();
 }
 
+//punto 2F
+void main_contador(){
+    int contador, cantidad, clave_actual;
+    Pila pila = p_crear();
+    TipoElemento elemento = te_crear(0);
+    printf(ANSI_bBLUE"ingrese la cantidad de elementos a cargar[0-99]: "ANSI_RESET);
+    scanf("%d", &cantidad);
+    for (int i = 0; i < cantidad; i++)
+    {
+        printf(ANSI_bBLUE"ingrese el valor para cargar a la pila:"ANSI_RESET);
+        scanf("%d", &clave_actual);
+        elemento = te_crear(clave_actual);
+        p_apilar(pila, elemento);
+    }
+    
+    p_mostrar(pila);
+
+    contador = contar(pila);
+    printf(ANSI_bGREEN"la cantidad de elementos que contiene la pila es de %d"ANSI_RESET, contador);
+}
+
 // PUNTO 3
 void main_compara_pilas(){
     Pila pila = p_crear();
@@ -296,7 +289,7 @@ void main_compara_pilas(){
 
     printf(ANSI_bGREEN"");
     p_mostrar(pila);
-    printf("\n");           // muestro como quedaron cargadas las listas
+    printf("\n");           // muestro como quedaron cargadas las pilas
     p_mostrar(pila2);
     printf("\n"ANSI_RESET);
 
@@ -316,25 +309,34 @@ void main_compara_pilas(){
     printf("\n"ANSI_RESET);
 }
 
-//punto 2F
-void main_contador(){
-    int contador, cantidad, clave_actual;
-    Pila pila = p_crear();
-    TipoElemento elemento = te_crear(0);
-    printf(ANSI_bBLUE"ingrese la cantidad de elementos a cargar[0-99]: "ANSI_RESET);
-    scanf("%d", &cantidad);
-    for (int i = 0; i < cantidad; i++)
+// PUNTO 4
+void main_conversor()
+{
+    int numero, validador, base;
+    printf(ANSI_BLUE "Ingrese un numero: " ANSI_YELLOW);
+    validador = scanf("%i", &numero);
+    while ((validador != 1) || (numero < 0) || (numero > 9999999))
     {
-        printf(ANSI_bBLUE"ingrese el valor para cargar a la pila:"ANSI_RESET);
-        scanf("%d", &clave_actual);
-        elemento = te_crear(clave_actual);
-        p_apilar(pila, elemento);
+        printf(ANSI_RED "Entrada invalida!\n" ANSI_RESET);
+        printf(ANSI_BLUE "Ingrese un numero: " ANSI_YELLOW);
+        while (getchar() != '\n')
+            ;
+        validador = scanf("%i", &numero);
     }
-    
-    p_mostrar(pila);
-
-    contador = contar(pila);
-    printf(ANSI_bGREEN"la cantidad de elementos que contiene la pila es de %d"ANSI_RESET, contador);
+    printf(ANSI_BLUE "Ingrese la base [2-16]: " ANSI_YELLOW);
+    validador = scanf("%i", &base);
+    while ((validador != 1) || (base < 0) || (base > 16))
+    {
+        printf(ANSI_RED "Entrada invalida!\n" ANSI_RESET);
+        printf(ANSI_BLUE "Ingrese la base [2-16]: " ANSI_YELLOW);
+        while (getchar() != '\n')
+            ;
+        validador = scanf("%i", &base);
+    }
+    printf(ANSI_BLUE "%d en base %d es: " ANSI_GREEN, numero, base);
+    Pila pila = conversor(numero, base);
+    mostrarhex(pila);
+    printf(ANSI_BLUE);
 }
 
 //PUNTO 5
@@ -364,6 +366,111 @@ void main_invertida(){
     p_mostrar(pila);
     printf(ANSI_bGREEN"pila invertida: \n"ANSI_RESET);
     p_mostrar(pila_invertida);
+}
+
+// PUNTO 7 
+void main_elemento_en_comun(){
+    Pila pila = p_crear();
+    Pila pila2 = p_crear();
+    int cant,valor;
+    printf(ANSI_bBLUE"ingrese cantidad de elementos a cargar en la 1ra Pila [0-99]: "ANSI_RESET);
+    int validador = scanf("%d",&cant);
+    vaciar_buffer();
+    while (validador != 1 || cant<0 || cant>=100){
+        limpiar_pantalla();
+        printf(ANSI_RED"\t\t-------- ERROR -------- \n");
+        printf("DATO INVALIDO, por favor ingrasar un numero entre [0-99]\n\n"ANSI_RESET);
+        pausa();
+        limpiar_pantalla();
+        printf(ANSI_bBLUE"ingrese cantidad de elementos a cargar: "ANSI_RESET);
+        validador = scanf("%d",&cant);
+        vaciar_buffer();
+        
+    }
+    
+    for (int i=0;i<cant;i++){
+        printf(ANSI_bBLUE"ingrese clave del elementos a cargar [-999.999 - 999.999]: "ANSI_RESET);
+        validador = scanf("%d",&valor);
+        vaciar_buffer();
+        while(validador!=1 || valor<-999999 || valor>999999){
+            limpiar_pantalla();
+            printf(ANSI_RED"\t\t-------- ERROR -------- \n");
+            printf("DATO FUERA DE RANGO, por favor ingrasar un numero entre [-999.999 - 999.999]\n\n"ANSI_RESET);
+            pausa();
+            limpiar_pantalla();
+            printf(ANSI_bBLUE"ingrese clave del elementos a cargar [-999.999 - 999.999]: "ANSI_RESET);
+            validador = scanf("%d",&valor); 
+            vaciar_buffer();
+            
+        }
+        TipoElemento elemento = te_crear(valor);
+        p_apilar(pila,elemento);
+        limpiar_pantalla();
+    }
+    
+    printf(ANSI_bBLUE"ingrese cantidad de elementos a cargar en la 2da Pila [0-99]: "ANSI_RESET);
+    validador = scanf("%d",&cant);
+    vaciar_buffer();
+    while (validador != 1 || cant<0 || cant>=100){
+        limpiar_pantalla();
+        printf(ANSI_RED"\t\t-------- ERROR -------- \n");
+        printf("DATO INVALIDO, por favor ingrasar un numero entre [0-99]\n\n"ANSI_RESET);
+        pausa();
+        limpiar_pantalla();
+        printf(ANSI_bBLUE"ingrese cantidad de elementos a cargar: "ANSI_RESET);
+        validador = scanf("%d",&cant);
+        vaciar_buffer();
+        
+    }
+    
+    for (int i=0;i<cant;i++){
+        printf(ANSI_bBLUE"ingrese clave del elementos a cargar [-999.999 - 999.999]: "ANSI_RESET);
+        validador = scanf("%d",&valor);
+        vaciar_buffer();
+        while(validador!=1 || valor<-999999 || valor>999999){
+            limpiar_pantalla();
+            printf(ANSI_RED"\t\t-------- ERROR -------- \n");
+            printf("DATO FUERA DE RANGO, por favor ingrasar un numero entre [-999.999 - 999.999]\n\n"ANSI_RESET);
+            pausa();
+            limpiar_pantalla();
+            printf(ANSI_bBLUE"ingrese clave del elementos a cargar [-999.999 - 999.999]: "ANSI_RESET);
+            validador = scanf("%d",&valor); 
+            vaciar_buffer();
+            
+        }
+        TipoElemento elemento = te_crear(valor);
+        p_apilar(pila2,elemento);
+        limpiar_pantalla();
+    }
+
+    printf(ANSI_bYELLOW"Pila 1 y 2 ANTES de llamar a la funcion de comparar\n");
+    printf(ANSI_bGREEN"");
+    p_mostrar(pila);
+    printf("\n");           // muestro como quedaron cargadas las pilas
+    p_mostrar(pila2);
+    printf("\n"ANSI_RESET);
+
+    
+    Pila pcomun = p_crear();
+    pcomun = elemento_en_comun(pila,pila2);
+
+    if(p_es_vacia(pcomun)){
+        printf(ANSI_RED"Ninguno de los elementos de las pilas coincidieron\n");
+    }
+
+    else{
+    printf(ANSI_YELLOW"Pila con elementos en comun\n");
+    p_mostrar(pcomun);
+    printf("\n\n"ANSI_RESET);
+    }
+
+    printf(ANSI_bYELLOW"Pila 1 y 2 DESPUES de llamar a la funcion de comparar\n");
+    printf(ANSI_bGREEN"");
+    p_mostrar(pila);
+    printf("\n");           // las vuelvo a mostrar para confirmar que no se modificaron luego de llamar a comparar
+    p_mostrar(pila2);
+    printf("\n"ANSI_RESET);
+
 }
 
 void menu_principal()
@@ -491,7 +598,7 @@ int main()
             getch();
             break;
         case 7:
-
+            main_elemento_en_comun();
             getch();
             break;
         case 8:

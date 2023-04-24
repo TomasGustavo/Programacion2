@@ -53,7 +53,7 @@ void mostrarhex(Pila pila)
         p_apilar(pila, X);
     }
 
-
+}
 // PUNTO 2A
 bool buscar_c (Pila p, int x){
     TipoElemento temp = te_crear(0);
@@ -179,4 +179,38 @@ Pila invertir_pila(Pila pila){
         p_apilar(pila, X);
     }
     return pila_invertida;
+}
+
+// PUNTO 7
+Pila elemento_en_comun(Pila p1, Pila p2){
+    Pila pAux1 = p_crear();
+    Pila pAux2 = p_crear();
+    Pila pComun = p_crear();
+    TipoElemento x1 = te_crear(0);
+    TipoElemento x2 = te_crear(0);
+
+    while(!p_es_vacia(p1)){         // saco un elemento de la pila 1 y lo guarda en la aux 1
+        x1 = p_desapilar(p1);
+        p_apilar(pAux1,x1);
+        while(!p_es_vacia(p2)){     // saco todos los elementos de a uno de la pila 2, los guarda en aux 2 y comparo con el elemento que saque de la pila 1
+            x2 = p_desapilar(p2);
+            p_apilar(pAux2,x2);
+            if(x1->clave == x2->clave){     // si coniciden guardo el elemento en la pila a retornar
+                p_apilar(pComun,x1);
+            }
+        }
+        while (!p_es_vacia(pAux2)){     // pongo en el orden original la pila 2 para volver a compararla con el siguiente elemnto de pila 1
+            x2 = p_desapilar(pAux2);
+            p_apilar(p2,x2);
+        }    
+    }
+    while (!p_es_vacia(pAux1)){     // pongo en el orden original la pila 1
+        x1 = p_desapilar(pAux1);
+        p_apilar(p1,x1);
+    }
+
+    free(pAux1);        // libero la memoria utilizada para las pilas auxiliares
+    free(pAux2);
+
+    return pComun;
 }

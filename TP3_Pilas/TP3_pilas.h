@@ -34,4 +34,6 @@ bool compara_pilas(Pila p1, Pila p2);
 
 Pila invertir_pila(Pila pila);
 
+Pila elemento_en_comun(Pila p1, Pila p2);
+
 #endif // TP3_LISTAS_H
