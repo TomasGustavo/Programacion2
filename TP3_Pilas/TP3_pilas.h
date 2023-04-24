@@ -26,6 +26,8 @@ void mostrarhex(Pila pila);
 
 bool buscar_c (Pila p, int x);
 
+Pila insertar(Pila p,TipoElemento elem, int posi);
+
 Pila eliminar_por_clave(Pila pila, int clave);
 
 int contar(Pila pila);
