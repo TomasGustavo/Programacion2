@@ -83,9 +83,41 @@ bool buscar_c(Pila p, int x)
     return rta;
 }
 
-// PUNTO 2C
-Pila eliminar_por_clave(Pila pila, int clave)
-{
+// PUNTO 2B 
+Pila insertar(Pila p,TipoElemento elem, int posi){
+    TipoElemento x = te_crear(0);
+    Pila Paux = p_crear();
+    int contador = 0;
+    bool bandera = false;
+    int largoP = contar(p);
+    int posicionOrdinal = largoP - (posi-1);
+    /*if((posi-1) == contar_elementos(p)){
+        p_apilar(p,elem);
+        return p;
+    }*/
+
+
+    while(!p_es_vacia(p) && !bandera){
+        x = p_desapilar(p);
+        p_apilar(Paux,x);
+        contador++;
+        if(contador == posicionOrdinal){
+            bandera = true;
+        }
+        
+    }
+    
+    p_apilar(p,elem);
+    while(!p_es_vacia(Paux)){
+        x = p_desapilar(Paux);
+        p_apilar(p,x);
+    }
+    return p;
+
+}
+
+// PUNTO 2C 
+Pila eliminar_por_clave(Pila pila, int clave){
     TipoElemento temp = te_crear(0);
     Pila paux = p_crear();
     temp = p_desapilar(pila);
