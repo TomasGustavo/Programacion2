@@ -30,6 +30,8 @@ Pila insertar(Pila p,TipoElemento elem, int posi);
 
 Pila eliminar_por_clave(Pila pila, int clave);
 
+Pila duplicar_pila(Pila pila);
+
 int contar(Pila pila);
 
 bool compara_pilas(Pila p1, Pila p2);

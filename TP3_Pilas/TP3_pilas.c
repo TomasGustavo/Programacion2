@@ -91,10 +91,7 @@ Pila insertar(Pila p,TipoElemento elem, int posi){
     bool bandera = false;
     int largoP = contar(p);
     int posicionOrdinal = largoP - (posi-1);
-    /*if((posi-1) == contar_elementos(p)){
-        p_apilar(p,elem);
-        return p;
-    }*/
+    
 
 
     while(!p_es_vacia(p) && !bandera){
@@ -153,6 +150,24 @@ Pila eliminar_por_clave(Pila pila, int clave){
         return pila;
     }
 }
+
+// PUNTO 2E 
+Pila duplicar_pila(Pila pila){
+    TipoElemento x = te_crear(0);
+    Pila Paux = p_crear();
+    
+    while(!p_es_vacia(pila)){
+        x = p_desapilar(pila);
+        p_apilar(Paux,x);
+    }
+    while(!p_es_vacia(Paux)){
+        x = p_desapilar(Paux);
+        p_apilar(pila,x);
+        p_apilar(pila,x);
+    }
+    return pila;
+}
+
 
 // PUNTO 3
 bool compara_pilas(Pila p1, Pila p2)
