@@ -36,4 +36,6 @@ Pila invertir_pila(Pila pila);
 
 Pila elemento_en_comun(Pila p1, Pila p2);
 
+Pila repetidor(Pila p1);
+
 #endif // TP3_LISTAS_H
