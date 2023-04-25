@@ -239,6 +239,26 @@ Pila invertir_pila(Pila pila)
     return pila_invertida;
 }
 
+// PUNTO 6
+Pila eliminar_ocurrencias(Pila pila, TipoElemento elemento){
+    Pila Paux = p_crear();
+    Pila nueva_p = p_crear();
+    TipoElemento x = te_crear(0);
+    
+    while(!p_es_vacia(pila)){
+        x = p_desapilar(pila);
+        p_apilar(Paux,x);
+        if(x->clave != elemento->clave){
+            p_apilar(nueva_p,x);
+        }
+    }
+    while(!p_es_vacia(Paux)){
+        x = p_desapilar(Paux);
+        p_apilar(pila,x);
+    }
+    return nueva_p;
+}
+
 // PUNTO 7
 Pila elemento_en_comun(Pila p1, Pila p2)
 {

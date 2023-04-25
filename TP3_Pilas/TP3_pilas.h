@@ -38,6 +38,8 @@ bool compara_pilas(Pila p1, Pila p2);
 
 Pila invertir_pila(Pila pila);
 
+Pila eliminar_ocurrencias(Pila pila, TipoElemento elemento);
+
 Pila elemento_en_comun(Pila p1, Pila p2);
 
 Pila repetidor(Pila p1);
