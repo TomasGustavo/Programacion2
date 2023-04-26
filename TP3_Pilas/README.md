@@ -27,8 +27,7 @@ Dependiendo de la implementación que se desee ejecutar, es imprescindible utili
 
 > `Punto 4`
 
-> La complejidad de la solución empleada en manera recursiva es O(n), ya que si o si va sacar todos los elementos de la pila para luego comparlos y volver a agregarlos. De igual manera pasa en la implementacion 
-iterativa, donde en el peor de los casos tendria que eliminar todos los elementos de la pila, donde n es la cantidad de elementos.
+> La complejidad de la solución empleada es ....
 
 ---
 
@@ -40,7 +39,8 @@ iterativa, donde en el peor de los casos tendria que eliminar todos los elemento
 
 > `Punto 6`
 
-> La complejidad de la solución empleada es ....
+> La complejidad de la solución empleada en manera recursiva es O(n), ya que si o si va sacar todos los elementos de la pila para luego comparlos y volver a agregarlos. De igual manera pasa en la implementacion 
+iterativa, donde en el peor de los casos tendria que eliminar todos los elementos de la pila, donde n es la cantidad de elementos.
 
 ---
 
