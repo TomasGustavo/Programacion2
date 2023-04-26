@@ -279,6 +279,34 @@ Pila eliminar_ocurrencias(Pila pila, TipoElemento elemento){
     return nueva_p;
 }
 
+// PUNTO 6 recursivo
+Pila eliminar_ocurrencias_recursivo(Pila pila, TipoElemento elemento){
+    Pila nueva_p = p_crear();
+    TipoElemento x = te_crear(0);
+    
+    // caso base: pila vacia
+    if(p_es_vacia(pila)){
+        return nueva_p;
+    }
+
+    // caso recursivo: desapilo el elemento del tope y llamo de vuelta a la funcion
+    x = p_desapilar(pila);
+    nueva_p = eliminar_ocurrencias_recursivo(pila,elemento);
+
+    // cuando ya saco todos los elementos de la pila original los comparo uno a uno con el elemento a eliminar
+    // si no coinciden los apilo en la nueva pila a retornar
+    if(x->clave != elemento->clave){
+        p_apilar(nueva_p,x);
+    }
+    // conicidan o no el elemento x con el elemento a eliminar, guardo de todas formar los elementos que saque
+    // de la pila pasada por parametro para no perderla
+    p_apilar(pila,x);
+
+    return nueva_p;
+
+
+}
+
 // PUNTO 7
 Pila elemento_en_comun(Pila p1, Pila p2)
 {

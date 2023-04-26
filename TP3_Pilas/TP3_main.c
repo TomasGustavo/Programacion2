@@ -601,14 +601,35 @@ void main_eliminar_ocurrencias(){
     TipoElemento elemento = te_crear(valor);
     limpiar_pantalla();
 
+    printf(ANSI_bBLUE"Elija de que manerera se llamara a la funcion\n\n1- Iterativante\n2- Recursivamente"ANSI_RESET);
+    int opc;
+    validador = scanf("%d",&opc);
+    vaciar_buffer();
+    while(validador != 1 || (opc != 1 && opc != 2)){
+        limpiar_pantalla();
+        printf(ANSI_RED "\t\t-------- ERROR -------- \n");
+        printf("DATO FUERA DE RANGO, por favor ingresar una opcion [1-2]\n\n" ANSI_RESET);
+        pausa();
+        limpiar_pantalla();
+        printf(ANSI_bBLUE "Elija de que manerera se llamara a la funcion\n\n1- Iterativante\n2- Recursivamente \n" ANSI_RESET);
+        validador = scanf("%d", &opc);
+        vaciar_buffer();
+    }
+
     printf(ANSI_bYELLOW"Pila ANTES de llamar a la funcion\n\n"ANSI_RESET);
     printf(ANSI_bGREEN "");
     p_mostrar(pila); // muestro la pila como quedo cargada
     printf("\n" ANSI_RESET);
 
     Pila pilaEliminada = p_crear();
-    pilaEliminada = eliminar_ocurrencias(pila,elemento);
-    pilaEliminada = invertir_pila(pilaEliminada);
+    if(opc == 1){
+        pilaEliminada = eliminar_ocurrencias(pila,elemento);
+        invertir_pila(pilaEliminada);
+    }
+    else{
+        pilaEliminada = eliminar_ocurrencias_recursivo(pila,elemento);
+    }
+    
 
     printf(ANSI_bYELLOW"Pila DESPUES de llamar a la funcion\n\n"ANSI_RESET);
     printf(ANSI_bGREEN "");
