@@ -90,10 +90,13 @@ Pila insertar(Pila p,TipoElemento elem, int posi){
     int contador = 0;
     bool bandera = false;
     int largoP = contar(p);
-    int posicionOrdinal = largoP - (posi-1);
+    // cuenta que resta el tamaño de elementos de la pila - (posicion pasada -1) 
+    // para saber la cantidad de elementos que tengo que sacar para insertar el nuevo elemento
+    int posicionOrdinal = largoP - (posi-1); 
     
 
-
+    // recorro mientras p no este vacia y la bandera sea falsa, apilo en pila auxiliar los elementos que saco
+    // y sumo la cantidad de vueltas que da hasta que coincide con la posicion a insertar y pongo la bandera en true para que salga del while
     while(!p_es_vacia(p) && !bandera){
         x = p_desapilar(p);
         p_apilar(Paux,x);
@@ -104,11 +107,13 @@ Pila insertar(Pila p,TipoElemento elem, int posi){
         
     }
     
+    // apila el elemento pasado por parametro en la posicion deseada y vuelvo a poner el resto de elementos de p
     p_apilar(p,elem);
     while(!p_es_vacia(Paux)){
         x = p_desapilar(Paux);
         p_apilar(p,x);
     }
+
     return p;
 
 }
@@ -119,13 +124,16 @@ Pila eliminar_por_clave(Pila pila, int clave){
     Pila paux = p_crear();
     temp = p_desapilar(pila);
     p_apilar(paux, temp);
+
+
+    // recorro comparando la clave de cada posicion con la clave pasada y que la pila nose vacia
     while (temp->clave != clave && !p_es_vacia(pila))
     {
         temp = p_desapilar(pila);
         p_apilar(paux, temp);
     }
 
-    if (temp->clave == clave)
+    if (temp->clave == clave)   // si con algun elemento hubo coincidencia de claves
     {
         temp = p_desapilar(paux); // desapilo una vez, que es el elemento a eliminar
 
@@ -156,10 +164,12 @@ Pila duplicar_pila(Pila pila){
     TipoElemento x = te_crear(0);
     Pila Paux = p_crear();
     
+    // saca todos los elemntos de una pila y los guarda en una auxiliar
     while(!p_es_vacia(pila)){
         x = p_desapilar(pila);
         p_apilar(Paux,x);
     }
+    // vuelve a llenar la pila original pero cada elemento lo guarda 2 veces
     while(!p_es_vacia(Paux)){
         x = p_desapilar(Paux);
         p_apilar(pila,x);
@@ -177,6 +187,9 @@ bool compara_pilas(Pila p1, Pila p2)
     TipoElemento x2 = te_crear(0);
     Pila pAux = p_crear();
 
+
+    // desapilo las 2 pilas y comparo elemento a elemento de la misma posicion y apilo en 1 pila auxiliar 
+    // pasando 1ro el elemento de pila1 y luego el de pila2 ,si alguna es falsa retorno false
     while (!p_es_vacia(p1))
     {
         x1 = p_desapilar(p1);
@@ -189,6 +202,8 @@ bool compara_pilas(Pila p1, Pila p2)
         p_apilar(pAux, x2);
     }
 
+    // vuelvo a apilar las pilas originales, arrancado por la pila 2 y luego pila 1 
+    // porque fue como me quedaron los elementos del desapile anterios
     while (!p_es_vacia(pAux))
     {
         x2 = p_desapilar(pAux);
@@ -245,6 +260,8 @@ Pila eliminar_ocurrencias(Pila pila, TipoElemento elemento){
     Pila nueva_p = p_crear();
     TipoElemento x = te_crear(0);
     
+    // recorro la pila y comparo cada elemento de esta con el pasado por parametro, si coincide lo elimino
+    // sin antes haberlo guardado para no modificar la pila original.
     while(!p_es_vacia(pila)){
         x = p_desapilar(pila);
         p_apilar(Paux,x);
@@ -252,10 +269,13 @@ Pila eliminar_ocurrencias(Pila pila, TipoElemento elemento){
             p_apilar(nueva_p,x);
         }
     }
+
+    // vuelvo a apilar la pila como estaba orginalmente.
     while(!p_es_vacia(Paux)){
         x = p_desapilar(Paux);
         p_apilar(pila,x);
     }
+    // retorno la pila con los elementos eliminados.
     return nueva_p;
 }
 
