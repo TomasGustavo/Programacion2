@@ -1,0 +1,86 @@
+{
+    "tasks": [
+        {
+            "type": "cppbuild",
+            "label": "COLAS ARREGLOS",
+            "command": "gcc",
+            "args": [
+                "-fdiagnostics-color=always",
+                "-g",
+                "${file}",
+                "${fileDirname}\\colas_arreglos.c",
+                "${fileDirname}\\tipo_elemento.c",
+                "${fileDirname}\\TP4_colas.c",
+                "-o",
+                "${fileDirname}\\${fileBasenameNoExtension}.exe",
+                "-Wall"
+            ],
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "Tarea generada por Gerr"
+        },
+        {
+            "type": "cppbuild",
+            "label": "COLAS ARREGLO CIRCULAR",
+            "command": "gcc",
+            "args": [
+                "-fdiagnostics-color=always",
+                "-g",
+                "${file}",
+                "${fileDirname}\\colas_arregloCircular.c",
+                "${fileDirname}\\tipo_elemento.c",
+                "${fileDirname}\\TP4_colas.c",
+                "-o",
+                "${fileDirname}\\${fileBasenameNoExtension}.exe",
+                "-Wall"
+            ],
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "Tarea generada por Gerr"
+        },
+        {
+            "type": "cppbuild",
+            "label": "COLAS APUNTADORES",
+            "command": "gcc",
+            "args": [
+                "-fdiagnostics-color=always",
+                "-g",
+                "${file}",
+                "${fileDirname}\\colas_apuntadores.c",
+                "${fileDirname}\\tipo_elemento.c",
+                "${fileDirname}\\TP4_colas.c",
+                "-o",
+                "${fileDirname}\\${fileBasenameNoExtension}.exe",
+                "-Wall"
+            ],
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "Tarea generada por Gerr"
+        }
+    ],
+    "version": "2.0.0"
+}
