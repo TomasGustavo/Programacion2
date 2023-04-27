@@ -159,6 +159,48 @@ Pila eliminar_por_clave(Pila pila, int clave){
     }
 }
 
+// PUNDO 2D
+Pila intercambiarPos(Pila p, int pos1, int pos2){
+    Pila paux = p_crear();
+    TipoElemento x = te_crear(0);
+    TipoElemento primero = te_crear(0);
+    TipoElemento segundo = te_crear(0);
+    int i = 1;
+
+    if (pos1 == pos2){
+        return p;
+    } else {
+        // Recorro la pila guardando los valores en las posiciones a intercambiar y la guardo en la auxiliar
+        while (!p_es_vacia(p))
+        {
+            x = p_desapilar(p);
+            if (i == pos1){
+                primero = x;
+            } else if (i == pos2){
+                segundo = x;
+            }
+            p_apilar(paux,x);
+            i++;
+        }
+        i--;
+        // Recorro la pila auxiliar intercambiando los elementos
+        while (!p_es_vacia(paux))
+        {
+            x = p_desapilar(paux);
+            if (i == pos1){
+                p_apilar(p,segundo);
+            } else if (i == pos2) {
+                p_apilar(p, primero);
+            } else {
+                p_apilar(p,x);
+            }
+            i--;
+        }
+        return p;
+    }
+ 
+}
+
 // PUNTO 2E 
 Pila duplicar_pila(Pila pila){
     TipoElemento x = te_crear(0);
