@@ -24,7 +24,7 @@ void c_encolar(Cola cola, TipoElemento elemento) {
 	if (c_es_llena(cola)){
 		return;
     }
-    cola-> final++;
+    cola->final++;
     cola->valores[cola->final] = elemento;
     if (c_es_vacia(cola)){
         cola->frente = cola->final;
@@ -36,9 +36,9 @@ TipoElemento c_desencolar(Cola cola){
 	if (c_es_vacia(cola)){
 		return NULL;
     }
-    TipoElemento elemento = cola->valores [cola->frente];
+    TipoElemento elemento = cola->valores[cola->frente];
 
-    for (i=cola->frente; i <= (cola->final-1) ; i++){
+    for (i=cola->frente; i <= (cola->final-1) ; ++i){
         cola->valores[i] = cola->valores [i+1];
     }
 
@@ -83,3 +83,4 @@ void c_mostrar (Cola cola) {
         c_encolar(cola, X); 
     } 
 }
+

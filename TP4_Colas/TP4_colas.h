@@ -21,4 +21,16 @@
 #define ANSI_bWHITE "\e[97m"
 #define ANSI_RESET "\e[0m"
 
+int vaciar_buffer(void);
+
+void pausa();
+
+void limpiar_pantalla();
+
+Cola intercambiar(Cola c);
+
+Cola cargarCola();
+
+bool buscar(Cola c, int clave);
+
 #endif // TP3_LISTAS_H

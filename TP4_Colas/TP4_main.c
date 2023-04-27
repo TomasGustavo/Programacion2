@@ -8,6 +8,36 @@
 #include "colas.h"
 #include "tipo_elemento.h"
 
+void main_buscarElemento(){
+    Cola c;
+    int clave, validador;
+    bool rta;
+    printf(ANSI_bMAGENTA "Cargar la lista: \n");
+    c = cargarCola(); 
+    
+    printf(ANSI_bMAGENTA "Ingrese el elemento a buscar [-999.999 - 999.999]: \n" ANSI_RESET);
+    validador = scanf("%d", &clave);
+    vaciar_buffer();
+    while (validador != 1 || clave < -999999 || clave > 999999)
+    {
+        printf(ANSI_RED "\t\t-------- ERROR -------- \n");
+        printf("DATO FUERA DE RANGO, por favor ingresar un numero entre [-999.999 - 999.999]\n\n" ANSI_RESET);
+        pausa();
+        printf(ANSI_bBLUE "Ingrese el elemento a buscar [-999.999 - 999.999]: \n" ANSI_RESET);
+        validador = scanf("%d", &clave);
+        vaciar_buffer();
+    }
+
+    rta = buscar(c,clave);
+
+    if (rta == true)
+        printf(ANSI_bGREEN "Se encontro el elemento %i en la cola\n",clave);
+    else
+    {
+        printf(ANSI_RED "No se encontro el elemento en la cola\n");
+    }
+}
+
 void menu_principal()
 {
     printf("\n");
@@ -87,7 +117,7 @@ int main()
                 switch (opcion)
                 {
                 case 1:
-                    
+                    main_buscarElemento();
                     getch();
                     break;
                 case 2:

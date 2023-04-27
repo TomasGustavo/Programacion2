@@ -28,6 +28,17 @@ void limpiar_pantalla()
     return;
 }
 
+Cola intercambiar(Cola c){
+    Cola caux = c_crear();
+    TipoElemento x = te_crear(0);
+    while (!c_es_vacia(c))
+    {
+        x = c_desencolar(c);
+        c_encolar(caux,x);
+    }
+    return caux;    
+}
+
 Cola cargarCola(){
     Cola cola = c_crear();
     int cant, valor;
@@ -66,8 +77,25 @@ Cola cargarCola(){
         c_encolar(cola, elemento);
         limpiar_pantalla();
     }
-    printf(ANSI_bGREEN "Cola cargada con exito: ");
+    printf(ANSI_bGREEN "");
     c_mostrar(cola); // muestro la pila como quedo cargada
     printf("\n" ANSI_RESET);
     return cola;
+}
+
+// PUNTO 2A
+bool buscar(Cola c, int clave){
+    bool res = false;
+    Cola caux = c_crear();
+    TipoElemento x = te_crear(0);
+    while (!c_es_vacia(c))
+    {
+        x = c_desencolar(c);
+        if(x->clave == clave){
+            res = true;
+        }
+        c_encolar(caux,x);
+    }
+    c = intercambiar(caux);
+    return res;
 }

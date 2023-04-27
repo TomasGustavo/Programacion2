@@ -295,11 +295,11 @@ void main_intercambiar(){
     printf(ANSI_bBLUE "Ingrese cantidad de elementos a cargar [0-99]: " ANSI_RESET);
     int validador = scanf("%d", &cant);
     vaciar_buffer();
-    while (validador != 1 || cant < 0 || cant >= 100)
+    while (validador != 1 || cant <= 0 || cant >= 100)
     {
         limpiar_pantalla();
         printf(ANSI_RED "\t\t-------- ERROR -------- \n");
-        printf("DATO INVALIDO, por favor ingresar un numero entre [0-99]\n\n" ANSI_RESET);
+        printf("DATO INVALIDO, por favor ingresar un numero entre [1-99]\n\n" ANSI_RESET);
         pausa();
         limpiar_pantalla();
         printf(ANSI_bBLUE "Ingrese cantidad de elementos a cargar: " ANSI_RESET);
