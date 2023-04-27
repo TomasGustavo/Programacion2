@@ -87,27 +87,27 @@ int main()
                 switch (opcion)
                 {
                 case 1:
-                    main_buscar_clave();
+                    
                     getch();
                     break;
                 case 2:
-                    main_insertar_en_pila();
+                    
                     getch();
                     break;
                 case 3:
-                    main_eliminar_por_clave();
+                   
                     getch();
                     break;
                 case 4:
-                    main_intercambiar();
+                   
                     getch();
                     break;
                 case 5:
-                    main_duplicar_pila();
+                   
                     getch();
                     break;
                 case 6:
-                    main_contador();
+                    
                     getch();
                     break;
                 case 0:
@@ -117,27 +117,27 @@ int main()
             break;
             menu_principal();
         case 3:
-            main_compara_pilas();
+            
             getch();
             break;
         case 4:
-            main_conversor();
+            
             getch();
             break;
         case 5:
-            main_invertida();
+            
             getch();
             break;
         case 6:
-            main_eliminar_ocurrencias();
+            
             getch();
             break;
         case 7:
-            main_elemento_en_comun();
+            
             getch();
             break;
         case 8:
-            main_contador_valores();
+            
             getch();
             break;
         case 0:

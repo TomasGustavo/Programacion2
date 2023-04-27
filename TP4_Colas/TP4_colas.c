@@ -9,11 +9,29 @@
 #include "colas.h"
 #include "tipo_elemento.h"
 
+int vaciar_buffer(void)
+{
+    char nada[200];
+    fgets(nada, 200, stdin);
+    return 0;
+}
+
+void pausa()
+{
+    printf(ANSI_YELLOW "\nPresione ENTER para continuar...." ANSI_RESET);
+    getchar();
+}
+
+void limpiar_pantalla()
+{
+    printf("\033[2J\033[1;1H");
+    return;
+}
+
 Cola cargarCola(){
     Cola cola = c_crear();
-    int cant, valor, clave;
-    bool rta;
-    printf(ANSI_bBLUE "ingrese cantidad de elementos a cargar [0-99]: " ANSI_RESET);
+    int cant, valor;
+    printf(ANSI_bBLUE "Ingrese cantidad de elementos a cargar [0-99]: " ANSI_RESET);
     int validador = scanf("%d", &cant);
     vaciar_buffer();
     while (validador != 1 || cant < 0 || cant >= 100)
@@ -30,25 +48,26 @@ Cola cargarCola(){
 
     for (int i = 0; i < cant; i++)
     {
-        printf(ANSI_bBLUE "ingrese clave del elementos a cargar [-999.999 - 999.999]: " ANSI_RESET);
+        printf(ANSI_bBLUE "ingrese clave del elemento a cargar [-999.999 - 999.999]: " ANSI_RESET);
         validador = scanf("%d", &valor);
         vaciar_buffer();
         while (validador != 1 || valor < -999999 || valor > 999999)
         {
             limpiar_pantalla();
             printf(ANSI_RED "\t\t-------- ERROR -------- \n");
-            printf("DATO FUERA DE RANGO, por favor ingrasar un numero entre [-999.999 - 999.999]\n\n" ANSI_RESET);
+            printf("DATO FUERA DE RANGO, por favor ingresar un numero entre [-999.999 - 999.999]\n\n" ANSI_RESET);
             pausa();
             limpiar_pantalla();
-            printf(ANSI_bBLUE "ingrese clave del elementos a cargar [-999.999 - 999.999]: " ANSI_RESET);
+            printf(ANSI_bBLUE "Ingrese clave del elemento a cargar [-999.999 - 999.999]: " ANSI_RESET);
             validador = scanf("%d", &valor);
             vaciar_buffer();
         }
         TipoElemento elemento = te_crear(valor);
-        p_apilar(pila, elemento);
+        c_encolar(cola, elemento);
         limpiar_pantalla();
     }
-    printf(ANSI_bGREEN "");
-    p_mostrar(pila); // muestro la pila como quedo cargada
+    printf(ANSI_bGREEN "Cola cargada con exito: ");
+    c_mostrar(cola); // muestro la pila como quedo cargada
     printf("\n" ANSI_RESET);
+    return cola;
 }

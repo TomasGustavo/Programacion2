@@ -4,6 +4,7 @@
 #include <stdbool.h>
 #include "colas.h"
 #include "tipo_elemento.h"
+
 #define ANSI_RED "\e[31m"
 #define ANSI_GREEN "\e[32m"
 #define ANSI_YELLOW "\e[33m"
@@ -19,3 +20,5 @@
 #define ANSI_bCYAN "\e[96m"
 #define ANSI_bWHITE "\e[97m"
 #define ANSI_RESET "\e[0m"
+
+#endif // TP3_LISTAS_H

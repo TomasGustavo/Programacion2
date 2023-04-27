@@ -1,4 +1,5 @@
 #include "colas.h" 
+#include "tipo_elemento.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdbool.h>
