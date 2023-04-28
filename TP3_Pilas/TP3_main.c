@@ -427,21 +427,60 @@ void main_duplicar_pila(){
 // punto 2F
 void main_contador()
 {
-    int contador, cantidad, clave_actual;
+    int contador, cantidad, clave_actual, validador;
     Pila pila = p_crear();
     TipoElemento elemento = te_crear(0);
-    printf(ANSI_bBLUE "Ingrese la cantidad de elementos a cargar[0-99]: " ANSI_RESET);
-    scanf("%d", &cantidad);
+    printf(ANSI_bBLUE "Ingrese la cantidad de elementos a cargar[0-99]: " ANSI_bYELLOW);
+    validador = scanf("%d", &cantidad);
+    printf(""ANSI_RESET);
+    vaciar_buffer();
+    while (validador == 0 || cantidad > 99 || cantidad < 0){
+        limpiar_pantalla();
+        if (validador == 0){
+            printf(ANSI_bRED "\t\t-------- ERROR -------- \n"ANSI_RESET);
+            printf(ANSI_bRED "no estan permitidos los caracteres\n"ANSI_RESET);
+            printf(ANSI_bBLUE"ingrese la cantidad de elementos a cargar[0-99]: " ANSI_bYELLOW);
+            validador = scanf("%d", &cantidad);
+        }
+        else if(cantidad > 99 || cantidad < 0){
+            printf(ANSI_bRED "\t\t-------- ERROR -------- \n"ANSI_RESET);
+            printf(ANSI_bRED"numero fuera del rango permitido\n"ANSI_RESET);
+            printf(ANSI_bBLUE"ingrese la cantidad de elementos a cargar[0-99]: " ANSI_bYELLOW);
+            validador = scanf("%d", &cantidad);
+        }
+        vaciar_buffer();
+    }
+    
     for (int i = 0; i < cantidad; i++)
     {
-        printf(ANSI_bBLUE "Ingrese el valor para cargar a la pila:" ANSI_RESET);
-        scanf("%d", &clave_actual);
+        printf(ANSI_bBLUE "Ingrese el valor para cargar a la pila [-999.999 - 999.999]:" ANSI_bYELLOW);
+        validador = scanf("%d", &clave_actual);
+        printf(""ANSI_RESET);
+        vaciar_buffer();
+        while (validador != 1 || clave_actual > 999999 || clave_actual < -999999)
+        {
+            limpiar_pantalla();
+            if (validador == 0){
+            printf(ANSI_bRED "\t\t-------- ERROR -------- \n"ANSI_RESET);
+            printf(ANSI_bRED"no estan permitidos los caracteres\n"ANSI_RESET);
+            printf(ANSI_bBLUE"ingrese el valor para cargar a la pila [-999.999 - 999.999]: " ANSI_bYELLOW);
+            validador = scanf("%d", &clave_actual);
+        }
+        else if(clave_actual > 999999 || clave_actual < -999999){
+            printf(ANSI_bRED "\t\t-------- ERROR -------- \n"ANSI_RESET);
+            printf(ANSI_bRED"numero fuera del rango permitido\n"ANSI_RESET);
+            printf(ANSI_bBLUE"ingrese el valor para cargar a la pila [-999.999 - 999.999]: " ANSI_bYELLOW);
+            validador = scanf("%d", &clave_actual);
+        }
+        printf(""ANSI_RESET);
+        vaciar_buffer();
+        }
+        
         elemento = te_crear(clave_actual);
         p_apilar(pila, elemento);
     }
-
+    printf(ANSI_bGREEN"Pila cargada: \n");
     p_mostrar(pila);
-
     contador = contar(pila);
     printf(ANSI_bGREEN "La cantidad de elementos que contiene la pila es de %d" ANSI_RESET, contador);
 }
@@ -588,31 +627,71 @@ void main_conversor()
 // PUNTO 5
 void main_invertida()
 {
-    int cantidad, clave_actual;
+    int cantidad, clave_actual, validador;
     Pila pila = p_crear();
     Pila pila_invertida = p_crear();
     TipoElemento elemento = te_crear(0);
-
-    printf(ANSI_bBLUE "Ingrese la cantidad de elementos a cargar[0-99]: " ANSI_RESET);
-    scanf("%d", &cantidad);
-
+    printf(ANSI_bBLUE "Ingrese la cantidad de elementos a cargar[0-99]: " ANSI_bYELLOW);
+    validador = scanf("%d", &cantidad);
+    printf(""ANSI_RESET);
+    vaciar_buffer();
+    while (validador == 0 || cantidad > 99 || cantidad < 0)
+    {
+        limpiar_pantalla();
+        if (validador == 0){
+            printf(ANSI_bRED "\t\t-------- ERROR -------- \n"ANSI_RESET);
+            printf(ANSI_bRED "no estan permitidos los caracteres\n"ANSI_RESET);
+            printf(ANSI_bBLUE"ingrese la cantidad de elementos a cargar[0-99]: " ANSI_bYELLOW);
+            validador = scanf("%d", &cantidad);
+        }
+        else if(cantidad > 99 || cantidad < 0){
+            printf(ANSI_bRED "\t\t-------- ERROR -------- \n"ANSI_RESET);
+            printf(ANSI_bRED"numero fuera del rango permitido\n"ANSI_RESET);
+            printf(ANSI_bBLUE"ingrese la cantidad de elementos a cargar[0-99]: " ANSI_bYELLOW);
+            validador = scanf("%d", &cantidad);
+        }
+        printf(""ANSI_RESET);   
+        vaciar_buffer();
+    }
+    
     for (int i = 0; i < cantidad; i++)
     {
-        printf(ANSI_bBLUE "Ingrese el valor para cargar a la pila:" ANSI_RESET);
+        limpiar_pantalla();
+        printf(ANSI_bBLUE "Ingrese el valor para cargar a la pila [-999.999 - 999.999]:" ANSI_bYELLOW);
         scanf("%d", &clave_actual);
+        printf(""ANSI_RESET);
+        vaciar_buffer();
+        while (validador != 1 || clave_actual > 999999 || clave_actual < -999999)
+        {
+            if (validador == 0){
+                printf(ANSI_bRED "\t\t-------- ERROR -------- \n"ANSI_RESET);
+                printf(ANSI_bRED "no estan permitidos los caracteres\n"ANSI_RESET);
+                printf(ANSI_bBLUE"ingrese el valor para cargar a la pila [-999.999 - 999.999]: " ANSI_bYELLOW);
+                validador = scanf("%d", &clave_actual);
+        }
+        else if(clave_actual > 999999 || clave_actual < -999999){
+            printf(ANSI_bRED "\t\t-------- ERROR -------- \n"ANSI_RESET);
+            printf(ANSI_bRED"numero fuera del rango permitido\n"ANSI_RESET);
+            printf(ANSI_bBLUE"ingrese el valor para cargar a la pila [-999.999 - 999.999]: " ANSI_bYELLOW);
+            validador = scanf("%d", &clave_actual);
+        }
+        printf(""ANSI_RESET);
+        vaciar_buffer();
+        }
         elemento = te_crear(clave_actual);
         p_apilar(pila, elemento);
     }
 
-    printf(ANSI_bGREEN "pila cargada: \n" ANSI_RESET);
+    printf(ANSI_bGREEN "pila cargada: \n");
     p_mostrar(pila);
-
+    printf(""ANSI_RESET);
     pila_invertida = invertir_pila(pila);
 
-    printf(ANSI_bGREEN "pila original: \n" ANSI_RESET);
+    printf(ANSI_bGREEN "pila original: \n");
     p_mostrar(pila);
-    printf(ANSI_bGREEN "pila invertida: \n" ANSI_RESET);
+    printf(ANSI_bGREEN "pila invertida: \n");
     p_mostrar(pila_invertida);
+    printf(""ANSI_RESET);
 }
 
 // PUNTO 6
