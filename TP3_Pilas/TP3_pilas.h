@@ -28,7 +28,7 @@ bool buscar_c (Pila p, int x);
 
 Pila insertar(Pila p,TipoElemento elem, int posi);
 
-Pila eliminar_por_clave(Pila pila, int clave);
+Pila eliminar_por_clave(Pila pila, int clave, bool *estado);
 
 Pila intercambiarPos(Pila p, int pos1, int pos2);
 
