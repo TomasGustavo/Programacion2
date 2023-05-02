@@ -35,7 +35,7 @@ Pila conversor(int numero, int base)
     return pila;
 }
 
-void mostrarhex(Pila pila)
+void mostrarhex(Pila pila)  // O(n^2) porque los 2 while utilizados depende de la cantidad de elementos de la pila
 {
     Pila Paux = p_crear();
     TipoElemento X = te_crear(0);
