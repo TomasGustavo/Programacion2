@@ -219,6 +219,7 @@ Pila duplicar_pila(Pila pila)
 {
     TipoElemento x = te_crear(0);
     Pila Paux = p_crear();
+    Pila Pila_duplicada = p_crear();
 
     // saca todos los elementos de una pila y los guarda en una auxiliar
     while (!p_es_vacia(pila))
@@ -231,9 +232,9 @@ Pila duplicar_pila(Pila pila)
     {
         x = p_desapilar(Paux);
         p_apilar(pila, x);
-        p_apilar(pila, x);
+        p_apilar(Pila_duplicada, x);
     }
-    return pila;
+    return Pila_duplicada;
 }
 
 // PUNTO 3

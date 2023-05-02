@@ -204,7 +204,7 @@ void main_insertar_en_pila()
 void main_eliminar_por_clave()
 {
     Pila pila = p_crear();
-    int cant, valor, clave;
+    int cant, clave;
     pila = cargar_pila(&cant);
     printf(ANSI_bGREEN "");
     p_mostrar(pila); // muestro la pila como quedo cargada
@@ -242,7 +242,7 @@ void main_eliminar_por_clave()
 void main_intercambiar()
 {
     Pila pila = p_crear();
-    int cant, valor, pos1, pos2;
+    int cant, pos1, pos2;
 
     pila = cargar_pila(&cant);
 
@@ -286,7 +286,8 @@ void main_intercambiar()
 void main_duplicar_pila()
 {
     Pila pila = p_crear();
-    int cant, valor;
+    Pila pila_duplicada = p_crear();
+    int cant;
     pila = cargar_pila(&cant);
 
     if (cant == 0)
@@ -300,9 +301,16 @@ void main_duplicar_pila()
     p_mostrar(pila); // muestro la pila como quedo cargada
     printf("\n" ANSI_RESET);
 
-    pila = duplicar_pila(pila);
+    pila_duplicada = duplicar_pila(pila);
 
     printf(ANSI_bYELLOW "Pila DUPLICADA\n\n" ANSI_RESET);
+    printf(ANSI_bGREEN "");
+    p_mostrar(pila_duplicada); // muestro la pila duplicada
+    printf("\n" ANSI_RESET);
+
+
+
+    printf(ANSI_bYELLOW "Pila Original DESPUES de llamar a la funcion\n\n" ANSI_RESET);
     printf(ANSI_bGREEN "");
     p_mostrar(pila); // muestro la pila como quedo después de llamar a la función
     printf("\n" ANSI_RESET);
@@ -313,7 +321,7 @@ void main_duplicar_pila()
 // punto 2F
 void main_contador()
 {
-    int contador, cantidad, clave_actual, validador, cant;
+    int contador, cant;
     Pila pila = p_crear();
     pila = cargar_pila(&cant);
     printf(ANSI_bGREEN "Pila cargada: \n");
@@ -327,79 +335,10 @@ void main_compara_pilas()
 {
     Pila pila = p_crear();
     Pila pila2 = p_crear();
-    int cant, valor;
+    int cant;
     bool rta;
-    printf(ANSI_bBLUE "Ingrese cantidad de elementos a cargar en la 1ra Pila[0-99]: " ANSI_RESET);
-    int validador = scanf("%d", &cant);
-    vaciar_buffer();
-    while (validador != 1 || cant < 0 || cant >= 100)
-    {
-        limpiar_pantalla();
-        printf(ANSI_RED "\t\t-------- ERROR -------- \n");
-        printf("DATO INVALIDO, por favor ingresar un numero entre [0-99]\n\n" ANSI_RESET);
-        pausa();
-        limpiar_pantalla();
-        printf(ANSI_bBLUE "Ingrese cantidad de elementos a cargar: " ANSI_RESET);
-        validador = scanf("%d", &cant);
-        vaciar_buffer();
-    }
-
-    for (int i = 0; i < cant; i++)
-    {
-        printf(ANSI_bBLUE "Ingrese clave del elemento a cargar [-999.999 - 999.999]: " ANSI_RESET);
-        validador = scanf("%d", &valor);
-        vaciar_buffer();
-        while (validador != 1 || valor < -999999 || valor > 999999)
-        {
-            limpiar_pantalla();
-            printf(ANSI_RED "\t\t-------- ERROR -------- \n");
-            printf("DATO FUERA DE RANGO, por favor ingresar un numero entre [-999.999 - 999.999]\n\n" ANSI_RESET);
-            pausa();
-            limpiar_pantalla();
-            printf(ANSI_bBLUE "Ingrese clave del elemento a cargar [-999.999 - 999.999]: " ANSI_RESET);
-            validador = scanf("%d", &valor);
-            vaciar_buffer();
-        }
-        TipoElemento elemento = te_crear(valor);
-        p_apilar(pila, elemento);
-        limpiar_pantalla();
-    }
-
-    printf(ANSI_bBLUE "Ingrese cantidad de elementos a cargar en la 2da Pila[0-99]: " ANSI_RESET);
-    validador = scanf("%d", &cant);
-    vaciar_buffer();
-    while (validador != 1 || cant < 0 || cant >= 100)
-    {
-        limpiar_pantalla();
-        printf(ANSI_RED "\t\t-------- ERROR -------- \n");
-        printf("DATO INVALIDO, por favor ingresar un numero entre [0-99]\n\n" ANSI_RESET);
-        pausa();
-        limpiar_pantalla();
-        printf(ANSI_bBLUE "Ingrese cantidad de elementos a cargar: " ANSI_RESET);
-        validador = scanf("%d", &cant);
-        vaciar_buffer();
-    }
-
-    for (int i = 0; i < cant; i++)
-    {
-        printf(ANSI_bBLUE "Ingrese clave del elemento a cargar [-999.999 - 999.999]: " ANSI_RESET);
-        validador = scanf("%d", &valor);
-        vaciar_buffer();
-        while (validador != 1 || valor < -999999 || valor > 999999)
-        {
-            limpiar_pantalla();
-            printf(ANSI_RED "\t\t-------- ERROR -------- \n");
-            printf("DATO FUERA DE RANGO, por favor ingresar un numero entre [-999.999 - 999.999]\n\n" ANSI_RESET);
-            pausa();
-            limpiar_pantalla();
-            printf(ANSI_bBLUE "Ingrese clave del elemento a cargar [-999.999 - 999.999]: " ANSI_RESET);
-            validador = scanf("%d", &valor);
-            vaciar_buffer();
-        }
-        TipoElemento elemento = te_crear(valor);
-        p_apilar(pila2, elemento);
-        limpiar_pantalla();
-    }
+    pila = cargar_pila(&cant);
+    pila2 = cargar_pila(&cant);
 
     if (longitud_pila(pila) != longitud_pila(pila2))
     {
@@ -464,64 +403,10 @@ void main_conversor()
 // PUNTO 5
 void main_invertida()
 {
-    int cantidad, clave_actual, validador;
+    int cantidad;
     Pila pila = p_crear();
     Pila pila_invertida = p_crear();
-    TipoElemento elemento = te_crear(0);
-    printf(ANSI_bBLUE "Ingrese la cantidad de elementos a cargar[0-99]: " ANSI_bYELLOW);
-    validador = scanf("%d", &cantidad);
-    printf("" ANSI_RESET);
-    vaciar_buffer();
-    while (validador == 0 || cantidad > 99 || cantidad < 0)
-    {
-        limpiar_pantalla();
-        if (validador == 0)
-        {
-            printf(ANSI_bRED "\t\t-------- ERROR -------- \n" ANSI_RESET);
-            printf(ANSI_bRED "no están permitidos los caracteres\n" ANSI_RESET);
-            printf(ANSI_bBLUE "ingrese la cantidad de elementos a cargar[0-99]: " ANSI_bYELLOW);
-            validador = scanf("%d", &cantidad);
-        }
-        else if (cantidad > 99 || cantidad < 0)
-        {
-            printf(ANSI_bRED "\t\t-------- ERROR -------- \n" ANSI_RESET);
-            printf(ANSI_bRED "numero fuera del rango permitido\n" ANSI_RESET);
-            printf(ANSI_bBLUE "ingrese la cantidad de elementos a cargar[0-99]: " ANSI_bYELLOW);
-            validador = scanf("%d", &cantidad);
-        }
-        printf("" ANSI_RESET);
-        vaciar_buffer();
-    }
-
-    for (int i = 0; i < cantidad; i++)
-    {
-        limpiar_pantalla();
-        printf(ANSI_bBLUE "Ingrese el valor para cargar a la pila [-999.999 - 999.999]:" ANSI_bYELLOW);
-        scanf("%d", &clave_actual);
-        printf("" ANSI_RESET);
-        vaciar_buffer();
-        while (validador != 1 || clave_actual > 999999 || clave_actual < -999999)
-        {
-            if (validador == 0)
-            {
-                printf(ANSI_bRED "\t\t-------- ERROR -------- \n" ANSI_RESET);
-                printf(ANSI_bRED "no están permitidos los caracteres\n" ANSI_RESET);
-                printf(ANSI_bBLUE "ingrese el valor para cargar a la pila [-999.999 - 999.999]: " ANSI_bYELLOW);
-                validador = scanf("%d", &clave_actual);
-            }
-            else if (clave_actual > 999999 || clave_actual < -999999)
-            {
-                printf(ANSI_bRED "\t\t-------- ERROR -------- \n" ANSI_RESET);
-                printf(ANSI_bRED "numero fuera del rango permitido\n" ANSI_RESET);
-                printf(ANSI_bBLUE "ingrese el valor para cargar a la pila [-999.999 - 999.999]: " ANSI_bYELLOW);
-                validador = scanf("%d", &clave_actual);
-            }
-            printf("" ANSI_RESET);
-            vaciar_buffer();
-        }
-        elemento = te_crear(clave_actual);
-        p_apilar(pila, elemento);
-    }
+    pila = cargar_pila(&cantidad);
 
     printf(ANSI_bGREEN "pila cargada: \n");
     p_mostrar(pila);
@@ -540,41 +425,7 @@ void main_eliminar_ocurrencias()
 {
     Pila pila = p_crear();
     int cant, valor;
-    printf(ANSI_bBLUE "Ingrese cantidad de elementos a cargar [0-99]: " ANSI_RESET);
-    int validador = scanf("%d", &cant);
-    vaciar_buffer();
-    while (validador != 1 || cant < 0 || cant >= 100)
-    {
-        limpiar_pantalla();
-        printf(ANSI_RED "\t\t-------- ERROR -------- \n");
-        printf("DATO INVALIDO, por favor ingresar un numero entre [0-99]\n\n" ANSI_RESET);
-        pausa();
-        limpiar_pantalla();
-        printf(ANSI_bBLUE "Ingrese cantidad de elementos a cargar: " ANSI_RESET);
-        validador = scanf("%d", &cant);
-        vaciar_buffer();
-    }
-
-    for (int i = 0; i < cant; i++)
-    {
-        printf(ANSI_bBLUE "Ingrese clave del elemento a cargar [-999.999 - 999.999]: " ANSI_RESET);
-        validador = scanf("%d", &valor);
-        vaciar_buffer();
-        while (validador != 1 || valor < -999999 || valor > 999999)
-        {
-            limpiar_pantalla();
-            printf(ANSI_RED "\t\t-------- ERROR -------- \n");
-            printf("DATO FUERA DE RANGO, por favor ingresar un numero entre [-999.999 - 999.999]\n\n" ANSI_RESET);
-            pausa();
-            limpiar_pantalla();
-            printf(ANSI_bBLUE "Ingrese clave del elemento a cargar [-999.999 - 999.999]: " ANSI_RESET);
-            validador = scanf("%d", &valor);
-            vaciar_buffer();
-        }
-        TipoElemento elemento = te_crear(valor);
-        p_apilar(pila, elemento);
-        limpiar_pantalla();
-    }
+    pila = cargar_pila(&cant);
 
     if (p_es_vacia(pila))
     {
@@ -583,7 +434,7 @@ void main_eliminar_ocurrencias()
     }
 
     printf(ANSI_bBLUE "Ingrese clave del elemento para ELIMINAR todas las ocurrencias en la pila [-999.999 - 999.999]: " ANSI_RESET);
-    validador = scanf("%d", &valor);
+    int validador = scanf("%d", &valor);
     vaciar_buffer();
     while (validador != 1 || valor < -999999 || valor > 999999)
     {
@@ -623,7 +474,8 @@ void main_eliminar_ocurrencias()
     if (opc == 1)
     {
         pilaEliminada = eliminar_ocurrencias(pila, elemento);
-        invertir_pila(pilaEliminada);
+        pilaEliminada = invertir_pila(pilaEliminada);
+        
     }
     else
     {
@@ -646,78 +498,9 @@ void main_elemento_en_comun()
 {
     Pila pila = p_crear();
     Pila pila2 = p_crear();
-    int cant, valor;
-    printf(ANSI_bBLUE "Ingrese cantidad de elementos a cargar en la 1ra Pila [0-99]: " ANSI_RESET);
-    int validador = scanf("%d", &cant);
-    vaciar_buffer();
-    while (validador != 1 || cant < 0 || cant >= 100)
-    {
-        limpiar_pantalla();
-        printf(ANSI_RED "\t\t-------- ERROR -------- \n");
-        printf("DATO INVALIDO, por favor ingresar un numero entre [0-99]\n\n" ANSI_RESET);
-        pausa();
-        limpiar_pantalla();
-        printf(ANSI_bBLUE "Ingrese cantidad de elementos a cargar: " ANSI_RESET);
-        validador = scanf("%d", &cant);
-        vaciar_buffer();
-    }
-
-    for (int i = 0; i < cant; i++)
-    {
-        printf(ANSI_bBLUE "Ingrese clave del elemento a cargar [-999.999 - 999.999]: " ANSI_RESET);
-        validador = scanf("%d", &valor);
-        vaciar_buffer();
-        while (validador != 1 || valor < -999999 || valor > 999999)
-        {
-            limpiar_pantalla();
-            printf(ANSI_RED "\t\t-------- ERROR -------- \n");
-            printf("DATO FUERA DE RANGO, por favor ingresar un numero entre [-999.999 - 999.999]\n\n" ANSI_RESET);
-            pausa();
-            limpiar_pantalla();
-            printf(ANSI_bBLUE "Ingrese clave del elemento va cargar [-999.999 - 999.999]: " ANSI_RESET);
-            validador = scanf("%d", &valor);
-            vaciar_buffer();
-        }
-        TipoElemento elemento = te_crear(valor);
-        p_apilar(pila, elemento);
-        limpiar_pantalla();
-    }
-
-    printf(ANSI_bBLUE "Ingrese cantidad de elementos a cargar en la 2da Pila [0-99]: " ANSI_RESET);
-    validador = scanf("%d", &cant);
-    vaciar_buffer();
-    while (validador != 1 || cant < 0 || cant >= 100)
-    {
-        limpiar_pantalla();
-        printf(ANSI_RED "\t\t-------- ERROR -------- \n");
-        printf("DATO INVALIDO, por favor ingresar un numero entre [0-99]\n\n" ANSI_RESET);
-        pausa();
-        limpiar_pantalla();
-        printf(ANSI_bBLUE "Ingrese cantidad de elementos a cargar: " ANSI_RESET);
-        validador = scanf("%d", &cant);
-        vaciar_buffer();
-    }
-
-    for (int i = 0; i < cant; i++)
-    {
-        printf(ANSI_bBLUE "Ingrese clave del elemento a cargar [-999.999 - 999.999]: " ANSI_RESET);
-        validador = scanf("%d", &valor);
-        vaciar_buffer();
-        while (validador != 1 || valor < -999999 || valor > 999999)
-        {
-            limpiar_pantalla();
-            printf(ANSI_RED "\t\t-------- ERROR -------- \n");
-            printf("DATO FUERA DE RANGO, por favor ingresar un numero entre [-999.999 - 999.999]\n\n" ANSI_RESET);
-            pausa();
-            limpiar_pantalla();
-            printf(ANSI_bBLUE "Ingrese clave del elemento a cargar [-999.999 - 999.999]: " ANSI_RESET);
-            validador = scanf("%d", &valor);
-            vaciar_buffer();
-        }
-        TipoElemento elemento = te_crear(valor);
-        p_apilar(pila2, elemento);
-        limpiar_pantalla();
-    }
+    int cant;
+    pila = cargar_pila(&cant);
+    pila2 = cargar_pila(&cant);
 
     printf(ANSI_bYELLOW "Pila 1 y 2 ANTES de llamar a la función de comparar\n");
     printf(ANSI_bGREEN "");
@@ -773,41 +556,8 @@ void mostrar_valores(Pila p1)
 void main_contador_valores()
 {
     Pila pila = p_crear();
-    int cant, valor;
-    printf(ANSI_bBLUE "Ingrese cantidad de elementos a cargar en la Pila [0-99]: " ANSI_YELLOW);
-    int validador = scanf("%d", &cant);
-    vaciar_buffer();
-    while (validador != 1 || cant < 0 || cant >= 100)
-    {
-        limpiar_pantalla();
-        printf(ANSI_RED "\t\t-------- ERROR -------- \n");
-        printf("DATO INVALIDO, por favor ingresar un numero entre [0-99]\n\n" ANSI_YELLOW);
-        pausa();
-        limpiar_pantalla();
-        printf(ANSI_bBLUE "Ingrese cantidad de elementos a cargar: " ANSI_YELLOW);
-        validador = scanf("%d", &cant);
-        vaciar_buffer();
-    }
-
-    for (int i = 0; i < cant; i++)
-    {
-        printf(ANSI_bBLUE "Ingrese clave del elemento a cargar [-999.999 - 999.999]: " ANSI_YELLOW);
-        validador = scanf("%d", &valor);
-        vaciar_buffer();
-        while (validador != 1 || valor < -999999 || valor > 999999)
-        {
-            limpiar_pantalla();
-            printf(ANSI_RED "\t\t-------- ERROR -------- \n");
-            printf("DATO FUERA DE RANGO, por favor ingresar un numero entre [-999.999 - 999.999]\n\n" ANSI_YELLOW);
-            pausa();
-            limpiar_pantalla();
-            printf(ANSI_bBLUE "ingrese clave del elemento a cargar [-999.999 - 999.999]: " ANSI_YELLOW);
-            validador = scanf("%d", &valor);
-            vaciar_buffer();
-        }
-        TipoElemento elemento = te_crear(valor);
-        p_apilar(pila, elemento);
-    }
+    int cant;
+    pila = cargar_pila(&cant);
 
     printf(ANSI_bGREEN "");
     p_mostrar(pila);
