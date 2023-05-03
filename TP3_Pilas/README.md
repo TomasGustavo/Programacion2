@@ -21,35 +21,35 @@ Dependiendo de la implementación que se desee ejecutar, es imprescindible utili
 
 > `Punto 3`
 
-> La complejidad de la solución empleada es O(n^2) porque se utilizan 2 while, uno para desapilar y otro para volver a apilar la pila original como estaba y los 2 while dependen de la cantidad de elementos dentro de la pila.
+> La complejidad de la solución empleada es O(n) porque hay varios ciclos que dependen de la cantidad de elementos de la pila, pero no se encuentran anidados.
 
 ---
 
 > `Punto 4`
 
-> La complejidad de la solución empleada es O(log(N)) .Como el número de llamadas recursivas será igual a la cantidad de veces que se puede dividir el número original entre la base hasta que el resultado sea menor que la base, el número de llamadas recursivas es proporcional a log(N) en la base dada.
+> La complejidad de la solución empleada es O(n), ya que se utiliza la pila para almacenar el resultado de la conversion, sin haber ciclos anidados que aumenten la complejidad del ejercicio.
 
 ---
 
 > `Punto 5`
 
-> La complejidad de la solución empleada es O(n^2) porque se utilizan 2 while, uno para desapilar y otro para volver a apilar la pila original como estaba y los 2 while dependen de la cantidad de elementos dentro de la pila.
+> La complejidad de la solución empleada es O(n) porque hay varios ciclos que dependen de la cantidad de elementos de la pila, pero no se encuentran anidados.
 
 ---
 
 > `Punto 6`
 
-> La complejidad de la solución empleada en manera recursiva es O(n), ya que si o si va sacar todos los elementos de la pila para luego comparlos y volver a agregarlos. 
-> En la implementacion iterativa es O(n^2) porque los 2 while utilizados para desapilar y apilar la pila van a depender de la cantidad de elementos que esta contenga.
+> La complejidad de la solución empleada en manera recursiva es O(n), ya que si o si va sacar todos los elementos de la pila para luego compararlos y volver a agregarlos. 
+> En la implementación iterativa es O(n), ya que si o si va sacar todos los elementos de la pila para luego compararlos y volver a agregarlos. 
 
 ---
 
 > `Punto 7`
 
-> La complejidad de la solución empleada es O(n^k) porque se utilizan varios while que dependen de la cantidad de elementos que posea la pila en momentos especificos del codigo mientras se ejecuta.
+> La complejidad de la solución empleada es O(n^2) porque se utilizan dos ciclos anidados para recorrer ambas pilas, lo que en el peor de los casos, la longitud de ambas seria igual.
 
 ---
 
 > `Punto 8`
 
-> La complejidad de la solución empleada es O(n^k) porque se utilizan varios while que dependen de la cantidad de elementos que posea la pila en momentos especificos del codigo mientras se ejecuta.
+> La complejidad de la solución empleada es O(n^2) porque a pesar que hay varios ciclos que dependen de la cantidad de elementos que posea la pila, solo hay un nivel de anidación, lo que volvería critico en el peor de los casos, siendo complejidad cuadrática.
