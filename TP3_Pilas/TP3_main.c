@@ -117,7 +117,6 @@ void main_buscar_clave()
         validador = scanf("%d", &clave);
         vaciar_buffer();
     }
-
     rta = buscar_c(pila, clave);
     if (rta == true)
     {
@@ -128,11 +127,9 @@ void main_buscar_clave()
     {
         printf(ANSI_RED "La clave no fue encontrada en la pila\n" ANSI_RESET);
     }
-
     printf(ANSI_bGREEN "");
     p_mostrar(pila); // la vuelvo a mostrar para que se vea que no se modifico durante la llamada a la función de búsqueda
     printf("\n" ANSI_RESET);
-
     pausa();
     limpiar_pantalla();
 }
@@ -146,7 +143,6 @@ void main_insertar_en_pila()
     printf(ANSI_bGREEN);
     p_mostrar(pila); // muestro la pila como quedo cargada
     printf("\n" ANSI_RESET);
-
     printf(ANSI_bBLUE "Ingrese clave del elemento a insertar en la pila: " ANSI_RESET);
     int validador = scanf("%d", &clave);
     vaciar_buffer();
@@ -159,9 +155,7 @@ void main_insertar_en_pila()
         validador = scanf("%d", &clave);
         vaciar_buffer();
     }
-
     TipoElemento elemento = te_crear(clave);
-
     printf(ANSI_bBLUE "Ingrese posición donde se insertara en la pila: " ANSI_RESET);
     validador = scanf("%d", &posi);
     vaciar_buffer();
@@ -174,27 +168,21 @@ void main_insertar_en_pila()
         validador = scanf("%d", &posi);
         vaciar_buffer();
     }
-
     TipoElemento tope = p_tope(pila);
-
     if (p_es_vacia(pila))
     {
-
         printf(ANSI_bBLUE "La pila esta vacía, así que simplemente se agregó el elemento a la pila\n\n" ANSI_RESET);
         p_apilar(pila, elemento);
     }
-
     else if (posi > tope->clave)
     {
         printf(ANSI_bBLUE "La posición pasada es mayor a la cantidad de posiciones en la pila, así que se agrego el elemento al final de la misma\n\n" ANSI_RESET);
         p_apilar(pila, elemento);
     }
-
     else
     {
         pila = insertar(pila, elemento, posi);
     }
-
     printf(ANSI_bGREEN "");
     p_mostrar(pila); // muestro la pila como quedo después de llamar a la función
     printf("\n" ANSI_RESET);
@@ -209,7 +197,6 @@ void main_eliminar_por_clave()
     printf(ANSI_bGREEN "");
     p_mostrar(pila); // muestro la pila como quedo cargada
     printf("\n" ANSI_RESET);
-
     printf(ANSI_bBLUE "Ingrese clave a eliminar en la pila: " ANSI_RESET);
     int validador = scanf("%d", &clave);
     vaciar_buffer();
@@ -243,13 +230,10 @@ void main_intercambiar()
 {
     Pila pila = p_crear();
     int cant, pos1, pos2;
-
     pila = cargar_pila(&cant);
-
     printf(ANSI_bGREEN "");
     p_mostrar(pila); // muestro la pila como quedo cargada
     printf("\n" ANSI_RESET);
-
     printf(ANSI_bBLUE "Ingrese la primera posición a intercambiar: " ANSI_RESET);
     int validador = scanf("%d", &pos1);
     vaciar_buffer();
@@ -262,7 +246,6 @@ void main_intercambiar()
         validador = scanf("%d", &pos1);
         vaciar_buffer();
     }
-
     printf(ANSI_bBLUE "Ingrese la segunda posición a intercambiar: " ANSI_RESET);
     validador = scanf("%d", &pos2);
     vaciar_buffer();
@@ -275,7 +258,6 @@ void main_intercambiar()
         validador = scanf("%d", &pos2);
         vaciar_buffer();
     }
-
     pila = intercambiarPos(pila, pos1, pos2);
     p_mostrar(pila);
     free(pila);
@@ -289,32 +271,24 @@ void main_duplicar_pila()
     Pila pila_duplicada = p_crear();
     int cant;
     pila = cargar_pila(&cant);
-
     if (cant == 0)
     {
         printf(ANSI_RED "Pila vacía, su forma duplicada sera doblemente vacía" ANSI_RESET);
         return;
     }
-
     printf(ANSI_bYELLOW "Pila ANTES de llamar a la función\n\n" ANSI_RESET);
     printf(ANSI_bGREEN "");
     p_mostrar(pila); // muestro la pila como quedo cargada
     printf("\n" ANSI_RESET);
-
     pila_duplicada = duplicar_pila(pila);
-
     printf(ANSI_bYELLOW "Pila DUPLICADA\n\n" ANSI_RESET);
     printf(ANSI_bGREEN "");
     p_mostrar(pila_duplicada); // muestro la pila duplicada
     printf("\n" ANSI_RESET);
-
-
-
-    printf(ANSI_bYELLOW "Pila Original DESPUES de llamar a la funcion\n\n" ANSI_RESET);
+    printf(ANSI_bYELLOW "Pila Original DESPUES de llamar a la función\n\n" ANSI_RESET);
     printf(ANSI_bGREEN "");
     p_mostrar(pila); // muestro la pila como quedo después de llamar a la función
     printf("\n" ANSI_RESET);
-
     return;
 }
 
@@ -337,21 +311,20 @@ void main_compara_pilas()
     Pila pila2 = p_crear();
     int cant;
     bool rta;
+    printf(ANSI_bGREEN "PILA N°1\n");
     pila = cargar_pila(&cant);
+    printf(ANSI_bGREEN "PILA N°2\n");
     pila2 = cargar_pila(&cant);
-
     if (longitud_pila(pila) != longitud_pila(pila2))
     {
         printf("Las pilas tiene distintos tamaños entre si, por ende no son iguales\n");
         return;
     }
-
     printf(ANSI_bGREEN "");
     p_mostrar(pila);
     printf("\n"); // muestro como quedaron cargadas las pilas
     p_mostrar(pila2);
     printf("\n" ANSI_RESET);
-
     rta = compara_pilas(pila, pila2);
     if (rta == true)
     {
@@ -407,12 +380,10 @@ void main_invertida()
     Pila pila = p_crear();
     Pila pila_invertida = p_crear();
     pila = cargar_pila(&cantidad);
-
     printf(ANSI_bGREEN "pila cargada: \n");
     p_mostrar(pila);
     printf("" ANSI_RESET);
     pila_invertida = invertir_pila(pila);
-
     printf(ANSI_bGREEN "pila original: \n");
     p_mostrar(pila);
     printf(ANSI_bGREEN "pila invertida: \n");
@@ -426,13 +397,11 @@ void main_eliminar_ocurrencias()
     Pila pila = p_crear();
     int cant, valor;
     pila = cargar_pila(&cant);
-
     if (p_es_vacia(pila))
     {
         printf(ANSI_RED "Pila vacía" ANSI_RESET);
         return;
     }
-
     printf(ANSI_bBLUE "Ingrese clave del elemento para ELIMINAR todas las ocurrencias en la pila [-999.999 - 999.999]: " ANSI_RESET);
     int validador = scanf("%d", &valor);
     vaciar_buffer();
@@ -448,7 +417,6 @@ void main_eliminar_ocurrencias()
         vaciar_buffer();
     }
     TipoElemento elemento = te_crear(valor);
-
     printf(ANSI_bBLUE "Elija de que manera se llamara a la función\n\n1- Iterativamente\n2- Recursivamente\nIngresar opción: " ANSI_RESET);
     int opc;
     validador = scanf("%d", &opc);
@@ -464,24 +432,20 @@ void main_eliminar_ocurrencias()
         validador = scanf("%d", &opc);
         vaciar_buffer();
     }
-
     printf(ANSI_bYELLOW "Pila ANTES de llamar a la función\n\n" ANSI_RESET);
     printf(ANSI_bGREEN "");
     p_mostrar(pila); // muestro la pila como quedo cargada
     printf("\n" ANSI_RESET);
-
     Pila pilaEliminada = p_crear();
     if (opc == 1)
     {
         pilaEliminada = eliminar_ocurrencias(pila, elemento);
         pilaEliminada = invertir_pila(pilaEliminada);
-        
     }
     else
     {
         pilaEliminada = eliminar_ocurrencias_recursivo(pila, elemento);
     }
-
     printf(ANSI_bYELLOW "Pila DESPUES de llamar a la función\n\n" ANSI_RESET);
     printf(ANSI_bGREEN "");
     p_mostrar(pila); // muestro la pila como quedo cargada
@@ -499,38 +463,34 @@ void main_elemento_en_comun()
     Pila pila = p_crear();
     Pila pila2 = p_crear();
     int cant;
+    printf(ANSI_bGREEN "PILA N°1\n");
     pila = cargar_pila(&cant);
+    printf(ANSI_bGREEN "PILA N°2\n");
     pila2 = cargar_pila(&cant);
-
     printf(ANSI_bYELLOW "Pila 1 y 2 ANTES de llamar a la función de comparar\n");
     printf(ANSI_bGREEN "");
     p_mostrar(pila);
     printf("\n"); // muestro como quedaron cargadas las pilas
     p_mostrar(pila2);
     printf("\n" ANSI_RESET);
-
     if (p_es_vacia(pila) || p_es_vacia(pila2))
     {
         printf(ANSI_RED "Una de las pilas esta vacía, por ende no van a tener elementos en común" ANSI_RESET);
     }
-
     else
     {
         Pila pcomun = p_crear();
         pcomun = elemento_en_comun(pila, pila2);
-
         if (p_es_vacia(pcomun))
         {
             printf(ANSI_RED "Ninguno de los elementos de las pilas coincidieron\n");
         }
-
         else
         {
             printf(ANSI_YELLOW "Pila con elementos en común\n");
             p_mostrar(pcomun);
             printf("\n\n" ANSI_RESET);
         }
-
         printf(ANSI_bYELLOW "Pila 1 y 2 DESPUES de llamar a la función de comparar\n");
         printf(ANSI_bGREEN "");
         p_mostrar(pila);
@@ -558,7 +518,6 @@ void main_contador_valores()
     Pila pila = p_crear();
     int cant;
     pila = cargar_pila(&cant);
-
     printf(ANSI_bGREEN "");
     p_mostrar(pila);
     printf("\n");
