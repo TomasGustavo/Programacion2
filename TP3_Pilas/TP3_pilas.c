@@ -9,16 +9,12 @@
 #include "pilas.h"
 #include "tipo_elemento.h"
 
+// función recursiva que convierte un entero a la base indica
 void IntToBase(Pila pila, int numero, int base)
 {
     TipoElemento x;
     int resto;
-// ----
-    if (numero < 0) {
-        numero = 256 + numero;
-    }
-// ----
-    if (numero < base)
+    if (numero < base) // caso base
     {
         x = te_crear(numero);
         p_apilar(pila, x);
@@ -33,17 +29,12 @@ void IntToBase(Pila pila, int numero, int base)
     }
 }
 
-char *conversor(int numero, int base)
+// muestra el numero convertido que se encuentra almacenado en la pila
+char *mostrarhex(Pila pila)
 {
     char *resultado = (char *)calloc(256, sizeof(char));
-    Pila pila = p_crear();
-    TipoElemento X = te_crear(0);
- if (numero < 0) {
-        numero = 256 + numero;
-    }
-IntToBase(pila, numero, base);
+    TipoElemento X;
     int indice = 0; // Índice de la posición actual en el buffer de resultados (string)
-    // Recorro la pila desopilándola y pasándola al auxiliar
     while (p_es_vacia(pila) != true)
     {
         X = p_desapilar(pila);
@@ -60,16 +51,17 @@ IntToBase(pila, numero, base);
     return resultado;
 }
 
-/*char *conversor(int numero, int base)
+// función principal de conversor de numero
+char *conversor(int numero, int base)
 {
     Pila pila = p_crear();
-    if (numero < 0)
+    if (numero < 0) // verifica si el numero es negativo
     {
-        numero = numero * -1;
+        numero = numero * -1; // convierte el numero a positivo
         IntToBase(pila, numero, base);
         char *resultado = (char *)calloc(256, sizeof(char));
-        *(resultado + 0) = 45;
-        strcat(resultado + 1, mostrarhex(pila));
+        *(resultado + 0) = 45;                   // almaceno en la primer posición un "-"
+        strcat(resultado + 1, mostrarhex(pila)); // copio en la 2da posición del string, el resultado de la conversion
         return resultado;
     }
     else
@@ -77,7 +69,7 @@ IntToBase(pila, numero, base);
         IntToBase(pila, numero, base);
         return mostrarhex(pila);
     }
-} */
+}
 
 // PUNTO 2A
 bool buscar_c(Pila p, int x)
