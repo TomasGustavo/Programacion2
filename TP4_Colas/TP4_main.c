@@ -8,13 +8,14 @@
 #include "colas.h"
 #include "tipo_elemento.h"
 
-void main_buscarElemento(){
+void main_buscarElemento()
+{
     Cola c;
     int clave, validador;
     bool rta;
     printf(ANSI_bMAGENTA "Cargar la lista: \n");
-    c = cargarCola(); 
-    
+    c = cargarCola();
+
     printf(ANSI_bMAGENTA "Ingrese el elemento a buscar [-999.999 - 999.999]: \n" ANSI_RESET);
     validador = scanf("%d", &clave);
     vaciar_buffer();
@@ -28,13 +29,13 @@ void main_buscarElemento(){
         vaciar_buffer();
     }
 
-    rta = buscar(c,clave);
+    rta = buscar(c, clave);
 
     if (rta == true)
-        printf(ANSI_bGREEN "Se encontro el elemento %i en la cola\n",clave);
+        printf(ANSI_bGREEN "Se encontró el elemento %i en la cola\n", clave);
     else
     {
-        printf(ANSI_RED "No se encontro el elemento en la cola\n");
+        printf(ANSI_RED "No se encontró el elemento en la cola\n");
     }
 }
 
@@ -121,23 +122,23 @@ int main()
                     getch();
                     break;
                 case 2:
-                    
+
                     getch();
                     break;
                 case 3:
-                   
+
                     getch();
                     break;
                 case 4:
-                   
+
                     getch();
                     break;
                 case 5:
-                   
+
                     getch();
                     break;
                 case 6:
-                    
+
                     getch();
                     break;
                 case 0:
@@ -147,27 +148,27 @@ int main()
             break;
             menu_principal();
         case 3:
-            
+
             getch();
             break;
         case 4:
-            
+
             getch();
             break;
         case 5:
-            
+
             getch();
             break;
         case 6:
-            
+
             getch();
             break;
         case 7:
-            
+
             getch();
             break;
         case 8:
-            
+
             getch();
             break;
         case 0:
