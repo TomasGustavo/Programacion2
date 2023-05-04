@@ -52,10 +52,28 @@ bool p_es_vacia(Pila pila)
     return pila->tope == NULL;
 }
 
+int longitud(Pila pila)
+{
+    int n = 0;
+    TipoElemento X = te_crear(0);
+    Pila paux = p_crear();
+    while (!p_es_vacia(pila))
+    {
+        X = p_desapilar(pila);
+        p_apilar(paux, X);
+        n++;
+    }
+    // Recorro la pila auxiliar para pasarla a la original (o bien construyo la utilidad intercambiar)
+    while (!p_es_vacia(paux))
+    {
+        X = p_desapilar(paux);
+        p_apilar(pila, X);
+    }
+    return n;
+}
 bool p_es_llena(Pila pila)
 {
-     return true;
-     //return (longitud(pila) == TAMANIO_MAXIMO);
+    return (longitud(pila) == TAMANIO_MAXIMO);
 }
 
 void p_mostrar(Pila pila)
