@@ -20,13 +20,11 @@
 #define ANSI_bWHITE "\e[97m"
 #define ANSI_RESET "\e[0m"
 
-Pila conversor(int numero, int base);
+char *conversor(int numero, int base);
 
-void mostrarhex(Pila pila);
+bool buscar_c(Pila p, int x);
 
-bool buscar_c (Pila p, int x);
-
-Pila insertar(Pila p,TipoElemento elem, int posi);
+Pila insertar(Pila p, TipoElemento elem, int posi);
 
 Pila eliminar_por_clave(Pila pila, int clave, bool *estado);
 

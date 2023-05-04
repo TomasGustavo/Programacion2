@@ -349,7 +349,7 @@ void main_conversor()
     int numero, validador, base;
     printf(ANSI_BLUE "Ingrese un numero: " ANSI_YELLOW);
     validador = scanf("%i", &numero);
-    while ((validador != 1) || (numero < 0) || (numero > 9999999))
+    while ((validador != 1) || (numero < -9999999) || (numero > 9999999))
     {
         printf(ANSI_RED "Entrada invalida!\n" ANSI_RESET);
         printf(ANSI_BLUE "Ingrese un numero: " ANSI_YELLOW);
@@ -367,9 +367,7 @@ void main_conversor()
             ;
         validador = scanf("%i", &base);
     }
-    printf(ANSI_BLUE "%d en base %d es: " ANSI_GREEN, numero, base);
-    Pila pila = conversor(numero, base);
-    mostrarhex(pila);
+    printf(ANSI_BLUE "%d en base %d es: " ANSI_GREEN "%s", numero, base, conversor(numero, base));
     printf(ANSI_BLUE);
 }
 

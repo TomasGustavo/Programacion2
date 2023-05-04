@@ -13,6 +13,11 @@ void IntToBase(Pila pila, int numero, int base)
 {
     TipoElemento x;
     int resto;
+// ----
+    if (numero < 0) {
+        numero = 256 + numero;
+    }
+// ----
     if (numero < base)
     {
         x = te_crear(numero);
@@ -28,31 +33,52 @@ void IntToBase(Pila pila, int numero, int base)
     }
 }
 
-Pila conversor(int numero, int base)
+char *conversor(int numero, int base)
 {
+    char *resultado = (char *)calloc(256, sizeof(char));
     Pila pila = p_crear();
-    IntToBase(pila, numero, base);
-    return pila;
-}
-
-void mostrarhex(Pila pila)
-{
-    Pila Paux = p_crear();
     TipoElemento X = te_crear(0);
+ if (numero < 0) {
+        numero = 256 + numero;
+    }
+IntToBase(pila, numero, base);
+    int indice = 0; // Índice de la posición actual en el buffer de resultados (string)
     // Recorro la pila desopilándola y pasándola al auxiliar
     while (p_es_vacia(pila) != true)
     {
         X = p_desapilar(pila);
-        printf("%x", X->clave);
-        p_apilar(Paux, X);
+        if (X->clave <= 9)
+        {
+            *(resultado + indice) = 48 + X->clave;
+        }
+        else
+        {
+            *(resultado + indice) = 55 + X->clave; // Convierte los n° entre 10 y 15 a letra
+        }
+        indice++;
     }
-    // Recorro la pila auxiliar para pasarla a la original (o bien construyo la utilidad intercambiar)
-    while (p_es_vacia(Paux) != true)
-    {
-        X = p_desapilar(Paux);
-        p_apilar(pila, X);
-    }
+    return resultado;
 }
+
+/*char *conversor(int numero, int base)
+{
+    Pila pila = p_crear();
+    if (numero < 0)
+    {
+        numero = numero * -1;
+        IntToBase(pila, numero, base);
+        char *resultado = (char *)calloc(256, sizeof(char));
+        *(resultado + 0) = 45;
+        strcat(resultado + 1, mostrarhex(pila));
+        return resultado;
+    }
+    else
+    {
+        IntToBase(pila, numero, base);
+        return mostrarhex(pila);
+    }
+} */
+
 // PUNTO 2A
 bool buscar_c(Pila p, int x)
 {

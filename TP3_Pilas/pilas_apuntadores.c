@@ -4,6 +4,8 @@
 #include <stdio.h>
 #include <stdbool.h>
 
+static const int TAMANIO_MAXIMO = 100;
+
 struct Nodo
 {
     TipoElemento datos; // Concepto del Nodo
@@ -48,6 +50,12 @@ TipoElemento p_tope(Pila pila)
 bool p_es_vacia(Pila pila)
 {
     return pila->tope == NULL;
+}
+
+bool p_es_llena(Pila pila)
+{
+     return true;
+     //return (longitud(pila) == TAMANIO_MAXIMO);
 }
 
 void p_mostrar(Pila pila)
