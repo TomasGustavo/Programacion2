@@ -9,7 +9,10 @@
 #include "pilas.h"
 #include "tipo_elemento.h"
 
-// función recursiva que convierte un entero a la base indica
+/// @brief Función recursiva que convierte un entero a una base entre 2 y 16
+/// @param pila Almacena el numero convertido
+/// @param numero Numero decimal a convertir
+/// @param base Numero decimal entre 2 y 16
 void IntToBase(Pila pila, int numero, int base)
 {
     TipoElemento x;
@@ -29,13 +32,15 @@ void IntToBase(Pila pila, int numero, int base)
     }
 }
 
-// muestra el numero convertido que se encuentra almacenado en la pila
+/// @brief Muestra como un string el numero convertido que se encuentra almacenado en la pila
+/// @param pila Contiene el numero convertido
+/// @return String del numero convertido a una base entre 2 y 16
 char *mostrarhex(Pila pila)
 {
     char *resultado = (char *)calloc(256, sizeof(char));
     TipoElemento X;
-    int indice = 0; // Índice de la posición actual en el buffer de resultados (string)
-    while (p_es_vacia(pila) != true)
+    int indice = 0; // Índice de la posición actual del buffer resultado (string)
+    while (!p_es_vacia(pila))
     {
         X = p_desapilar(pila);
         if (X->clave <= 9)
@@ -51,11 +56,14 @@ char *mostrarhex(Pila pila)
     return resultado;
 }
 
-// función principal de conversor de numero
+/// @brief Función principal del conversor de numero a una base entre 2 y 16. El numero puede ser positivo o negativo
+/// @param numero Numero decimal a convertir (admite negativos)
+/// @param base Numero decimal entre 2 y 16
+/// @return String del numero positivo o negativo convertivo a su correspondiente bace
 char *conversor(int numero, int base)
 {
     Pila pila = p_crear();
-    if (numero < 0) // verifica si el numero es negativo
+    if (numero < 0) // verifica si el numero es negativor
     {
         numero = numero * -1; // convierte el numero a positivo
         IntToBase(pila, numero, base);
@@ -108,10 +116,10 @@ Pila insertar(Pila p, TipoElemento elem, int posi)
     Pila Paux = p_crear();
     int contador = 0;
     bool bandera = false;
-    int largoP = contar(p);
+    // int largoP = contar(p);
     // cuenta que resta el tamaño de elementos de la pila - (posición pasada -1)
     // para saber la cantidad de elementos que tengo que sacar para insertar el nuevo elemento
-    int posicionOrdinal = largoP - (posi - 1);
+    // int posicionOrdinal = largoP - (posi - 1);
 
     // recorro mientras p no este vacía y la bandera sea falsa, apilo en pila auxiliar los elementos que saco
     // y sumo la cantidad de vueltas que da hasta que coincide con la posición a insertar y pongo la bandera en true para que salga del while
@@ -120,7 +128,7 @@ Pila insertar(Pila p, TipoElemento elem, int posi)
         x = p_desapilar(p);
         p_apilar(Paux, x);
         contador++;
-        if (contador == posicionOrdinal)
+        if (contador == posi - 1)
         {
             bandera = true;
         }
@@ -296,7 +304,7 @@ int contar(Pila pila)
 {
     Pila paux = p_crear();
     TipoElemento X = te_crear(0);
-    int contador_elementos;
+    int contador_elementos = 0;
     while (p_es_vacia(pila) != true)
     {
         X = p_desapilar(pila);
@@ -350,7 +358,6 @@ Pila eliminar_ocurrencias(Pila pila, TipoElemento elemento)
             p_apilar(nueva_p, x);
         }
     }
-
     // vuelvo a apilar la pila como estaba originalmente.
     while (!p_es_vacia(Paux))
     {
@@ -358,7 +365,7 @@ Pila eliminar_ocurrencias(Pila pila, TipoElemento elemento)
         p_apilar(pila, x);
     }
     // retorno la pila con los elementos eliminados.
-    return nueva_p;
+    return invertir_pila(nueva_p);
 }
 
 // PUNTO 6 recursivo

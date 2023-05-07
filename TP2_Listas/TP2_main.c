@@ -376,7 +376,7 @@ int main()
     while (!salir)
     {
         menu_principal();
-        scanf("%i", &opcion);
+        scanf("%d", &opcion);
         while (opcion < 0 || opcion > 6 || opcion == 1)
         {
             printf(ANSI_RED "Opción incorrecta\n" ANSI_RESET);

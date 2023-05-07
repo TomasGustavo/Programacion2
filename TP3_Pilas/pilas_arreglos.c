@@ -63,7 +63,7 @@ void p_mostrar(Pila pila)
 {
     if (p_es_vacia(pila))
     {
-        printf("PILA VACIA \n");
+        printf("La pila esta vacia\n");
         return;
     }
     Pila paux = p_crear();

@@ -78,6 +78,11 @@ bool p_es_llena(Pila pila)
 
 void p_mostrar(Pila pila)
 {
+    if (p_es_vacia(pila))
+    {
+        printf("La pila esta vacia\n");
+        return;
+    }
     Pila Paux = p_crear();
     TipoElemento X = te_crear(0);
     printf("Contenido de la pila: ");

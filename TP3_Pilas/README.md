@@ -39,8 +39,7 @@ Dependiendo de la implementación que se desee ejecutar, es imprescindible utili
 
 > `Punto 6`
 
-> La complejidad de la solución empleada en manera recursiva es O(n), ya que si o si va sacar todos los elementos de la pila para luego compararlos y volver a agregarlos. 
-> En la implementación iterativa es O(n), ya que si o si va sacar todos los elementos de la pila para luego compararlos y volver a agregarlos. 
+> La complejidad de la solución empleada tanto de manera recursiva como iterativa es O(n), ya que si o si en ambas implementaciones, va sacar todos los elementos de la pila para luego compararlos y volver a agregarlos. 
 
 ---
 
@@ -52,4 +51,4 @@ Dependiendo de la implementación que se desee ejecutar, es imprescindible utili
 
 > `Punto 8`
 
-> La complejidad de la solución empleada es O(n^2) porque a pesar que hay varios ciclos que dependen de la cantidad de elementos que posea la pila, solo hay un nivel de anidación, lo que volvería critico en el peor de los casos, siendo complejidad cuadrática.
+> La complejidad de la solución empleada es O(n^2) porque a pesar que hay varios ciclos que dependen de la cantidad de elementos que posea la pila, solo hay un nivel de anidación, lo que se volvería critico en el peor de los casos, siendo complejidad cuadrática.
