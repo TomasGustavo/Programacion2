@@ -28,7 +28,7 @@ void limpiar_pantalla()
     return;
 }
 
-void intercambiar(Cola c, Cola aux)
+void intercambiar2(Cola c, Cola aux)
 {
     TipoElemento x = te_crear(0);
     while (!c_es_vacia(aux))
@@ -36,6 +36,18 @@ void intercambiar(Cola c, Cola aux)
         x = c_desencolar(aux);
         c_encolar(c, x);
     }
+}
+
+Cola intercambiar(Cola caux)
+{
+    Cola cresult = c_crear();
+    TipoElemento x = te_crear(0);
+    while (!c_es_vacia(caux))
+    {
+        x = c_desencolar(caux);
+        c_encolar(cresult, x);
+    }
+    return cresult;
 }
 
 // Función genérica para cargar una cola de enteros
@@ -98,7 +110,9 @@ bool buscar(Cola c, int clave)
         }
         c_encolar(caux, x);
     }
-    intercambiar(c, caux);
+    intercambiar2(c, caux);
+    //*c = intercambiar(caux);
+    c_mostrar(c);
     return res;
 }
 
@@ -113,7 +127,8 @@ int Longitud(Cola c)
         cont++;
         c_encolar(aux, x);
     }
-    intercambiar(c, aux);
+    //intercambiar(c, aux);
+    c = intercambiar(aux);
     return cont;
 }
 
@@ -137,7 +152,8 @@ bool buscarPos(Cola c, TipoElemento x, int pos)
         }
         c_encolar(aux, x1);
     }
-    intercambiar(c, aux);
+    //intercambiar(c, aux);
+    c = intercambiar(aux);
     return bandera;
 }
 
@@ -163,7 +179,8 @@ bool Comparar(Cola c1, Cola c2)
             }
             c_encolar(caux, x1);
         }
-        intercambiar(c1, caux);
+        //intercambiar(c1, caux);
+        c1 = intercambiar(caux);
         return bandera;
     }
 }
@@ -194,6 +211,7 @@ Cola norepetidos(Cola c)
             c_encolar(caux, x);
         }
     }
-    intercambiar(c,caux);
+    //intercambiar(c,caux);
+    c = intercambiar(caux);
     return cresp;
 }

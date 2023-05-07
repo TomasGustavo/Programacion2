@@ -27,7 +27,9 @@ void pausa();
 
 void limpiar_pantalla();
 
-void intercambiar(Cola c, Cola aux);
+Cola intercambiar(Cola caux);
+
+//void intercambiar(Cola c, Cola aux);
 
 Cola cargarCola();
 
