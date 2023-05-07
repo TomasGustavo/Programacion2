@@ -113,11 +113,6 @@ int Longitud(Cola c)
         cont++;
         c_encolar(aux, x);
     }
-    /*while (!c_es_vacia(aux))
-    {
-        x = c_desencolar(aux);
-        c_encolar(c, x);
-    }*/
     intercambiar(c, aux);
     return cont;
 }
@@ -142,11 +137,6 @@ bool buscarPos(Cola c, TipoElemento x, int pos)
         }
         c_encolar(aux, x1);
     }
-    /* while (!c_es_vacia(aux))
-      {
-          x = c_desencolar(aux);
-          c_encolar(c, x);
-      }*/
     intercambiar(c, aux);
     return bandera;
 }
@@ -174,11 +164,36 @@ bool Comparar(Cola c1, Cola c2)
             c_encolar(caux, x1);
         }
         intercambiar(c1, caux);
-        /*while (!c_es_vacia(caux))
-         {
-             x1 = c_desencolar(caux);
-             c_encolar(c1, x1);
-         }*/
         return bandera;
     }
+}
+
+// Punto 4
+
+Cola norepetidos(Cola c)
+{
+    Cola caux = c_crear(), cresp = c_crear();
+    TipoElemento x = te_crear(0);
+    while (!c_es_vacia(c))
+    {
+        x = c_desencolar(c);
+        if (!buscar(c, x->clave))
+        {
+            if (buscar(caux, x->clave))
+            {
+                c_encolar(caux, x);
+            }
+            else
+            {
+                c_encolar(caux, x);
+                c_encolar(cresp, x);
+            }
+        }
+        else
+        {
+            c_encolar(caux, x);
+        }
+    }
+    intercambiar(c,caux);
+    return cresp;
 }
