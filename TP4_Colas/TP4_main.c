@@ -67,11 +67,19 @@ void main_punto3()
     }
 }
 
+void main_punto4(){
+  Cola c1,c2 = c_crear();
+    c1 = cargarCola();
+    c2 = norepetidos(c1);
+     printf("Los elementos no repetidos de la cola son:\n");
+     c_mostrar(c2);
+}
+
 void menu_principal()
 {
     printf("\n");
     printf(ANSI_BLUE "  ============================================================================\n");
-    printf(" |                                 TP3 PILAS                                 |\n");
+    printf(" |                                 TP3 COLAS                                 |\n");
     printf("  ============================================================================\n");
     printf("\n");
     printf("  2   Operaciones con colas\n");
@@ -180,7 +188,7 @@ int main()
             getch();
             break;
         case 4:
-
+            main_punto4();
             getch();
             break;
         case 5:

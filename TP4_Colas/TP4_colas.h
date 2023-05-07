@@ -35,4 +35,6 @@ bool buscar(Cola c, int clave);
 
 bool Comparar(Cola c1, Cola c2);
 
+Cola norepetidos(Cola c);
+
 #endif // TP3_LISTAS_H
