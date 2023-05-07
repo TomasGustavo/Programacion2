@@ -86,6 +86,10 @@ bool c_es_llena(Cola cola)
 
 void c_mostrar(Cola cola)
 {
+    if (c_es_vacia(cola))
+    {
+        printf("La cola esta vacia");
+    }
     Cola Caux = c_crear();
     TipoElemento X = te_crear(0);
     printf("Imprimiendo las Claves de la Cola \n");

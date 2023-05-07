@@ -9,25 +9,30 @@
 #include "colas.h"
 #include "tipo_elemento.h"
 
-int vaciar_buffer(void)
+/// @brief Vacia el buffer de entrada.
+void vaciar_buffer()
 {
     char nada[200];
     fgets(nada, 200, stdin);
-    return 0;
 }
 
+/// @brief Frena la ejecucion del codigo esperando el ingreso de un caracter.
 void pausa()
 {
-    printf(ANSI_bYELLOW "\nPresione ENTER para continuar...." ANSI_RESET);
+    printf(ANSI_bYELLOW "\nPresione una tecla para continuar...." ANSI_RESET);
     getchar();
 }
 
+/// @brief Secuencia de escape ANSI que se utiliza para limpiar la pantalla de la terminal y posicionar el cursor en la esquina superior izquierda.
 void limpiar_pantalla()
 {
     printf("\033[2J\033[1;1H");
     return;
 }
 
+/// @brief Pasa los elementos de una cola (auxiliar) a otra cola. Especialmente util para no destruir la cola original.
+/// @param c Cola donde se desea pasar los elementos.
+/// @param aux Cola auxiliar, se piede al finalizar el ciclo.
 void intercambiar2(Cola c, Cola aux)
 {
     TipoElemento x = te_crear(0);
@@ -38,6 +43,9 @@ void intercambiar2(Cola c, Cola aux)
     }
 }
 
+/// @brief Pasa los elementos de una cola (auxiliar) a otra cola. Especialmente util para no destruir la cola original.
+/// @param caux Cola auxiliar, se piede al finalizar el ciclo.
+/// @return Cola donde se desea pasar los elementos, debe pasarse como referencia (puntero)
 Cola intercambiar(Cola caux)
 {
     Cola cresult = c_crear();
@@ -50,7 +58,10 @@ Cola intercambiar(Cola caux)
     return cresult;
 }
 
-// Función genérica para cargar una cola de enteros
+//
+
+/// @brief Función genérica para cargar una cola de enteros y mostrarla al finalizar
+/// @return Cola cargada con numeros enteros
 Cola cargarCola()
 {
     Cola cola = c_crear();
@@ -96,6 +107,10 @@ Cola cargarCola()
 }
 
 // PUNTO 2A
+/// @brief Informar si un elemento dado se encuentra en la cola.
+/// @param c Cola cargada
+/// @param clave Numero entero a buscar
+/// @return Si el elemento forma parte de la cola devuelve verdadero, de lo contrario devuelve falso
 bool buscar(Cola c, int clave)
 {
     bool res = false;
@@ -116,6 +131,9 @@ bool buscar(Cola c, int clave)
     return res;
 }
 
+/// @brief Informa la longuitud que posee la cola
+/// @param c Cola cargada
+/// @return Cantidad de elementos que posee la cola
 int Longitud(Cola c)
 {
     Cola aux = c_crear();
@@ -127,12 +145,16 @@ int Longitud(Cola c)
         cont++;
         c_encolar(aux, x);
     }
-    //intercambiar(c, aux);
+    // intercambiar(c, aux);
     c = intercambiar(aux);
     return cont;
 }
 
-// PUNTO 3
+/// @brief Busca el elemento dado en la posicion indicada
+/// @param c Cola cargada
+/// @param x TipoElemento a buscar
+/// @param pos Posicion (entero) a buscar
+/// @return Si el elemento se encuentra en la posicion brindada, devuelve verdadero, de lo contrario devuelve falso
 bool buscarPos(Cola c, TipoElemento x, int pos)
 {
     int cont = 0;
@@ -152,11 +174,16 @@ bool buscarPos(Cola c, TipoElemento x, int pos)
         }
         c_encolar(aux, x1);
     }
-    //intercambiar(c, aux);
+    // intercambiar(c, aux);
     c = intercambiar(aux);
     return bandera;
 }
 
+// PUNTO 3
+/// @brief Determina si el contenido de 2 colas son iguales tanto en posición como en datos (comparando  la clave), sin destruirlas.
+/// @param c1 Cola N°1 cargada
+/// @param c2 Cola N°2 cargada
+/// @return Si ambas colas son iguales, devuelve verdadero, de lo contrario devuelve falso
 bool Comparar(Cola c1, Cola c2)
 {
     Cola caux = c_crear();
@@ -179,7 +206,7 @@ bool Comparar(Cola c1, Cola c2)
             }
             c_encolar(caux, x1);
         }
-        //intercambiar(c1, caux);
+        // intercambiar(c1, caux);
         c1 = intercambiar(caux);
         return bandera;
     }
@@ -187,6 +214,9 @@ bool Comparar(Cola c1, Cola c2)
 
 // Punto 4
 
+/// @brief  Permite pasar todos los elementos que no se repiten de una cola (no ordenada de números enteros) a otra cola.
+/// @param c Cola no ordenada cargada
+/// @return Cola con los elementos no repetidos
 Cola norepetidos(Cola c)
 {
     Cola caux = c_crear(), cresp = c_crear();
@@ -211,7 +241,7 @@ Cola norepetidos(Cola c)
             c_encolar(caux, x);
         }
     }
-    //intercambiar(c,caux);
+    // intercambiar(c,caux);
     c = intercambiar(caux);
     return cresp;
 }

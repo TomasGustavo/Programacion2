@@ -86,6 +86,10 @@ TipoElemento c_recuperar(Cola cola)
 
 void c_mostrar(Cola cola)
 {
+    if (c_es_vacia(cola))
+    {
+        printf("La cola esta vacia");
+    }
     Cola Caux = c_crear();
     TipoElemento X = te_crear(0);
     printf("Contenido de la Cola \n");

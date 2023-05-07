@@ -21,7 +21,7 @@
 #define ANSI_bWHITE "\e[97m"
 #define ANSI_RESET "\e[0m"
 
-int vaciar_buffer(void);
+void vaciar_buffer();
 
 void pausa();
 
@@ -29,7 +29,7 @@ void limpiar_pantalla();
 
 Cola intercambiar(Cola caux);
 
-//void intercambiar(Cola c, Cola aux);
+// void intercambiar(Cola c, Cola aux);
 
 Cola cargarCola();
 
