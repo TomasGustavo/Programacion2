@@ -27,10 +27,12 @@ void pausa();
 
 void limpiar_pantalla();
 
-Cola intercambiar(Cola c);
+void intercambiar(Cola c, Cola aux);
 
 Cola cargarCola();
 
 bool buscar(Cola c, int clave);
+
+bool Comparar(Cola c1, Cola c2);
 
 #endif // TP3_LISTAS_H

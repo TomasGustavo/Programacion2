@@ -30,12 +30,40 @@ void main_buscarElemento()
     }
 
     rta = buscar(c, clave);
+    c_mostrar(c);
 
     if (rta == true)
         printf(ANSI_bGREEN "Se encontró el elemento %i en la cola\n", clave);
     else
     {
         printf(ANSI_RED "No se encontró el elemento en la cola\n");
+    }
+}
+
+// Punto 3
+
+void main_punto3()
+{
+    Cola c1, c2;
+    c1 = cargarCola();
+    c2 = cargarCola();
+    if (Comparar(c1, c2))
+    {
+        printf("Las colas son iguales\n");
+        printf("Cola 1\n");
+        c_mostrar(c1);
+        printf("\n");
+        printf("Cola 2\n");
+        c_mostrar(c2);
+    }
+    else
+    {
+        printf("Las colas no son iguales\n");
+        printf("Cola 1\n");
+        c_mostrar(c1);
+        printf("\n");
+        printf("Cola 2\n");
+        c_mostrar(c2);
     }
 }
 
@@ -148,7 +176,7 @@ int main()
             break;
             menu_principal();
         case 3:
-
+            main_punto3();
             getch();
             break;
         case 4:

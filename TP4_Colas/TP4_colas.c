@@ -28,16 +28,14 @@ void limpiar_pantalla()
     return;
 }
 
-Cola intercambiar(Cola c)
+void intercambiar(Cola c, Cola aux)
 {
-    Cola caux = c_crear();
     TipoElemento x = te_crear(0);
-    while (!c_es_vacia(c))
+    while (!c_es_vacia(aux))
     {
-        x = c_desencolar(c);
-        c_encolar(caux, x);
+        x = c_desencolar(aux);
+        c_encolar(c, x);
     }
-    return caux;
 }
 
 // Función genérica para cargar una cola de enteros
@@ -100,6 +98,87 @@ bool buscar(Cola c, int clave)
         }
         c_encolar(caux, x);
     }
-    c = intercambiar(caux);
+    intercambiar(c, caux);
     return res;
+}
+
+int Longitud(Cola c)
+{
+    Cola aux = c_crear();
+    TipoElemento x = te_crear(0);
+    int cont = 0;
+    while (!c_es_vacia(c))
+    {
+        x = c_desencolar(c);
+        cont++;
+        c_encolar(aux, x);
+    }
+    /*while (!c_es_vacia(aux))
+    {
+        x = c_desencolar(aux);
+        c_encolar(c, x);
+    }*/
+    intercambiar(c, aux);
+    return cont;
+}
+
+// PUNTO 3
+bool buscarPos(Cola c, TipoElemento x, int pos)
+{
+    int cont = 0;
+    Cola aux = c_crear();
+    TipoElemento x1 = te_crear(0);
+    bool bandera = true;
+    while (!c_es_vacia(c))
+    {
+        x1 = c_desencolar(c);
+        cont++;
+        if (cont == pos)
+        {
+            if (x1->clave != x->clave)
+            {
+                bandera = false;
+            }
+        }
+        c_encolar(aux, x1);
+    }
+    /* while (!c_es_vacia(aux))
+      {
+          x = c_desencolar(aux);
+          c_encolar(c, x);
+      }*/
+    intercambiar(c, aux);
+    return bandera;
+}
+
+bool Comparar(Cola c1, Cola c2)
+{
+    Cola caux = c_crear();
+    bool bandera = true;
+    int pos = 0;
+    TipoElemento x1 = te_crear(0);
+    if (Longitud(c1) != Longitud(c2))
+    {
+        return false;
+    }
+    else
+    {
+        while (!c_es_vacia(c1))
+        {
+            x1 = c_desencolar(c1);
+            pos++;
+            if ((bandera) && (!buscarPos(c2, x1, pos)))
+            {
+                bandera = false;
+            }
+            c_encolar(caux, x1);
+        }
+        intercambiar(c1, caux);
+        /*while (!c_es_vacia(caux))
+         {
+             x1 = c_desencolar(caux);
+             c_encolar(c1, x1);
+         }*/
+        return bandera;
+    }
 }
