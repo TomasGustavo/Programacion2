@@ -44,6 +44,47 @@ void main_buscarElemento()
     }
     printf(ANSI_RESET);
 }
+//punto 2C
+void main_borrar(){
+    Cola cola = c_crear();
+    cola = cargarCola();
+    TipoElemento X;
+    int elemento;
+    printf(ANSI_bBLUE"ingrese el elemento que quiere borrar: "ANSI_bYELLOW);
+    scanf("%d",&elemento);
+    X = te_crear(elemento);
+    borrar_elemento(cola, X);
+    printf(ANSI_bGREEN"");
+    c_mostrar(cola);
+    printf(ANSI_RESET"");
+}
+
+//punto 2F
+void main_invertida(){
+    Cola cola = c_crear();
+    Cola caux = c_crear();
+    Cola cola_invertida = c_crear();
+    TipoElemento X;
+    cola = cargarCola();
+    int longitud_cola = 0;
+     while (c_es_vacia(cola)!= true)//esta seccion solo encuentra el 
+    {                              //elemento mayor de la cola (para limitar la funcion) y la longitud en flotante 
+    
+        X = c_desencolar(cola);
+        longitud_cola++;
+        c_encolar(caux, X);
+    }
+    while (c_es_vacia(caux) != true)
+    {
+        X = c_desencolar(caux);
+        c_encolar(cola , X);
+    }
+    cola_invertida = invertir(cola,caux , longitud_cola);
+    printf(ANSI_bGREEN"cola invertida: \n");
+    c_mostrar(cola_invertida);
+    printf(ANSI_bGREEN"\ncola original: \n");
+    c_mostrar(cola);
+} 
 
 /// @brief Punto 2b: Inserta un elemento en la posicion dada
 void main_insertar_en_cola(){
@@ -181,7 +222,7 @@ void main_divisores(){
     float longitud_cola = 0;
     cola = cargarCola();
     while (c_es_vacia(cola)!= true)//esta seccion solo encuentra el 
-    {                              //elemento mayor de la cola y la longitud
+    {                              //elemento mayor de la cola (para limitar la funcion) y la longitud en flotante 
     
         X = c_desencolar(cola);
         if (X->clave > elemento_mayor_cola)
@@ -204,7 +245,7 @@ void main_divisores(){
     printf(ANSI_bGREEN"Divisores totales: \n");
     c_mostrar(Divisor_total);
     printf("\n");
-    printf(ANSI_bGREEN"Divisores parciales: \n");
+    printf(ANSI_bGREEN"\nDivisores parciales: \n");
     c_mostrar(Divisor_parcial);
     printf(ANSI_RESET"");
 }
@@ -298,6 +339,7 @@ int main()
                     break;
                 case 3:
                     main_eliminar_repeticiones();
+                    //main_borrar();
                     getch();
                     break;
                 case 4:
@@ -309,7 +351,7 @@ int main()
                     getch();
                     break;
                 case 6:
-
+                    main_invertida();
                     getch();
                     break;
                 case 0:
