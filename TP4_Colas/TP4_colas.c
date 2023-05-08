@@ -62,14 +62,14 @@ Cola intercambiar(Cola caux)
 
 /// @brief Función genérica para cargar una cola de enteros y mostrarla al finalizar
 /// @return Cola cargada con números enteros
-Cola cargarCola()
+Cola cargarCola(int* cant)
 {
     Cola cola = c_crear();
-    int cant, valor;
+    int valor;
     printf(ANSI_bBLUE "Ingrese cantidad de elementos a cargar [0-99]: " ANSI_bYELLOW);
-    int validador = scanf("%d", &cant);
+    int validador = scanf("%d", cant);
     vaciar_buffer();
-    while (validador != 1 || cant < 0 || cant >= 100)
+    while (validador != 1 || *cant < 0 || *cant >= 100)
     {
         limpiar_pantalla();
         printf(ANSI_bRED "\t\t-------- ERROR --------\n");
@@ -77,10 +77,10 @@ Cola cargarCola()
         pausa();
         limpiar_pantalla();
         printf(ANSI_bBLUE "Ingrese cantidad de elementos a cargar [0-99]: " ANSI_bYELLOW);
-        validador = scanf("%d", &cant);
+        validador = scanf("%d", cant);
         vaciar_buffer();
     }
-    for (int i = 0; i < cant; i++)
+    for (int i = 0; i < *cant; i++)
     {
         limpiar_pantalla();
         printf(ANSI_bBLUE "Ingrese clave del elemento N°%d a cargar [-999.999 - 999.999]: " ANSI_bYELLOW, i + 1);
@@ -129,6 +129,52 @@ bool buscar(Cola c, int clave)
     //*c = intercambiar(caux);
     c_mostrar(c);
     return res;
+}
+
+// PUNTO 2B
+/// @brief Inserta un elemento en la posicion dada
+/// @param c Cola cargada
+///@param x Elemento a insertar
+///@param pos Posicion en la que se quiere insertar el elemento
+/// @return Nueva cola con  el elemento insertado
+Cola insertar(Cola c, TipoElemento x, int pos)
+{
+    Cola caux = c_crear();
+    TipoElemento x1 = te_crear(0);
+    int i = 1;
+    while (!c_es_vacia(c))
+    {
+        x1 = c_desencolar(c);
+        if (i == pos){
+            c_encolar (caux, x);
+            i++;
+        }
+        c_encolar(caux, x1);
+        i++;
+    }
+    intercambiar2(c,caux);
+    return c;
+}
+
+// PUNTO 2C
+/// @brief Elimina todas las repeticiones del elemento dado
+/// @param c Cola cargada
+/// @param clave Clave a eliminar
+/// @param estado Devuelve true si se encontro el elemento a eliminar y false si no se encontro
+/// @return Cantidad de elementos que posee la cola
+Cola eliminarTodas(Cola c, int clave, bool* estado){
+    Cola caux = c_crear();
+    TipoElemento x = te_crear(0);
+    *estado = false;
+    while (!c_es_vacia(c)){
+        x = c_desencolar(c);
+        if (x->clave != clave){
+            c_encolar(caux,x);
+            *estado = true;
+        }
+    }
+    intercambiar2(c,caux);
+    return c;
 }
 
 /// @brief Informa la longitud que posee la cola
@@ -246,32 +292,34 @@ Cola norepetidos(Cola c)
     return cresp;
 }
 
-//Punto 5
-void divisores(Cola cola, Cola Divisor_total, Cola Divisor_parcial, int numero_actual, float longitud_cola){
+// Punto 5
+void divisores(Cola cola, Cola Divisor_total, Cola Divisor_parcial, int numero_actual, float longitud_cola)
+{
     int contador_divisores = 0;
     Cola caux = c_crear();
     TipoElemento X = te_crear(0);
     float mitad_longitud = longitud_cola / 2;
-    while (c_es_vacia(cola)!= true)
+    while (c_es_vacia(cola) != true)
     {
         X = c_desencolar(cola);
         if (X->clave % numero_actual == 0)
         {
-            contador_divisores++;    
+            contador_divisores++;
         }
         c_encolar(caux, X);
     }
     while (c_es_vacia(caux) != true)
     {
         X = c_desencolar(caux);
-        c_encolar(cola , X);
+        c_encolar(cola, X);
     }
     if (contador_divisores == longitud_cola)
     {
         X = te_crear(numero_actual);
         c_encolar(Divisor_total, X);
     }
-    else if (contador_divisores >= mitad_longitud){
+    else if (contador_divisores >= mitad_longitud)
+    {
         X = te_crear(numero_actual);
         c_encolar(Divisor_parcial, X);
     }

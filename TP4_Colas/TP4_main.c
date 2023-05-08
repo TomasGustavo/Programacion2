@@ -45,6 +45,89 @@ void main_buscarElemento()
     printf(ANSI_RESET);
 }
 
+/// @brief Punto 2b: Inserta un elemento en la posicion dada
+void main_insertar_en_cola(){
+    Cola c = c_crear();
+    int clave, posi, cant;
+    c = cargarCola(&cant);
+    printf(ANSI_bGREEN);
+    printf("\n" ANSI_RESET);
+    printf(ANSI_bBLUE "Ingrese clave del elemento a insertar en la cola: " ANSI_YELLOW);
+    int validador = scanf("%d", &clave);
+    vaciar_buffer();
+    while (validador != 1 || clave < -999999 || clave > 999999)
+    {
+        printf(ANSI_RED "\t\t-------- ERROR -------- \n");
+        printf("DATO FUERA DE RANGO, por favor ingresar un numero entre [-999.999 - 999.999]\n\n" ANSI_RESET);
+        pausa();
+        printf(ANSI_bBLUE "Ingrese clave a insertar en la cola: " ANSI_YELLOW);
+        validador = scanf("%d", &clave);
+        vaciar_buffer();
+    }
+    TipoElemento elemento = te_crear(clave);
+    printf(ANSI_bBLUE "Ingrese posición donde se insertara en la cola, entre [1-%d]: " ANSI_YELLOW, cant + 1);
+    validador = scanf("%d", &posi);
+    vaciar_buffer();
+    while (validador != 1 || posi <= 0 || posi > cant + 1)
+    {
+        printf(ANSI_RED "\t\t-------- ERROR -------- \n");
+        printf("DATO INCORRECTO" ANSI_RESET);
+        pausa();
+        printf(ANSI_bBLUE "Ingrese posición donde se insertara en la pila, entre [1-%d]: " ANSI_YELLOW, cant + 1);
+        validador = scanf("%d", &posi);
+        vaciar_buffer();
+    }
+    if (c_es_vacia(c)){
+        c_encolar(c, elemento);
+    } else {
+        c = insertar(c, elemento, posi);
+    }
+    c_mostrar(c);
+    printf("\n" ANSI_RESET);
+}
+
+/// @brief Punto 2c: Eliminar todas las repeticiones de un elemento dado
+void main_eliminar_repeticiones(){
+    Cola c = c_crear();
+    int cant, clave;
+    c = cargarCola(&cant);
+    printf(ANSI_bGREEN);
+    printf("\n" ANSI_RESET);
+    if (!c_es_vacia(c))
+    {
+        printf(ANSI_bBLUE "Ingrese clave a eliminar en la cola: " ANSI_YELLOW);
+        int validador = scanf("%d", &clave);
+        vaciar_buffer();
+        while (validador != 1 || clave < -999999 || clave > 999999)
+        {
+            printf(ANSI_RED "\t\t-------- ERROR -------- \n");
+            printf("DATO FUERA DE RANGO, por favor ingresar un numero entre [-999.999 - 999.999]\n\n" ANSI_RESET);
+            pausa();
+            printf(ANSI_bBLUE "Ingrese clave a eliminar en la cola: " ANSI_YELLOW);
+            validador = scanf("%d", &clave);
+            vaciar_buffer();
+        }
+        bool estado;
+        c = eliminarTodas(c, clave, &estado);
+        if (estado)
+        {
+            printf(ANSI_GREEN "Se elimino correctamente el elemento %d\n", clave);
+        }
+        else
+        {
+            printf(ANSI_RED "El elemento %d no se encuentra en la cola\n", clave);
+        }
+        printf(ANSI_bGREEN);
+        c_mostrar(c); // la vuelvo a mostrar para confirmar que se hizo bien la eliminación
+        printf("\n" ANSI_RESET);
+    } else printf(ANSI_bRED "No se puede buscar un elemento si la cola esta vacia");
+    printf("\n" ANSI_RESET);
+    pausa();
+    limpiar_pantalla();
+}
+
+
+
 /// @brief Punto 3: Dadas dos colas, determinar si sus contenidos son iguales tanto en posición como en datos (solo comparar por la clave), sin destruirlas. Utilizar para la resolución del problema una sola cola auxiliar. Determinar la complejidad algorítmica del problema.
 void main_punto3()
 {
@@ -210,11 +293,11 @@ int main()
                     getch();
                     break;
                 case 2:
-
+                    main_insertar_en_cola();
                     getch();
                     break;
                 case 3:
-
+                    main_eliminar_repeticiones();
                     getch();
                     break;
                 case 4:

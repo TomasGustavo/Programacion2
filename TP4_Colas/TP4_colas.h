@@ -35,6 +35,10 @@ Cola cargarCola();
 
 bool buscar(Cola c, int clave);
 
+Cola insertar(Cola c, TipoElemento x, int pos);
+
+Cola eliminarTodas(Cola c, int clave, bool* estado);
+
 bool Comparar(Cola c1, Cola c2);
 
 Cola norepetidos(Cola c);
