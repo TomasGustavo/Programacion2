@@ -149,7 +149,24 @@ int Longitud(Cola c)
     c = intercambiar(aux);
     return cont;
 }
-
+//punto 2C
+void borrar_elemento(Cola cola, TipoElemento elemento){
+    Cola caux = c_crear();
+    TipoElemento X;
+    while (c_es_vacia(cola) != true)
+    {
+        X = c_desencolar(cola);
+        if (X->clave != elemento->clave)
+        {
+            c_encolar(caux, X);
+        }
+    }
+    while (c_es_vacia(caux) != true)
+    {
+        X = c_desencolar(caux);
+        c_encolar(cola, X);
+    }
+}
 /// @brief Busca el elemento dado en la posición indicada
 /// @param c Cola cargada
 /// @param x TipoElemento a buscar
@@ -179,6 +196,33 @@ bool buscarPos(Cola c, TipoElemento x, int pos)
     return bandera;
 }
 
+//Punto 2F
+Cola invertir(Cola cola, Cola caux, int longitud){
+    Cola cola_invertida = c_crear();
+    TipoElemento X = te_crear(0);
+    if (longitud == 1)
+    {
+        X = c_desencolar(cola);
+        c_encolar(caux, X);
+        c_encolar(cola_invertida, X);
+        return cola_invertida;
+    }
+    
+    if(c_es_vacia(cola) != true)
+    {
+        X = c_desencolar(cola);
+        c_encolar(caux, X);
+        cola_invertida = invertir(cola, caux, longitud - 1);
+        c_encolar(cola_invertida, X);
+        while (c_es_vacia(caux) != true)
+        {
+        X = c_desencolar(caux);
+        c_encolar(cola, X);
+        }
+    }
+    
+    return cola_invertida;
+}
 // PUNTO 3
 /// @brief Determina si el contenido de 2 colas son iguales tanto en posición como en datos (comparando  la clave), sin destruirlas.
 /// @param c1 Cola N°1 cargada

@@ -35,6 +35,10 @@ Cola cargarCola();
 
 bool buscar(Cola c, int clave);
 
+void borrar_elemento(Cola cola, TipoElemento elemento);
+
+Cola invertir(Cola cola, Cola caux, int longitud);
+
 bool Comparar(Cola c1, Cola c2);
 
 Cola norepetidos(Cola c);
