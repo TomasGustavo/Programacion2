@@ -19,15 +19,15 @@ void main_buscarElemento()
     if (!c_es_vacia(c))
     {
 
-        printf(ANSI_bMAGENTA "Ingrese el elemento a buscar [-999.999 - 999.999]: \n" ANSI_RESET);
+        printf(ANSI_bMAGENTA "Ingrese el elemento a buscar [-999.999 - 999.999]: \n" ANSI_YELLOW);
         validador = scanf("%d", &clave);
         vaciar_buffer();
         while (validador != 1 || clave < -999999 || clave > 999999)
         {
             printf(ANSI_RED "\t\t-------- ERROR -------- \n");
-            printf("DATO FUERA DE RANGO, por favor ingresar un numero entre [-999.999 - 999.999]\n\n" ANSI_RESET);
+            printf("DATO FUERA DE RANGO\n\n" ANSI_RESET);
             pausa();
-            printf(ANSI_bBLUE "Ingrese el elemento a buscar [-999.999 - 999.999]: \n" ANSI_RESET);
+            printf(ANSI_bBLUE "Ingrese el elemento a buscar [-999.999 - 999.999]: \n" ANSI_YELLOW);
             validador = scanf("%d", &clave);
             vaciar_buffer();
         }
@@ -42,6 +42,7 @@ void main_buscarElemento()
             printf(ANSI_RED "No se encontró el elemento en la cola\n");
         }
     }
+    printf(ANSI_RESET);
 }
 
 /// @brief Punto 3: Dadas dos colas, determinar si sus contenidos son iguales tanto en posición como en datos (solo comparar por la clave), sin destruirlas. Utilizar para la resolución del problema una sola cola auxiliar. Determinar la complejidad algorítmica del problema.
@@ -52,22 +53,23 @@ void main_punto3()
     c2 = cargarCola();
     if (Comparar(c1, c2))
     {
-        printf("Las colas son iguales\n");
-        printf("Cola 1\n");
+        printf(ANSI_GREEN "Las colas son iguales\n");
+        printf(ANSI_GREEN "Cola 1\n");
         c_mostrar(c1);
         printf("\n");
-        printf("Cola 2\n");
+        printf(ANSI_GREEN "Cola 2\n");
         c_mostrar(c2);
     }
     else
     {
-        printf("Las colas no son iguales\n");
-        printf("Cola 1\n");
+        printf(ANSI_RED "Las colas no son iguales\n");
+        printf(ANSI_GREEN "Cola 1\n");
         c_mostrar(c1);
         printf("\n");
-        printf("Cola 2\n");
+        printf(ANSI_GREEN "Cola 2\n");
         c_mostrar(c2);
     }
+    printf(ANSI_RESET);
 }
 
 /// @brief Punto 4: Dada una cola de números enteros, no ordenada, construir un algoritmo que permita pasar a otra cola todos los elementos que no se repiten en la primera, sin destruir el contenido de la cola original y dejándola en su estado inicial. Determinar la complejidad algorítmica de la solución.
@@ -78,9 +80,10 @@ void main_punto4()
     if (!c_es_vacia(c1))
     {
         c2 = norepetidos(c1);
-        printf("Los elementos no repetidos de la cola son:\n");
+        printf(ANSI_GREEN "Los elementos no repetidos de la cola son:\n");
         c_mostrar(c2);
     }
+    printf(ANSI_RESET);
 }
 
 /// @brief Menu principal del TP de Colas

@@ -9,14 +9,14 @@
 #include "colas.h"
 #include "tipo_elemento.h"
 
-/// @brief Vacia el buffer de entrada.
+/// @brief Vacía el buffer de entrada.
 void vaciar_buffer()
 {
     char nada[200];
     fgets(nada, 200, stdin);
 }
 
-/// @brief Frena la ejecucion del codigo esperando el ingreso de un caracter.
+/// @brief Frena la ejecución del código esperando el ingreso de un carácter.
 void pausa()
 {
     printf(ANSI_bYELLOW "\nPresione una tecla para continuar...." ANSI_RESET);
@@ -32,7 +32,7 @@ void limpiar_pantalla()
 
 /// @brief Pasa los elementos de una cola (auxiliar) a otra cola. Especialmente util para no destruir la cola original.
 /// @param c Cola donde se desea pasar los elementos.
-/// @param aux Cola auxiliar, se piede al finalizar el ciclo.
+/// @param aux Cola auxiliar, se pierde al finalizar el ciclo.
 void intercambiar2(Cola c, Cola aux)
 {
     TipoElemento x = te_crear(0);
@@ -44,7 +44,7 @@ void intercambiar2(Cola c, Cola aux)
 }
 
 /// @brief Pasa los elementos de una cola (auxiliar) a otra cola. Especialmente util para no destruir la cola original.
-/// @param caux Cola auxiliar, se piede al finalizar el ciclo.
+/// @param caux Cola auxiliar, se pierde al finalizar el ciclo.
 /// @return Cola donde se desea pasar los elementos, debe pasarse como referencia (puntero)
 Cola intercambiar(Cola caux)
 {
@@ -61,7 +61,7 @@ Cola intercambiar(Cola caux)
 //
 
 /// @brief Función genérica para cargar una cola de enteros y mostrarla al finalizar
-/// @return Cola cargada con numeros enteros
+/// @return Cola cargada con números enteros
 Cola cargarCola()
 {
     Cola cola = c_crear();
@@ -73,7 +73,7 @@ Cola cargarCola()
     {
         limpiar_pantalla();
         printf(ANSI_bRED "\t\t-------- ERROR --------\n");
-        printf("DATO INVALIDO, por favor ingresar un numero entre [0-99]\n\n" ANSI_RESET);
+        printf("DATO INVALIDO\n\n" ANSI_RESET);
         pausa();
         limpiar_pantalla();
         printf(ANSI_bBLUE "Ingrese cantidad de elementos a cargar [0-99]: " ANSI_bYELLOW);
@@ -90,7 +90,7 @@ Cola cargarCola()
         {
             limpiar_pantalla();
             printf(ANSI_bRED "\t\t-------- ERROR --------\n");
-            printf("DATO FUERA DE RANGO, por favor ingresar un numero entre [-999.999 - 999.999]\n\n" ANSI_RESET);
+            printf("DATO FUERA DE RANGO\n\n" ANSI_RESET);
             pausa();
             limpiar_pantalla();
             printf(ANSI_bBLUE "Ingrese clave del elemento N°%d a cargar [-999.999 - 999.999]: " ANSI_bYELLOW, i + 1);
@@ -131,7 +131,7 @@ bool buscar(Cola c, int clave)
     return res;
 }
 
-/// @brief Informa la longuitud que posee la cola
+/// @brief Informa la longitud que posee la cola
 /// @param c Cola cargada
 /// @return Cantidad de elementos que posee la cola
 int Longitud(Cola c)
@@ -150,11 +150,11 @@ int Longitud(Cola c)
     return cont;
 }
 
-/// @brief Busca el elemento dado en la posicion indicada
+/// @brief Busca el elemento dado en la posición indicada
 /// @param c Cola cargada
 /// @param x TipoElemento a buscar
-/// @param pos Posicion (entero) a buscar
-/// @return Si el elemento se encuentra en la posicion brindada, devuelve verdadero, de lo contrario devuelve falso
+/// @param pos Posición (entero) a buscar
+/// @return Si el elemento se encuentra en la posición brindada, devuelve verdadero, de lo contrario devuelve falso
 bool buscarPos(Cola c, TipoElemento x, int pos)
 {
     int cont = 0;
