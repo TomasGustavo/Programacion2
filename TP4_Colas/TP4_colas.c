@@ -195,6 +195,7 @@ int Longitud(Cola c)
     c = intercambiar(aux);
     return cont;
 }
+
 //punto 2C
 void borrar_elemento(Cola cola, TipoElemento elemento){
     Cola caux = c_crear();
@@ -213,6 +214,8 @@ void borrar_elemento(Cola cola, TipoElemento elemento){
         c_encolar(cola, X);
     }
 }
+
+
 /// @brief Busca el elemento dado en la posición indicada
 /// @param c Cola cargada
 /// @param x TipoElemento a buscar

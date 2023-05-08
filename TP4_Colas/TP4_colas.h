@@ -39,6 +39,8 @@ Cola insertar(Cola c, TipoElemento x, int pos);
 
 Cola eliminarTodas(Cola c, int clave, bool* estado);
 
+int Longitud(Cola c);
+
 //void borrar_elemento(Cola cola, TipoElemento elemento);
 
 Cola invertir(Cola cola, Cola caux, int longitud);

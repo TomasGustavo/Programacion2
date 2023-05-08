@@ -167,7 +167,15 @@ void main_eliminar_repeticiones(){
     limpiar_pantalla();
 }
 
-
+/// @brief Punto 2d: Contar los elementos de una cola
+void main_contador()
+{
+    int contador, cant;
+    Cola c = c_crear();
+    c = cargarCola(&cant);
+    contador = Longitud(c);
+    printf(ANSI_bGREEN "La cantidad de elementos que contiene la pila es de %d" ANSI_RESET, contador);
+}
 
 /// @brief Punto 3: Dadas dos colas, determinar si sus contenidos son iguales tanto en posición como en datos (solo comparar por la clave), sin destruirlas. Utilizar para la resolución del problema una sola cola auxiliar. Determinar la complejidad algorítmica del problema.
 void main_punto3()
@@ -343,7 +351,7 @@ int main()
                     getch();
                     break;
                 case 4:
-
+                    main_contador();
                     getch();
                     break;
                 case 5:
