@@ -245,3 +245,35 @@ Cola norepetidos(Cola c)
     c = intercambiar(caux);
     return cresp;
 }
+
+//Punto 5
+void divisores(Cola cola, Cola Divisor_total, Cola Divisor_parcial, int numero_actual, float longitud_cola){
+    int contador_divisores = 0;
+    Cola caux = c_crear();
+    TipoElemento X = te_crear(0);
+    float mitad_longitud = longitud_cola / 2;
+    while (c_es_vacia(cola)!= true)
+    {
+        X = c_desencolar(cola);
+        if (X->clave % numero_actual == 0)
+        {
+            contador_divisores++;    
+        }
+        c_encolar(caux, X);
+    }
+    while (c_es_vacia(caux) != true)
+    {
+        X = c_desencolar(caux);
+        c_encolar(cola , X);
+    }
+    if (contador_divisores == longitud_cola)
+    {
+        X = te_crear(numero_actual);
+        c_encolar(Divisor_total, X);
+    }
+    else if (contador_divisores >= mitad_longitud){
+        X = te_crear(numero_actual);
+        c_encolar(Divisor_parcial, X);
+    }
+    return;
+}

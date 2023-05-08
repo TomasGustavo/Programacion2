@@ -39,4 +39,6 @@ bool Comparar(Cola c1, Cola c2);
 
 Cola norepetidos(Cola c);
 
+void divisores(Cola cola, Cola Divisor_total, Cola Divisor_parcial, int numero_actual, float longitud_cola);
+
 #endif // TP3_LISTAS_H

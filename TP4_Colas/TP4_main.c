@@ -86,6 +86,45 @@ void main_punto4()
     printf(ANSI_RESET);
 }
 
+//Punto 5
+void main_divisores(){
+    Cola cola = c_crear();
+    Cola caux = c_crear();
+    Cola Divisor_total = c_crear();
+    Cola Divisor_parcial = c_crear();
+    TipoElemento X;
+    int numero_actual = 2;
+    int elemento_mayor_cola = 0;
+    float longitud_cola = 0;
+    cola = cargarCola();
+    while (c_es_vacia(cola)!= true)//esta seccion solo encuentra el 
+    {                              //elemento mayor de la cola y la longitud
+    
+        X = c_desencolar(cola);
+        if (X->clave > elemento_mayor_cola)
+        {
+            elemento_mayor_cola = X->clave;
+        }
+        longitud_cola++;
+        c_encolar(caux, X);
+    }
+    while (c_es_vacia(caux) != true)
+    {
+        X = c_desencolar(caux);
+        c_encolar(cola , X);
+    }
+    while (numero_actual <= 100 || numero_actual < elemento_mayor_cola)
+    {
+        divisores(cola, Divisor_total, Divisor_parcial, numero_actual, longitud_cola);
+        numero_actual++;
+    }
+    printf(ANSI_bGREEN"Divisores totales: \n");
+    c_mostrar(Divisor_total);
+    printf("\n");
+    printf(ANSI_bGREEN"Divisores parciales: \n");
+    c_mostrar(Divisor_parcial);
+    printf(ANSI_RESET"");
+}
 /// @brief Menu principal del TP de Colas
 void menu_principal()
 {
@@ -205,7 +244,7 @@ int main()
             getch();
             break;
         case 5:
-
+            main_divisores();
             getch();
             break;
         case 6:
