@@ -299,7 +299,7 @@ bool compara_pilas(Pila p1, Pila p2)
     }
     return rta;
 }
-
+//PUNTO 2F
 int contar(Pila pila)
 {
     Pila paux = p_crear();
@@ -319,7 +319,7 @@ int contar(Pila pila)
     }
     return contador_elementos;
 }
-
+//PUNTO 5
 Pila invertir_pila(Pila pila)
 {
     Pila paux = p_crear();

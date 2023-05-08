@@ -362,7 +362,7 @@ void main_conversor()
     }
     printf(ANSI_BLUE "Ingrese la base [2-16]: " ANSI_YELLOW);
     validador = scanf("%i", &base);
-    while ((validador != 1) || (base < 0) || (base > 16))
+    while ((validador != 1) || (base < 2) || (base > 16))
     {
         printf(ANSI_RED "Entrada invalida!\n" ANSI_RESET);
         printf(ANSI_BLUE "Ingrese la base [2-16]: " ANSI_YELLOW);
