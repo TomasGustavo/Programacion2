@@ -59,11 +59,11 @@ char *mostrarhex(Pila pila)
 /// @brief Función principal del conversor de numero a una base entre 2 y 16. El numero puede ser positivo o negativo
 /// @param numero Numero decimal a convertir (admite negativos)
 /// @param base Numero decimal entre 2 y 16
-/// @return String del numero positivo o negativo convertivo a su correspondiente bace
+/// @return String del numero positivo o negativo convertido a su correspondiente base
 char *conversor(int numero, int base)
 {
     Pila pila = p_crear();
-    if (numero < 0) // verifica si el numero es negativor
+    if (numero < 0) // verifica si el numero es negativo
     {
         numero = numero * -1; // convierte el numero a positivo
         IntToBase(pila, numero, base);
@@ -187,7 +187,7 @@ Pila eliminar_por_clave(Pila pila, int clave, bool *estado)
     }
 }
 
-// PUNDO 2D
+// PUNTO 2D
 Pila intercambiarPos(Pila p, int pos1, int pos2)
 {
     Pila paux = p_crear();

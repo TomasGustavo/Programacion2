@@ -58,7 +58,7 @@ Pila cargar_pila(int *cant)
 {
     int valor;
     Pila pila = p_crear();
-    printf(ANSI_BLUE "Ingrese cantidad de elementos a cargar [0-99]: " ANSI_YELLOW);
+    printf(ANSI_bBLUE "Ingrese cantidad de elementos a cargar [0-99]: " ANSI_YELLOW);
     int validador = scanf("%d", cant);
     vaciar_buffer();
     while (validador != 1 || *cant < 0 || *cant >= 100)
@@ -68,7 +68,7 @@ Pila cargar_pila(int *cant)
         printf("DATO INVALIDO, por favor ingresar un numero entre [0-99]\n\n" ANSI_RESET);
         pausa();
         limpiar_pantalla();
-        printf(ANSI_BLUE "Ingrese cantidad de elementos a cargar [0-99]: " ANSI_YELLOW);
+        printf(ANSI_bBLUE "Ingrese cantidad de elementos a cargar [0-99]: " ANSI_YELLOW);
         validador = scanf("%d", cant);
         vaciar_buffer();
     }
@@ -102,10 +102,10 @@ void main_buscar_clave()
     int cant, clave;
     bool rta;
     pila = cargar_pila(&cant);
-    printf(ANSI_bGREEN "");
+    printf(ANSI_bGREEN);
     p_mostrar(pila); // muestro la pila como quedo cargada
     printf("\n" ANSI_RESET);
-    printf(ANSI_bBLUE "Ingrese clave a buscar en la pila: " ANSI_RESET);
+    printf(ANSI_bBLUE "Ingrese clave a buscar en la pila: " ANSI_YELLOW);
     int validador = scanf("%d", &clave);
     vaciar_buffer();
     while (validador != 1 || clave < -999999 || clave > 999999)
@@ -113,7 +113,7 @@ void main_buscar_clave()
         printf(ANSI_RED "\t\t-------- ERROR -------- \n");
         printf("DATO FUERA DE RANGO, por favor ingresar un numero entre [-999.999 - 999.999]\n\n" ANSI_RESET);
         pausa();
-        printf(ANSI_bBLUE "Ingrese clave a buscar en la pila: " ANSI_RESET);
+        printf(ANSI_bBLUE "Ingrese clave a buscar en la pila: " ANSI_YELLOW);
         validador = scanf("%d", &clave);
         vaciar_buffer();
     }
@@ -133,7 +133,7 @@ void main_buscar_clave()
         {
             printf(ANSI_RED "La clave no fue encontrada en la pila\n" ANSI_RESET);
         }
-        printf(ANSI_bGREEN "");
+        printf(ANSI_bGREEN);
         p_mostrar(pila); // la vuelvo a mostrar para que se vea que no se modifico durante la llamada a la función de búsqueda
         printf("\n" ANSI_RESET);
     }
@@ -150,7 +150,7 @@ void main_insertar_en_pila()
     printf(ANSI_bGREEN);
     p_mostrar(pila); // muestro la pila como quedo cargada
     printf("\n" ANSI_RESET);
-    printf(ANSI_bBLUE "Ingrese clave del elemento a insertar en la pila: " ANSI_RESET);
+    printf(ANSI_bBLUE "Ingrese clave del elemento a insertar en la pila: " ANSI_YELLOW);
     int validador = scanf("%d", &clave);
     vaciar_buffer();
     while (validador != 1 || clave < -999999 || clave > 999999)
@@ -158,12 +158,12 @@ void main_insertar_en_pila()
         printf(ANSI_RED "\t\t-------- ERROR -------- \n");
         printf("DATO FUERA DE RANGO, por favor ingresar un numero entre [-999.999 - 999.999]\n\n" ANSI_RESET);
         pausa();
-        printf(ANSI_bBLUE "Ingrese clave a insertar en la pila: " ANSI_RESET);
+        printf(ANSI_bBLUE "Ingrese clave a insertar en la pila: " ANSI_YELLOW);
         validador = scanf("%d", &clave);
         vaciar_buffer();
     }
     TipoElemento elemento = te_crear(clave);
-    printf(ANSI_bBLUE "Ingrese posición donde se insertara en la pila, entre [1-%d]: " ANSI_RESET, cant + 1);
+    printf(ANSI_bBLUE "Ingrese posición donde se insertara en la pila, entre [1-%d]: " ANSI_YELLOW, cant + 1);
     validador = scanf("%d", &posi);
     vaciar_buffer();
     while (validador != 1 || posi <= 0 || posi > cant + 1)
@@ -171,7 +171,7 @@ void main_insertar_en_pila()
         printf(ANSI_RED "\t\t-------- ERROR -------- \n");
         printf("DATO INCORRECTO" ANSI_RESET);
         pausa();
-        printf(ANSI_bBLUE "Ingrese posición donde se insertara en la pila, entre [1-%d]: " ANSI_RESET, cant + 1);
+        printf(ANSI_bBLUE "Ingrese posición donde se insertara en la pila, entre [1-%d]: " ANSI_YELLOW, cant + 1);
         validador = scanf("%d", &posi);
         vaciar_buffer();
     }
@@ -183,7 +183,7 @@ void main_insertar_en_pila()
     {
         pila = insertar(pila, elemento, posi);
     }
-    printf(ANSI_bGREEN "");
+    printf(ANSI_bGREEN);
     p_mostrar(pila); // muestro la pila como quedo después de llamar a la función
     printf("\n" ANSI_RESET);
 }
@@ -194,12 +194,12 @@ void main_eliminar_por_clave()
     Pila pila = p_crear();
     int cant, clave;
     pila = cargar_pila(&cant);
-    printf(ANSI_bGREEN "");
+    printf(ANSI_bGREEN);
     p_mostrar(pila); // muestro la pila como quedo cargada
     printf("\n" ANSI_RESET);
     if (!p_es_vacia(pila))
     {
-        printf(ANSI_bBLUE "Ingrese clave a eliminar en la pila: " ANSI_RESET);
+        printf(ANSI_bBLUE "Ingrese clave a eliminar en la pila: " ANSI_YELLOW);
         int validador = scanf("%d", &clave);
         vaciar_buffer();
         while (validador != 1 || clave < -999999 || clave > 999999)
@@ -207,7 +207,7 @@ void main_eliminar_por_clave()
             printf(ANSI_RED "\t\t-------- ERROR -------- \n");
             printf("DATO FUERA DE RANGO, por favor ingresar un numero entre [-999.999 - 999.999]\n\n" ANSI_RESET);
             pausa();
-            printf(ANSI_bBLUE "Ingrese clave a eliminar en la pila: " ANSI_RESET);
+            printf(ANSI_bBLUE "Ingrese clave a eliminar en la pila: " ANSI_YELLOW);
             validador = scanf("%d", &clave);
             vaciar_buffer();
         }
@@ -221,7 +221,7 @@ void main_eliminar_por_clave()
         {
             printf(ANSI_RED "El elemento %d no se encuentra en la pila\n", clave);
         }
-        printf(ANSI_bGREEN "");
+        printf(ANSI_bGREEN);
         p_mostrar(pila); // la vuelvo a mostrar para confirmar que se hizo bien la eliminación
         printf("\n" ANSI_RESET);
     }
@@ -235,12 +235,12 @@ void main_intercambiar()
     Pila pila = p_crear();
     int cant, pos1, pos2;
     pila = cargar_pila(&cant);
-    printf(ANSI_bGREEN "");
+    printf(ANSI_bGREEN);
     p_mostrar(pila); // muestro la pila como quedo cargada
     printf("\n" ANSI_RESET);
     if (!p_es_vacia(pila))
     {
-        printf(ANSI_bBLUE "Ingrese la primera posición a intercambiar, entre [1-%d]: " ANSI_RESET, cant);
+        printf(ANSI_bBLUE "Ingrese la primera posición a intercambiar, entre [1-%d]: " ANSI_YELLOW, cant);
         int validador = scanf("%d", &pos1);
         vaciar_buffer();
         while (validador != 1 || pos1 < 1 || pos1 > cant)
@@ -248,11 +248,11 @@ void main_intercambiar()
             printf(ANSI_RED "\t\t-------- ERROR -------- \n");
             printf("DATO FUERA DE RANGO\n\n" ANSI_RESET);
             pausa();
-            printf(ANSI_bBLUE "Ingrese la primera posición a intercambiar, entre [1-%d]: " ANSI_RESET, cant);
+            printf(ANSI_bBLUE "Ingrese la primera posición a intercambiar, entre [1-%d]: " ANSI_YELLOW, cant);
             validador = scanf("%d", &pos1);
             vaciar_buffer();
         }
-        printf(ANSI_bBLUE "Ingrese la segunda posición a intercambiar, entre [1-%d]: " ANSI_RESET, cant);
+        printf(ANSI_bBLUE "Ingrese la segunda posición a intercambiar, entre [1-%d]: " ANSI_YELLOW, cant);
         validador = scanf("%d", &pos2);
         vaciar_buffer();
         while (validador != 1 || pos2 < 1 || pos2 > cant)
@@ -260,11 +260,12 @@ void main_intercambiar()
             printf(ANSI_RED "\t\t-------- ERROR -------- \n");
             printf("DATO FUERA DE RANGO\n\n" ANSI_RESET);
             pausa();
-            printf(ANSI_bBLUE "Ingrese la segunda posición a intercambiar, entre [1-%d]: " ANSI_RESET, cant);
+            printf(ANSI_bBLUE "Ingrese la segunda posición a intercambiar, entre [1-%d]: " ANSI_YELLOW, cant);
             validador = scanf("%d", &pos2);
             vaciar_buffer();
         }
         pila = intercambiarPos(pila, pos1, pos2);
+        printf(ANSI_bGREEN);
         p_mostrar(pila);
         free(pila);
         printf("\n" ANSI_RESET);
@@ -283,17 +284,12 @@ void main_duplicar_pila()
     {
         printf(ANSI_RED "Pila vacía, su forma duplicada es vacía\n" ANSI_RESET);
     }
-    printf(ANSI_bYELLOW "Pila ANTES de llamar a la función\n\n" ANSI_RESET);
-    printf(ANSI_bGREEN "");
+    printf(ANSI_bYELLOW "Pila ANTES de llamar a la función\n\n" ANSI_bGREEN);
     p_mostrar(pila); // muestro la pila como quedo cargada
-    printf("\n" ANSI_RESET);
     pila_duplicada = duplicar_pila(pila);
-    printf(ANSI_bYELLOW "Pila DUPLICADA\n\n" ANSI_RESET);
-    printf(ANSI_bGREEN "");
+    printf(ANSI_bYELLOW "Pila DUPLICADA\n\n" ANSI_bGREEN);
     p_mostrar(pila_duplicada); // muestro la pila duplicada
-    printf("\n" ANSI_RESET);
-    printf(ANSI_bYELLOW "Pila Original DESPUES de llamar a la función\n\n" ANSI_RESET);
-    printf(ANSI_bGREEN "");
+    printf(ANSI_bYELLOW "Pila Original DESPUÉS de llamar a la función\n\n" ANSI_bGREEN);
     p_mostrar(pila); // muestro la pila como quedo después de llamar a la función
     printf("\n" ANSI_RESET);
 }
@@ -323,13 +319,13 @@ void main_compara_pilas()
     pila2 = cargar_pila(&cant);
     if (longitud_pila(pila) != longitud_pila(pila2))
     {
-        printf("Las pilas tiene distintos tamaños entre si, por ende no son iguales\n");
+        printf(ANSI_RED "Las pilas tiene distintos tamaños entre si, por ende no son iguales\n" ANSI_RESET);
         return;
     }
-    printf(ANSI_bGREEN "");
+    printf(ANSI_bGREEN);
     p_mostrar(pila);
-    printf("\n"); // muestro como quedaron cargadas las pilas
-    p_mostrar(pila2);
+    printf("\n");
+    p_mostrar(pila2); // muestro como quedaron cargadas las pilas
     printf("\n" ANSI_RESET);
     rta = compara_pilas(pila, pila2);
     if (rta == true)
@@ -342,11 +338,11 @@ void main_compara_pilas()
         printf(ANSI_RED "Las pilas son distintas una de otra\n" ANSI_RESET);
         // return;
     }
-    printf(ANSI_bGREEN "");
+    printf(ANSI_bGREEN);
     p_mostrar(pila);
-    printf("\n"); // las vuelvo a mostrar para confirmar que no se modificaron luego de llamar a comparar
-    p_mostrar(pila2);
-    printf(ANSI_bMAGENTA "\nCOMPLEJIDAD ALGORITMICA\nLa complejidad de la solución empleada es O(n) porque hay varios ciclos que dependen de la cantidad de elementos de la pila, pero no se encuentran anidados.");
+    printf("\n");
+    p_mostrar(pila2); // las vuelvo a mostrar para confirmar que no se modificaron luego de llamar a comparar
+    printf(ANSI_bMAGENTA "\nCOMPLEJIDAD ALGORÍTMICA\nLa complejidad de la solución empleada es O(n) porque hay varios ciclos que dependen de la cantidad de elementos de la pila, pero no se encuentran anidados.");
     printf("\n" ANSI_RESET);
 }
 
@@ -375,7 +371,7 @@ void main_conversor()
         validador = scanf("%i", &base);
     }
     printf(ANSI_BLUE "%d en base %d es: " ANSI_GREEN "%s", numero, base, conversor(numero, base));
-    printf(ANSI_bMAGENTA "\nCOMPLEJIDAD ALGORITMICA\nLa complejidad de la solución empleada es O(n), ya que se utiliza la pila para almacenar el resultado de la conversion, sin haber ciclos anidados que aumenten la complejidad del ejercicio.");
+    printf(ANSI_bMAGENTA "\nCOMPLEJIDAD ALGORÍTMICA\nLa complejidad de la solución empleada es O(n), ya que se utiliza la pila para almacenar el resultado de la conversion, sin haber ciclos anidados que aumenten la complejidad del ejercicio.");
     printf(ANSI_BLUE);
 }
 
@@ -388,13 +384,12 @@ void main_invertida()
     pila = cargar_pila(&cantidad);
     printf(ANSI_bGREEN "pila cargada: \n");
     p_mostrar(pila);
-    printf("" ANSI_RESET);
     pila_invertida = invertir_pila(pila);
     printf(ANSI_bGREEN "pila original: \n");
     p_mostrar(pila);
     printf(ANSI_bGREEN "pila invertida: \n");
     p_mostrar(pila_invertida);
-    printf(ANSI_bMAGENTA "\nCOMPLEJIDAD ALGORITMICA\nLa complejidad de la solución empleada es O(n) porque hay varios ciclos que dependen de la cantidad de elementos de la pila, pero no se encuentran anidados.");
+    printf(ANSI_bMAGENTA "\nCOMPLEJIDAD ALGORÍTMICA\nLa complejidad de la solución empleada es O(n) porque hay varios ciclos que dependen de la cantidad de elementos de la pila, pero no se encuentran anidados.");
     printf("" ANSI_RESET);
 }
 
@@ -410,7 +405,7 @@ void main_eliminar_ocurrencias()
     }
     else
     {
-        printf(ANSI_bBLUE "Ingrese clave del elemento para ELIMINAR todas las ocurrencias en la pila [-999.999 - 999.999]: " ANSI_RESET);
+        printf(ANSI_bBLUE "Ingrese clave del elemento para ELIMINAR todas las ocurrencias en la pila [-999.999 - 999.999]: " ANSI_YELLOW);
         int validador = scanf("%d", &valor);
         vaciar_buffer();
         while (validador != 1 || valor < -999999 || valor > 999999)
@@ -420,12 +415,12 @@ void main_eliminar_ocurrencias()
             printf("DATO FUERA DE RANGO, por favor ingresar un numero entre [-999.999 - 999.999]\n\n" ANSI_RESET);
             pausa();
             limpiar_pantalla();
-            printf(ANSI_bBLUE "Ingrese clave del elemento a cargar [-999.999 - 999.999]: " ANSI_RESET);
+            printf(ANSI_bBLUE "Ingrese clave del elemento a cargar [-999.999 - 999.999]: " ANSI_YELLOW);
             validador = scanf("%d", &valor);
             vaciar_buffer();
         }
         TipoElemento elemento = te_crear(valor);
-        printf(ANSI_bBLUE "Elija de que manera se llamara a la función\n\n1- Iterativamente\n2- Recursivamente\nIngresar opción: " ANSI_RESET);
+        printf(ANSI_bBLUE "\nElija de que manera se llamara a la función\n\n1- Iterativamente\n2- Recursivamente\nIngresar opción: " ANSI_YELLOW);
         int opc;
         validador = scanf("%d", &opc);
         vaciar_buffer();
@@ -436,12 +431,11 @@ void main_eliminar_ocurrencias()
             printf("DATO FUERA DE RANGO, por favor ingresar una opción [1-2]\n\n" ANSI_RESET);
             pausa();
             limpiar_pantalla();
-            printf(ANSI_bBLUE "Elija de que manera se llamara a la función\n\n1- Iterativamente\n2- Recursivamente \n" ANSI_RESET);
+            printf(ANSI_bBLUE "\nElija de que manera se llamara a la función\n\n1- Iterativamente\n2- Recursivamente\nIngresar opción: " ANSI_YELLOW);
             validador = scanf("%d", &opc);
             vaciar_buffer();
         }
-        printf(ANSI_bYELLOW "Pila ANTES de llamar a la función\n\n" ANSI_RESET);
-        printf(ANSI_bGREEN "");
+        printf(ANSI_bYELLOW "Pila ANTES de llamar a la función\n\n" ANSI_bGREEN);
         p_mostrar(pila); // muestro la pila como quedo cargada
         printf("\n" ANSI_RESET);
         Pila pilaEliminada = p_crear();
@@ -453,16 +447,12 @@ void main_eliminar_ocurrencias()
         {
             pilaEliminada = eliminar_ocurrencias_recursivo(pila, elemento);
         }
-        printf(ANSI_bYELLOW "Pila DESPUES de llamar a la función\n\n" ANSI_RESET);
-        printf(ANSI_bGREEN "");
+        printf(ANSI_bYELLOW "Pila DESPUÉS de llamar a la función\n\n" ANSI_bGREEN);
         p_mostrar(pila); // muestro la pila como quedo cargada
-        printf("\n" ANSI_RESET);
-
-        printf(ANSI_bYELLOW "Pila con los valores eliminados\n\n" ANSI_RESET);
-        printf(ANSI_bGREEN "");
+        printf(ANSI_bYELLOW "Pila con los valores eliminados\n\n" ANSI_bGREEN);
         p_mostrar(pilaEliminada); // muestro la pila como quedo cargada
     }
-    printf(ANSI_bMAGENTA "\nCOMPLEJIDAD ALGORITMICA\nLa complejidad de la solución empleada tanto de manera recursiva como iterativa es O(n), ya que si o si en ambas implementaciones, va sacar todos los elementos de la pila para luego compararlos y volver a agregarlos.");
+    printf(ANSI_bMAGENTA "\nCOMPLEJIDAD ALGORÍTMICA\nLa complejidad de la solución empleada tanto de manera recursiva como iterativa es O(n), ya que si o si en ambas implementaciones, va sacar todos los elementos de la pila para luego compararlos y volver a agregarlos.");
     printf("\n" ANSI_RESET);
 }
 
@@ -476,11 +466,10 @@ void main_elemento_en_comun()
     pila = cargar_pila(&cant);
     printf(ANSI_bGREEN "PILA N°2\n");
     pila2 = cargar_pila(&cant);
-    printf(ANSI_bYELLOW "Pila 1 y 2 ANTES de llamar a la función de comparar\n");
-    printf(ANSI_bGREEN "");
+    printf(ANSI_bYELLOW "Pila 1 y 2 ANTES de llamar a la función de comparar\n" ANSI_bGREEN);
     p_mostrar(pila);
-    printf("\n"); // muestro como quedaron cargadas las pilas
-    p_mostrar(pila2);
+    printf("\n");
+    p_mostrar(pila2); // muestro como quedaron cargadas las pilas
     printf("\n" ANSI_RESET);
     if (p_es_vacia(pila) || p_es_vacia(pila2))
     {
@@ -500,13 +489,12 @@ void main_elemento_en_comun()
             p_mostrar(pcomun);
             printf("\n\n" ANSI_RESET);
         }
-        printf(ANSI_bYELLOW "Pila 1 y 2 DESPUES de llamar a la función de comparar\n");
-        printf(ANSI_bGREEN "");
+        printf(ANSI_bYELLOW "Pila 1 y 2 DESPUÉS de llamar a la función de comparar\n" ANSI_bGREEN);
         p_mostrar(pila);
-        printf("\n"); // las vuelvo a mostrar para confirmar que no se modificaron luego de llamar a comparar
-        p_mostrar(pila2);
+        printf("\n");
+        p_mostrar(pila2); // las vuelvo a mostrar para confirmar que no se modificaron luego de llamar a comparar
     }
-    printf(ANSI_bMAGENTA "\nCOMPLEJIDAD ALGORITMICA\nLa complejidad de la solución empleada es O(n^2) porque se utilizan dos ciclos anidados para recorrer ambas pilas, lo que en el peor de los casos, la longitud de ambas seria igual.");
+    printf(ANSI_bMAGENTA "\nCOMPLEJIDAD ALGORÍTMICA\nLa complejidad de la solución empleada es O(n^2) porque se utilizan dos ciclos anidados para recorrer ambas pilas, lo que en el peor de los casos, la longitud de ambas seria igual.");
     printf("\n" ANSI_RESET);
 }
 
@@ -528,7 +516,7 @@ void main_contador_valores()
     Pila pila = p_crear();
     int cant;
     pila = cargar_pila(&cant);
-    printf(ANSI_bGREEN "");
+    printf(ANSI_bGREEN);
     p_mostrar(pila);
     printf("\n");
     if (!p_es_vacia(pila))
@@ -538,7 +526,7 @@ void main_contador_valores()
         mostrar_valores(paux);
         printf("\n");
     }
-    printf(ANSI_bMAGENTA "\nCOMPLEJIDAD ALGORITMICA\nLa complejidad de la solución empleada es O(n^2) porque a pesar que hay varios ciclos que dependen de la cantidad de elementos que posea la pila, solo hay un nivel de anidación, lo que se volvería critico en el peor de los casos, siendo complejidad cuadrática.");
+    printf(ANSI_bMAGENTA "\nCOMPLEJIDAD ALGORÍTMICA\nLa complejidad de la solución empleada es O(n^2) porque a pesar que hay varios ciclos que dependen de la cantidad de elementos que posea la pila, solo hay un nivel de anidación, lo que se volvería critico en el peor de los casos, siendo complejidad cuadrática.");
     printf("\n" ANSI_RESET);
 }
 

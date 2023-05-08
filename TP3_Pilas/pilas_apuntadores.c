@@ -80,13 +80,13 @@ void p_mostrar(Pila pila)
 {
     if (p_es_vacia(pila))
     {
-        printf("La pila esta vacia\n");
+        printf("La pila esta vacía\n");
         return;
     }
     Pila Paux = p_crear();
     TipoElemento X = te_crear(0);
     printf("Contenido de la pila: ");
-    // Recorro la pila desopilándola y pasándola al auxiliar
+    // Recorro la pila desapilandola y pasándola al auxiliar
     while (p_es_vacia(pila) != true)
     {
         X = p_desapilar(pila);

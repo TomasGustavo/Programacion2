@@ -5,8 +5,8 @@ TP3 Pilas
 
 Para compilar correctamente este proyecto, son requeridos los siguientes fuentes:
 ```
-- TP3_main.c [codigo principal]
-- TP3_pilas.c [codigo con las implementaciones de los ejercicios]
+- TP3_main.c [código principal]
+- TP3_pilas.c [código con las implementaciones de los ejercicios]
 - tipo_elemento
 ```
 Dependiendo de la implementación que se desee ejecutar, es imprescindible utilizar solo uno de los siguientes fuentes:
