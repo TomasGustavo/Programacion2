@@ -3,6 +3,8 @@
 
 #include <stdbool.h>
 #include "colas.h"
+#include "pilas.h"
+#include "listas.h"
 #include "tipo_elemento.h"
 
 #define ANSI_RED "\e[31m"
@@ -21,6 +23,9 @@
 #define ANSI_bWHITE "\e[97m"
 #define ANSI_RESET "\e[0m"
 
+struct posicionesPC;
+typedef struct posicionesPC *posiciones;
+
 void vaciar_buffer();
 
 void pausa();
@@ -33,13 +38,21 @@ Cola intercambiar(Cola caux);
 
 Cola cargarCola();
 
+Cola cargarColaSinRepetidos();
+
+Pila cargarPilaSinRepetidos();
+
 bool buscar(Cola c, int clave);
+
+bool buscar_c(Pila p, int x);
 
 Cola insertar(Cola c, TipoElemento x, int pos);
 
 Cola eliminarTodas(Cola c, int clave, bool* estado);
 
 int Longitud(Cola c);
+
+void mostrarListaConValor(Lista l);
 
 //void borrar_elemento(Cola cola, TipoElemento elemento);
 
@@ -51,4 +64,5 @@ Cola norepetidos(Cola c);
 
 void divisores(Cola cola, Cola Divisor_total, Cola Divisor_parcial, int numero_actual, float longitud_cola);
 
+Lista valoresComunes (Pila p, Cola c);
 #endif // TP3_LISTAS_H

@@ -93,7 +93,7 @@ void c_mostrar(Cola cola)
     }
     Cola Caux = c_crear();
     TipoElemento X = te_crear(0);
-    printf("Contenido de la Cola \n");
+    printf("Contenido de la Cola: ");
     // La cola se debe desencolar y guardar en una auxiliar
     while (c_es_vacia(cola) != true)
     {

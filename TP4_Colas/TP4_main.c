@@ -6,6 +6,8 @@
 #include <string.h>
 #include "TP4_colas.h"
 #include "colas.h"
+#include "pilas.h"
+#include "listas.h"
 #include "tipo_elemento.h"
 
 /// @brief Punto 2A: Informar si un elemento dado se encuentra en la cola.
@@ -257,6 +259,24 @@ void main_divisores(){
     c_mostrar(Divisor_parcial);
     printf(ANSI_RESET"");
 }
+
+//  PUNTO 6
+void main_valores_comunes(){
+    int cantColas, cantPilas;
+    Lista l = l_crear();
+    printf(ANSI_bCYAN"Cargando la pila: \n");
+    Pila p = cargarPilaSinRepetidos(&cantPilas);
+    printf(ANSI_bCYAN"Cargando la cola: \n");
+    Cola c = cargarColaSinRepetidos(&cantColas);
+    pausa();
+    limpiar_pantalla();
+    p_mostrar(p);
+    c_mostrar(c);
+    l = valoresComunes(p,c);
+    mostrarListaConValor(l);
+}
+
+
 /// @brief Menu principal del TP de Colas
 void menu_principal()
 {
@@ -381,14 +401,10 @@ int main()
             getch();
             break;
         case 6:
-
+            main_valores_comunes();
             getch();
             break;
         case 7:
-
-            getch();
-            break;
-        case 8:
 
             getch();
             break;

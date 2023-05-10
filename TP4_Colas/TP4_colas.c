@@ -7,7 +7,15 @@
 #include <ctype.h>
 #include "TP4_colas.h"
 #include "colas.h"
+#include "pilas.h"
+#include "listas.h"
 #include "tipo_elemento.h"
+
+struct posicionesPC
+{
+    int p;
+    int c;
+};
 
 /// @brief Vacía el buffer de entrada.
 void vaciar_buffer()
@@ -40,6 +48,19 @@ void intercambiar2(Cola c, Cola aux)
     {
         x = c_desencolar(aux);
         c_encolar(c, x);
+    }
+}
+
+/// @brief Pasa los elementos de una pila (auxiliar) a otra pila. Especialmente util para no destruir la pila original.
+/// @param p Pila donde se desea pasar los elementos.
+/// @param aux Pila auxiliar, se pierde al finalizar el ciclo.
+void intercambiarPilas(Pila p, Pila aux)
+{
+    TipoElemento x = te_crear(0);
+    while (!p_es_vacia(aux))
+    {
+        x = p_desapilar(aux);
+        p_apilar(p, x);
     }
 }
 
@@ -127,9 +148,155 @@ bool buscar(Cola c, int clave)
     }
     intercambiar2(c, caux);
     //*c = intercambiar(caux);
-    c_mostrar(c);
     return res;
 }
+
+
+/// @brief Función genérica para cargar una cola de enteros no repetidos y mostrarla al finalizar
+/// @return Cola cargada con números enteros no repetidos
+Cola cargarColaSinRepetidos(int* cant)
+{
+    Cola cola = c_crear();
+    int valor;
+    bool esRepetido = false;
+    printf(ANSI_bBLUE "Ingrese cantidad de elementos a cargar [0-99]: " ANSI_bYELLOW);
+    int validador = scanf("%d", cant);
+    vaciar_buffer();
+    while (validador != 1 || *cant < 0 || *cant >= 100)
+    {
+        limpiar_pantalla();
+        printf(ANSI_bRED "\t\t-------- ERROR --------\n");
+        printf("DATO INVALIDO\n\n" ANSI_RESET);
+        pausa();
+        limpiar_pantalla();
+        printf(ANSI_bBLUE "Ingrese cantidad de elementos a cargar en la cola [0-99]: " ANSI_bYELLOW);
+        validador = scanf("%d", cant);
+        vaciar_buffer();
+    }
+    for (int i = 0; i < *cant; i++)
+    {
+        limpiar_pantalla();
+        printf(ANSI_bBLUE "Ingrese clave del elemento N°%d a cargar [-999.999 - 999.999] (no debe estar repetido): " ANSI_bYELLOW, i + 1);
+        validador = scanf("%d", &valor);
+        if (c_es_vacia(cola)) esRepetido = false;
+        else esRepetido = buscar(cola, valor);
+        vaciar_buffer();
+        while (validador != 1 || valor < -999999 || valor > 999999 || esRepetido)
+        {
+            limpiar_pantalla();
+            printf(ANSI_bRED "\t\t-------- ERROR --------\n");
+            printf("DATO FUERA DE RANGO\n\n" ANSI_RESET);
+            pausa();
+            limpiar_pantalla();
+            printf(ANSI_bBLUE "Ingrese clave del elemento N°%d a cargar [-999.999 - 999.999]: " ANSI_bYELLOW, i + 1);
+            validador = scanf("%d", &valor);
+            if (c_es_vacia(cola)) esRepetido = false;
+            else esRepetido = buscar(cola, valor);
+            vaciar_buffer();
+        }
+        TipoElemento x = te_crear(valor);
+        c_encolar(cola,x);
+    }
+    printf(ANSI_bGREEN "");
+    c_mostrar(cola); // muestro la cola como quedo cargada
+    printf("\n" ANSI_RESET);
+    return cola;
+}
+
+bool buscar_c(Pila p, int x)
+{
+    TipoElemento temp = te_crear(0);
+    bool rta;
+    Pila paux = p_crear();
+    temp = p_desapilar(p);
+    p_apilar(paux, temp);
+    while (temp->clave != x && !p_es_vacia(p))
+    { // saco elementos la pila hasta que coincida con el elemento a buscar o hasta que este vacía
+        temp = p_desapilar(p);
+        p_apilar(paux, temp);
+    }
+    if (temp->clave == x)
+    { // si coinciden los elementos retorno true, sino salió del ciclo porque se vació lo que significa que no encontró el elemento
+        rta = true;
+    }
+    else
+    {
+        rta = false;
+    }
+    while (!p_es_vacia(paux))
+    { // vuelvo a poner en orden todos los elementos que saque en la pila original
+        temp = p_desapilar(paux);
+        p_apilar(p, temp);
+    }
+    free(paux); // libero la memoria que use para la pila auxiliar
+    return rta;
+}
+
+void mostrarListaConValor(Lista l){
+    TipoElemento x;
+    struct posicionesPC *pos;
+    Iterador ite = iterador(l);
+    printf(ANSI_YELLOW"\n Lista: ");
+    while (hay_siguiente(ite))
+    {
+        x = siguiente(ite);
+        pos = x->valor; // Acceder al valor como struct valoresXY
+        printf(ANSI_YELLOW "%i:%i:%i, ", x->clave, pos->p, pos->c);
+    }
+}
+
+/// @brief Función genérica para cargar una pila de enteros no repetidos y mostrarla al finalizar
+/// @return Pila cargada con números enteros no repetidos
+Pila cargarPilaSinRepetidos(int* cant)
+{
+    Pila pila = p_crear();
+    int valor;
+    bool esRepetido = false;
+    printf(ANSI_bBLUE "Ingrese cantidad de elementos a cargar en la pila [0-99]: " ANSI_bYELLOW);
+    int validador = scanf("%d", cant);
+    vaciar_buffer();
+    while (validador != 1 || *cant < 0 || *cant >= 100)
+    {
+        limpiar_pantalla();
+        printf(ANSI_bRED "\t\t-------- ERROR --------\n");
+        printf("DATO INVALIDO\n\n" ANSI_RESET);
+        pausa();
+        limpiar_pantalla();
+        printf(ANSI_bBLUE "Ingrese cantidad de elementos a cargar [0-99]: " ANSI_bYELLOW);
+        validador = scanf("%d", cant);
+        vaciar_buffer();
+    }
+    for (int i = 0; i < *cant; i++)
+    {
+        limpiar_pantalla();
+        printf(ANSI_bBLUE "Ingrese clave del elemento N°%d a cargar [-999.999 - 999.999] (no debe estar repetido): " ANSI_bYELLOW, i + 1);
+        validador = scanf("%d", &valor);
+        if (p_es_vacia(pila)) esRepetido = false;
+        else esRepetido = buscar_c(pila, valor);
+        vaciar_buffer();
+        while (validador != 1 || valor < -999999 || valor > 999999 || esRepetido)
+        {
+            limpiar_pantalla();
+            printf(ANSI_bRED "\t\t-------- ERROR --------\n");
+            printf("DATO FUERA DE RANGO\n\n" ANSI_RESET);
+            pausa();
+            limpiar_pantalla();
+            printf(ANSI_bBLUE "Ingrese clave del elemento N°%d a cargar [-999.999 - 999.999]: " ANSI_bYELLOW, i + 1);
+            validador = scanf("%d", &valor);
+            if (p_es_vacia(pila)) esRepetido = false;
+            else esRepetido = buscar_c(pila, valor);
+            vaciar_buffer();
+        }
+        TipoElemento x = te_crear(valor);
+        p_apilar(pila,x);
+    }
+    printf(ANSI_bGREEN "");
+    p_mostrar(pila); // muestro la pila como quedo cargada
+    printf("\n" ANSI_RESET);
+    return pila;
+}
+
+
 
 // PUNTO 2B
 /// @brief Inserta un elemento en la posicion dada
@@ -371,4 +538,43 @@ void divisores(Cola cola, Cola Divisor_total, Cola Divisor_parcial, int numero_a
         c_encolar(Divisor_parcial, X);
     }
     return;
+}
+
+// PUNTO 6 
+/// @brief  Dada una pila y una cola devuelve una lista con los valores comunes y su posicion en la estructura original
+/// @param p Pila cargada sin repetidos
+/// @param c Cola cargada sin repetidos
+/// @return Lista con los elementos comunes y sus posiciones en la estructura original
+Lista valoresComunes (Pila p, Cola c){
+    Pila paux = p_crear();
+    Cola caux = c_crear();
+    Lista l = l_crear();
+    TipoElemento x1 = te_crear(0);
+    TipoElemento x2 = te_crear(0);
+    int pc;
+    int pp = 1;
+    while (!p_es_vacia(p))
+    {
+        x1 = p_desapilar(p);
+        pc = 1;
+        while (!c_es_vacia(c))
+        {
+            x2 = c_desencolar(c);
+            if (x1->clave == x2->clave){
+                int elemento = x2->clave;
+                struct posicionesPC *pos = malloc(sizeof(struct posicionesPC));
+                pos->p = pp;
+                pos->c = pc;
+                TipoElemento x3 = te_crear_con_valor(elemento,pos);
+                l_agregar(l,x3);
+            }
+            pc++;
+            c_encolar(caux,x2);
+        }
+        p_apilar(paux,x1);
+        pp++;
+        intercambiar2(c,caux);
+    }
+    intercambiarPilas(p,paux);
+    return l;
 }

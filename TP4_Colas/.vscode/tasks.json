@@ -11,6 +11,8 @@
                 "${fileDirname}\\colas_arreglos.c",
                 "${fileDirname}\\tipo_elemento.c",
                 "${fileDirname}\\TP4_colas.c",
+                "${fileDirname}\\pilas_apuntadores.c",
+                "${fileDirname}\\listas_apuntadores.c",
                 "-o",
                 "${fileDirname}\\${fileBasenameNoExtension}.exe",
                 "-Wall"
@@ -38,6 +40,8 @@
                 "${fileDirname}\\colas_arregloCircular.c",
                 "${fileDirname}\\tipo_elemento.c",
                 "${fileDirname}\\TP4_colas.c",
+                "${fileDirname}\\pilas_apuntadores.c",
+                "${fileDirname}\\listas_apuntadores.c",
                 "-o",
                 "${fileDirname}\\${fileBasenameNoExtension}.exe",
                 "-Wall"
@@ -65,6 +69,8 @@
                 "${fileDirname}\\colas_apuntadores.c",
                 "${fileDirname}\\tipo_elemento.c",
                 "${fileDirname}\\TP4_colas.c",
+                "${fileDirname}\\pilas_apuntadores.c",
+                "${fileDirname}\\listas_apuntadores.c",
                 "-o",
                 "${fileDirname}\\${fileBasenameNoExtension}.exe",
                 "-Wall"

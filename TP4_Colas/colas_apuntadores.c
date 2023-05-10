@@ -93,12 +93,12 @@ void c_mostrar(Cola cola)
     }
     Cola Caux = c_crear();
     TipoElemento X = te_crear(0);
-    printf("Imprimiendo las Claves de la Cola \n");
+    printf("Contenido de la Cola: ");
     // La cola se debe desencolar y guardar en una auxiliar
     while (c_es_vacia(cola) != true)
     {
         X = c_desencolar(cola);
-        printf("Clave: %d \n", X->clave);
+        printf("% d", X->clave);
         c_encolar(Caux, X);
     }
     // ahora paso la auxiliar a la cola de nuevo para dejarla como estaba
@@ -108,3 +108,4 @@ void c_mostrar(Cola cola)
         c_encolar(cola, X);
     }
 }
+
