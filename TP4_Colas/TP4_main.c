@@ -272,8 +272,14 @@ void main_valores_comunes(){
     limpiar_pantalla();
     p_mostrar(p);
     c_mostrar(c);
-    l = valoresComunes(p,c);
-    mostrarListaConValor(l);
+    if (p_es_vacia(p) || c_es_vacia(c)){
+        printf(ANSI_RED"\n Las estructuras no tienen valores comunes ya que al menos una de ellas esta vacia");
+        printf(ANSI_RESET);
+    } 
+    else {
+        l = valoresComunes(p,c);
+        mostrarListaConValor(l);
+    }
 }
 
 
