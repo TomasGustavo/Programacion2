@@ -54,7 +54,7 @@ int Longitud(Cola c);
 
 void mostrarListaConValor(Lista l);
 
-//void borrar_elemento(Cola cola, TipoElemento elemento);
+void borrar_elemento(Cola cola, TipoElemento elemento);
 
 Cola invertir(Cola cola, Cola caux, int longitud);
 

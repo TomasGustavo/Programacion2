@@ -67,7 +67,7 @@ bool c_es_vacia(Cola cola)
 }
 
 // Rutina interna
-int longitud(Cola cola)
+int c_longitud(Cola cola)
 {
     int i = 0;
     struct Nodo *N = cola->frente;
@@ -81,7 +81,7 @@ int longitud(Cola cola)
 
 bool c_es_llena(Cola cola)
 {
-    return (longitud(cola) == TAMANIO_MAXIMO);
+    return (c_longitud(cola) == TAMANIO_MAXIMO);
 }
 
 void c_mostrar(Cola cola)
