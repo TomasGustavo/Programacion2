@@ -403,9 +403,31 @@ bool buscarPos(Cola c, TipoElemento x, int pos)
     return bandera;
 }
 
-// Punto 2F
-Cola invertir(Cola cola, Cola caux, int longitud)
-{
+// punto 2E
+/// @brief Crea una copia de una cola sin perder la original
+/// @param c Cola cargada
+/// @return Devuelve la cola clonada
+Cola copiar_cola(Cola cola){
+    Cola c = c_crear();
+    Cola cAux = c_crear();
+    TipoElemento x = te_crear(0);
+    while(!c_es_vacia(cola)){
+        x = c_desencolar(cola);
+        c_encolar(c,x);
+        c_encolar(cAux,x);
+    }
+
+    while(!c_es_vacia(cAux)){
+        x = c_desencolar(cAux);
+        c_encolar(cola,x);
+    }
+    free(cAux);
+
+    return c;
+}
+
+//Punto 2F
+Cola invertir(Cola cola, Cola caux, int longitud){
     Cola cola_invertida = c_crear();
     TipoElemento X = te_crear(0);
     if (longitud == 1)

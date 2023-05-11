@@ -46,6 +46,8 @@ Cola insertar(Cola c, TipoElemento x, int pos);
 
 Cola eliminarTodas(Cola c, int clave, bool *estado);
 
+Cola copiar_cola(Cola cola);
+
 int Longitud(Cola c);
 
 void mostrarListaConValor(Lista l);
