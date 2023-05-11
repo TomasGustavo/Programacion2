@@ -32,15 +32,11 @@ void pausa();
 
 void limpiar_pantalla();
 
-Cola intercambiar(Cola caux);
+Cola cargarCola(int *cant);
 
-// void intercambiar(Cola c, Cola aux);
+Cola cargarColaSinRepetidos(int *cant);
 
-Cola cargarCola();
-
-Cola cargarColaSinRepetidos();
-
-Pila cargarPilaSinRepetidos();
+Pila cargarPilaSinRepetidos(int *cant);
 
 bool buscar(Cola c, int clave);
 
@@ -48,7 +44,7 @@ bool buscar_c(Pila p, int x);
 
 Cola insertar(Cola c, TipoElemento x, int pos);
 
-Cola eliminarTodas(Cola c, int clave, bool* estado);
+Cola eliminarTodas(Cola c, int clave, bool *estado);
 
 int Longitud(Cola c);
 
@@ -64,5 +60,5 @@ Cola norepetidos(Cola c);
 
 void divisores(Cola cola, Cola Divisor_total, Cola Divisor_parcial, int numero_actual, float longitud_cola);
 
-Lista valoresComunes (Pila p, Cola c);
+Lista valoresComunes(Pila p, Cola c);
 #endif // TP3_LISTAS_H

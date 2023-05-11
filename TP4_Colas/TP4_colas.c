@@ -39,51 +39,35 @@ void limpiar_pantalla()
 }
 
 /// @brief Pasa los elementos de una cola (auxiliar) a otra cola. Especialmente util para no destruir la cola original.
-/// @param c Cola donde se desea pasar los elementos.
-/// @param aux Cola auxiliar, se pierde al finalizar el ciclo.
-void intercambiar2(Cola c, Cola aux)
+/// @param C Cola donde se desea pasar los elementos.
+/// @param CAux Cola auxiliar, se pierde al finalizar el ciclo.
+void c_intercambiar(Cola C, Cola CAux)
 {
     TipoElemento x = te_crear(0);
-    while (!c_es_vacia(aux))
+    while (!c_es_vacia(CAux))
     {
-        x = c_desencolar(aux);
-        c_encolar(c, x);
+        x = c_desencolar(CAux);
+        c_encolar(C, x);
     }
 }
 
 /// @brief Pasa los elementos de una pila (auxiliar) a otra pila. Especialmente util para no destruir la pila original.
 /// @param p Pila donde se desea pasar los elementos.
 /// @param aux Pila auxiliar, se pierde al finalizar el ciclo.
-void intercambiarPilas(Pila p, Pila aux)
+void p_intercambiar(Pila P, Pila PAux)
 {
     TipoElemento x = te_crear(0);
-    while (!p_es_vacia(aux))
+    while (!p_es_vacia(PAux))
     {
-        x = p_desapilar(aux);
-        p_apilar(p, x);
+        x = p_desapilar(PAux);
+        p_apilar(P, x);
     }
 }
-
-/// @brief Pasa los elementos de una cola (auxiliar) a otra cola. Especialmente util para no destruir la cola original.
-/// @param caux Cola auxiliar, se pierde al finalizar el ciclo.
-/// @return Cola donde se desea pasar los elementos, debe pasarse como referencia (puntero)
-Cola intercambiar(Cola caux)
-{
-    Cola cresult = c_crear();
-    TipoElemento x = te_crear(0);
-    while (!c_es_vacia(caux))
-    {
-        x = c_desencolar(caux);
-        c_encolar(cresult, x);
-    }
-    return cresult;
-}
-
-//
 
 /// @brief Función genérica para cargar una cola de enteros y mostrarla al finalizar
+/// @param cant Retorna por referencia la cantidad de elementos de la cola
 /// @return Cola cargada con números enteros
-Cola cargarCola(int* cant)
+Cola cargarCola(int *cant)
 {
     Cola cola = c_crear();
     int valor;
@@ -146,15 +130,13 @@ bool buscar(Cola c, int clave)
         }
         c_encolar(caux, x);
     }
-    intercambiar2(c, caux);
-    //*c = intercambiar(caux);
+    c_intercambiar(c, caux);
     return res;
 }
 
-
 /// @brief Función genérica para cargar una cola de enteros no repetidos y mostrarla al finalizar
 /// @return Cola cargada con números enteros no repetidos
-Cola cargarColaSinRepetidos(int* cant)
+Cola cargarColaSinRepetidos(int *cant)
 {
     Cola cola = c_crear();
     int valor;
@@ -178,8 +160,10 @@ Cola cargarColaSinRepetidos(int* cant)
         limpiar_pantalla();
         printf(ANSI_bBLUE "Ingrese clave del elemento N°%d a cargar [-999.999 - 999.999] (no debe estar repetido): " ANSI_bYELLOW, i + 1);
         validador = scanf("%d", &valor);
-        if (c_es_vacia(cola)) esRepetido = false;
-        else esRepetido = buscar(cola, valor);
+        if (c_es_vacia(cola))
+            esRepetido = false;
+        else
+            esRepetido = buscar(cola, valor);
         vaciar_buffer();
         while (validador != 1 || valor < -999999 || valor > 999999 || esRepetido)
         {
@@ -190,12 +174,14 @@ Cola cargarColaSinRepetidos(int* cant)
             limpiar_pantalla();
             printf(ANSI_bBLUE "Ingrese clave del elemento N°%d a cargar [-999.999 - 999.999]: " ANSI_bYELLOW, i + 1);
             validador = scanf("%d", &valor);
-            if (c_es_vacia(cola)) esRepetido = false;
-            else esRepetido = buscar(cola, valor);
+            if (c_es_vacia(cola))
+                esRepetido = false;
+            else
+                esRepetido = buscar(cola, valor);
             vaciar_buffer();
         }
         TipoElemento x = te_crear(valor);
-        c_encolar(cola,x);
+        c_encolar(cola, x);
     }
     printf(ANSI_bGREEN "");
     c_mostrar(cola); // muestro la cola como quedo cargada
@@ -232,11 +218,12 @@ bool buscar_c(Pila p, int x)
     return rta;
 }
 
-void mostrarListaConValor(Lista l){
+void mostrarListaConValor(Lista l)
+{
     TipoElemento x;
     struct posicionesPC *pos;
     Iterador ite = iterador(l);
-    printf(ANSI_YELLOW"\n Lista: ");
+    printf(ANSI_YELLOW "\n Lista: ");
     while (hay_siguiente(ite))
     {
         x = siguiente(ite);
@@ -247,7 +234,7 @@ void mostrarListaConValor(Lista l){
 
 /// @brief Función genérica para cargar una pila de enteros no repetidos y mostrarla al finalizar
 /// @return Pila cargada con números enteros no repetidos
-Pila cargarPilaSinRepetidos(int* cant)
+Pila cargarPilaSinRepetidos(int *cant)
 {
     Pila pila = p_crear();
     int valor;
@@ -271,8 +258,10 @@ Pila cargarPilaSinRepetidos(int* cant)
         limpiar_pantalla();
         printf(ANSI_bBLUE "Ingrese clave del elemento N°%d a cargar [-999.999 - 999.999] (no debe estar repetido): " ANSI_bYELLOW, i + 1);
         validador = scanf("%d", &valor);
-        if (p_es_vacia(pila)) esRepetido = false;
-        else esRepetido = buscar_c(pila, valor);
+        if (p_es_vacia(pila))
+            esRepetido = false;
+        else
+            esRepetido = buscar_c(pila, valor);
         vaciar_buffer();
         while (validador != 1 || valor < -999999 || valor > 999999 || esRepetido)
         {
@@ -283,12 +272,14 @@ Pila cargarPilaSinRepetidos(int* cant)
             limpiar_pantalla();
             printf(ANSI_bBLUE "Ingrese clave del elemento N°%d a cargar [-999.999 - 999.999]: " ANSI_bYELLOW, i + 1);
             validador = scanf("%d", &valor);
-            if (p_es_vacia(pila)) esRepetido = false;
-            else esRepetido = buscar_c(pila, valor);
+            if (p_es_vacia(pila))
+                esRepetido = false;
+            else
+                esRepetido = buscar_c(pila, valor);
             vaciar_buffer();
         }
         TipoElemento x = te_crear(valor);
-        p_apilar(pila,x);
+        p_apilar(pila, x);
     }
     printf(ANSI_bGREEN "");
     p_mostrar(pila); // muestro la pila como quedo cargada
@@ -296,13 +287,11 @@ Pila cargarPilaSinRepetidos(int* cant)
     return pila;
 }
 
-
-
 // PUNTO 2B
-/// @brief Inserta un elemento en la posicion dada
+/// @brief Inserta un elemento en la posición dada
 /// @param c Cola cargada
 ///@param x Elemento a insertar
-///@param pos Posicion en la que se quiere insertar el elemento
+///@param pos Posición en la que se quiere insertar el elemento
 /// @return Nueva cola con  el elemento insertado
 Cola insertar(Cola c, TipoElemento x, int pos)
 {
@@ -312,14 +301,15 @@ Cola insertar(Cola c, TipoElemento x, int pos)
     while (!c_es_vacia(c))
     {
         x1 = c_desencolar(c);
-        if (i == pos){
-            c_encolar (caux, x);
+        if (i == pos)
+        {
+            c_encolar(caux, x);
             i++;
         }
         c_encolar(caux, x1);
         i++;
     }
-    intercambiar2(c,caux);
+    c_intercambiar(c, caux);
     return c;
 }
 
@@ -327,20 +317,23 @@ Cola insertar(Cola c, TipoElemento x, int pos)
 /// @brief Elimina todas las repeticiones del elemento dado
 /// @param c Cola cargada
 /// @param clave Clave a eliminar
-/// @param estado Devuelve true si se encontro el elemento a eliminar y false si no se encontro
+/// @param estado Devuelve true si se encontró el elemento a eliminar y false si no se encontró
 /// @return Cantidad de elementos que posee la cola
-Cola eliminarTodas(Cola c, int clave, bool* estado){
+Cola eliminarTodas(Cola c, int clave, bool *estado)
+{
     Cola caux = c_crear();
     TipoElemento x = te_crear(0);
     *estado = false;
-    while (!c_es_vacia(c)){
+    while (!c_es_vacia(c))
+    {
         x = c_desencolar(c);
-        if (x->clave != clave){
-            c_encolar(caux,x);
+        if (x->clave != clave)
+        {
+            c_encolar(caux, x);
             *estado = true;
         }
     }
-    intercambiar2(c,caux);
+    c_intercambiar(c, caux);
     return c;
 }
 
@@ -358,13 +351,13 @@ int Longitud(Cola c)
         cont++;
         c_encolar(aux, x);
     }
-    // intercambiar(c, aux);
-    c = intercambiar(aux);
+    c_intercambiar(c, aux);
     return cont;
 }
 
-//punto 2C
-void borrar_elemento(Cola cola, TipoElemento elemento){
+// punto 2C
+void borrar_elemento(Cola cola, TipoElemento elemento)
+{
     Cola caux = c_crear();
     TipoElemento X;
     while (c_es_vacia(cola) != true)
@@ -381,7 +374,6 @@ void borrar_elemento(Cola cola, TipoElemento elemento){
         c_encolar(cola, X);
     }
 }
-
 
 /// @brief Busca el elemento dado en la posición indicada
 /// @param c Cola cargada
@@ -407,13 +399,13 @@ bool buscarPos(Cola c, TipoElemento x, int pos)
         }
         c_encolar(aux, x1);
     }
-    // intercambiar(c, aux);
-    c = intercambiar(aux);
+    c_intercambiar(c, aux);
     return bandera;
 }
 
-//Punto 2F
-Cola invertir(Cola cola, Cola caux, int longitud){
+// Punto 2F
+Cola invertir(Cola cola, Cola caux, int longitud)
+{
     Cola cola_invertida = c_crear();
     TipoElemento X = te_crear(0);
     if (longitud == 1)
@@ -423,8 +415,8 @@ Cola invertir(Cola cola, Cola caux, int longitud){
         c_encolar(cola_invertida, X);
         return cola_invertida;
     }
-    
-    if(c_es_vacia(cola) != true)
+
+    if (c_es_vacia(cola) != true)
     {
         X = c_desencolar(cola);
         c_encolar(caux, X);
@@ -432,11 +424,11 @@ Cola invertir(Cola cola, Cola caux, int longitud){
         c_encolar(cola_invertida, X);
         while (c_es_vacia(caux) != true)
         {
-        X = c_desencolar(caux);
-        c_encolar(cola, X);
+            X = c_desencolar(caux);
+            c_encolar(cola, X);
         }
     }
-    
+
     return cola_invertida;
 }
 // PUNTO 3
@@ -466,8 +458,7 @@ bool Comparar(Cola c1, Cola c2)
             }
             c_encolar(caux, x1);
         }
-        // intercambiar(c1, caux);
-        c1 = intercambiar(caux);
+        c_intercambiar(c1, caux);
         return bandera;
     }
 }
@@ -501,8 +492,7 @@ Cola norepetidos(Cola c)
             c_encolar(caux, x);
         }
     }
-    // intercambiar(c,caux);
-    c = intercambiar(caux);
+    c_intercambiar(c, caux);
     return cresp;
 }
 
@@ -540,12 +530,13 @@ void divisores(Cola cola, Cola Divisor_total, Cola Divisor_parcial, int numero_a
     return;
 }
 
-// PUNTO 6 
-/// @brief  Dada una pila y una cola devuelve una lista con los valores comunes y su posicion en la estructura original
+// PUNTO 6
+/// @brief  Dada una pila y una cola devuelve una lista con los valores comunes y su posición en la estructura original
 /// @param p Pila cargada sin repetidos
 /// @param c Cola cargada sin repetidos
 /// @return Lista con los elementos comunes y sus posiciones en la estructura original
-Lista valoresComunes (Pila p, Cola c){
+Lista valoresComunes(Pila p, Cola c)
+{
     Pila paux = p_crear();
     Cola caux = c_crear();
     Lista l = l_crear();
@@ -560,21 +551,22 @@ Lista valoresComunes (Pila p, Cola c){
         while (!c_es_vacia(c))
         {
             x2 = c_desencolar(c);
-            if (x1->clave == x2->clave){
+            if (x1->clave == x2->clave)
+            {
                 int elemento = x2->clave;
                 struct posicionesPC *pos = malloc(sizeof(struct posicionesPC));
                 pos->p = pp;
                 pos->c = pc;
-                TipoElemento x3 = te_crear_con_valor(elemento,pos);
-                l_agregar(l,x3);
+                TipoElemento x3 = te_crear_con_valor(elemento, pos);
+                l_agregar(l, x3);
             }
             pc++;
-            c_encolar(caux,x2);
+            c_encolar(caux, x2);
         }
-        p_apilar(paux,x1);
+        p_apilar(paux, x1);
         pp++;
-        intercambiar2(c,caux);
+        c_intercambiar(c, caux);
     }
-    intercambiarPilas(p,paux);
+    p_intercambiar(p, paux);
     return l;
 }
