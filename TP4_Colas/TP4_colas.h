@@ -63,4 +63,6 @@ Cola norepetidos(Cola c);
 void divisores(Cola cola, Cola Divisor_total, Cola Divisor_parcial, int numero_actual, float longitud_cola);
 
 Lista valoresComunes(Pila p, Cola c);
+
+void ventanillas(int q, Cola c1, Cola c2, Cola c3);
 #endif // TP3_LISTAS_H

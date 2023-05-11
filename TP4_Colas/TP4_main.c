@@ -14,10 +14,10 @@
 void main_buscarElemento()
 {
     Cola c;
-    int clave, validador;
+    int clave, validador,cant;
     bool rta;
     printf(ANSI_bMAGENTA "Cargar la cola: \n");
-    c = cargarCola();
+    c = cargarCola(&cant);
     if (!c_es_vacia(c))
     {
 
@@ -49,7 +49,8 @@ void main_buscarElemento()
 //punto 2C
 void main_borrar(){
     Cola cola = c_crear();
-    cola = cargarCola();
+    int cant;
+    cola = cargarCola(&cant);
     TipoElemento X;
     int elemento;
     printf(ANSI_bBLUE"ingrese el elemento que quiere borrar: "ANSI_bYELLOW);
@@ -67,7 +68,8 @@ void main_invertida(){
     Cola caux = c_crear();
     Cola cola_invertida = c_crear();
     TipoElemento X;
-    cola = cargarCola();
+    int cant;
+    cola = cargarCola(&cant);
     int longitud_cola = 0;
      while (c_es_vacia(cola)!= true)//esta sección solo encuentra el 
     {                              //elemento mayor de la cola (para limitar la función) y la longitud en flotante 
@@ -211,8 +213,9 @@ void main_clonar(){
 void main_punto3()
 {
     Cola c1, c2;
-    c1 = cargarCola();
-    c2 = cargarCola();
+    int cant;
+    c1 = cargarCola(&cant);
+    c2 = cargarCola(&cant);
     if (Comparar(c1, c2))
     {
         printf(ANSI_GREEN "Las colas son iguales\n");
@@ -238,7 +241,8 @@ void main_punto3()
 void main_punto4()
 {
     Cola c1, c2 = c_crear();
-    c1 = cargarCola();
+    int cant;
+    c1 = cargarCola(&cant);
     if (!c_es_vacia(c1))
     {
         c2 = norepetidos(c1);
@@ -255,10 +259,11 @@ void main_divisores(){
     Cola Divisor_total = c_crear();
     Cola Divisor_parcial = c_crear();
     TipoElemento X;
+    int cant;
     int numero_actual = 2;
     int elemento_mayor_cola = 0;
     float longitud_cola = 0;
-    cola = cargarCola();
+    cola = cargarCola(&cant);
     while (c_es_vacia(cola)!= true)//esta sección solo encuentra el 
     {                              //elemento mayor de la cola (para limitar la función) y la longitud en flotante 
     
@@ -308,6 +313,22 @@ void main_valores_comunes(){
         l = valoresComunes(p,c);
         mostrarListaConValor(l);
     }
+}
+
+void main_ventanillas(){
+    Cola cola1 = c_crear();
+    Cola cola2 = c_crear();
+    Cola cola3 = c_crear();
+    int cant,q=10;
+
+    cola1 = cargarCola(&cant);
+    cola2 = cargarCola(&cant);
+    cola3 = cargarCola(&cant);
+
+
+    ventanillas(q,cola1,cola2,cola3);
+
+    return;
 }
 
 /// @brief Menu principal del TP de Colas

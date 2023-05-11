@@ -592,3 +592,43 @@ Lista valoresComunes(Pila p, Cola c)
     p_intercambiar(p, paux);
     return l;
 }
+
+// Punto 7
+void ventanillas(int q, Cola c1, Cola c2, Cola c3){
+
+    TipoElemento x1=te_crear(0);
+    TipoElemento x2=te_crear(0);
+    TipoElemento x3=te_crear(0);
+    int ciclos = (Longitud(c1) + Longitud(c2) + Longitud(c3));
+
+    for (int i=0; i<ciclos; i++){
+        if(!c_es_vacia(c1)){
+            x1 = c_desencolar(c1);
+            x1->clave = x1->clave - q;
+
+            if(x1->clave <= 0){
+                printf("Cliente 'x' Cola 1\n");
+            }
+        }
+
+        if(!c_es_vacia(c2)){
+            x2 = c_desencolar(c2);
+            x2->clave = x2->clave - q;
+
+            if(x2->clave <= 0){
+                printf("Cliente 'x' Cola 2\n");
+            }
+        }
+
+        if(!c_es_vacia(c3)){
+            x3 = c_desencolar(c3);
+            x3->clave = x3->clave - q;
+
+            if(x3->clave <= 0){
+                printf("Cliente 'x' Cola 3\n");
+            }
+        }
+    }
+    
+
+}
