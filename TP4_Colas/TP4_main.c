@@ -202,7 +202,7 @@ void main_clonar()
 
     if (c_es_vacia(cola))
     {
-        printf(ANSI_YELLOW "La cola esta vacia, se hara la copia igualmente pero este es solo un aviso\n\n" ANSI_RESET);
+        printf(ANSI_YELLOW "La cola esta vacía, se hara la copia igualmente pero este es solo un aviso\n\n" ANSI_RESET);
     }
 
     colaClon = copiar_cola(cola);
@@ -210,7 +210,7 @@ void main_clonar()
     printf(ANSI_bMAGENTA "Cola clonada: \n\n");
     c_mostrar(colaClon);
 
-    printf(ANSI_bGREEN "\n\nCola original DESPUES de llamar a la funcion: \n");
+    printf(ANSI_bGREEN "\n\nCola original DESPUES de llamar a la función: \n");
     c_mostrar(cola);
     printf("" ANSI_RESET);
 
