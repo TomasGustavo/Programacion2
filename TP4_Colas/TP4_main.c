@@ -69,8 +69,8 @@ void main_invertida(){
     TipoElemento X;
     cola = cargarCola();
     int longitud_cola = 0;
-     while (c_es_vacia(cola)!= true)//esta seccion solo encuentra el 
-    {                              //elemento mayor de la cola (para limitar la funcion) y la longitud en flotante 
+     while (c_es_vacia(cola)!= true)//esta sección solo encuentra el 
+    {                              //elemento mayor de la cola (para limitar la función) y la longitud en flotante 
     
         X = c_desencolar(cola);
         longitud_cola++;
@@ -88,7 +88,7 @@ void main_invertida(){
     c_mostrar(cola);
 } 
 
-/// @brief Punto 2b: Inserta un elemento en la posicion dada
+/// @brief Punto 2b: Inserta un elemento en la posición dada
 void main_insertar_en_cola(){
     Cola c = c_crear();
     int clave, posi, cant;
@@ -163,7 +163,7 @@ void main_eliminar_repeticiones(){
         printf(ANSI_bGREEN);
         c_mostrar(c); // la vuelvo a mostrar para confirmar que se hizo bien la eliminación
         printf("\n" ANSI_RESET);
-    } else printf(ANSI_bRED "No se puede buscar un elemento si la cola esta vacia");
+    } else printf(ANSI_bRED "No se puede buscar un elemento si la cola esta vacía");
     printf("\n" ANSI_RESET);
     pausa();
     limpiar_pantalla();
@@ -231,8 +231,8 @@ void main_divisores(){
     int elemento_mayor_cola = 0;
     float longitud_cola = 0;
     cola = cargarCola();
-    while (c_es_vacia(cola)!= true)//esta seccion solo encuentra el 
-    {                              //elemento mayor de la cola (para limitar la funcion) y la longitud en flotante 
+    while (c_es_vacia(cola)!= true)//esta sección solo encuentra el 
+    {                              //elemento mayor de la cola (para limitar la función) y la longitud en flotante 
     
         X = c_desencolar(cola);
         if (X->clave > elemento_mayor_cola)
@@ -273,7 +273,7 @@ void main_valores_comunes(){
     p_mostrar(p);
     c_mostrar(c);
     if (p_es_vacia(p) || c_es_vacia(c)){
-        printf(ANSI_RED"\n Las estructuras no tienen valores comunes ya que al menos una de ellas esta vacia");
+        printf(ANSI_RED"\n Las estructuras no tienen valores comunes ya que al menos una de ellas esta vacía");
         printf(ANSI_RESET);
     } 
     else {
@@ -281,7 +281,6 @@ void main_valores_comunes(){
         mostrarListaConValor(l);
     }
 }
-
 
 /// @brief Menu principal del TP de Colas
 void menu_principal()
