@@ -46,36 +46,36 @@ void main_buscarElemento()
     }
     printf(ANSI_RESET);
 }
-//punto 2C
-void main_borrar(){
+// punto 2C
+void main_borrar()
+{
     int cant;
     Cola cola = c_crear();
-    int cant;
     cola = cargarCola(&cant);
     TipoElemento X;
     int elemento;
-    printf(ANSI_bBLUE"ingrese el elemento que quiere borrar: "ANSI_bYELLOW);
-    scanf("%d",&elemento);
+    printf(ANSI_bBLUE "ingrese el elemento que quiere borrar: " ANSI_bYELLOW);
+    scanf("%d", &elemento);
     X = te_crear(elemento);
     borrar_elemento(cola, X);
-    printf(ANSI_bGREEN"");
+    printf(ANSI_bGREEN "");
     c_mostrar(cola);
-    printf(ANSI_RESET"");
+    printf(ANSI_RESET "");
 }
 
-//punto 2F
-void main_invertida(){
+// punto 2F
+void main_invertida()
+{
     int cant;
     Cola cola = c_crear();
     Cola caux = c_crear();
     Cola cola_invertida = c_crear();
     TipoElemento X;
-    int cant;
     cola = cargarCola(&cant);
     int longitud_cola = 0;
-     while (c_es_vacia(cola)!= true)//esta sección solo encuentra el 
-    {                              //elemento mayor de la cola (para limitar la función) y la longitud en flotante 
-    
+    while (c_es_vacia(cola) != true) // esta sección solo encuentra el
+    {                                // elemento mayor de la cola (para limitar la función) y la longitud en flotante
+
         X = c_desencolar(cola);
         longitud_cola++;
         c_encolar(caux, X);
@@ -83,17 +83,18 @@ void main_invertida(){
     while (c_es_vacia(caux) != true)
     {
         X = c_desencolar(caux);
-        c_encolar(cola , X);
+        c_encolar(cola, X);
     }
-    cola_invertida = invertir(cola,caux , longitud_cola);
-    printf(ANSI_bGREEN"cola invertida: \n");
+    cola_invertida = invertir(cola, caux, longitud_cola);
+    printf(ANSI_bGREEN "cola invertida: \n");
     c_mostrar(cola_invertida);
-    printf(ANSI_bGREEN"\ncola original: \n");
+    printf(ANSI_bGREEN "\ncola original: \n");
     c_mostrar(cola);
-} 
+}
 
 /// @brief Punto 2b: Inserta un elemento en la posición dada
-void main_insertar_en_cola(){
+void main_insertar_en_cola()
+{
     Cola c = c_crear();
     int clave, posi, cant;
     c = cargarCola(&cant);
@@ -124,9 +125,12 @@ void main_insertar_en_cola(){
         validador = scanf("%d", &posi);
         vaciar_buffer();
     }
-    if (c_es_vacia(c)){
+    if (c_es_vacia(c))
+    {
         c_encolar(c, elemento);
-    } else {
+    }
+    else
+    {
         c = insertar(c, elemento, posi);
     }
     c_mostrar(c);
@@ -134,7 +138,8 @@ void main_insertar_en_cola(){
 }
 
 /// @brief Punto 2c: Eliminar todas las repeticiones de un elemento dado
-void main_eliminar_repeticiones(){
+void main_eliminar_repeticiones()
+{
     Cola c = c_crear();
     int cant, clave;
     c = cargarCola(&cant);
@@ -167,7 +172,9 @@ void main_eliminar_repeticiones(){
         printf(ANSI_bGREEN);
         c_mostrar(c); // la vuelvo a mostrar para confirmar que se hizo bien la eliminación
         printf("\n" ANSI_RESET);
-    } else printf(ANSI_bRED "No se puede buscar un elemento si la cola esta vacía");
+    }
+    else
+        printf(ANSI_bRED "No se puede buscar un elemento si la cola esta vacía");
     printf("\n" ANSI_RESET);
     pausa();
     limpiar_pantalla();
@@ -185,25 +192,27 @@ void main_contador()
 
 /// @brief Punto 2E: Clona una cola
 
-void main_clonar(){
+void main_clonar()
+{
     int cant;
     Cola cola = c_crear();
     Cola colaClon = c_crear();
 
     cola = cargarCola(&cant);
-    
-    if(c_es_vacia(cola)){
-        printf(ANSI_YELLOW"La cola esta vacia, se hara la copia igualmente pero este es solo un aviso\n\n"ANSI_RESET);
+
+    if (c_es_vacia(cola))
+    {
+        printf(ANSI_YELLOW "La cola esta vacia, se hara la copia igualmente pero este es solo un aviso\n\n" ANSI_RESET);
     }
-    
+
     colaClon = copiar_cola(cola);
 
-    printf(ANSI_bMAGENTA"Cola clonada: \n\n");
+    printf(ANSI_bMAGENTA "Cola clonada: \n\n");
     c_mostrar(colaClon);
 
-    printf(ANSI_bGREEN"\n\nCola original DESPUES de llamar a la funcion: \n");
+    printf(ANSI_bGREEN "\n\nCola original DESPUES de llamar a la funcion: \n");
     c_mostrar(cola);
-    printf(""ANSI_RESET);
+    printf("" ANSI_RESET);
 
     pausa();
     limpiar_pantalla();
@@ -244,7 +253,6 @@ void main_punto4()
 {
     int cant;
     Cola c1, c2 = c_crear();
-    int cant;
     c1 = cargarCola(&cant);
     if (!c_es_vacia(c1))
     {
@@ -255,22 +263,22 @@ void main_punto4()
     printf(ANSI_RESET);
 }
 
-//Punto 5
-void main_divisores(){
+// Punto 5
+void main_divisores()
+{
     int cant;
     Cola cola = c_crear();
     Cola caux = c_crear();
     Cola Divisor_total = c_crear();
     Cola Divisor_parcial = c_crear();
     TipoElemento X;
-    int cant;
     int numero_actual = 2;
     int elemento_mayor_cola = 0;
     float longitud_cola = 0;
     cola = cargarCola(&cant);
-    while (c_es_vacia(cola)!= true)//esta sección solo encuentra el 
-    {                              //elemento mayor de la cola (para limitar la función) y la longitud en flotante 
-    
+    while (c_es_vacia(cola) != true) // esta sección solo encuentra el
+    {                                // elemento mayor de la cola (para limitar la función) y la longitud en flotante
+
         X = c_desencolar(cola);
         if (X->clave > elemento_mayor_cola)
         {
@@ -282,55 +290,58 @@ void main_divisores(){
     while (c_es_vacia(caux) != true)
     {
         X = c_desencolar(caux);
-        c_encolar(cola , X);
+        c_encolar(cola, X);
     }
     while (numero_actual <= 100 || numero_actual < elemento_mayor_cola)
     {
         divisores(cola, Divisor_total, Divisor_parcial, numero_actual, longitud_cola);
         numero_actual++;
     }
-    printf(ANSI_bGREEN"Divisores totales: \n");
+    printf(ANSI_bGREEN "Divisores totales: \n");
     c_mostrar(Divisor_total);
     printf("\n");
-    printf(ANSI_bGREEN"\nDivisores parciales: \n");
+    printf(ANSI_bGREEN "\nDivisores parciales: \n");
     c_mostrar(Divisor_parcial);
-    printf(ANSI_RESET"");
+    printf(ANSI_RESET "");
 }
 
 //  PUNTO 6
-void main_valores_comunes(){
+void main_valores_comunes()
+{
     int cantColas, cantPilas;
     Lista l = l_crear();
-    printf(ANSI_bCYAN"Cargando la pila: \n");
+    printf(ANSI_bCYAN "Cargando la pila: \n");
     Pila p = cargarPilaSinRepetidos(&cantPilas);
-    printf(ANSI_bCYAN"Cargando la cola: \n");
+    printf(ANSI_bCYAN "Cargando la cola: \n");
     Cola c = cargarColaSinRepetidos(&cantColas);
     pausa();
     limpiar_pantalla();
     p_mostrar(p);
     c_mostrar(c);
-    if (p_es_vacia(p) || c_es_vacia(c)){
-        printf(ANSI_RED"\n Las estructuras no tienen valores comunes ya que al menos una de ellas esta vacía");
+    if (p_es_vacia(p) || c_es_vacia(c))
+    {
+        printf(ANSI_RED "\n Las estructuras no tienen valores comunes ya que al menos una de ellas esta vacía");
         printf(ANSI_RESET);
-    } 
-    else {
-        l = valoresComunes(p,c);
+    }
+    else
+    {
+        l = valoresComunes(p, c);
         mostrarListaConValor(l);
     }
 }
 
-void main_ventanillas(){
+void main_ventanillas()
+{
     Cola cola1 = c_crear();
     Cola cola2 = c_crear();
     Cola cola3 = c_crear();
-    int cant,q=10;
+    int cant, q = 10;
 
     cola1 = cargarCola(&cant);
     cola2 = cargarCola(&cant);
     cola3 = cargarCola(&cant);
 
-
-    ventanillas(q,cola1,cola2,cola3);
+    ventanillas(q, cola1, cola2, cola3);
 
     return;
 }
@@ -425,7 +436,7 @@ int main()
                     break;
                 case 3:
                     main_eliminar_repeticiones();
-                    //main_borrar();
+                    // main_borrar();
                     getch();
                     break;
                 case 4:
