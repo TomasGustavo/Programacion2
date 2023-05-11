@@ -179,6 +179,34 @@ void main_contador()
     printf(ANSI_bGREEN "La cantidad de elementos que contiene la pila es de %d" ANSI_RESET, contador);
 }
 
+/// @brief Punto 2E: Clona una cola
+
+void main_clonar(){
+    int cant;
+    Cola cola = c_crear();
+    Cola colaClon = c_crear();
+
+    cola = cargarCola(&cant);
+    
+    if(c_es_vacia(cola)){
+        printf(ANSI_YELLOW"La cola esta vacia, se hara la copia igualmente pero este es solo un aviso\n\n"ANSI_RESET);
+    }
+    
+    colaClon = copiar_cola(cola);
+
+    printf(ANSI_bMAGENTA"Cola clonada: \n\n");
+    c_mostrar(colaClon);
+
+    printf(ANSI_bGREEN"\n\nCola original DESPUES de llamar a la funcion: \n");
+    c_mostrar(cola);
+    printf(""ANSI_RESET);
+
+    pausa();
+    limpiar_pantalla();
+
+    return;
+}
+
 /// @brief Punto 3: Dadas dos colas, determinar si sus contenidos son iguales tanto en posición como en datos (solo comparar por la clave), sin destruirlas. Utilizar para la resolución del problema una sola cola auxiliar. Determinar la complejidad algorítmica del problema.
 void main_punto3()
 {
@@ -381,7 +409,7 @@ int main()
                     getch();
                     break;
                 case 5:
-
+                    main_clonar();
                     getch();
                     break;
                 case 6:
