@@ -14,10 +14,10 @@
 void main_buscarElemento()
 {
     Cola c;
-    int clave, validador;
+    int clave, validador, cant;
     bool rta;
     printf(ANSI_bMAGENTA "Cargar la cola: \n");
-    c = cargarCola();
+    c = cargarCola(&cant);
     if (!c_es_vacia(c))
     {
 
@@ -48,8 +48,9 @@ void main_buscarElemento()
 }
 //punto 2C
 void main_borrar(){
+    int cant;
     Cola cola = c_crear();
-    cola = cargarCola();
+    cola = cargarCola(&cant);
     TipoElemento X;
     int elemento;
     printf(ANSI_bBLUE"ingrese el elemento que quiere borrar: "ANSI_bYELLOW);
@@ -63,11 +64,12 @@ void main_borrar(){
 
 //punto 2F
 void main_invertida(){
+    int cant;
     Cola cola = c_crear();
     Cola caux = c_crear();
     Cola cola_invertida = c_crear();
     TipoElemento X;
-    cola = cargarCola();
+    cola = cargarCola(&cant);
     int longitud_cola = 0;
      while (c_es_vacia(cola)!= true)//esta sección solo encuentra el 
     {                              //elemento mayor de la cola (para limitar la función) y la longitud en flotante 
@@ -210,9 +212,10 @@ void main_clonar(){
 /// @brief Punto 3: Dadas dos colas, determinar si sus contenidos son iguales tanto en posición como en datos (solo comparar por la clave), sin destruirlas. Utilizar para la resolución del problema una sola cola auxiliar. Determinar la complejidad algorítmica del problema.
 void main_punto3()
 {
+    int cant1, cant2;
     Cola c1, c2;
-    c1 = cargarCola();
-    c2 = cargarCola();
+    c1 = cargarCola(&cant1);
+    c2 = cargarCola(&cant2);
     if (Comparar(c1, c2))
     {
         printf(ANSI_GREEN "Las colas son iguales\n");
@@ -237,8 +240,9 @@ void main_punto3()
 /// @brief Punto 4: Dada una cola de números enteros, no ordenada, construir un algoritmo que permita pasar a otra cola todos los elementos que no se repiten en la primera, sin destruir el contenido de la cola original y dejándola en su estado inicial. Determinar la complejidad algorítmica de la solución.
 void main_punto4()
 {
+    int cant;
     Cola c1, c2 = c_crear();
-    c1 = cargarCola();
+    c1 = cargarCola(&cant);
     if (!c_es_vacia(c1))
     {
         c2 = norepetidos(c1);
@@ -250,6 +254,7 @@ void main_punto4()
 
 //Punto 5
 void main_divisores(){
+    int cant;
     Cola cola = c_crear();
     Cola caux = c_crear();
     Cola Divisor_total = c_crear();
@@ -258,7 +263,7 @@ void main_divisores(){
     int numero_actual = 2;
     int elemento_mayor_cola = 0;
     float longitud_cola = 0;
-    cola = cargarCola();
+    cola = cargarCola(&cant);
     while (c_es_vacia(cola)!= true)//esta sección solo encuentra el 
     {                              //elemento mayor de la cola (para limitar la función) y la longitud en flotante 
     
