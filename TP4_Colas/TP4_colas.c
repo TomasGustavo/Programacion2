@@ -594,38 +594,83 @@ Lista valoresComunes(Pila p, Cola c)
 }
 
 // Punto 7
+/// @brief Le va restando el valor de Q a cada primer elemento de cada cola hasta que llega a '0', una vez que alcanza ese valor lo imprime para mostrar el orden en el que los clientes fueron saliendo.
+/// @param q Cantidad de tiempo que se queda en cada cola
+/// @param c1 Cola 1 
+/// @param c2 Cola 2
+/// @param c3 Cola 3
 void ventanillas(int q, Cola c1, Cola c2, Cola c3){
 
-    TipoElemento x1=te_crear(0);
-    TipoElemento x2=te_crear(0);
-    TipoElemento x3=te_crear(0);
-    int ciclos = (Longitud(c1) + Longitud(c2) + Longitud(c3));
+    TipoElemento x1=te_crear(-1);
+    TipoElemento x2=te_crear(-1);
+    TipoElemento x3=te_crear(-1);
+    int cli1 =1,cli2 =1,cli3 =1;
+    int ciclos = (Longitud(c1) + Longitud(c2) + Longitud(c3)); // la cantidad de elementos entre las 3 colas, se usara como parametro para el while
 
-    for (int i=0; i<ciclos; i++){
-        if(!c_es_vacia(c1)){
+
+    // si un x tiene valor menos o igual a 0 significa que el "cliente" ya salio por ende vuelvo a desencolar otro cliente para atender,
+    // si el cliente todavia no fue terminado de atender no se desencola al siguiente y se sigue restadno el valor de q al mismo;
+    // los valores de clave que toman los x son el tiempo que tarda cada cliente en ser atendido, por eos se le resta el tiempo que el cajero lo atiende en cada vuelta.
+    // si ese valor llega a 0 o menos significa que ya fue atendido y se fue por eso imprimo el numero de cliente y de que cola fue.
+    while (ciclos > 0){
+        
+        if(!c_es_vacia(c1) && x1->clave <=0){
             x1 = c_desencolar(c1);
             x1->clave = x1->clave - q;
 
             if(x1->clave <= 0){
-                printf("Cliente 'x' Cola 1\n");
+                printf(ANSI_bGREEN"Cliente %i Cola 1\n",cli1);
+                cli1++;
+                ciclos--;
+            }
+        }
+        else if (!c_es_vacia(c1) || x1->clave>0){
+            x1->clave = x1->clave - q;
+
+            if(x1->clave <= 0){
+                printf(ANSI_bGREEN"Cliente %i Cola 1\n",cli1);
+                cli1++;
+                ciclos--;
             }
         }
 
-        if(!c_es_vacia(c2)){
+        if(!c_es_vacia(c2) && x2->clave <=0){
             x2 = c_desencolar(c2);
             x2->clave = x2->clave - q;
 
             if(x2->clave <= 0){
-                printf("Cliente 'x' Cola 2\n");
+                printf(ANSI_bGREEN"Cliente %i Cola 2\n",cli2);
+                cli2++;
+                ciclos--;
+            }
+        }
+        else if (!c_es_vacia(c2) || x2->clave>0){
+            x2->clave = x2->clave - q;
+
+            if(x2->clave <= 0){
+                printf(ANSI_bGREEN"Cliente %i Cola 2\n",cli2);
+                cli2++;
+                ciclos--;
             }
         }
 
-        if(!c_es_vacia(c3)){
+        if(!c_es_vacia(c3) && x3->clave <=0){
             x3 = c_desencolar(c3);
             x3->clave = x3->clave - q;
 
             if(x3->clave <= 0){
-                printf("Cliente 'x' Cola 3\n");
+                printf(ANSI_bGREEN"Cliente %i Cola 3\n",cli3);
+                cli3++;
+                ciclos--;
+            }
+        }
+        else if (!c_es_vacia(c3) || x3->clave>0){
+            x3->clave = x3->clave - q;
+
+            if(x3->clave <= 0){
+                printf(ANSI_bGREEN"Cliente %i Cola 3\n",cli3);
+                cli3++;
+                ciclos--;
             }
         }
     }

@@ -315,15 +315,29 @@ void main_valores_comunes(){
     }
 }
 
+//Punto 7
+/// @brief Muestra el orden por el que los clientes fueron atentidos y se retiran
+
 void main_ventanillas(){
     Cola cola1 = c_crear();
     Cola cola2 = c_crear();
     Cola cola3 = c_crear();
-    int cant,q=10;
+    int cant,q;
 
     cola1 = cargarCola(&cant);
     cola2 = cargarCola(&cant);
     cola3 = cargarCola(&cant);
+
+    printf(ANSI_bYELLOW"Ingrese el tiempo que el vendedor atendera en cada caja: ");
+    int validador = scanf("%i",&q);
+    vaciar_buffer();
+    while(validador != 1 || q <= 0){
+        printf(ANSI_RED"\t\t-----ERROR-----\n\n");
+        printf(ANSI_RED"Por favor SOLO ingresar numeros MAYORES a 0\n");
+        printf(ANSI_bYELLOW"Ingrese el tiempo que el vendedor atendera en cada caja: ");
+        validador = scanf("%i",&q);
+        vaciar_buffer();
+    }
 
 
     ventanillas(q,cola1,cola2,cola3);
@@ -459,7 +473,7 @@ int main()
             getch();
             break;
         case 7:
-
+            main_ventanillas();
             getch();
             break;
         case 0:
