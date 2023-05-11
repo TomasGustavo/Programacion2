@@ -335,11 +335,23 @@ void main_ventanillas()
     Cola cola1 = c_crear();
     Cola cola2 = c_crear();
     Cola cola3 = c_crear();
-    int cant, q = 10;
+    int cant, q;
 
     cola1 = cargarCola(&cant);
     cola2 = cargarCola(&cant);
     cola3 = cargarCola(&cant);
+
+    printf("Ingrese la cantidad de tiempo que se quedara en cada cola: ");
+    int validador = scanf("%i",&q);
+    vaciar_buffer();
+
+    while (validador!=1 || q<=0){
+        printf("\t\t-----ERROR-----\n\n ");
+        printf("Por favor SOLO ingresar numeros mayores a 0\n\n ");
+        printf("Ingrese la cantidad de tiempo que se quedara en cada cola: ");
+        validador = scanf("%i",&q);
+        vaciar_buffer();
+    }
 
     ventanillas(q, cola1, cola2, cola3);
 
