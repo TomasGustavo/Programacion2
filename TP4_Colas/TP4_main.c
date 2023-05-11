@@ -50,6 +50,7 @@ void main_buscarElemento()
 void main_borrar(){
     int cant;
     Cola cola = c_crear();
+    int cant;
     cola = cargarCola(&cant);
     TipoElemento X;
     int elemento;
@@ -69,6 +70,7 @@ void main_invertida(){
     Cola caux = c_crear();
     Cola cola_invertida = c_crear();
     TipoElemento X;
+    int cant;
     cola = cargarCola(&cant);
     int longitud_cola = 0;
      while (c_es_vacia(cola)!= true)//esta sección solo encuentra el 
@@ -242,6 +244,7 @@ void main_punto4()
 {
     int cant;
     Cola c1, c2 = c_crear();
+    int cant;
     c1 = cargarCola(&cant);
     if (!c_es_vacia(c1))
     {
@@ -260,6 +263,7 @@ void main_divisores(){
     Cola Divisor_total = c_crear();
     Cola Divisor_parcial = c_crear();
     TipoElemento X;
+    int cant;
     int numero_actual = 2;
     int elemento_mayor_cola = 0;
     float longitud_cola = 0;
@@ -313,6 +317,22 @@ void main_valores_comunes(){
         l = valoresComunes(p,c);
         mostrarListaConValor(l);
     }
+}
+
+void main_ventanillas(){
+    Cola cola1 = c_crear();
+    Cola cola2 = c_crear();
+    Cola cola3 = c_crear();
+    int cant,q=10;
+
+    cola1 = cargarCola(&cant);
+    cola2 = cargarCola(&cant);
+    cola3 = cargarCola(&cant);
+
+
+    ventanillas(q,cola1,cola2,cola3);
+
+    return;
 }
 
 /// @brief Menu principal del TP de Colas
