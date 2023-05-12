@@ -224,6 +224,8 @@ bool buscar_c(Pila p, int x)
     return rta;
 }
 
+/// @brief Muestra los valores guardados en la lista, que poseen en comun una cola y una lista y en qué posición ordinal se encontró cada uno en su estructura.
+/// @param l Lista cargada con los valores comunes.
 void mostrarListaConValor(Lista l)
 {
     TipoElemento x;
@@ -240,6 +242,7 @@ void mostrarListaConValor(Lista l)
 }
 
 /// @brief Función genérica para cargar una pila de enteros no repetidos y mostrarla al finalizar
+/// @param cant Retorna por referencia la cantidad de elementos de la cola
 /// @return Pila cargada con números enteros no repetidos
 Pila cargarPilaSinRepetidos(int *cant)
 {
@@ -363,6 +366,10 @@ int Longitud(Cola c)
 }
 
 // punto 2C
+
+/// @brief Dado un elemento, lo saca de la cola todas las veces que aparezca.
+/// @param cola Cola cargada de elementos.
+/// @param elemento Elemento a buscar.
 void borrar_elemento(Cola cola, TipoElemento elemento)
 {
     Cola caux = c_crear();
@@ -437,6 +444,12 @@ Cola copiar_cola(Cola cola)
 }
 
 // Punto 2F
+
+/// @brief Invierte el contenido de una cola sin destruir la cola original.
+/// @param cola Cola cargada de elementos.
+/// @param caux Cola auxiliar.
+/// @param longitud Cantidad de elementos que posee la cola.
+/// @return Retorna la cola invertida.
 Cola invertir(Cola cola, Cola caux, int longitud)
 {
     Cola cola_invertida = c_crear();
@@ -497,7 +510,6 @@ bool Comparar(Cola c1, Cola c2)
 }
 
 // Punto 4
-
 /// @brief  Permite pasar todos los elementos que no se repiten de una cola (no ordenada de números enteros) a otra cola.
 /// @param c Cola no ordenada cargada
 /// @return Cola con los elementos no repetidos
@@ -530,6 +542,13 @@ Cola norepetidos(Cola c)
 }
 
 // Punto 5
+
+/// @brief Obtiene todos los valores que son Divisores Totales o parciales de una cola de valores enteros no repetidos y mayores o iguales a 2.
+/// @param cola Cola cargada de elementos no repetidos
+/// @param Divisor_total Permite dividir a todos los demás valores de la cola en forma exacta.
+/// @param Divisor_parcial Permite dividir en forma exacta al menos al 50% de la cola
+/// @param numero_actual Numero entero
+/// @param longitud_cola Cantidad de elementos de la cola
 void divisores(Cola cola, Cola Divisor_total, Cola Divisor_parcial, int numero_actual, float longitud_cola)
 {
     int contador_divisores = 0;
