@@ -445,7 +445,7 @@ Cola copiar_cola(Cola cola)
 
 // Punto 2F
 
-/// @brief Invierte el contenido de una cola sin destruir la cola original.
+/// @brief Funcion recursiva que invierte el contenido de una cola sin destruir la cola original.
 /// @param cola Cola cargada de elementos.
 /// @param caux Cola auxiliar.
 /// @param longitud Cantidad de elementos que posee la cola.
@@ -541,16 +541,72 @@ Cola norepetidos(Cola c)
     return cresp;
 }
 
+/// @brief Función limitada para el punto 5 que carga una cola de enteros y la muestra al finalizar
+/// @param cant Retorna por referencia la cantidad de elementos de la cola
+/// @param elemento_mayor Retorna por referencia el elemento mayor de la cola
+/// @return Cola cargada con números enteros
+Cola cargarCola_divisores(int *cant, int * elemento_mayor)
+{
+    Cola cola = c_crear();
+    int valor;
+    printf(ANSI_bBLUE "Ingrese cantidad de elementos a cargar [0-99]: " ANSI_bYELLOW);
+    int validador = scanf("%d", cant);
+    vaciar_buffer();
+    while (validador != 1 || *cant < 0 || *cant >= 100)
+    {
+        limpiar_pantalla();
+        printf(ANSI_bRED "\t\t-------- ERROR --------\n");
+        printf("DATO INVALIDO\n\n" ANSI_RESET);
+        pausa();
+        limpiar_pantalla();
+        printf(ANSI_bBLUE "Ingrese cantidad de elementos a cargar [0-99]: " ANSI_bYELLOW);
+        validador = scanf("%d", cant);
+        vaciar_buffer();
+    }
+    for (int i = 0; i < *cant; i++)
+    {
+        limpiar_pantalla();
+        printf(ANSI_bBLUE "Ingrese clave del elemento N°%d a cargar [2 - 999.999]: " ANSI_bYELLOW, i + 1);
+        validador = scanf("%d", &valor);
+        vaciar_buffer();
+        while (validador != 1 || valor < 2 || valor > 999999)
+        {
+            limpiar_pantalla();
+            printf(ANSI_bRED "\t\t-------- ERROR --------\n");
+            printf("DATO FUERA DE RANGO\n\n" ANSI_RESET);
+            pausa();
+            limpiar_pantalla();
+            printf(ANSI_bBLUE "Ingrese clave del elemento N°%d a cargar [2 - 999.999]: " ANSI_bYELLOW, i + 1);
+            validador = scanf("%d", &valor);
+            vaciar_buffer();
+        }
+        TipoElemento elemento = te_crear(valor);
+        c_encolar(cola, elemento);
+        if (elemento->clave > *elemento_mayor)
+        {
+            *elemento_mayor = elemento->clave;
+        }
+    }
+    printf(ANSI_bGREEN "");
+    c_mostrar(cola); // muestro la pila como quedo cargada
+    printf("\n" ANSI_RESET);
+    return cola;
+}
 // Punto 5
 
 /// @brief Obtiene todos los valores que son Divisores Totales o parciales de una cola de valores enteros no repetidos y mayores o iguales a 2.
 /// @param cola Cola cargada de elementos no repetidos
-/// @param Divisor_total Permite dividir a todos los demás valores de la cola en forma exacta.
-/// @param Divisor_parcial Permite dividir en forma exacta al menos al 50% de la cola
-/// @param numero_actual Numero entero
+/// @param Divisor_total Cola que sera cargada con los numeros que permitan dividir a todos los demás valores de la cola en forma exacta.
+/// @param Divisor_parcial Cola que sera cargada con los numeros que permitan dividir en forma exacta al menos al 50% de la cola
+/// @param numero_actual Numero actual que se usa para comprobar si es divisor de los numeros cargados en la cola.
 /// @param longitud_cola Cantidad de elementos de la cola
 void divisores(Cola cola, Cola Divisor_total, Cola Divisor_parcial, int numero_actual, float longitud_cola)
 {
+    if (c_es_vacia(cola))
+    {
+        return;
+    }
+    
     int contador_divisores = 0;
     Cola caux = c_crear();
     TipoElemento X = te_crear(0);

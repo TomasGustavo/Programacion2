@@ -68,24 +68,11 @@ void main_invertida()
     Cola cola = c_crear();
     Cola caux = c_crear();
     Cola cola_invertida = c_crear();
-    TipoElemento X;
     cola = cargarCola(&cant);
-    int longitud_cola = 0;
-    while (c_es_vacia(cola) != true) // esta sección solo encuentra el
-    {                                // elemento mayor de la cola (para limitar la función) y la longitud en flotante
-        X = c_desencolar(cola);
-        longitud_cola++;
-        c_encolar(caux, X);
-    }
-    while (c_es_vacia(caux) != true)
-    {
-        X = c_desencolar(caux);
-        c_encolar(cola, X);
-    }
-    cola_invertida = invertir(cola, caux, longitud_cola);
-    printf(ANSI_bGREEN "cola invertida: \n");
+    cola_invertida = invertir(cola, caux, cant);
+    printf(ANSI_bGREEN "Cola invertida: \n");
     c_mostrar(cola_invertida);
-    printf(ANSI_bGREEN "\ncola original: \n");
+    printf(ANSI_bGREEN "\nCola original: \n");
     c_mostrar(cola);
     printf(ANSI_RESET);
 }
@@ -257,40 +244,23 @@ void main_divisores()
 {
     int cant;
     Cola cola = c_crear();
-    Cola caux = c_crear();
     Cola Divisor_total = c_crear();
     Cola Divisor_parcial = c_crear();
-    TipoElemento X;
     int numero_actual = 2;
-    int elemento_mayor_cola = 0;
-    float longitud_cola = 0;
-    cola = cargarCola(&cant);
-    while (c_es_vacia(cola) != true) // esta sección solo encuentra el
-    {                                // elemento mayor de la cola (para limitar la función) y la longitud en flotante
-        X = c_desencolar(cola);
-        if (X->clave > elemento_mayor_cola)
-        {
-            elemento_mayor_cola = X->clave;
-        }
-        longitud_cola++;
-        c_encolar(caux, X);
-    }
-    while (c_es_vacia(caux) != true)
-    {
-        X = c_desencolar(caux);
-        c_encolar(cola, X);
-    }
-    while (numero_actual <= 100 || numero_actual < elemento_mayor_cola)
+    int elemento_mayor_cola = 0; //esta variable se utiliza para que la funcion termine si el contador numero_actual supera el valor del elemento mayor de la cola
+    cola = cargarCola_divisores(&cant, &elemento_mayor_cola);
+    float longitud_cola = cant;
+    while (numero_actual <= 1000 && numero_actual < elemento_mayor_cola)
     {
         divisores(cola, Divisor_total, Divisor_parcial, numero_actual, longitud_cola);
         numero_actual++;
     }
-    printf(ANSI_bGREEN "Divisores totales: \n");
+    printf(ANSI_bGREEN"\nSe muestran solo divisores entre el 2 y el 1000:\n");
+    printf("Divisores totales: \n");
     c_mostrar(Divisor_total);
-    printf("\n");
     printf(ANSI_bGREEN "\nDivisores parciales: \n");
     c_mostrar(Divisor_parcial);
-    printf(ANSI_RESET "");
+    printf(ANSI_RESET);
 }
 
 /// @brief Punto 6: Dada una pila y una cola generada con valores al azar retornar en una lista todos los valores comunes a ambas y en qué posición ordinal se encontró cada uno en su estructura. No se deben destruir las estructuras originales. No se deben perderse las estructuras originales.
