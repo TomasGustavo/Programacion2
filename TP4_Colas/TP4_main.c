@@ -20,7 +20,6 @@ void main_buscarElemento()
     c = cargarCola(&cant);
     if (!c_es_vacia(c))
     {
-
         printf(ANSI_bMAGENTA "Ingrese el elemento a buscar [-999.999 - 999.999]: \n" ANSI_YELLOW);
         validador = scanf("%d", &clave);
         vaciar_buffer();
@@ -33,10 +32,8 @@ void main_buscarElemento()
             validador = scanf("%d", &clave);
             vaciar_buffer();
         }
-
         rta = buscar(c, clave);
         c_mostrar(c);
-
         if (rta == true)
             printf(ANSI_bGREEN "Se encontró el elemento %i en la cola\n", clave);
         else
@@ -46,7 +43,8 @@ void main_buscarElemento()
     }
     printf(ANSI_RESET);
 }
-// punto 2C
+
+/// @brief Punto 2C: Agrega un nuevo elemento en una posición dada (colarse).
 void main_borrar()
 {
     int cant;
@@ -58,12 +56,12 @@ void main_borrar()
     scanf("%d", &elemento);
     X = te_crear(elemento);
     borrar_elemento(cola, X);
-    printf(ANSI_bGREEN "");
+    printf(ANSI_bGREEN);
     c_mostrar(cola);
-    printf(ANSI_RESET "");
+    printf(ANSI_RESET);
 }
 
-// punto 2F
+/// @brief Punto 2F: Invierte del contenido de una cola sin destruir la cola original.
 void main_invertida()
 {
     int cant;
@@ -75,7 +73,6 @@ void main_invertida()
     int longitud_cola = 0;
     while (c_es_vacia(cola) != true) // esta sección solo encuentra el
     {                                // elemento mayor de la cola (para limitar la función) y la longitud en flotante
-
         X = c_desencolar(cola);
         longitud_cola++;
         c_encolar(caux, X);
@@ -90,9 +87,10 @@ void main_invertida()
     c_mostrar(cola_invertida);
     printf(ANSI_bGREEN "\ncola original: \n");
     c_mostrar(cola);
+    printf(ANSI_RESET);
 }
 
-/// @brief Punto 2b: Inserta un elemento en la posición dada
+/// @brief Punto 2B: Inserta un elemento en la posición dada
 void main_insertar_en_cola()
 {
     Cola c = c_crear();
@@ -133,18 +131,18 @@ void main_insertar_en_cola()
     {
         c = insertar(c, elemento, posi);
     }
+    printf(ANSI_GREEN);
     c_mostrar(c);
     printf("\n" ANSI_RESET);
 }
 
-/// @brief Punto 2c: Eliminar todas las repeticiones de un elemento dado
+/// @brief Punto 2C: Agrega un nuevo elemento en una posición dada (colarse).
 void main_eliminar_repeticiones()
 {
     Cola c = c_crear();
     int cant, clave;
     c = cargarCola(&cant);
-    printf(ANSI_bGREEN);
-    printf("\n" ANSI_RESET);
+    printf("\n");
     if (!c_es_vacia(c))
     {
         printf(ANSI_bBLUE "Ingrese clave a eliminar en la cola: " ANSI_YELLOW);
@@ -180,7 +178,7 @@ void main_eliminar_repeticiones()
     limpiar_pantalla();
 }
 
-/// @brief Punto 2d: Contar los elementos de una cola
+/// @brief Punto 2D: Contar los elementos de una cola
 void main_contador()
 {
     int contador, cant;
@@ -191,33 +189,24 @@ void main_contador()
 }
 
 /// @brief Punto 2E: Clona una cola
-
 void main_clonar()
 {
     int cant;
     Cola cola = c_crear();
     Cola colaClon = c_crear();
-
     cola = cargarCola(&cant);
-
     if (c_es_vacia(cola))
     {
         printf(ANSI_YELLOW "La cola esta vacía, se hara la copia igualmente pero este es solo un aviso\n\n" ANSI_RESET);
     }
-
     colaClon = copiar_cola(cola);
-
     printf(ANSI_bMAGENTA "Cola clonada: \n\n");
     c_mostrar(colaClon);
-
     printf(ANSI_bGREEN "\n\nCola original DESPUES de llamar a la función: \n");
     c_mostrar(cola);
     printf("" ANSI_RESET);
-
     pausa();
     limpiar_pantalla();
-
-    return;
 }
 
 /// @brief Punto 3: Dadas dos colas, determinar si sus contenidos son iguales tanto en posición como en datos (solo comparar por la clave), sin destruirlas. Utilizar para la resolución del problema una sola cola auxiliar. Determinar la complejidad algorítmica del problema.
@@ -263,7 +252,7 @@ void main_punto4()
     printf(ANSI_RESET);
 }
 
-// Punto 5
+/// @brief Punto 5: Dada una cola de valores enteros no repetidos y mayores o iguales a 2, obtener todos los valores que son Divisores Totales o parciales. Se dice que un valor es Divisor Total si permite dividir a todos los demás valores de la cola en forma exacta. Se dice que un divisor es parcial si al menos puede dividir en forma exacta al menos al 50% de la cola (es decir a la mitad de los elementos).
 void main_divisores()
 {
     int cant;
@@ -278,7 +267,6 @@ void main_divisores()
     cola = cargarCola(&cant);
     while (c_es_vacia(cola) != true) // esta sección solo encuentra el
     {                                // elemento mayor de la cola (para limitar la función) y la longitud en flotante
-
         X = c_desencolar(cola);
         if (X->clave > elemento_mayor_cola)
         {
@@ -305,7 +293,7 @@ void main_divisores()
     printf(ANSI_RESET "");
 }
 
-//  PUNTO 6
+/// @brief Punto 6: Dada una pila y una cola generada con valores al azar retornar en una lista todos los valores comunes a ambas y en qué posición ordinal se encontró cada uno en su estructura. No se deben destruir las estructuras originales. No se deben perderse las estructuras originales.
 void main_valores_comunes()
 {
     int cantColas, cantPilas;
@@ -330,32 +318,28 @@ void main_valores_comunes()
     }
 }
 
+/// @brief Punto 7: Un negocio tiene 3 ventanillas para atender a sus clientes. Los clientes forman cola en cada ventanilla. Un día, dos de los tres empleados que atienden las ventanillas no pueden asistir al trabajo, quedando uno solo para atender a las tres colas. Este empleado decide que, a medida que lleguen los clientes, atenderá por cierta cantidad de minutos (que denominaremos Q) a cada cola, paseándose por todas las colas equitativamente.
 void main_ventanillas()
 {
     Cola cola1 = c_crear();
     Cola cola2 = c_crear();
     Cola cola3 = c_crear();
     int cant, q;
-
     cola1 = cargarCola(&cant);
     cola2 = cargarCola(&cant);
     cola3 = cargarCola(&cant);
-
-    printf("Ingrese la cantidad de tiempo que se quedara en cada cola: ");
-    int validador = scanf("%i",&q);
+    printf(ANSI_BLUE "Ingrese la cantidad de tiempo que se quedara en cada cola: " ANSI_YELLOW);
+    int validador = scanf("%i", &q);
     vaciar_buffer();
-
-    while (validador!=1 || q<=0){
-        printf("\t\t-----ERROR-----\n\n ");
-        printf("Por favor SOLO ingresar numeros mayores a 0\n\n ");
-        printf("Ingrese la cantidad de tiempo que se quedara en cada cola: ");
-        validador = scanf("%i",&q);
+    while (validador != 1 || q <= 0)
+    {
+        printf(ANSI_RED "\t\t-----ERROR-----\n\n ");
+        printf("Por favor SOLO ingresar números mayores a 0\n\n ");
+        printf(ANSI_BLUE "Ingrese la cantidad de tiempo que se quedara en cada cola: " ANSI_YELLOW);
+        validador = scanf("%i", &q);
         vaciar_buffer();
     }
-
     ventanillas(q, cola1, cola2, cola3);
-
-    return;
 }
 
 /// @brief Menu principal del TP de Colas
