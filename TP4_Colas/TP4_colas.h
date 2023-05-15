@@ -34,6 +34,8 @@ void limpiar_pantalla();
 
 Cola cargarCola(int *cant);
 
+Cola cargarColaMayores0(int *cant);
+
 Cola cargarColaSinRepetidos(int *cant);
 
 Pila cargarPilaSinRepetidos(int *cant);

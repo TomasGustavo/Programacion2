@@ -65,6 +65,53 @@ void p_intercambiar(Pila P, Pila PAux)
     }
 }
 
+/// @brief Función genérica para cargar una cola de enteros "MAYORES A 0" y mostrarla al finalizar
+/// @param cant Retorna por referencia la cantidad de elementos de la cola
+/// @return Cola cargada con números enteros
+Cola cargarColaMayores0(int *cant)
+{
+    Cola cola = c_crear();
+    int valor;
+    printf(ANSI_bBLUE "Ingrese cantidad de elementos a cargar [0-99]: " ANSI_bYELLOW);
+    int validador = scanf("%d", cant);
+    vaciar_buffer();
+    while (validador != 1 || *cant < 0 || *cant >= 100)
+    {
+        limpiar_pantalla();
+        printf(ANSI_bRED "\t\t-------- ERROR --------\n");
+        printf("DATO INVALIDO\n\n" ANSI_RESET);
+        pausa();
+        limpiar_pantalla();
+        printf(ANSI_bBLUE "Ingrese cantidad de elementos a cargar [0-99]: " ANSI_bYELLOW);
+        validador = scanf("%d", cant);
+        vaciar_buffer();
+    }
+    for (int i = 0; i < *cant; i++)
+    {
+        limpiar_pantalla();
+        printf(ANSI_bBLUE "Ingrese clave del elemento N°%d a cargar [1 - 999.999]: " ANSI_bYELLOW, i + 1);
+        validador = scanf("%d", &valor);
+        vaciar_buffer();
+        while (validador != 1 || valor <= 0 || valor > 999999)
+        {
+            limpiar_pantalla();
+            printf(ANSI_bRED "\t\t-------- ERROR --------\n");
+            printf("DATO FUERA DE RANGO\n\n" ANSI_RESET);
+            pausa();
+            limpiar_pantalla();
+            printf(ANSI_bBLUE "Ingrese clave del elemento N°%d a cargar [1 - 999.999]: " ANSI_bYELLOW, i + 1);
+            validador = scanf("%d", &valor);
+            vaciar_buffer();
+        }
+        TipoElemento elemento = te_crear(valor);
+        c_encolar(cola, elemento);
+    }
+    printf(ANSI_bGREEN "");
+    c_mostrar(cola); // muestro la pila como quedo cargada
+    printf("\n" ANSI_RESET);
+    return cola;
+}
+
 /// @brief Función genérica para cargar una cola de enteros y mostrarla al finalizar
 /// @param cant Retorna por referencia la cantidad de elementos de la cola
 /// @return Cola cargada con números enteros

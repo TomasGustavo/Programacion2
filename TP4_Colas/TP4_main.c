@@ -321,11 +321,11 @@ void main_ventanillas()
     Cola cola3 = c_crear();
     int cant, q;
     printf(ANSI_bMAGENTA "COLA DE LA VENTANILLA 1\n");
-    cola1 = cargarCola(&cant);
+    cola1 = cargarColaMayores0(&cant);
     printf(ANSI_bMAGENTA "COLA DE LA VENTANILLA 2\n");
-    cola2 = cargarCola(&cant);
+    cola2 = cargarColaMayores0(&cant);
     printf(ANSI_bMAGENTA "COLA DE LA VENTANILLA 3\n");
-    cola3 = cargarCola(&cant);
+    cola3 = cargarColaMayores0(&cant);
     printf(ANSI_BLUE "Ingrese la cantidad de tiempo que se quedara en cada cola: " ANSI_YELLOW);
     int validador = scanf("%i", &q);
     vaciar_buffer();
