@@ -28,7 +28,7 @@ void vaciar_buffer()
 /// @brief Frena la ejecución del código esperando el ingreso de un carácter.
 void pausa()
 {
-    printf(ANSI_bYELLOW "\nPresione una tecla para continuar...." ANSI_RESET);
+    printf(ANSI_bYELLOW "\n\nPresione una tecla para continuar...." ANSI_RESET);
     getchar();
 }
 
@@ -224,7 +224,7 @@ bool buscar_c(Pila p, int x)
     return rta;
 }
 
-/// @brief Muestra los valores guardados en la lista, que poseen en comun una cola y una lista y en qué posición ordinal se encontró cada uno en su estructura.
+/// @brief Muestra los valores guardados en la lista, que poseen en común una cola y una lista y en qué posición ordinal se encontró cada uno en su estructura.
 /// @param l Lista cargada con los valores comunes.
 void mostrarListaConValor(Lista l)
 {
@@ -314,10 +314,13 @@ Cola insertar(Cola c, TipoElemento x, int pos)
         if (i == pos)
         {
             c_encolar(caux, x);
-            i++;
         }
         c_encolar(caux, x1);
         i++;
+    }
+    if (i == pos)
+    {
+        c_encolar(caux, x);
     }
     c_intercambiar(c, caux);
     return c;
@@ -432,20 +435,18 @@ Cola copiar_cola(Cola cola)
         c_encolar(c, x);
         c_encolar(cAux, x);
     }
-
     while (!c_es_vacia(cAux))
     {
         x = c_desencolar(cAux);
         c_encolar(cola, x);
     }
-    free(cAux);
 
     return c;
 }
 
 // Punto 2F
 
-/// @brief Funcion recursiva que invierte el contenido de una cola sin destruir la cola original.
+/// @brief Función recursiva que invierte el contenido de una cola sin destruir la cola original.
 /// @param cola Cola cargada de elementos.
 /// @param caux Cola auxiliar.
 /// @param longitud Cantidad de elementos que posee la cola.
@@ -545,7 +546,7 @@ Cola norepetidos(Cola c)
 /// @param cant Retorna por referencia la cantidad de elementos de la cola
 /// @param elemento_mayor Retorna por referencia el elemento mayor de la cola
 /// @return Cola cargada con números enteros
-Cola cargarCola_divisores(int *cant, int * elemento_mayor)
+Cola cargarCola_divisores(int *cant, int *elemento_mayor)
 {
     Cola cola = c_crear();
     int valor;
@@ -596,9 +597,9 @@ Cola cargarCola_divisores(int *cant, int * elemento_mayor)
 
 /// @brief Obtiene todos los valores que son Divisores Totales o parciales de una cola de valores enteros no repetidos y mayores o iguales a 2.
 /// @param cola Cola cargada de elementos no repetidos
-/// @param Divisor_total Cola que sera cargada con los numeros que permitan dividir a todos los demás valores de la cola en forma exacta.
-/// @param Divisor_parcial Cola que sera cargada con los numeros que permitan dividir en forma exacta al menos al 50% de la cola
-/// @param numero_actual Numero actual que se usa para comprobar si es divisor de los numeros cargados en la cola.
+/// @param Divisor_total Cola que sera cargada con los números que permitan dividir a todos los demás valores de la cola en forma exacta.
+/// @param Divisor_parcial Cola que sera cargada con los números que permitan dividir en forma exacta al menos al 50% de la cola
+/// @param numero_actual Numero actual que se usa para comprobar si es divisor de los números cargados en la cola.
 /// @param longitud_cola Cantidad de elementos de la cola
 void divisores(Cola cola, Cola Divisor_total, Cola Divisor_parcial, int numero_actual, float longitud_cola)
 {
@@ -606,7 +607,7 @@ void divisores(Cola cola, Cola Divisor_total, Cola Divisor_parcial, int numero_a
     {
         return;
     }
-    
+
     int contador_divisores = 0;
     Cola caux = c_crear();
     TipoElemento X = te_crear(0);
@@ -773,5 +774,4 @@ void ventanillas(int q, Cola c1, Cola c2, Cola c3)
             }
         }
     }
-    printf(ANSI_RESET);
 }

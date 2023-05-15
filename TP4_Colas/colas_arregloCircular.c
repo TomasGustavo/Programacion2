@@ -82,7 +82,7 @@ void c_mostrar(Cola cola)
     while (c_es_vacia(cola) != true)
     {
         X = c_desencolar(cola);
-        printf("% d", X->clave);
+        printf("%d ", X->clave);
         c_encolar(Caux, X);
     }
     // ahora paso la auxiliar a la cola de nuevo para dejarla como estaba

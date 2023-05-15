@@ -20,7 +20,7 @@ void main_buscarElemento()
     c = cargarCola(&cant);
     if (!c_es_vacia(c))
     {
-        printf(ANSI_bMAGENTA "Ingrese el elemento a buscar [-999.999 - 999.999]: \n" ANSI_YELLOW);
+        printf(ANSI_bMAGENTA "Ingrese el elemento a buscar [-999.999 - 999.999]: " ANSI_YELLOW);
         validador = scanf("%d", &clave);
         vaciar_buffer();
         while (validador != 1 || clave < -999999 || clave > 999999)
@@ -28,12 +28,13 @@ void main_buscarElemento()
             printf(ANSI_RED "\t\t-------- ERROR -------- \n");
             printf("DATO FUERA DE RANGO\n\n" ANSI_RESET);
             pausa();
-            printf(ANSI_bBLUE "Ingrese el elemento a buscar [-999.999 - 999.999]: \n" ANSI_YELLOW);
+            printf(ANSI_bBLUE "Ingrese el elemento a buscar [-999.999 - 999.999]: " ANSI_YELLOW);
             validador = scanf("%d", &clave);
             vaciar_buffer();
         }
         rta = buscar(c, clave);
         c_mostrar(c);
+        printf("\n");
         if (rta == true)
             printf(ANSI_bGREEN "Se encontró el elemento %i en la cola\n", clave);
         else
@@ -187,12 +188,13 @@ void main_clonar()
         printf(ANSI_YELLOW "La cola esta vacía, se hara la copia igualmente pero este es solo un aviso\n\n" ANSI_RESET);
     }
     colaClon = copiar_cola(cola);
-    printf(ANSI_bMAGENTA "Cola clonada: \n\n");
+    printf(ANSI_bMAGENTA "\nCola clonada: \n");
     c_mostrar(colaClon);
     printf(ANSI_bGREEN "\n\nCola original DESPUES de llamar a la función: \n");
     c_mostrar(cola);
     printf("" ANSI_RESET);
     pausa();
+
     limpiar_pantalla();
 }
 
@@ -203,25 +205,33 @@ void main_punto3()
     Cola c1, c2;
     c1 = cargarCola(&cant1);
     c2 = cargarCola(&cant2);
-    if (Comparar(c1, c2))
+    if (!c_es_vacia(c1) || (!c_es_vacia(c2)))
     {
-        printf(ANSI_GREEN "Las colas son iguales\n");
-        printf(ANSI_GREEN "Cola 1\n");
-        c_mostrar(c1);
-        printf("\n");
-        printf(ANSI_GREEN "Cola 2\n");
-        c_mostrar(c2);
+        if (Comparar(c1, c2))
+        {
+            printf(ANSI_GREEN "Las colas son iguales\n");
+            printf(ANSI_GREEN "Cola 1\n");
+            c_mostrar(c1);
+            printf("\n");
+            printf(ANSI_GREEN "Cola 2\n");
+            c_mostrar(c2);
+        }
+        else
+        {
+            printf(ANSI_RED "Las colas no son iguales\n");
+            printf(ANSI_GREEN "Cola 1\n");
+            c_mostrar(c1);
+            printf("\n");
+            printf(ANSI_GREEN "Cola 2\n");
+            c_mostrar(c2);
+        }
     }
     else
     {
-        printf(ANSI_RED "Las colas no son iguales\n");
-        printf(ANSI_GREEN "Cola 1\n");
-        c_mostrar(c1);
-        printf("\n");
-        printf(ANSI_GREEN "Cola 2\n");
-        c_mostrar(c2);
+        printf(ANSI_RED "Las colas están vacías");
     }
-    printf(ANSI_RESET);
+    printf(ANSI_bMAGENTA "\nCOMPLEJIDAD ALGORÍTMICA\nLa complejidad de la solución empleada es lineal O(n^2) porque se utilizan dos ciclos anidados para recorrer ambas colas.");
+    pausa();
 }
 
 /// @brief Punto 4: Dada una cola de números enteros, no ordenada, construir un algoritmo que permita pasar a otra cola todos los elementos que no se repiten en la primera, sin destruir el contenido de la cola original y dejándola en su estado inicial. Determinar la complejidad algorítmica de la solución.
@@ -233,9 +243,18 @@ void main_punto4()
     if (!c_es_vacia(c1))
     {
         c2 = norepetidos(c1);
-        printf(ANSI_GREEN "Los elementos no repetidos de la cola son:\n");
-        c_mostrar(c2);
+        if (!c_es_vacia(c2))
+        {
+            printf(ANSI_GREEN "Los elementos no repetidos de la cola son:\n");
+            c_mostrar(c2);
+        }
+        else
+        {
+            printf(ANSI_RED "La cola no posee elementos no repetidos.");
+        }
     }
+    printf(ANSI_bMAGENTA "\nCOMPLEJIDAD ALGORÍTMICA\nLa complejidad de la solución empleada es polinomial O(n^a) porque se utilizan tres ciclos anidados para recorrer las colas.");
+    pausa();
     printf(ANSI_RESET);
 }
 
@@ -247,19 +266,23 @@ void main_divisores()
     Cola Divisor_total = c_crear();
     Cola Divisor_parcial = c_crear();
     int numero_actual = 2;
-    int elemento_mayor_cola = 0; //esta variable se utiliza para que la funcion termine si el contador numero_actual supera el valor del elemento mayor de la cola
+    int elemento_mayor_cola = 0; // esta variable se utiliza para que la función termine si el contador numero_actual supera el valor del elemento mayor de la cola
     cola = cargarCola_divisores(&cant, &elemento_mayor_cola);
     float longitud_cola = cant;
-    while (numero_actual <= 1000 && numero_actual < elemento_mayor_cola)
+    if (!c_es_vacia(cola))
     {
-        divisores(cola, Divisor_total, Divisor_parcial, numero_actual, longitud_cola);
-        numero_actual++;
+        while (numero_actual <= 1000 && numero_actual < elemento_mayor_cola)
+        {
+            divisores(cola, Divisor_total, Divisor_parcial, numero_actual, longitud_cola);
+            numero_actual++;
+        }
+        printf(ANSI_bGREEN "\nSe muestran solo divisores entre el 2 y el 1000:\n");
+        printf("Divisores totales: \n");
+        c_mostrar(Divisor_total);
+        printf(ANSI_bGREEN "\nDivisores parciales: \n");
+        c_mostrar(Divisor_parcial);
     }
-    printf(ANSI_bGREEN"\nSe muestran solo divisores entre el 2 y el 1000:\n");
-    printf("Divisores totales: \n");
-    c_mostrar(Divisor_total);
-    printf(ANSI_bGREEN "\nDivisores parciales: \n");
-    c_mostrar(Divisor_parcial);
+    printf(ANSI_bMAGENTA "\nCOMPLEJIDAD ALGORÍTMICA\nLa complejidad de la solución empleada es lineal O(n) porque hay varios ciclos que dependen de la cantidad de elementos de la cola, pero no se encuentran anidados.");
     printf(ANSI_RESET);
 }
 
@@ -286,6 +309,8 @@ void main_valores_comunes()
         l = valoresComunes(p, c);
         mostrarListaConValor(l);
     }
+    printf(ANSI_bMAGENTA "\nCOMPLEJIDAD ALGORÍTMICA\nLa complejidad de la solución empleada es lineal O(n^2) porque dentro del ciclo que depende de la pila, se encuentra anidado un ciclo que depende de la lista. Si se considera que ambas estructuras tienen n elementos, la complejidad para retornar la lista seria n^2.");
+    pausa();
 }
 
 /// @brief Punto 7: Un negocio tiene 3 ventanillas para atender a sus clientes. Los clientes forman cola en cada ventanilla. Un día, dos de los tres empleados que atienden las ventanillas no pueden asistir al trabajo, quedando uno solo para atender a las tres colas. Este empleado decide que, a medida que lleguen los clientes, atenderá por cierta cantidad de minutos (que denominaremos Q) a cada cola, paseándose por todas las colas equitativamente.
@@ -295,8 +320,11 @@ void main_ventanillas()
     Cola cola2 = c_crear();
     Cola cola3 = c_crear();
     int cant, q;
+    printf(ANSI_bMAGENTA "COLA DE LA VENTANILLA 1\n");
     cola1 = cargarCola(&cant);
+    printf(ANSI_bMAGENTA "COLA DE LA VENTANILLA 2\n");
     cola2 = cargarCola(&cant);
+    printf(ANSI_bMAGENTA "COLA DE LA VENTANILLA 3\n");
     cola3 = cargarCola(&cant);
     printf(ANSI_BLUE "Ingrese la cantidad de tiempo que se quedara en cada cola: " ANSI_YELLOW);
     int validador = scanf("%i", &q);
@@ -310,6 +338,8 @@ void main_ventanillas()
         vaciar_buffer();
     }
     ventanillas(q, cola1, cola2, cola3);
+    printf(ANSI_bMAGENTA "\nCOMPLEJIDAD ALGORÍTMICA\nLa complejidad de la solución empleada es lineal O(n) porque el bucle depende de la suma de la cantidad de elementos de las colas, dicha suma seria n*3, siendo n la cantidad de elementos de cada cola.");
+    pausa();
 }
 
 /// @brief Menu principal del TP de Colas
@@ -425,11 +455,11 @@ int main()
             menu_principal();
         case 3:
             main_punto3();
-            getch();
+            // getch();
             break;
         case 4:
             main_punto4();
-            getch();
+            // getch();
             break;
         case 5:
             main_divisores();
@@ -437,11 +467,11 @@ int main()
             break;
         case 6:
             main_valores_comunes();
-            getch();
+            // getch();
             break;
         case 7:
             main_ventanillas();
-            getch();
+            // getch();
             break;
         case 0:
             salir = true;
