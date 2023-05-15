@@ -542,14 +542,15 @@ Cola norepetidos(Cola c)
     return cresp;
 }
 
-/// @brief Función limitada para el punto 5 que carga una cola de enteros y la muestra al finalizar
+/// @brief Función limitada para el punto 5 que carga una cola de enteros sin repetidos y la muestra al finalizar
 /// @param cant Retorna por referencia la cantidad de elementos de la cola
 /// @param elemento_mayor Retorna por referencia el elemento mayor de la cola
 /// @return Cola cargada con números enteros
-Cola cargarCola_divisores(int *cant, int *elemento_mayor)
+Cola cargarColaSinRepetidos_divisores(int *cant, int *elemento_mayor)
 {
     Cola cola = c_crear();
     int valor;
+    bool repetido = false;
     printf(ANSI_bBLUE "Ingrese cantidad de elementos a cargar [0-99]: " ANSI_bYELLOW);
     int validador = scanf("%d", cant);
     vaciar_buffer();
@@ -570,7 +571,14 @@ Cola cargarCola_divisores(int *cant, int *elemento_mayor)
         printf(ANSI_bBLUE "Ingrese clave del elemento N°%d a cargar [2 - 999.999]: " ANSI_bYELLOW, i + 1);
         validador = scanf("%d", &valor);
         vaciar_buffer();
-        while (validador != 1 || valor < 2 || valor > 999999)
+        if (c_es_vacia(cola))
+        {
+            repetido = false;
+        }
+        else{
+            repetido = buscar(cola, valor);
+        }
+        while (validador != 1 || valor < 2 || valor > 999999 || repetido)
         {
             limpiar_pantalla();
             printf(ANSI_bRED "\t\t-------- ERROR --------\n");
@@ -579,6 +587,13 @@ Cola cargarCola_divisores(int *cant, int *elemento_mayor)
             limpiar_pantalla();
             printf(ANSI_bBLUE "Ingrese clave del elemento N°%d a cargar [2 - 999.999]: " ANSI_bYELLOW, i + 1);
             validador = scanf("%d", &valor);
+            if (c_es_vacia(cola))
+            {
+            repetido = false;
+            }
+            else{
+            repetido = buscar(cola, valor);
+            }
             vaciar_buffer();
         }
         TipoElemento elemento = te_crear(valor);

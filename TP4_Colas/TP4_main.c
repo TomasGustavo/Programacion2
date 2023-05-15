@@ -267,11 +267,11 @@ void main_divisores()
     Cola Divisor_parcial = c_crear();
     int numero_actual = 2;
     int elemento_mayor_cola = 0; // esta variable se utiliza para que la función termine si el contador numero_actual supera el valor del elemento mayor de la cola
-    cola = cargarCola_divisores(&cant, &elemento_mayor_cola);
+    cola = cargarColaSinRepetidos_divisores(&cant, &elemento_mayor_cola);
     float longitud_cola = cant;
     if (!c_es_vacia(cola))
     {
-        while (numero_actual <= 1000 && numero_actual < elemento_mayor_cola)
+        while (numero_actual <= 1000 && numero_actual <= elemento_mayor_cola)
         {
             divisores(cola, Divisor_total, Divisor_parcial, numero_actual, longitud_cola);
             numero_actual++;
