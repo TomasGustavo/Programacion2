@@ -10,6 +10,7 @@
                 "${file}",
                 "${fileDirname}\\arbol-binario.c",
                 "${fileDirname}\\listas_apuntadores.c",
+                "${fileDirname}\\nodo.c",
                 "${fileDirname}\\tipo_elemento.c",
                 "${fileDirname}\\TP5_arboles.c",
                 "-o",
