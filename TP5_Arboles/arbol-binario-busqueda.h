@@ -5,8 +5,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "D:\Mario\Prog_2_2009\2023\TADs\Arboles\nodo.h"
-#include "D:\Mario\Prog_2_2009\2023\TADs\Tipos\tipo_elemento.h"
+#include "nodo.h"
+#include "tipo_elemento.h"
 
 struct ArbolBinarioBusquedaRep;
 typedef struct ArbolBinarioBusquedaRep *ArbolBinarioBusqueda;

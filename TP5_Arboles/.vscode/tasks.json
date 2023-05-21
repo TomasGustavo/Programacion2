@@ -1,0 +1,33 @@
+{
+    "tasks": [
+        {
+            "type": "cppbuild",
+            "label": "ARBOLES BINARIOS PUNTEROS",
+            "command": "gcc",
+            "args": [
+                "-fdiagnostics-color=always",
+                "-g",
+                "${file}",
+                "${fileDirname}\\arbol-binario.c",
+                "${fileDirname}\\listas_apuntadores.c",
+                "${fileDirname}\\tipo_elemento.c",
+                "${fileDirname}\\TP5_arboles.c",
+                "-o",
+                "${fileDirname}\\${fileBasenameNoExtension}.exe",
+                "-Wall"
+            ],
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "Tarea generada por Gerr"
+        },
+    ],
+    "version": "2.0.0"
+}

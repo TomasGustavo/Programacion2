@@ -6,10 +6,14 @@
 /// @brief Retorna el hijo izquierdo
 /// @param N Recibe un nodo del cual queremos obtener el hijo izquierdo
 /// @return Hijo izquierdo del Nodo dado
-NodoArbol n_hijoizquierdo(NodoArbol N){
-    if (N == NULL){
+NodoArbol n_hijoizquierdo(NodoArbol N)
+{
+    if (N == NULL)
+    {
         return NULL;
-    } else {
+    }
+    else
+    {
         return N->hi;
     }
 }
@@ -17,10 +21,14 @@ NodoArbol n_hijoizquierdo(NodoArbol N){
 /// @brief Retorna el hijo derecho
 /// @param N Recibe un nodo del cual queremos obtener el hijo derecho
 /// @return Hijo derecho del Nodo dado
-NodoArbol n_hijoderecho(NodoArbol N){
-    if (N == NULL){
+NodoArbol n_hijoderecho(NodoArbol N)
+{
+    if (N == NULL)
+    {
         return NULL;
-    } else {
+    }
+    else
+    {
         return N->hd;
     }
 }
@@ -28,8 +36,9 @@ NodoArbol n_hijoderecho(NodoArbol N){
 /// @brief RCrea un nodo
 /// @param te Tipo elemento con los datos que va a contener el nodo
 /// @return Nodo creado
-NodoArbol n_crear(TipoElemento te){
-    NodoArbol na = (NodoArbol) malloc(sizeof(struct NodoArbolRep));
+NodoArbol n_crear(TipoElemento te)
+{
+    NodoArbol na = (NodoArbol)malloc(sizeof(struct NodoArbolRep));
     na->datos = te;
     na->hi = NULL;
     na->hd = NULL;
@@ -40,13 +49,16 @@ NodoArbol n_crear(TipoElemento te){
 /// @brief Recupera el tipo elemento de un nodo o NULL si no existe
 /// @param N Recibe un nodo a recuperar
 /// @return Retorna el tipo elemento de un nodo o NULL si no existe
-TipoElemento n_recuperar(NodoArbol N){
+TipoElemento n_recuperar(NodoArbol N)
+{
     TipoElemento x = te_crear(0);
-    if (N == NULL){
+    if (N == NULL)
+    {
         return NULL;
-    } else {
+    }
+    else
+    {
         x = N->datos;
         return x;
     }
 }
-

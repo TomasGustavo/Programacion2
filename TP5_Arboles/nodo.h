@@ -2,11 +2,12 @@
 #define NODO_H
 #include "tipo_elemento.h"
 
-struct NodoArbolRep {
+struct NodoArbolRep
+{
     TipoElemento datos;
     struct NodoArbolRep *hi;
     struct NodoArbolRep *hd;
-    int FE;   //Factor de Equilibro de Cada nodo para el autobalanceo
+    int FE; // Factor de Equilibro de Cada nodo para el autobalanceo
 };
 typedef struct NodoArbolRep *NodoArbol;
 
