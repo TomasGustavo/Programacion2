@@ -23,4 +23,20 @@
 #define ANSI_bWHITE "\e[97m"
 #define ANSI_RESET "\e[0m"
 
+void vaciar_buffer();
+
+void pausa();
+
+void limpiar_pantalla();
+
+void cargar_arbol_binario(ArbolBinario A);
+
+void mostrar_pre_orden(NodoArbol N);
+
+void mostrar_in_orden(NodoArbol N);
+
+void mostrar_post_orden(NodoArbol N);
+
+void hojas(ArbolBinario A);
+
 #endif // TP5_ARBOLES_H

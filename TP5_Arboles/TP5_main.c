@@ -76,6 +76,18 @@ void menu_punto4()
     printf("  Por favor seleccione una opción: " ANSI_YELLOW);
 }
 
+/// @brief PUNTO 2A: Retornar una lista con todos los nodos terminales u hojas.
+void main_hojas()
+{
+    ArbolBinario A;
+    A = a_crear();
+    cargar_arbol_binario(A);
+    hojas(A);
+    vaciar_buffer();
+    pausa();
+    limpiar_pantalla();
+}
+
 int main()
 {
     bool salir = false;
@@ -114,13 +126,11 @@ int main()
                 switch (opcion)
                 {
                 case 1:
-                    getch();
+                    main_hojas();
                     break;
                 case 2:
-                    getch();
                     break;
                 case 3:
-                    getch();
                     break;
                 case 0:
                     salir_p2 = true;
@@ -129,7 +139,6 @@ int main()
             break;
             menu_principal();
         case 3:
-            getch();
             break;
         case 4:
             while (!salir_p4)
@@ -147,31 +156,22 @@ int main()
                 switch (opcion)
                 {
                 case 1:
-                    getch();
                     break;
                 case 2:
-                    getch();
                     break;
                 case 3:
-                    getch();
                     break;
                 case 4:
-                    getch();
                     break;
                 case 5:
-                    getch();
                     break;
                 case 6:
-                    getch();
                     break;
                 case 7:
-                    getch();
                     break;
                 case 8:
-                    getch();
                     break;
                 case 9:
-                    getch();
                     break;
                 case 0:
                     salir_p4 = true;
@@ -180,13 +180,10 @@ int main()
             break;
             menu_principal();
         case 7:
-            getch();
             break;
         case 9:
-            getch();
             break;
         case 10:
-            getch();
             break;
         case 0:
             salir = true;
