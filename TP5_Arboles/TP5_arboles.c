@@ -179,3 +179,33 @@ void hojas(ArbolBinario A)
     printf(ANSI_GREEN "Las hojas son: ");
     buscar_hojas(a_raiz(A));
 }
+
+/// @brief Recorre el arbol binario en busca de los nodos interiores
+/// @param Q Nodo del arbol (recibe la raiz del arbol)
+/// @param L Lista vacia que va a contener todos los nodos interiores
+/// @param raiz Condicion para ignorar la raiz asi no se guarda como nodo interior
+void buscar_nodos(NodoArbol Q, Lista L, bool raiz){
+    TipoElemento X;
+    if (Q == NULL){
+    }
+    else{
+        if (raiz == false){
+        if(n_hijoizquierdo(Q) != NULL || n_hijoderecho(Q) != NULL)
+        {
+            X = n_recuperar(Q);
+            l_agregar(L, X);
+        }}
+        buscar_nodos(n_hijoizquierdo(Q), L, false);
+        buscar_nodos(n_hijoderecho(Q), L, false);
+    }
+}
+
+/// @brief Funcion que llama a la funcion buscar_nodos
+/// @param A Arbol binario cargado de enteros
+/// @return Retorna la lista cargada con los nodos interiores
+Lista nodos_interiores(ArbolBinario A){
+    Lista lista = l_crear();
+    bool raiz = true;
+    buscar_nodos(a_raiz(A), lista, raiz);
+    return lista;
+}

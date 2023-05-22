@@ -88,6 +88,26 @@ void main_hojas()
     limpiar_pantalla();
 }
 
+/// @brief PUNTO 2B: Retornar en una estructura todos los nodos interiores (los que no son ni hojas ni raíz). 
+void main_interior(){
+    ArbolBinario A;
+    Lista L;
+    A = a_crear();
+    L = l_crear();
+    cargar_arbol_binario(A);
+    L = nodos_interiores(A);
+    vaciar_buffer();
+    printf(ANSI_bGREEN"Nodos interiores: \n");
+    l_mostrarLista(L);
+    if (l_es_vacia(L))
+    {
+        printf("La lista esta vacia");
+    }
+    printf(ANSI_RESET);
+    pausa();
+    limpiar_pantalla();
+}
+
 int main()
 {
     bool salir = false;
@@ -129,6 +149,7 @@ int main()
                     main_hojas();
                     break;
                 case 2:
+                    main_interior();
                     break;
                 case 3:
                     break;

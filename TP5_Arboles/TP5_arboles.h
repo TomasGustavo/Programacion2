@@ -39,4 +39,6 @@ void mostrar_post_orden(NodoArbol N);
 
 void hojas(ArbolBinario A);
 
+Lista nodos_interiores(ArbolBinario A);
+
 #endif // TP5_ARBOLES_H
