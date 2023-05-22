@@ -209,3 +209,53 @@ Lista nodos_interiores(ArbolBinario A){
     buscar_nodos(a_raiz(A), lista, raiz);
     return lista;
 }
+
+/// @brief Funcion que muestra el contenido de la lista por valor
+/// @param L Lista cargada de valores
+void l_mostrarLista_valor(Lista L){
+    TipoElemento X;
+    int contador = 1;
+    printf("contenido de la lista: ");
+    if (l_es_vacia(L))
+    {
+        printf("la lista esta vacia");
+    }
+    else{
+    while (contador <= l_longitud(L))
+    {
+        X = l_recuperar(L, contador);
+        printf("%p ", X->valor);
+        contador++;
+    }
+    }
+    printf("\n");
+}
+
+/// @brief Busca todas las ocurrencias del elemento y carga su posicion en una lista
+/// @param Q  Nodo del arbol (recibe la raiz del arbol)
+/// @param lista Lista vacia que va a contener todas las ocurrencias
+/// @param elemento Elemento a buscar
+void buscar_ocurrencias(NodoArbol Q, Lista lista, int elemento){
+    TipoElemento X;
+    if (Q == NULL){
+    }
+    else{ 
+        X = n_recuperar(Q);
+        if(elemento == X->clave){
+           X->valor = Q;
+            l_agregar(lista, X);
+        }
+        buscar_ocurrencias(n_hijoizquierdo(Q), lista, elemento);
+        buscar_ocurrencias(n_hijoderecho(Q), lista, elemento);
+    }
+}
+
+/// @brief Funcion que llama a la funcion buscar_ocurrencias
+/// @param A Arbol Binario cargado de enteros
+/// @param elemento Elemento a buscar en el arbol
+/// @return Retorna la lista cargada con la posicion del elemento
+Lista ocurrencias(ArbolBinario A, int elemento){
+    Lista lista = l_crear();
+    buscar_ocurrencias(a_raiz(A), lista, elemento);
+    return lista;
+}

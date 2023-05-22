@@ -108,6 +108,41 @@ void main_interior(){
     limpiar_pantalla();
 }
 
+/// @brief Punto 2C: Buscar todas las ocurrencias de una clave dentro del árbol. Retornar la posición de cada ocurrencia (puntero al nodo). 
+void main_buscar(){
+    ArbolBinario A;
+    Lista L;
+    int clave, validador;
+    A = a_crear();
+    L = l_crear();
+    cargar_arbol_binario(A);
+    if (!a_es_vacio(A))
+    {
+        printf(ANSI_bMAGENTA "Ingrese el elemento a buscar [-999.999 - 999.999]: " ANSI_YELLOW);
+        validador = scanf("%d", &clave);
+        vaciar_buffer();
+        while (validador != 1 || clave < -999999 || clave > 999999)
+        {
+            printf(ANSI_RED "\t\t-------- ERROR -------- \n");
+            printf("DATO FUERA DE RANGO\n\n" ANSI_RESET);
+            pausa();
+            printf(ANSI_bBLUE "Ingrese el elemento a buscar [-999.999 - 999.999]: " ANSI_YELLOW);
+            validador = scanf("%d", &clave);
+            vaciar_buffer();
+        }
+    L = ocurrencias(A, clave);
+    printf(ANSI_bGREEN"Posiciones del elemento %d: \n", clave);
+    l_mostrarLista_valor(L);
+    if (l_es_vacia(L))
+    {
+        printf(ANSI_bRED"no se encontro el elemento en el arbol\n");
+    }
+    printf(ANSI_RESET);
+    pausa();
+    limpiar_pantalla();
+}
+}
+
 int main()
 {
     bool salir = false;
@@ -152,6 +187,7 @@ int main()
                     main_interior();
                     break;
                 case 3:
+                    main_buscar();
                     break;
                 case 0:
                     salir_p2 = true;

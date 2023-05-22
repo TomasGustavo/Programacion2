@@ -41,4 +41,8 @@ void hojas(ArbolBinario A);
 
 Lista nodos_interiores(ArbolBinario A);
 
+Lista ocurrencias(ArbolBinario A, int elemento);
+
+void l_mostrarLista_valor(Lista L);
+
 #endif // TP5_ARBOLES_H
