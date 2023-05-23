@@ -57,4 +57,12 @@ NodoArbol devolver_nodo(ArbolBinario A, int clave);
 
 void devolver_nodo_aux(ArbolBinario A, NodoArbol actual, int clave, NodoArbol* N);
 
+NodoArbol nodo_hermano(ArbolBinario A, int clave);
+
+void existe_nodo_aux(ArbolBinario A, NodoArbol actual, int clave, bool* resultado);
+
+int nivel(ArbolBinario A, int clave);
+
+void nivel_aux(NodoArbol actual,int clave, int n , int* resultado);
+
 #endif // TP5_ARBOLES_H

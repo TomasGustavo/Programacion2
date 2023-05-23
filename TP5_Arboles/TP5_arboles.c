@@ -324,6 +324,12 @@ NodoArbol nodo_padre(ArbolBinario A, int clave){
     }
 }
 
+/// @brief Funcion que devuelve true si existe el nodo y false si no
+/// @param A Arbol Binario cargado de enteros
+/// @param actual Nodo actual
+/// @param clave Clave a buscar en el arbol
+/// @param resultado variable donde se devuelve true o false
+/// @return Retorna el nodo padre
 void existe_nodo_aux(ArbolBinario A, NodoArbol actual, int clave, bool* resultado){
     if(!a_es_rama_nula(actual)){
         if(n_recuperar(actual)->clave == clave) *resultado = true;
@@ -334,6 +340,10 @@ void existe_nodo_aux(ArbolBinario A, NodoArbol actual, int clave, bool* resultad
     }
 }
 
+/// @brief Funcion que llama a existe_nodo_aux
+/// @param A Arbol Binario cargado de enteros
+/// @param clave Clave a buscar en el arbol
+/// @return Retorna true si existe el nodo y false si no existe
 bool existe_nodo(ArbolBinario A, int clave){
     NodoArbol R;
     bool resultado = false;
@@ -343,4 +353,34 @@ bool existe_nodo(ArbolBinario A, int clave){
         existe_nodo_aux(A,R,clave, &resultado);
         return resultado;
     }
+}
+
+/// @brief Funcion que llama a nodo_hermano_aux
+/// @param A Arbol Binario cargado de enteros
+/// @param clave Clave a buscar en el arbol
+/// @return Retorna el nodo hermano
+NodoArbol nodo_hermano(ArbolBinario A, int clave){
+    NodoArbol N = nodo_padre(A, clave);
+    if(n_hijoizquierdo(N) == clave) return n_hijoderecho(N);
+    else return n_hijoderecho(N);
+}
+
+void nivel_aux(NodoArbol actual,int clave, int n , int* resultado){
+    TipoElemento X = te_crear(0);
+    if(actual != NULL){
+        X = n_recuperar(actual);
+        if (X->clave == clave){
+            *resultado = n;
+        } else {
+            nivel_aux(n_hijoizquierdo(actual), clave, n+1, resultado);
+            nivel_aux(n_hijoderecho(actual), clave, n+1, resultado);
+        }
+    }
+}
+
+int nivel(ArbolBinario A, int clave){
+    int N = -1;
+    NodoArbol R = a_raiz(A);
+    nivel_aux(R, clave, 0, &N);
+    return N;
 }

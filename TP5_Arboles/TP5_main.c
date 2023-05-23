@@ -10,7 +10,7 @@
 #include "arbol-binario.h"
 #include "listas.h"
 
-/// @brief Menu principal del TP de Colas
+/// @brief Menu principal del TP de Arboles
 void menu_principal()
 {
     printf("\n");
@@ -51,12 +51,12 @@ void menu_punto2()
     printf("  Por favor seleccione una opción: " ANSI_YELLOW);
 }
 
-/// @brief Menu del Punto 2: Operaciones con un arbol binario
+/// @brief Menu del Punto 4
 void menu_punto4()
 {
     printf("\n");
     printf(ANSI_BLUE "  ============================================================================\n");
-    printf(" |                     3   Operaciones con un arbol n-ario                     |\n");
+    printf(" |                     4   Operaciones con un arbol n-ario                     |\n");
     printf("  ============================================================================\n");
     printf("\n");
     printf("  1   Mostrar recorrido en anchura\n");
@@ -146,9 +146,9 @@ void main_buscar(){
 /// @brief Punto 3 
 void main_nodo_binario(){
     ArbolBinario A;
-    int validador, clave;
-    NodoArbol N, N1, HI, HD;
-    TipoElemento X, XI, XD;
+    int validador, clave, nivelNodo;
+    NodoArbol N, N1, HI, HD, NHermano;
+    TipoElemento X, XI, XD, XHermano;
     A = a_crear();
     cargar_arbol_binario(A);
     if (!a_es_vacio(A))
@@ -187,10 +187,16 @@ void main_nodo_binario(){
     
             // PUNTO 3C: Listar el hermano 
             printf(ANSI_bMAGENTA "\nHermano: " ANSI_YELLOW);
-
+            NHermano = nodo_hermano(A,clave);
+            if (NHermano == NULL) printf(ANSI_bMAGENTA "Hhermano nulo");
+            else {
+                XHermano = n_recuperar(NHermano);
+                printf(ANSI_bMAGENTA "%i", XHermano->clave);
+            }
             // PUNTO 3D: Calcular el nivel en el que se encuentra.
-            printf(ANSI_bMAGENTA "\nNivel: " ANSI_YELLOW);
-
+            nivelNodo = nivel(A,clave);
+            printf(ANSI_bMAGENTA "\nNivel: %i", nivelNodo);
+         
             // PUNTO 3E: Calcular la altura de su rama
             printf(ANSI_bMAGENTA "\nAltura: " ANSI_YELLOW);
 
