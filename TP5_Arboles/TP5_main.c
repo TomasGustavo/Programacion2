@@ -143,6 +143,70 @@ void main_buscar(){
 }
 }
 
+/// @brief Punto 3 
+void main_nodo_binario(){
+    ArbolBinario A;
+    int validador, clave;
+    NodoArbol N, N1, HI, HD;
+    TipoElemento X, XI, XD;
+    A = a_crear();
+    cargar_arbol_binario(A);
+    if (!a_es_vacio(A))
+    {
+        printf(ANSI_bMAGENTA "Ingrese la clave [-999.999 - 999.999]: " ANSI_YELLOW);
+        validador = scanf("%d", &clave);
+        vaciar_buffer();
+        while (validador != 1 || clave < -999999 || clave > 999999)
+        {
+            printf(ANSI_RED "\t\t-------- ERROR -------- \n");
+            printf("DATO FUERA DE RANGO\n\n" ANSI_RESET);
+            pausa();
+            printf(ANSI_bBLUE "Ingrese la clave [-999.999 - 999.999]: " ANSI_YELLOW);
+            validador = scanf("%d", &clave);
+            vaciar_buffer();
+        }
+        if (existe_nodo(A,clave)){
+            // PUNTO 3A: Indicar el nombre del nodo padre.
+            N = nodo_padre(A,clave);
+            X = n_recuperar(N);
+            printf(ANSI_bMAGENTA "\nNodo padre: %i", X->clave);
+    
+            // PUNTO 3B: Listar los hijos
+            N1 = devolver_nodo(A,clave);
+            HI = n_hijoizquierdo(N1);
+            HD = n_hijoderecho(N1);
+            printf(ANSI_bMAGENTA "\nHijos: ");
+            if(HI != NULL) {
+                XI = n_recuperar(HI);
+                printf(ANSI_bMAGENTA "%i (Hijo izquierdo) ", XI->clave);
+            } else printf(ANSI_bMAGENTA "Hijo izquierdo nulo ");
+            if(HD != NULL) {
+                XD = n_recuperar(HD);
+                printf(ANSI_bMAGENTA "%i (Hijo derecho) ", XD->clave);
+            } else printf(ANSI_bMAGENTA "Hijo derecho nulo");
+    
+            // PUNTO 3C: Listar el hermano 
+            printf(ANSI_bMAGENTA "\nHermano: " ANSI_YELLOW);
+
+            // PUNTO 3D: Calcular el nivel en el que se encuentra.
+            printf(ANSI_bMAGENTA "\nNivel: " ANSI_YELLOW);
+
+            // PUNTO 3E: Calcular la altura de su rama
+            printf(ANSI_bMAGENTA "\nAltura: " ANSI_YELLOW);
+
+            // PUNTO 3F: Listar todos los nodos que están en el mismo nivel 
+            printf(ANSI_bMAGENTA "\nNodos del mismo nivel: " ANSI_YELLOW);
+        } else {
+            printf(ANSI_bMAGENTA "\nNo se ha encontrado la clave en el arbol" ANSI_YELLOW);
+    }
+    } else {
+        printf(ANSI_bMAGENTA "\nEl arbol esta vacio" ANSI_YELLOW);
+    }
+    printf(ANSI_RESET);
+    pausa();
+    limpiar_pantalla();
+}
+
 int main()
 {
     bool salir = false;
@@ -196,6 +260,7 @@ int main()
             break;
             menu_principal();
         case 3:
+            main_nodo_binario();
             break;
         case 4:
             while (!salir_p4)

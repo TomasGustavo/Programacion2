@@ -242,7 +242,7 @@ void buscar_ocurrencias(NodoArbol Q, Lista lista, int elemento){
     else{ 
         X = n_recuperar(Q);
         if(elemento == X->clave){
-           X->valor = Q;
+            X->valor = Q;
             l_agregar(lista, X);
         }
         buscar_ocurrencias(n_hijoizquierdo(Q), lista, elemento);
@@ -258,4 +258,89 @@ Lista ocurrencias(ArbolBinario A, int elemento){
     Lista lista = l_crear();
     buscar_ocurrencias(a_raiz(A), lista, elemento);
     return lista;
+}
+
+/// @brief Recorre el arbol binario en busca un nodo
+/// @param A arbol binario cargado
+/// @param actual Nodo actual
+/// @param clave clave a buscar en el arbol
+/// @param N Nodo encontrado
+/// @return Retorna el nodo buscado
+void devolver_nodo_aux(ArbolBinario A, NodoArbol actual, int clave, NodoArbol* N){
+    if(!a_es_rama_nula(actual)){
+        if(n_recuperar(actual)->clave == clave) *N = actual;
+        else{
+            devolver_nodo_aux(A, n_hijoizquierdo(actual), clave, N);
+            devolver_nodo_aux(A, n_hijoderecho(actual), clave, N);
+        }
+    }
+}
+
+/// @brief Funcion que llama a devolver_nodo_aux
+/// @param A arbol binario cargado
+/// @param clave clave a buscar en el arbol
+/// @return Retorna el nodo buscado
+NodoArbol devolver_nodo(ArbolBinario A, int clave){
+    TipoElemento X = te_crear(0);
+    NodoArbol N;
+    N = NULL;
+    N = n_crear(X);
+    NodoArbol R = a_raiz(A);
+    devolver_nodo_aux(A,R,clave,&N);
+    return N;
+}
+
+/// @brief Funcion que busca el nodo padre recursivamente
+/// @param A Arbol Binario cargado de enteros
+/// @param actual Nodo actual
+/// @param padre Parametro que guarda el padre del nodo actual
+/// @param clave Clave a buscar en el arbol
+/// @param R Nodo donde se va a guardar resultado
+/// @return Retorna el nodo padre
+void nodo_padre_aux(ArbolBinario A, NodoArbol actual, NodoArbol padre, int clave, NodoArbol* R){
+  if(!a_es_rama_nula(actual)){
+    if(n_recuperar(actual)->clave == clave) *R = padre;
+    else{
+        nodo_padre_aux(A,n_hijoizquierdo(actual), actual, clave, R);
+        nodo_padre_aux(A, n_hijoderecho(actual), actual, clave, R);
+    }
+  }
+}
+
+/// @brief Funcion que llama a la funcion nodo_padre_aux
+/// @param A Arbol Binario cargado de enteros
+/// @param clave Clave a buscar en el arbol
+/// @return Retorna el nodo padre
+NodoArbol nodo_padre(ArbolBinario A, int clave){
+    NodoArbol N, R;
+    TipoElemento X = te_crear(0);
+    N = NULL;
+    N = n_crear(X);
+    R = a_raiz(A);
+    if (n_recuperar(R)->clave == clave) return R;
+    else {
+        nodo_padre_aux(A,R,NULL,clave,&N);
+        return N;
+    }
+}
+
+void existe_nodo_aux(ArbolBinario A, NodoArbol actual, int clave, bool* resultado){
+    if(!a_es_rama_nula(actual)){
+        if(n_recuperar(actual)->clave == clave) *resultado = true;
+        else{
+            existe_nodo_aux(A,n_hijoizquierdo(actual),clave, resultado);
+            existe_nodo_aux(A, n_hijoderecho(actual),clave, resultado);
+        }
+    }
+}
+
+bool existe_nodo(ArbolBinario A, int clave){
+    NodoArbol R;
+    bool resultado = false;
+    R = a_raiz(A);
+    if (n_recuperar(R)->clave == clave) return true;
+    else {
+        existe_nodo_aux(A,R,clave, &resultado);
+        return resultado;
+    }
 }
