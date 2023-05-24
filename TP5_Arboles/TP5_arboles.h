@@ -65,4 +65,6 @@ int nivel(ArbolBinario A, int clave);
 
 void nivel_aux(NodoArbol actual,int clave, int n , int* resultado);
 
+int nodo_altura(NodoArbol Q);
+
 #endif // TP5_ARBOLES_H

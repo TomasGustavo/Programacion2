@@ -184,17 +184,22 @@ void hojas(ArbolBinario A)
 /// @param Q Nodo del arbol (recibe la raiz del arbol)
 /// @param L Lista vacia que va a contener todos los nodos interiores
 /// @param raiz Condicion para ignorar la raiz asi no se guarda como nodo interior
-void buscar_nodos(NodoArbol Q, Lista L, bool raiz){
+void buscar_nodos(NodoArbol Q, Lista L, bool raiz)
+{
     TipoElemento X;
-    if (Q == NULL){
+    if (Q == NULL)
+    {
     }
-    else{
-        if (raiz == false){
-        if(n_hijoizquierdo(Q) != NULL || n_hijoderecho(Q) != NULL)
+    else
+    {
+        if (raiz == false)
         {
-            X = n_recuperar(Q);
-            l_agregar(L, X);
-        }}
+            if (n_hijoizquierdo(Q) != NULL || n_hijoderecho(Q) != NULL)
+            {
+                X = n_recuperar(Q);
+                l_agregar(L, X);
+            }
+        }
         buscar_nodos(n_hijoizquierdo(Q), L, false);
         buscar_nodos(n_hijoderecho(Q), L, false);
     }
@@ -203,7 +208,8 @@ void buscar_nodos(NodoArbol Q, Lista L, bool raiz){
 /// @brief Funcion que llama a la funcion buscar_nodos
 /// @param A Arbol binario cargado de enteros
 /// @return Retorna la lista cargada con los nodos interiores
-Lista nodos_interiores(ArbolBinario A){
+Lista nodos_interiores(ArbolBinario A)
+{
     Lista lista = l_crear();
     bool raiz = true;
     buscar_nodos(a_raiz(A), lista, raiz);
@@ -212,7 +218,8 @@ Lista nodos_interiores(ArbolBinario A){
 
 /// @brief Funcion que muestra el contenido de la lista por valor
 /// @param L Lista cargada de valores
-void l_mostrarLista_valor(Lista L){
+void l_mostrarLista_valor(Lista L)
+{
     TipoElemento X;
     int contador = 1;
     printf("contenido de la lista: ");
@@ -220,13 +227,14 @@ void l_mostrarLista_valor(Lista L){
     {
         printf("la lista esta vacia");
     }
-    else{
-    while (contador <= l_longitud(L))
+    else
     {
-        X = l_recuperar(L, contador);
-        printf("%p ", X->valor);
-        contador++;
-    }
+        while (contador <= l_longitud(L))
+        {
+            X = l_recuperar(L, contador);
+            printf("%p ", X->valor);
+            contador++;
+        }
     }
     printf("\n");
 }
@@ -235,13 +243,17 @@ void l_mostrarLista_valor(Lista L){
 /// @param Q  Nodo del arbol (recibe la raiz del arbol)
 /// @param lista Lista vacia que va a contener todas las ocurrencias
 /// @param elemento Elemento a buscar
-void buscar_ocurrencias(NodoArbol Q, Lista lista, int elemento){
+void buscar_ocurrencias(NodoArbol Q, Lista lista, int elemento)
+{
     TipoElemento X;
-    if (Q == NULL){
+    if (Q == NULL)
+    {
     }
-    else{ 
+    else
+    {
         X = n_recuperar(Q);
-        if(elemento == X->clave){
+        if (elemento == X->clave)
+        {
             X->valor = Q;
             l_agregar(lista, X);
         }
@@ -254,7 +266,8 @@ void buscar_ocurrencias(NodoArbol Q, Lista lista, int elemento){
 /// @param A Arbol Binario cargado de enteros
 /// @param elemento Elemento a buscar en el arbol
 /// @return Retorna la lista cargada con la posicion del elemento
-Lista ocurrencias(ArbolBinario A, int elemento){
+Lista ocurrencias(ArbolBinario A, int elemento)
+{
     Lista lista = l_crear();
     buscar_ocurrencias(a_raiz(A), lista, elemento);
     return lista;
@@ -266,10 +279,14 @@ Lista ocurrencias(ArbolBinario A, int elemento){
 /// @param clave clave a buscar en el arbol
 /// @param N Nodo encontrado
 /// @return Retorna el nodo buscado
-void devolver_nodo_aux(ArbolBinario A, NodoArbol actual, int clave, NodoArbol* N){
-    if(!a_es_rama_nula(actual)){
-        if(n_recuperar(actual)->clave == clave) *N = actual;
-        else{
+void devolver_nodo_aux(ArbolBinario A, NodoArbol actual, int clave, NodoArbol *N)
+{
+    if (!a_es_rama_nula(actual))
+    {
+        if (n_recuperar(actual)->clave == clave)
+            *N = actual;
+        else
+        {
             devolver_nodo_aux(A, n_hijoizquierdo(actual), clave, N);
             devolver_nodo_aux(A, n_hijoderecho(actual), clave, N);
         }
@@ -280,13 +297,14 @@ void devolver_nodo_aux(ArbolBinario A, NodoArbol actual, int clave, NodoArbol* N
 /// @param A arbol binario cargado
 /// @param clave clave a buscar en el arbol
 /// @return Retorna el nodo buscado
-NodoArbol devolver_nodo(ArbolBinario A, int clave){
+NodoArbol devolver_nodo(ArbolBinario A, int clave)
+{
     TipoElemento X = te_crear(0);
     NodoArbol N;
     N = NULL;
     N = n_crear(X);
     NodoArbol R = a_raiz(A);
-    devolver_nodo_aux(A,R,clave,&N);
+    devolver_nodo_aux(A, R, clave, &N);
     return N;
 }
 
@@ -297,29 +315,36 @@ NodoArbol devolver_nodo(ArbolBinario A, int clave){
 /// @param clave Clave a buscar en el arbol
 /// @param R Nodo donde se va a guardar resultado
 /// @return Retorna el nodo padre
-void nodo_padre_aux(ArbolBinario A, NodoArbol actual, NodoArbol padre, int clave, NodoArbol* R){
-  if(!a_es_rama_nula(actual)){
-    if(n_recuperar(actual)->clave == clave) *R = padre;
-    else{
-        nodo_padre_aux(A,n_hijoizquierdo(actual), actual, clave, R);
-        nodo_padre_aux(A, n_hijoderecho(actual), actual, clave, R);
+void nodo_padre_aux(ArbolBinario A, NodoArbol actual, NodoArbol padre, int clave, NodoArbol *R)
+{
+    if (!a_es_rama_nula(actual))
+    {
+        if (n_recuperar(actual)->clave == clave)
+            *R = padre;
+        else
+        {
+            nodo_padre_aux(A, n_hijoizquierdo(actual), actual, clave, R);
+            nodo_padre_aux(A, n_hijoderecho(actual), actual, clave, R);
+        }
     }
-  }
 }
 
 /// @brief Funcion que llama a la funcion nodo_padre_aux
 /// @param A Arbol Binario cargado de enteros
 /// @param clave Clave a buscar en el arbol
 /// @return Retorna el nodo padre
-NodoArbol nodo_padre(ArbolBinario A, int clave){
+NodoArbol nodo_padre(ArbolBinario A, int clave)
+{
     NodoArbol N, R;
     TipoElemento X = te_crear(0);
     N = NULL;
     N = n_crear(X);
     R = a_raiz(A);
-    if (n_recuperar(R)->clave == clave) return R;
-    else {
-        nodo_padre_aux(A,R,NULL,clave,&N);
+    if (n_recuperar(R)->clave == clave)
+        return R;
+    else
+    {
+        nodo_padre_aux(A, R, NULL, clave, &N);
         return N;
     }
 }
@@ -330,12 +355,16 @@ NodoArbol nodo_padre(ArbolBinario A, int clave){
 /// @param clave Clave a buscar en el arbol
 /// @param resultado variable donde se devuelve true o false
 /// @return Retorna el nodo padre
-void existe_nodo_aux(ArbolBinario A, NodoArbol actual, int clave, bool* resultado){
-    if(!a_es_rama_nula(actual)){
-        if(n_recuperar(actual)->clave == clave) *resultado = true;
-        else{
-            existe_nodo_aux(A,n_hijoizquierdo(actual),clave, resultado);
-            existe_nodo_aux(A, n_hijoderecho(actual),clave, resultado);
+void existe_nodo_aux(ArbolBinario A, NodoArbol actual, int clave, bool *resultado)
+{
+    if (!a_es_rama_nula(actual))
+    {
+        if (n_recuperar(actual)->clave == clave)
+            *resultado = true;
+        else
+        {
+            existe_nodo_aux(A, n_hijoizquierdo(actual), clave, resultado);
+            existe_nodo_aux(A, n_hijoderecho(actual), clave, resultado);
         }
     }
 }
@@ -344,13 +373,16 @@ void existe_nodo_aux(ArbolBinario A, NodoArbol actual, int clave, bool* resultad
 /// @param A Arbol Binario cargado de enteros
 /// @param clave Clave a buscar en el arbol
 /// @return Retorna true si existe el nodo y false si no existe
-bool existe_nodo(ArbolBinario A, int clave){
+bool existe_nodo(ArbolBinario A, int clave)
+{
     NodoArbol R;
     bool resultado = false;
     R = a_raiz(A);
-    if (n_recuperar(R)->clave == clave) return true;
-    else {
-        existe_nodo_aux(A,R,clave, &resultado);
+    if (n_recuperar(R)->clave == clave)
+        return true;
+    else
+    {
+        existe_nodo_aux(A, R, clave, &resultado);
         return resultado;
     }
 }
@@ -359,28 +391,85 @@ bool existe_nodo(ArbolBinario A, int clave){
 /// @param A Arbol Binario cargado de enteros
 /// @param clave Clave a buscar en el arbol
 /// @return Retorna el nodo hermano
-NodoArbol nodo_hermano(ArbolBinario A, int clave){
+NodoArbol nodo_hermano(ArbolBinario A, int clave)
+{
     NodoArbol N = nodo_padre(A, clave);
-    if(n_hijoizquierdo(N) == clave) return n_hijoderecho(N);
-    else return n_hijoderecho(N);
+    if (n_hijoizquierdo(N) == clave)
+        return n_hijoderecho(N);
+    else
+        return n_hijoderecho(N);
 }
 
-void nivel_aux(NodoArbol actual,int clave, int n , int* resultado){
+void nivel_aux(NodoArbol actual, int clave, int n, int *resultado)
+{
     TipoElemento X = te_crear(0);
-    if(actual != NULL){
+    if (actual != NULL)
+    {
         X = n_recuperar(actual);
-        if (X->clave == clave){
+        if (X->clave == clave)
+        {
             *resultado = n;
-        } else {
-            nivel_aux(n_hijoizquierdo(actual), clave, n+1, resultado);
-            nivel_aux(n_hijoderecho(actual), clave, n+1, resultado);
+        }
+        else
+        {
+            nivel_aux(n_hijoizquierdo(actual), clave, n + 1, resultado);
+            nivel_aux(n_hijoderecho(actual), clave, n + 1, resultado);
         }
     }
 }
 
-int nivel(ArbolBinario A, int clave){
+int nivel(ArbolBinario A, int clave)
+{
     int N = -1;
     NodoArbol R = a_raiz(A);
     nivel_aux(R, clave, 0, &N);
     return N;
+}
+
+/// @brief Resuelve la altura. 'C' cuenta los pasos desde la raíz a cada nodo
+/// @param Q Nodo actual
+/// @param C Cantidad de pasos actual
+/// @param H Cantidad de pasos en la hoja anterior
+void altura(NodoArbol Q, int C, int H)
+{
+    if (a_es_rama_nula(Q))
+    {
+        if (C > H) // cada vez que llega a la hoja pregunta si la cantidad de pasos fue mayor que la de la hoja anterior
+        {
+            H = C;
+        }
+        else
+        {
+            altura(n_hijoizquierdo(Q), C + 1, H);
+            altura(n_hijoderecho(Q), C + 1, H);
+        }
+    }
+}
+
+/// @brief Dado un nodo, indica la altura del mismo
+/// @param Q Nodo actual
+/// @return Retorna la altura del nodo
+int nodo_altura(NodoArbol Q)
+{
+    int H = 0;
+    altura(Q, 0, H);
+    return H;
+}
+
+void nivel_ger(NodoArbol Q, NodoArbol P, int C)
+{
+    if (!a_es_rama_nula(Q))
+    {
+        if (Q == P)
+        {
+            return C;
+        }
+        nivel_ger(n_hijoizquierdo(Q), P, C + 1);
+        nivel_ger(n_hijoderecho(Q), P, C + 1);
+    }
+}
+
+int nodo_nivel_ger(NodoArbol Q)
+{
+    nivel_ger(Q, Q, 0);
 }

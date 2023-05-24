@@ -88,8 +88,9 @@ void main_hojas()
     limpiar_pantalla();
 }
 
-/// @brief PUNTO 2B: Retornar en una estructura todos los nodos interiores (los que no son ni hojas ni raíz). 
-void main_interior(){
+/// @brief PUNTO 2B: Retornar en una estructura todos los nodos interiores (los que no son ni hojas ni raíz).
+void main_interior()
+{
     ArbolBinario A;
     Lista L;
     A = a_crear();
@@ -97,7 +98,7 @@ void main_interior(){
     cargar_arbol_binario(A);
     L = nodos_interiores(A);
     vaciar_buffer();
-    printf(ANSI_bGREEN"Nodos interiores: \n");
+    printf(ANSI_bGREEN "Nodos interiores: \n");
     l_mostrarLista(L);
     if (l_es_vacia(L))
     {
@@ -108,8 +109,9 @@ void main_interior(){
     limpiar_pantalla();
 }
 
-/// @brief Punto 2C: Buscar todas las ocurrencias de una clave dentro del árbol. Retornar la posición de cada ocurrencia (puntero al nodo). 
-void main_buscar(){
+/// @brief Punto 2C: Buscar todas las ocurrencias de una clave dentro del árbol. Retornar la posición de cada ocurrencia (puntero al nodo).
+void main_buscar()
+{
     ArbolBinario A;
     Lista L;
     int clave, validador;
@@ -130,21 +132,22 @@ void main_buscar(){
             validador = scanf("%d", &clave);
             vaciar_buffer();
         }
-    L = ocurrencias(A, clave);
-    printf(ANSI_bGREEN"Posiciones del elemento %d: \n", clave);
-    l_mostrarLista_valor(L);
-    if (l_es_vacia(L))
-    {
-        printf(ANSI_bRED"no se encontro el elemento en el arbol\n");
+        L = ocurrencias(A, clave);
+        printf(ANSI_bGREEN "Posiciones del elemento %d: \n", clave);
+        l_mostrarLista_valor(L);
+        if (l_es_vacia(L))
+        {
+            printf(ANSI_bRED "no se encontro el elemento en el arbol\n");
+        }
+        printf(ANSI_RESET);
+        pausa();
+        limpiar_pantalla();
     }
-    printf(ANSI_RESET);
-    pausa();
-    limpiar_pantalla();
-}
 }
 
-/// @brief Punto 3 
-void main_nodo_binario(){
+/// @brief Punto 3
+void main_nodo_binario()
+{
     ArbolBinario A;
     int validador, clave, nivelNodo;
     NodoArbol N, N1, HI, HD, NHermano;
@@ -165,47 +168,60 @@ void main_nodo_binario(){
             validador = scanf("%d", &clave);
             vaciar_buffer();
         }
-        if (existe_nodo(A,clave)){
+        if (existe_nodo(A, clave))
+        {
             // PUNTO 3A: Indicar el nombre del nodo padre.
-            N = nodo_padre(A,clave);
+            N = nodo_padre(A, clave);
             X = n_recuperar(N);
             printf(ANSI_bMAGENTA "\nNodo padre: %i", X->clave);
-    
+
             // PUNTO 3B: Listar los hijos
-            N1 = devolver_nodo(A,clave);
+            N1 = devolver_nodo(A, clave);
             HI = n_hijoizquierdo(N1);
             HD = n_hijoderecho(N1);
             printf(ANSI_bMAGENTA "\nHijos: ");
-            if(HI != NULL) {
+            if (HI != NULL)
+            {
                 XI = n_recuperar(HI);
                 printf(ANSI_bMAGENTA "%i (Hijo izquierdo) ", XI->clave);
-            } else printf(ANSI_bMAGENTA "Hijo izquierdo nulo ");
-            if(HD != NULL) {
+            }
+            else
+                printf(ANSI_bMAGENTA "Hijo izquierdo nulo ");
+            if (HD != NULL)
+            {
                 XD = n_recuperar(HD);
                 printf(ANSI_bMAGENTA "%i (Hijo derecho) ", XD->clave);
-            } else printf(ANSI_bMAGENTA "Hijo derecho nulo");
-    
-            // PUNTO 3C: Listar el hermano 
+            }
+            else
+                printf(ANSI_bMAGENTA "Hijo derecho nulo");
+
+            // PUNTO 3C: Listar el hermano
             printf(ANSI_bMAGENTA "\nHermano: " ANSI_YELLOW);
-            NHermano = nodo_hermano(A,clave);
-            if (NHermano == NULL) printf(ANSI_bMAGENTA "Hhermano nulo");
-            else {
+            NHermano = nodo_hermano(A, clave);
+            if (NHermano == NULL)
+                printf(ANSI_bMAGENTA "Hhermano nulo");
+            else
+            {
                 XHermano = n_recuperar(NHermano);
                 printf(ANSI_bMAGENTA "%i", XHermano->clave);
             }
             // PUNTO 3D: Calcular el nivel en el que se encuentra.
-            nivelNodo = nivel(A,clave);
+            nivelNodo = nivel(A, clave);
             printf(ANSI_bMAGENTA "\nNivel: %i", nivelNodo);
-         
-            // PUNTO 3E: Calcular la altura de su rama
-            printf(ANSI_bMAGENTA "\nAltura: " ANSI_YELLOW);
 
-            // PUNTO 3F: Listar todos los nodos que están en el mismo nivel 
+            // PUNTO 3E: Calcular la altura de su rama
+            printf(ANSI_bMAGENTA "\nAltura: %i" ANSI_YELLOW, nodo_altura(N1));
+
+            // PUNTO 3F: Listar todos los nodos que están en el mismo nivel
             printf(ANSI_bMAGENTA "\nNodos del mismo nivel: " ANSI_YELLOW);
-        } else {
+        }
+        else
+        {
             printf(ANSI_bMAGENTA "\nNo se ha encontrado la clave en el arbol" ANSI_YELLOW);
+        }
     }
-    } else {
+    else
+    {
         printf(ANSI_bMAGENTA "\nEl arbol esta vacio" ANSI_YELLOW);
     }
     printf(ANSI_RESET);
