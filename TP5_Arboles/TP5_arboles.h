@@ -63,4 +63,6 @@ bool arbol_similar(ArbolBinario A1, ArbolBinario A2);
 
 NodoArbol padre_nario(ArbolBinario A, int clave);
 
+Lista hermanos_nario(ArbolBinario A, int clave);
+
 #endif // TP5_ARBOLES_H

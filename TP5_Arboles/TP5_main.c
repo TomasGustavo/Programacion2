@@ -307,6 +307,46 @@ void main_padre_nario(){
     limpiar_pantalla();
 }
 
+void main_hermanos_nario(){
+    ArbolBinario A;
+    int validador, clave;
+    Lista L = l_crear();
+    A = a_crear();
+    cargar_arbol_binario(A);
+    if (!a_es_vacio(A))
+    {
+        printf(ANSI_bMAGENTA "Ingrese la clave [-999.999 - 999.999]: " ANSI_YELLOW);
+        validador = scanf("%d", &clave);
+        vaciar_buffer();
+        while (validador != 1 || clave < -999999 || clave > 999999)
+        {
+            printf(ANSI_RED "\t\t-------- ERROR -------- \n");
+            printf("DATO FUERA DE RANGO\n\n" ANSI_RESET);
+            pausa();
+            printf(ANSI_bBLUE "Ingrese la clave [-999.999 - 999.999]: " ANSI_YELLOW);
+            validador = scanf("%d", &clave);
+            vaciar_buffer();
+        }
+        if (existe_nodo(A, clave)){
+            L = hermanos_nario(A,clave);
+            if (l_es_vacia(L)) printf(ANSI_bRED "El nodo no tiene hermanos");
+            else {
+                l_mostrarLista(L);
+            }
+        }else{
+            printf(ANSI_bMAGENTA "\nNo se ha encontrado la clave en el arbol" ANSI_YELLOW);
+        }
+    }
+    else
+    {
+        printf(ANSI_bMAGENTA "\nEl arbol esta vacio" ANSI_YELLOW);
+    }
+    printf(ANSI_RESET);
+    vaciar_buffer();
+    pausa();
+    limpiar_pantalla();
+}
+
 int main()
 {
     bool salir = false;
@@ -389,6 +429,7 @@ int main()
                     main_padre_nario();
                     break;
                 case 5:
+                    main_hermanos_nario();
                     break;
                 case 6:
                     break;

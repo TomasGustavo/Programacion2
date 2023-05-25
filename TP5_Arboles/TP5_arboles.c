@@ -341,7 +341,8 @@ NodoArbol nodo_padre(ArbolBinario A, int clave)
     N = n_crear(X);
     R = a_raiz(A);
     if (n_recuperar(R)->clave == clave)
-        return NULL;
+        return NULL
+        ;
     else
     {
         nodo_padre_aux(A, R, NULL, clave, &N);
@@ -556,4 +557,29 @@ NodoArbol padre_nario(ArbolBinario A, int clave){
     if (n_recuperar(R)->clave == clave) return NULL;
     padre_nario_aux(R,NULL,clave,&N);
     return N;
+}
+
+void hermanos_nario_aux(NodoArbol actual,int clave, Lista* L){
+    if(!a_es_rama_nula(actual)){
+        if(n_recuperar(actual)->clave == clave){
+        } else {
+            TipoElemento X = n_recuperar(actual);
+            l_agregar(*L,X);
+        }
+        hermanos_nario_aux(n_hijoderecho(actual),clave,L);
+    }
+}
+
+/// @brief Funcion que llama hermanos_nario_auz
+/// @param A Arbol n-ario cargado como binario
+/// @param clave clave del nodo a buscar
+/// @return Retorna una lista con los hermanos del nodo
+Lista hermanos_nario(ArbolBinario A, int clave){
+    NodoArbol N;
+    Lista L = l_crear();
+    TipoElemento X = te_crear(0);
+    N = n_crear(X);
+    N = padre_nario(A,clave);
+    hermanos_nario_aux(n_hijoizquierdo(N),clave,&L);
+    return L;
 }
