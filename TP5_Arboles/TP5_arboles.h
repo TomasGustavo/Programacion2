@@ -59,4 +59,6 @@ int nodo_altura(NodoArbol Q);
 
 int hojas_nario(ArbolBinario A);
 
+bool arbol_similar(ArbolBinario A1, ArbolBinario A2);
+
 #endif // TP5_ARBOLES_H

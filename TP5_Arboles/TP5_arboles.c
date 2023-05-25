@@ -394,7 +394,7 @@ bool existe_nodo(ArbolBinario A, int clave)
 NodoArbol nodo_hermano(ArbolBinario A, int clave)
 {
     NodoArbol N = nodo_padre(A, clave);
-    if (n_hijoizquierdo(N) == clave)
+    if (n_recuperar(n_hijoizquierdo(N))->clave == clave)
         return n_hijoderecho(N);
     else
         return n_hijoderecho(N);
@@ -478,7 +478,7 @@ int nodo_nivel_ger(NodoArbol Q)
 /// @param N nodo actual
 /// @param cantidad variable que devuelve la cantidad de nodos hoja
 /// @return Retorna la cantidad de nodos hoja del arbol
- hojas_nario_aux(NodoArbol N, int* cantidad){
+void hojas_nario_aux(NodoArbol N, int* cantidad){
     if(!a_es_rama_nula(N)){
         if(a_es_rama_nula(n_hijoizquierdo(N))) *cantidad = *cantidad + 1;
         else hojas_nario_aux(n_hijoizquierdo(N), cantidad);
@@ -500,11 +500,13 @@ int hojas_nario(ArbolBinario A){
 /// @param N1 Nodo actual del arbol 1 
 /// @param N2 Nodo actual del arbol 2
 /// @return Retorna true si son arboles similares y false si no
-arbol_similar_aux(NodoArbol N1, NodoArbol N2, int* rta){
-    if (!a_es_rama_nula(N1) && !a_es_rama_nula(N2)){
+void arbol_similar_aux(NodoArbol N1, NodoArbol N2, bool* rta){
+    if ((!a_es_rama_nula(N1) && !a_es_rama_nula(N2)) || *rta==false){
         if((a_es_rama_nula(N1) && !a_es_rama_nula(N2)) || (!a_es_rama_nula(N1) && a_es_rama_nula(N2))) *rta = false;
-        arbol_similar_aux(n_hijoizquierdo(N1), n_hijoizquierdo(N2), rta);
-        arbol_similar_aux(n_hijoderecho(N1), n_hijoderecho(N2), rta);
+        else{
+            arbol_similar_aux(n_hijoizquierdo(N1), n_hijoizquierdo(N2), rta);
+            arbol_similar_aux(n_hijoderecho(N1), n_hijoderecho(N2), rta);
+        }
     }
 }
 
