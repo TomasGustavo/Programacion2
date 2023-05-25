@@ -150,7 +150,7 @@ void main_nodo_binario()
 {
     ArbolBinario A;
     int validador, clave, nivelNodo;
-    NodoArbol N, N1, HI, HD, NHermano;
+    NodoArbol N, N1, HI, HD, NHermano, raiz;
     TipoElemento X, XI, XD, XHermano;
     A = a_crear();
     cargar_arbol_binario(A);
@@ -229,6 +229,18 @@ void main_nodo_binario()
     limpiar_pantalla();
 }
 
+void main_cantidad_hojas(){
+    ArbolBinario A;
+    int clave, cantidadHojas;
+    A = a_crear();
+    cargar_arbol_binario(A);
+    if (!a_es_vacio(A)) printf(ANSI_bMAGENTA "\n El arbol esta vacio");
+    else {
+        cantidadHojas = hojas_nario(A);
+        printf(ANSI_bMAGENTA "\n La cantidad de hojas del arbol es %i", cantidadHojas);
+    }
+}
+
 int main()
 {
     bool salir = false;
@@ -302,20 +314,13 @@ int main()
                 case 1:
                     break;
                 case 2:
+                    main_cantidad_hojas();
                     break;
                 case 3:
                     break;
                 case 4:
                     break;
                 case 5:
-                    break;
-                case 6:
-                    break;
-                case 7:
-                    break;
-                case 8:
-                    break;
-                case 9:
                     break;
                 case 0:
                     salir_p4 = true;

@@ -473,3 +473,51 @@ int nodo_nivel_ger(NodoArbol Q)
 {
     nivel_ger(Q, Q, 0);
 }
+
+/// @brief Funcion que recorre el arbol n-ario y cuenta la cantidad de hojas
+/// @param N nodo actual
+/// @param cantidad variable que devuelve la cantidad de nodos hoja
+/// @return Retorna la cantidad de nodos hoja del arbol
+ hojas_nario_aux(NodoArbol N, int* cantidad){
+    if(!a_es_rama_nula(N)){
+        if(a_es_rama_nula(n_hijoizquierdo(N))) *cantidad = *cantidad + 1;
+        else hojas_nario_aux(n_hijoizquierdo(N), cantidad);
+        hojas_nario_aux(n_hijoderecho(N), cantidad);
+    }
+ }
+
+/// @brief Funcion que llama a hojas_nario_aux
+/// @param A Arbol n-ario cargado como binario
+/// @return Retorna la cantidad de nodos hoja del arbol
+int hojas_nario(ArbolBinario A){
+    int cantidad = 0;
+    NodoArbol N = a_raiz(A);
+    hojas_nario_aux(N, &cantidad);
+    return cantidad;
+}
+
+/// @brief Funcion que devuelve true si los arboles son similares y false si no
+/// @param N1 Nodo actual del arbol 1 
+/// @param N2 Nodo actual del arbol 2
+/// @return Retorna true si son arboles similares y false si no
+arbol_similar_aux(NodoArbol N1, NodoArbol N2, int* rta){
+    if (!a_es_rama_nula(N1) && !a_es_rama_nula(N2)){
+        if((a_es_rama_nula(N1) && !a_es_rama_nula(N2)) || (!a_es_rama_nula(N1) && a_es_rama_nula(N2))) *rta = false;
+        arbol_similar_aux(n_hijoizquierdo(N1), n_hijoizquierdo(N2), rta);
+        arbol_similar_aux(n_hijoderecho(N1), n_hijoderecho(N2), rta);
+    }
+}
+
+/// @brief Funcion que llama a arbol_similar_aux
+/// @param A1 Arbol n-ario cargado como binario
+/// @param A2 Arbol n-ario cargado como binario
+/// @return Retorna true si son arboles similares y false si no
+bool arbol_similar(ArbolBinario A1, ArbolBinario A2){
+    bool rta = true;
+    if (a_es_vacio(A1) && a_es_vacio(A2)) return true;
+    if ((a_es_vacio(A1) && !a_es_vacio(A2)) || (!a_es_vacio(A1) && a_es_vacio(A2))) return false;
+    NodoArbol N1 = a_raiz(A1);
+    NodoArbol N2 = a_raiz(A2);
+    arbol_similar_aux(N1,N2,&rta);
+    return rta;
+}
