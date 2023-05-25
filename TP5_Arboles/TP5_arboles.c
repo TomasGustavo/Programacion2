@@ -501,11 +501,12 @@ int hojas_nario(ArbolBinario A){
 /// @param N2 Nodo actual del arbol 2
 /// @return Retorna true si son arboles similares y false si no
 void arbol_similar_aux(NodoArbol N1, NodoArbol N2, bool* rta){
-    if ((!a_es_rama_nula(N1) && !a_es_rama_nula(N2)) || *rta==false){
-        if((a_es_rama_nula(N1) && !a_es_rama_nula(N2)) || (!a_es_rama_nula(N1) && a_es_rama_nula(N2))) *rta = false;
-        else{
-            arbol_similar_aux(n_hijoizquierdo(N1), n_hijoizquierdo(N2), rta);
-            arbol_similar_aux(n_hijoderecho(N1), n_hijoderecho(N2), rta);
+    if ((a_es_rama_nula(N1) && a_es_rama_nula(N2)) || *rta==false){
+        }else{
+            if((a_es_rama_nula(N1) && !a_es_rama_nula(N2)) || (!a_es_rama_nula(N1) && a_es_rama_nula(N2))) *rta = false;
+            else{
+                arbol_similar_aux(n_hijoizquierdo(N1), n_hijoizquierdo(N2), rta);
+                arbol_similar_aux(n_hijoderecho(N1), n_hijoderecho(N2), rta);
         }
     }
 }
