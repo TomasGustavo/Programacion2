@@ -105,6 +105,7 @@ void main_interior()
         printf("La lista esta vacia");
     }
     printf(ANSI_RESET);
+    vaciar_buffer();
     pausa();
     limpiar_pantalla();
 }
@@ -140,6 +141,7 @@ void main_buscar()
             printf(ANSI_bRED "no se encontro el elemento en el arbol\n");
         }
         printf(ANSI_RESET);
+        vaciar_buffer();
         pausa();
         limpiar_pantalla();
     }
@@ -150,7 +152,7 @@ void main_nodo_binario()
 {
     ArbolBinario A;
     int validador, clave, nivelNodo;
-    NodoArbol N, N1, HI, HD, NHermano, raiz;
+    NodoArbol N, N1, HI, HD, NHermano;
     TipoElemento X, XI, XD, XHermano;
     A = a_crear();
     cargar_arbol_binario(A);
@@ -173,7 +175,8 @@ void main_nodo_binario()
             // PUNTO 3A: Indicar el nombre del nodo padre.
             N = nodo_padre(A, clave);
             X = n_recuperar(N);
-            printf(ANSI_bMAGENTA "\nNodo padre: %i", X->clave);
+            if (N == NULL) printf(ANSI_bMAGENTA "\nLa clave pertenece a la raiz y no tiene padre"); 
+            else printf(ANSI_bMAGENTA "\nNodo padre: %i", X->clave); 
 
             // PUNTO 3B: Listar los hijos
             N1 = devolver_nodo(A, clave);
@@ -225,6 +228,7 @@ void main_nodo_binario()
         printf(ANSI_bMAGENTA "\nEl arbol esta vacio" ANSI_YELLOW);
     }
     printf(ANSI_RESET);
+    vaciar_buffer();
     pausa();
     limpiar_pantalla();
 }
@@ -240,6 +244,7 @@ void main_cantidad_hojas(){
         printf(ANSI_bMAGENTA "\n La cantidad de hojas del arbol es %i", cantidadHojas);
     }
     printf(ANSI_RESET);
+    vaciar_buffer();
     pausa();
     limpiar_pantalla();
 }
@@ -257,8 +262,49 @@ void main_arboles_similares(){
     if(res)printf(ANSI_bGREEN "\n Los arboles son similares (tienen la misma estructura)\n");
     else printf(ANSI_bRED "\n Los arboles no tienen la misma estructura\n");
     printf(ANSI_RESET);
+    vaciar_buffer();
     pausa();
-    //limpiar_pantalla();
+    limpiar_pantalla();
+}
+
+void main_padre_nario(){
+    ArbolBinario A;
+    int validador, clave;
+    NodoArbol N;
+    TipoElemento X;
+    A = a_crear();
+    cargar_arbol_binario(A);
+    if (!a_es_vacio(A))
+    {
+        printf(ANSI_bMAGENTA "Ingrese la clave [-999.999 - 999.999]: " ANSI_YELLOW);
+        validador = scanf("%d", &clave);
+        vaciar_buffer();
+        while (validador != 1 || clave < -999999 || clave > 999999)
+        {
+            printf(ANSI_RED "\t\t-------- ERROR -------- \n");
+            printf("DATO FUERA DE RANGO\n\n" ANSI_RESET);
+            pausa();
+            printf(ANSI_bBLUE "Ingrese la clave [-999.999 - 999.999]: " ANSI_YELLOW);
+            validador = scanf("%d", &clave);
+            vaciar_buffer();
+        }
+        if (existe_nodo(A, clave)){
+            N = padre_nario(A, clave);
+            X = n_recuperar(N);
+            if (N == NULL) printf(ANSI_bMAGENTA "\nLa clave pertenece a la raiz y no tiene padre"); 
+            else printf(ANSI_bMAGENTA "\nNodo padre: %i", X->clave); 
+        }else{
+            printf(ANSI_bMAGENTA "\nNo se ha encontrado la clave en el arbol" ANSI_YELLOW);
+        }
+    }
+    else
+    {
+        printf(ANSI_bMAGENTA "\nEl arbol esta vacio" ANSI_YELLOW);
+    }
+    printf(ANSI_RESET);
+    vaciar_buffer();
+    pausa();
+    limpiar_pantalla();
 }
 
 int main()
@@ -340,6 +386,7 @@ int main()
                     main_arboles_similares();
                     break;
                 case 4:
+                    main_padre_nario();
                     break;
                 case 5:
                     break;

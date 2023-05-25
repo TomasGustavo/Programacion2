@@ -341,7 +341,7 @@ NodoArbol nodo_padre(ArbolBinario A, int clave)
     N = n_crear(X);
     R = a_raiz(A);
     if (n_recuperar(R)->clave == clave)
-        return R;
+        return NULL;
     else
     {
         nodo_padre_aux(A, R, NULL, clave, &N);
@@ -523,4 +523,37 @@ bool arbol_similar(ArbolBinario A1, ArbolBinario A2){
     NodoArbol N2 = a_raiz(A2);
     arbol_similar_aux(N1,N2,&rta);
     return rta;
+}
+
+/// @brief Funcion que devuelve el padre de un nodo
+/// @param A Arbol n-ario cargado como binario
+/// @param clave clave del nodo a buscar
+/// @return Retorna true si son arboles similares y false si no
+void padre_nario_aux(NodoArbol actual, NodoArbol padre, int clave, NodoArbol *R)
+{
+    if (!a_es_rama_nula(actual))
+    {
+        if (n_recuperar(actual)->clave == clave)
+            *R = padre;
+        else
+        {
+            padre_nario_aux(n_hijoizquierdo(actual), actual, clave, R);
+            padre_nario_aux(n_hijoderecho(actual), padre, clave, R);
+        }
+    }
+}
+
+/// @brief Funcion que llama a padre_nario_aux
+/// @param A Arbol n-ario cargado como binario
+/// @param clave clave del nodo a buscar
+/// @return Retorna true si son arboles similares y false si no
+NodoArbol padre_nario(ArbolBinario A, int clave){
+    NodoArbol N, R;
+    TipoElemento X = te_crear(0);
+    N = NULL;
+    N = n_crear(X);
+    R = a_raiz(A);
+    if (n_recuperar(R)->clave == clave) return NULL;
+    padre_nario_aux(R,NULL,clave,&N);
+    return N;
 }
