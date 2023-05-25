@@ -331,6 +331,7 @@ void main_hermanos_nario(){
             L = hermanos_nario(A,clave);
             if (l_es_vacia(L)) printf(ANSI_bRED "El nodo no tiene hermanos");
             else {
+                printf(ANSI_bMAGENTA "Hermanos del nodo %i: ", clave);
                 l_mostrarLista(L);
             }
         }else{
@@ -346,6 +347,68 @@ void main_hermanos_nario(){
     pausa();
     limpiar_pantalla();
 }
+
+void main_nivel_nario(){
+    int nivelNodo;
+    ArbolBinario A;
+    int validador, clave;
+    A = a_crear();
+    cargar_arbol_binario(A);
+    if (!a_es_vacio(A))
+    {
+        printf(ANSI_bMAGENTA "Ingrese la clave [-999.999 - 999.999]: " ANSI_YELLOW);
+        validador = scanf("%d", &clave);
+        vaciar_buffer();
+        while (validador != 1 || clave < -999999 || clave > 999999)
+        {
+            printf(ANSI_RED "\t\t-------- ERROR -------- \n");
+            printf("DATO FUERA DE RANGO\n\n" ANSI_RESET);
+            pausa();
+            printf(ANSI_bBLUE "Ingrese la clave [-999.999 - 999.999]: " ANSI_YELLOW);
+            validador = scanf("%d", &clave);
+            vaciar_buffer();
+        }
+        if (existe_nodo(A, clave)){
+            nivelNodo = nivel_nario(A, clave);
+            printf(ANSI_bMAGENTA "\nNivel: %i", nivelNodo);
+
+        }else{
+            printf(ANSI_bMAGENTA "\nNo se ha encontrado la clave en el arbol" ANSI_YELLOW);
+        }
+    }
+    else
+    {
+        printf(ANSI_bMAGENTA "\nEl arbol esta vacio" ANSI_YELLOW);
+    }
+    printf(ANSI_RESET);
+    vaciar_buffer();
+    pausa();
+    limpiar_pantalla();
+}
+
+ void main_nodos_internos_nario(){
+    ArbolBinario A;
+    Lista L = l_crear();
+    A = a_crear();
+    cargar_arbol_binario(A);
+    if (!a_es_vacio(A))
+    {
+        L = nodos_internos_nario(A);
+        if (l_es_vacia(L)) printf(ANSI_bRED "\nEl arbol no tiene nodos internos" ANSI_YELLOW);
+        else {
+            printf(ANSI_bRED "\nNodos internos:" ANSI_YELLOW);
+            l_mostrarLista(L);
+        }
+    }
+    else
+    {
+        printf(ANSI_bMAGENTA "\nEl arbol esta vacio" ANSI_YELLOW);
+    }
+    printf(ANSI_RESET);
+    vaciar_buffer();
+    pausa();
+    limpiar_pantalla();
+ }
 
 int main()
 {
@@ -434,8 +497,10 @@ int main()
                 case 6:
                     break;
                 case 7:
+                    main_nivel_nario();
                     break;
                 case 8:
+                    main_nodos_internos_nario();
                     break;   
                 case 9:
                     break;

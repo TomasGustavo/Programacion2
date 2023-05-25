@@ -401,6 +401,12 @@ NodoArbol nodo_hermano(ArbolBinario A, int clave)
         return n_hijoderecho(N);
 }
 
+/// @brief Indica el nivel en el que se encuentra la clave pasada
+/// @param A Arbol binario cargado
+/// @param clave clave a buscar
+/// @param n contador de niveles
+/// @param resultado parametro que devuelve el resultado
+/// @return Devuelve el nivel en el que se encuentra la clave
 void nivel_aux(NodoArbol actual, int clave, int n, int *resultado)
 {
     TipoElemento X = te_crear(0);
@@ -419,6 +425,10 @@ void nivel_aux(NodoArbol actual, int clave, int n, int *resultado)
     }
 }
 
+/// @brief Funcion que llama a nive_aux
+/// @param A Arbol binario cargado
+/// @param clave clave a buscar
+/// @return Devuelve el nivel en el que se encuentra la clave
 int nivel(ArbolBinario A, int clave)
 {
     int N = -1;
@@ -581,5 +591,65 @@ Lista hermanos_nario(ArbolBinario A, int clave){
     N = n_crear(X);
     N = padre_nario(A,clave);
     hermanos_nario_aux(n_hijoizquierdo(N),clave,&L);
+    return L;
+}
+
+/// @brief Indica el nivel en el que se encuentra la clave pasada
+/// @param A Arbol binario cargado
+/// @param clave clave a buscar
+/// @param n contador de niveles
+/// @param resultado parametro que devuelve el resultado
+/// @return Devuelve el nivel en el que se encuentra la clave
+void nivel_nario_aux(NodoArbol actual, int clave, int n, int *resultado)
+{
+    TipoElemento X = te_crear(0);
+    if (actual != NULL)
+    {
+        X = n_recuperar(actual);
+        if (X->clave == clave)
+        {
+            *resultado = n;
+        }
+        else
+        {
+            nivel_nario_aux(n_hijoizquierdo(actual), clave, n + 1, resultado);
+            nivel_nario_aux(n_hijoderecho(actual), clave, n, resultado);
+        }
+    }
+}
+
+/// @brief Funcion que llama a nivel_nario_aux
+/// @param A Arbol binario cargado
+/// @param clave clave a buscar
+/// @return Devuelve el nivel en el que se encuentra la clave
+int nivel_nario(ArbolBinario A, int clave)
+{
+    int N = -1;
+    NodoArbol R = a_raiz(A);
+    nivel_nario_aux(R, clave, 0, &N);
+    return N;
+}
+
+/// @brief Funcion que llama a nodos_internos_nario_auz
+/// @param A Arbol binario cargado
+/// @return Devuelve una lista con los nodos internos del arbol n-ario
+void nodos_internos_nario_aux(ArbolBinario A, NodoArbol actual, Lista* L){
+    if(!a_es_rama_nula(actual)){
+        if(!a_es_rama_nula(n_hijoizquierdo(actual)) && n_recuperar(a_raiz(A))->clave != n_recuperar(actual)->clave){
+            TipoElemento X = n_recuperar(actual);
+            l_agregar(*L,X);
+        }
+        nodos_internos_nario_aux(A,n_hijoizquierdo(actual),L);
+        nodos_internos_nario_aux(A,n_hijoderecho(actual),L);
+    }
+}
+
+/// @brief Funcion que llama a nodos_internos_nario_auz
+/// @param A Arbol binario cargado
+/// @return Devuelve una lista con los nodos internos del arbol n-ario
+Lista nodos_internos_nario(ArbolBinario A){
+    NodoArbol N = a_raiz(A);
+    Lista L = l_crear();
+    nodos_internos_nario_aux(A,N,&L);
     return L;
 }
