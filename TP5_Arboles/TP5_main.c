@@ -369,6 +369,32 @@ void main_hermanos_nario()
     limpiar_pantalla();
 }
 
+/// @brief PUNTO 7:  Determinar si dos árboles binarios son equivalentes.
+void main_equivalentes(){
+    ArbolBinario A1;
+    ArbolBinario A2;
+    int equivalentes;
+    A1 = a_crear();
+    A2 = a_crear();
+    printf(ANSI_bMAGENTA"Carga del primer arbol: \n"ANSI_RESET);
+    cargar_arbol_binario(A1);
+    printf(ANSI_bMAGENTA"Carga del segundo arbol: \n"ANSI_RESET);
+    cargar_arbol_binario(A2);
+    equivalentes = arbol_equivalentes(A1, A2);
+    vaciar_buffer();
+    if (equivalentes == 1)
+    {
+        printf(ANSI_bGREEN"Los arboles son equivalentes \n");
+    }
+    else{
+        printf(ANSI_bRED"Los arboles no son equivalentes\n");
+    }
+    printf(ANSI_RESET);
+    vaciar_buffer();
+    pausa();
+    limpiar_pantalla();
+}
+
 void main_nivel_nario()
 {
     int nivelNodo;
@@ -560,6 +586,7 @@ int main()
             break;
             menu_principal();
         case 7:
+            main_equivalentes();
             break;
         case 9:
             break;
