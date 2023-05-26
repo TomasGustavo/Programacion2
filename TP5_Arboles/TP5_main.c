@@ -175,8 +175,10 @@ void main_nodo_binario()
             // PUNTO 3A: Indicar el nombre del nodo padre.
             N = nodo_padre(A, clave);
             X = n_recuperar(N);
-            if (N == NULL) printf(ANSI_bMAGENTA "\nLa clave pertenece a la raiz y no tiene padre"); 
-            else printf(ANSI_bMAGENTA "\nNodo padre: %i", X->clave); 
+            if (N == NULL)
+                printf(ANSI_bMAGENTA "\nLa clave pertenece a la raiz y no tiene padre");
+            else
+                printf(ANSI_bMAGENTA "\nNodo padre: %i", X->clave);
 
             // PUNTO 3B: Listar los hijos
             N1 = devolver_nodo(A, clave);
@@ -217,6 +219,7 @@ void main_nodo_binario()
 
             // PUNTO 3F: Listar todos los nodos que están en el mismo nivel
             printf(ANSI_bMAGENTA "\nNodos del mismo nivel: " ANSI_YELLOW);
+            l_mostrarLista(nodos_nivel(A, clave));
         }
         else
         {
@@ -233,13 +236,16 @@ void main_nodo_binario()
     limpiar_pantalla();
 }
 
-void main_cantidad_hojas(){
+void main_cantidad_hojas()
+{
     ArbolBinario A;
     int cantidadHojas;
     A = a_crear();
     cargar_arbol_binario(A);
-    if (a_es_vacio(A)) printf(ANSI_bMAGENTA "\n El arbol esta vacio");
-    else {
+    if (a_es_vacio(A))
+        printf(ANSI_bMAGENTA "\n El arbol esta vacio");
+    else
+    {
         cantidadHojas = hojas_nario(A);
         printf(ANSI_bMAGENTA "\n La cantidad de hojas del arbol es %i", cantidadHojas);
     }
@@ -249,8 +255,9 @@ void main_cantidad_hojas(){
     limpiar_pantalla();
 }
 
-void main_arboles_similares(){
-    ArbolBinario A1,A2;
+void main_arboles_similares()
+{
+    ArbolBinario A1, A2;
     bool res;
     A1 = a_crear();
     A2 = a_crear();
@@ -258,16 +265,19 @@ void main_arboles_similares(){
     cargar_arbol_binario(A1);
     printf(ANSI_bMAGENTA "\n Carga del arbol 2:\n");
     cargar_arbol_binario(A2);
-    res = arbol_similar(A1,A2);
-    if(res)printf(ANSI_bGREEN "\n Los arboles son similares (tienen la misma estructura)\n");
-    else printf(ANSI_bRED "\n Los arboles no tienen la misma estructura\n");
+    res = arbol_similar(A1, A2);
+    if (res)
+        printf(ANSI_bGREEN "\n Los arboles son similares (tienen la misma estructura)\n");
+    else
+        printf(ANSI_bRED "\n Los arboles no tienen la misma estructura\n");
     printf(ANSI_RESET);
     vaciar_buffer();
     pausa();
     limpiar_pantalla();
 }
 
-void main_padre_nario(){
+void main_padre_nario()
+{
     ArbolBinario A;
     int validador, clave;
     NodoArbol N;
@@ -288,12 +298,17 @@ void main_padre_nario(){
             validador = scanf("%d", &clave);
             vaciar_buffer();
         }
-        if (existe_nodo(A, clave)){
+        if (existe_nodo(A, clave))
+        {
             N = padre_nario(A, clave);
             X = n_recuperar(N);
-            if (N == NULL) printf(ANSI_bMAGENTA "\nLa clave pertenece a la raiz y no tiene padre"); 
-            else printf(ANSI_bMAGENTA "\nNodo padre: %i", X->clave); 
-        }else{
+            if (N == NULL)
+                printf(ANSI_bMAGENTA "\nLa clave pertenece a la raiz y no tiene padre");
+            else
+                printf(ANSI_bMAGENTA "\nNodo padre: %i", X->clave);
+        }
+        else
+        {
             printf(ANSI_bMAGENTA "\nNo se ha encontrado la clave en el arbol" ANSI_YELLOW);
         }
     }
@@ -307,7 +322,8 @@ void main_padre_nario(){
     limpiar_pantalla();
 }
 
-void main_hermanos_nario(){
+void main_hermanos_nario()
+{
     ArbolBinario A;
     int validador, clave;
     Lista L = l_crear();
@@ -327,14 +343,19 @@ void main_hermanos_nario(){
             validador = scanf("%d", &clave);
             vaciar_buffer();
         }
-        if (existe_nodo(A, clave)){
-            L = hermanos_nario(A,clave);
-            if (l_es_vacia(L)) printf(ANSI_bRED "El nodo no tiene hermanos");
-            else {
+        if (existe_nodo(A, clave))
+        {
+            L = hermanos_nario(A, clave);
+            if (l_es_vacia(L))
+                printf(ANSI_bRED "El nodo no tiene hermanos");
+            else
+            {
                 printf(ANSI_bMAGENTA "Hermanos del nodo %i: ", clave);
                 l_mostrarLista(L);
             }
-        }else{
+        }
+        else
+        {
             printf(ANSI_bMAGENTA "\nNo se ha encontrado la clave en el arbol" ANSI_YELLOW);
         }
     }
@@ -348,7 +369,8 @@ void main_hermanos_nario(){
     limpiar_pantalla();
 }
 
-void main_nivel_nario(){
+void main_nivel_nario()
+{
     int nivelNodo;
     ArbolBinario A;
     int validador, clave;
@@ -368,11 +390,13 @@ void main_nivel_nario(){
             validador = scanf("%d", &clave);
             vaciar_buffer();
         }
-        if (existe_nodo(A, clave)){
+        if (existe_nodo(A, clave))
+        {
             nivelNodo = nivel_nario(A, clave);
             printf(ANSI_bMAGENTA "\nNivel: %i", nivelNodo);
-
-        }else{
+        }
+        else
+        {
             printf(ANSI_bMAGENTA "\nNo se ha encontrado la clave en el arbol" ANSI_YELLOW);
         }
     }
@@ -386,7 +410,8 @@ void main_nivel_nario(){
     limpiar_pantalla();
 }
 
- void main_nodos_internos_nario(){
+void main_nodos_internos_nario()
+{
     ArbolBinario A;
     Lista L = l_crear();
     A = a_crear();
@@ -394,8 +419,10 @@ void main_nivel_nario(){
     if (!a_es_vacio(A))
     {
         L = nodos_internos_nario(A);
-        if (l_es_vacia(L)) printf(ANSI_bRED "\nEl arbol no tiene nodos internos" ANSI_YELLOW);
-        else {
+        if (l_es_vacia(L))
+            printf(ANSI_bRED "\nEl arbol no tiene nodos internos" ANSI_YELLOW);
+        else
+        {
             printf(ANSI_bRED "\nNodos internos:" ANSI_YELLOW);
             l_mostrarLista(L);
         }
@@ -408,7 +435,7 @@ void main_nivel_nario(){
     vaciar_buffer();
     pausa();
     limpiar_pantalla();
- }
+}
 
 int main()
 {
@@ -501,7 +528,7 @@ int main()
                     break;
                 case 8:
                     main_nodos_internos_nario();
-                    break;   
+                    break;
                 case 9:
                     break;
                 case 0:

@@ -341,8 +341,7 @@ NodoArbol nodo_padre(ArbolBinario A, int clave)
     N = n_crear(X);
     R = a_raiz(A);
     if (n_recuperar(R)->clave == clave)
-        return NULL
-        ;
+        return NULL;
     else
     {
         nodo_padre_aux(A, R, NULL, clave, &N);
@@ -437,6 +436,29 @@ int nivel(ArbolBinario A, int clave)
     return N;
 }
 
+void nodos_nivel_aux(ArbolBinario A, NodoArbol Q, int nivel_clave, Lista *lista)
+{
+    if (!a_es_rama_nula(Q))
+    {
+        TipoElemento x = n_recuperar(Q);
+        int nivel_actual = nivel(A, x->clave);
+        if (nivel_actual == nivel_clave)
+        {
+            l_agregar(*lista, x);
+        }
+        nodos_nivel_aux(A, n_hijoizquierdo(Q), nivel_clave, lista);
+        nodos_nivel_aux(A, n_hijoderecho(Q), nivel_clave, lista);
+    }
+}
+
+Lista nodos_nivel(ArbolBinario A, int clave)
+{
+    int nivel_clave = nivel(A, clave);
+    Lista lista = l_crear();
+    nodos_nivel_aux(A, a_raiz(A), nivel_clave, &lista);
+    return lista;
+}
+
 /// @brief Resuelve la altura. 'C' cuenta los pasos desde la raíz a cada nodo
 /// @param Q Nodo actual
 /// @param C Cantidad de pasos actual
@@ -489,18 +511,23 @@ int nodo_nivel_ger(NodoArbol Q)
 /// @param N nodo actual
 /// @param cantidad variable que devuelve la cantidad de nodos hoja
 /// @return Retorna la cantidad de nodos hoja del arbol
-void hojas_nario_aux(NodoArbol N, int* cantidad){
-    if(!a_es_rama_nula(N)){
-        if(a_es_rama_nula(n_hijoizquierdo(N))) *cantidad = *cantidad + 1;
-        else hojas_nario_aux(n_hijoizquierdo(N), cantidad);
+void hojas_nario_aux(NodoArbol N, int *cantidad)
+{
+    if (!a_es_rama_nula(N))
+    {
+        if (a_es_rama_nula(n_hijoizquierdo(N)))
+            *cantidad = *cantidad + 1;
+        else
+            hojas_nario_aux(n_hijoizquierdo(N), cantidad);
         hojas_nario_aux(n_hijoderecho(N), cantidad);
     }
- }
+}
 
 /// @brief Funcion que llama a hojas_nario_aux
 /// @param A Arbol n-ario cargado como binario
 /// @return Retorna la cantidad de nodos hoja del arbol
-int hojas_nario(ArbolBinario A){
+int hojas_nario(ArbolBinario A)
+{
     int cantidad = 0;
     NodoArbol N = a_raiz(A);
     hojas_nario_aux(N, &cantidad);
@@ -508,16 +535,22 @@ int hojas_nario(ArbolBinario A){
 }
 
 /// @brief Funcion que devuelve true si los arboles son similares y false si no
-/// @param N1 Nodo actual del arbol 1 
+/// @param N1 Nodo actual del arbol 1
 /// @param N2 Nodo actual del arbol 2
 /// @return Retorna true si son arboles similares y false si no
-void arbol_similar_aux(NodoArbol N1, NodoArbol N2, bool* rta){
-    if ((a_es_rama_nula(N1) && a_es_rama_nula(N2)) || *rta==false){
-        }else{
-            if((a_es_rama_nula(N1) && !a_es_rama_nula(N2)) || (!a_es_rama_nula(N1) && a_es_rama_nula(N2))) *rta = false;
-            else{
-                arbol_similar_aux(n_hijoizquierdo(N1), n_hijoizquierdo(N2), rta);
-                arbol_similar_aux(n_hijoderecho(N1), n_hijoderecho(N2), rta);
+void arbol_similar_aux(NodoArbol N1, NodoArbol N2, bool *rta)
+{
+    if ((a_es_rama_nula(N1) && a_es_rama_nula(N2)) || *rta == false)
+    {
+    }
+    else
+    {
+        if ((a_es_rama_nula(N1) && !a_es_rama_nula(N2)) || (!a_es_rama_nula(N1) && a_es_rama_nula(N2)))
+            *rta = false;
+        else
+        {
+            arbol_similar_aux(n_hijoizquierdo(N1), n_hijoizquierdo(N2), rta);
+            arbol_similar_aux(n_hijoderecho(N1), n_hijoderecho(N2), rta);
         }
     }
 }
@@ -526,13 +559,16 @@ void arbol_similar_aux(NodoArbol N1, NodoArbol N2, bool* rta){
 /// @param A1 Arbol n-ario cargado como binario
 /// @param A2 Arbol n-ario cargado como binario
 /// @return Retorna true si son arboles similares y false si no
-bool arbol_similar(ArbolBinario A1, ArbolBinario A2){
+bool arbol_similar(ArbolBinario A1, ArbolBinario A2)
+{
     bool rta = true;
-    if (a_es_vacio(A1) && a_es_vacio(A2)) return true;
-    if ((a_es_vacio(A1) && !a_es_vacio(A2)) || (!a_es_vacio(A1) && a_es_vacio(A2))) return false;
+    if (a_es_vacio(A1) && a_es_vacio(A2))
+        return true;
+    if ((a_es_vacio(A1) && !a_es_vacio(A2)) || (!a_es_vacio(A1) && a_es_vacio(A2)))
+        return false;
     NodoArbol N1 = a_raiz(A1);
     NodoArbol N2 = a_raiz(A2);
-    arbol_similar_aux(N1,N2,&rta);
+    arbol_similar_aux(N1, N2, &rta);
     return rta;
 }
 
@@ -558,25 +594,32 @@ void padre_nario_aux(NodoArbol actual, NodoArbol padre, int clave, NodoArbol *R)
 /// @param A Arbol n-ario cargado como binario
 /// @param clave clave del nodo a buscar
 /// @return Retorna true si son arboles similares y false si no
-NodoArbol padre_nario(ArbolBinario A, int clave){
+NodoArbol padre_nario(ArbolBinario A, int clave)
+{
     NodoArbol N, R;
     TipoElemento X = te_crear(0);
     N = NULL;
     N = n_crear(X);
     R = a_raiz(A);
-    if (n_recuperar(R)->clave == clave) return NULL;
-    padre_nario_aux(R,NULL,clave,&N);
+    if (n_recuperar(R)->clave == clave)
+        return NULL;
+    padre_nario_aux(R, NULL, clave, &N);
     return N;
 }
 
-void hermanos_nario_aux(NodoArbol actual,int clave, Lista* L){
-    if(!a_es_rama_nula(actual)){
-        if(n_recuperar(actual)->clave == clave){
-        } else {
-            TipoElemento X = n_recuperar(actual);
-            l_agregar(*L,X);
+void hermanos_nario_aux(NodoArbol actual, int clave, Lista *L)
+{
+    if (!a_es_rama_nula(actual))
+    {
+        if (n_recuperar(actual)->clave == clave)
+        {
         }
-        hermanos_nario_aux(n_hijoderecho(actual),clave,L);
+        else
+        {
+            TipoElemento X = n_recuperar(actual);
+            l_agregar(*L, X);
+        }
+        hermanos_nario_aux(n_hijoderecho(actual), clave, L);
     }
 }
 
@@ -584,13 +627,14 @@ void hermanos_nario_aux(NodoArbol actual,int clave, Lista* L){
 /// @param A Arbol n-ario cargado como binario
 /// @param clave clave del nodo a buscar
 /// @return Retorna una lista con los hermanos del nodo
-Lista hermanos_nario(ArbolBinario A, int clave){
+Lista hermanos_nario(ArbolBinario A, int clave)
+{
     NodoArbol N;
     Lista L = l_crear();
     TipoElemento X = te_crear(0);
     N = n_crear(X);
-    N = padre_nario(A,clave);
-    hermanos_nario_aux(n_hijoizquierdo(N),clave,&L);
+    N = padre_nario(A, clave);
+    hermanos_nario_aux(n_hijoizquierdo(N), clave, &L);
     return L;
 }
 
@@ -633,23 +677,27 @@ int nivel_nario(ArbolBinario A, int clave)
 /// @brief Funcion que llama a nodos_internos_nario_auz
 /// @param A Arbol binario cargado
 /// @return Devuelve una lista con los nodos internos del arbol n-ario
-void nodos_internos_nario_aux(ArbolBinario A, NodoArbol actual, Lista* L){
-    if(!a_es_rama_nula(actual)){
-        if(!a_es_rama_nula(n_hijoizquierdo(actual)) && n_recuperar(a_raiz(A))->clave != n_recuperar(actual)->clave){
+void nodos_internos_nario_aux(ArbolBinario A, NodoArbol actual, Lista *L)
+{
+    if (!a_es_rama_nula(actual))
+    {
+        if (!a_es_rama_nula(n_hijoizquierdo(actual)) && n_recuperar(a_raiz(A))->clave != n_recuperar(actual)->clave)
+        {
             TipoElemento X = n_recuperar(actual);
-            l_agregar(*L,X);
+            l_agregar(*L, X);
         }
-        nodos_internos_nario_aux(A,n_hijoizquierdo(actual),L);
-        nodos_internos_nario_aux(A,n_hijoderecho(actual),L);
+        nodos_internos_nario_aux(A, n_hijoizquierdo(actual), L);
+        nodos_internos_nario_aux(A, n_hijoderecho(actual), L);
     }
 }
 
 /// @brief Funcion que llama a nodos_internos_nario_auz
 /// @param A Arbol binario cargado
 /// @return Devuelve una lista con los nodos internos del arbol n-ario
-Lista nodos_internos_nario(ArbolBinario A){
+Lista nodos_internos_nario(ArbolBinario A)
+{
     NodoArbol N = a_raiz(A);
     Lista L = l_crear();
-    nodos_internos_nario_aux(A,N,&L);
+    nodos_internos_nario_aux(A, N, &L);
     return L;
 }

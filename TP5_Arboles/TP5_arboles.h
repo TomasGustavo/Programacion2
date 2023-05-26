@@ -69,4 +69,6 @@ int nivel_nario(ArbolBinario A, int clave);
 
 Lista nodos_internos_nario(ArbolBinario A);
 
+Lista nodos_nivel(ArbolBinario A, int clave);
+
 #endif // TP5_ARBOLES_H
