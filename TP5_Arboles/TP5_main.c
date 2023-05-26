@@ -437,6 +437,27 @@ void main_nodos_internos_nario()
     limpiar_pantalla();
 }
 
+void main_hojas_nivel_nario(){
+    ArbolBinario A;
+    A = a_crear();
+    bool res;
+    cargar_arbol_binario(A);
+    if (!a_es_vacio(A))
+    {
+       res = nivel_hojas_nario(A);
+       if (res) printf(ANSI_bGREEN "\nTodas las hojas estan al mismo nivel" ANSI_YELLOW);
+       else printf(ANSI_bRED "\nLas hojas no estan al mismo nivel" ANSI_YELLOW);
+    }
+    else
+    {
+        printf(ANSI_bMAGENTA "\nEl arbol esta vacio" ANSI_YELLOW);
+    }
+    printf(ANSI_RESET);
+    vaciar_buffer();
+    pausa();
+    limpiar_pantalla();
+}
+
 int main()
 {
     bool salir = false;
@@ -530,6 +551,7 @@ int main()
                     main_nodos_internos_nario();
                     break;
                 case 9:
+                    main_hojas_nivel_nario();
                     break;
                 case 0:
                     salir_p4 = true;
