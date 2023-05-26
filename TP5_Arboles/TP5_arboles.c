@@ -638,6 +638,46 @@ Lista hermanos_nario(ArbolBinario A, int clave)
     return L;
 }
 
+/// @brief Recorre los arboles binarios para comparar si son equivalentes
+/// @param Q1 Nodo del arbol (recibe la raiz del arbol)
+/// @param Q2 Nodo del arbol (recibe la raiz del arbol)
+/// @param equivalentes bandera que indica si los arboles son equivalentes
+void comparar_equivalencia(NodoArbol Q1, NodoArbol Q2, int * equivalentes){
+    TipoElemento X1;
+    TipoElemento X2;
+    if (Q1 == NULL && Q2 == NULL)
+    {
+    }
+    else{
+        X1 = n_recuperar(Q1);
+        X2 = n_recuperar(Q2);
+        if (Q1 == NULL || Q2 == NULL)
+        {
+            *equivalentes = 0;
+        }
+        else if (X1->clave == X2->clave)
+        {
+            comparar_equivalencia(n_hijoizquierdo(Q1),n_hijoizquierdo(Q2), equivalentes);
+            comparar_equivalencia(n_hijoderecho(Q1), n_hijoderecho(Q2), equivalentes);
+        }
+        else{
+            *equivalentes = 0;
+        }
+        
+    }
+}
+/// @brief Funcion que llama a la funcion comparar_equivalencia
+/// @param A1 Arbol binario cargado de enteros
+/// @param A2 Arbol binario cargado de enteros
+/// @return Retorna una bandera que indica si los arboles son equivalentes
+int arbol_equivalentes(ArbolBinario A1, ArbolBinario A2){
+    int equivalentes = 1;
+    comparar_equivalencia(a_raiz(A1), a_raiz(A2), &equivalentes);
+    return equivalentes;
+}
+
+
+
 /// @brief Indica el nivel en el que se encuentra la clave pasada
 /// @param A Arbol binario cargado
 /// @param clave clave a buscar
