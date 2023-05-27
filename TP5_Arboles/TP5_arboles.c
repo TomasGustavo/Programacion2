@@ -7,6 +7,7 @@
 #include <ctype.h>
 #include "TP5_arboles.h"
 #include "listas.h"
+#include "colas.h"
 #include "tipo_elemento.h"
 
 /// @brief Vacía el buffer de entrada.
@@ -776,4 +777,36 @@ bool nivel_hojas_nario(ArbolBinario A){
         }
     } else res = false;
     return res;
+}
+
+Lista anchura_nario(ArbolBinario A){
+    Lista L;
+    Cola C;
+    NodoArbol N, N1;
+    TipoElemento X, X1;
+    if(!a_es_vacio(A)){
+        L = l_crear();
+        C = c_crear();
+        N = a_raiz(A);
+        X = te_crear_con_valor(0,N);
+        c_encolar(C,X);
+        while (!c_es_vacia(C))
+        {
+            X = c_desencolar(C);
+            N = (NodoArbol) X->valor;
+            l_agregar(L,n_recuperar(N));
+            if (!a_es_rama_nula(n_hijoizquierdo(N))){
+                N1 = n_hijoizquierdo(N);
+                X1 = te_crear_con_valor(0,N1);
+                c_encolar(C,X1);
+            }
+            while (!a_es_rama_nula(n_hijoderecho(N1)))
+            {
+                N1 = n_hijoderecho(N1);
+                X = te_crear_con_valor(0,N1);
+                c_encolar(C,X);
+            }
+        }
+    }
+    return L;
 }

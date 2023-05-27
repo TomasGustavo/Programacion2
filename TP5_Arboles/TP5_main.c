@@ -484,6 +484,28 @@ void main_hojas_nivel_nario(){
     limpiar_pantalla();
 }
 
+void main_anchura_nario(){
+    ArbolBinario A;
+    Lista L;
+    A = a_crear();
+    cargar_arbol_binario(A);
+    if (!a_es_vacio(A))
+    {
+       L = l_crear();
+       L = anchura_nario(A);
+       printf(ANSI_bMAGENTA "\nRecorrido en anchura del arbol n-ario: \n");
+       l_mostrarLista(L);
+    }
+    else
+    {
+        printf(ANSI_bMAGENTA "\nEl arbol esta vacio" ANSI_YELLOW);
+    }
+    printf(ANSI_RESET);
+    vaciar_buffer();
+    pausa();
+    limpiar_pantalla();
+}
+
 int main()
 {
     bool salir = false;
@@ -555,6 +577,7 @@ int main()
                 switch (opcion)
                 {
                 case 1:
+                    main_anchura_nario();
                     break;
                 case 2:
                     main_cantidad_hojas();
