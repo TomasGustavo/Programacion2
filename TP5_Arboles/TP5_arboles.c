@@ -638,6 +638,46 @@ Lista hermanos_nario(ArbolBinario A, int clave)
     return L;
 }
 
+/// @brief Recorre los arboles binarios para comparar si son equivalentes
+/// @param Q1 Nodo del arbol (recibe la raiz del arbol)
+/// @param Q2 Nodo del arbol (recibe la raiz del arbol)
+/// @param equivalentes bandera que indica si los arboles son equivalentes
+void comparar_equivalencia(NodoArbol Q1, NodoArbol Q2, int * equivalentes){
+    TipoElemento X1;
+    TipoElemento X2;
+    if (Q1 == NULL && Q2 == NULL)
+    {
+    }
+    else{
+        X1 = n_recuperar(Q1);
+        X2 = n_recuperar(Q2);
+        if (Q1 == NULL || Q2 == NULL)
+        {
+            *equivalentes = 0;
+        }
+        else if (X1->clave == X2->clave)
+        {
+            comparar_equivalencia(n_hijoizquierdo(Q1),n_hijoizquierdo(Q2), equivalentes);
+            comparar_equivalencia(n_hijoderecho(Q1), n_hijoderecho(Q2), equivalentes);
+        }
+        else{
+            *equivalentes = 0;
+        }
+        
+    }
+}
+/// @brief Funcion que llama a la funcion comparar_equivalencia
+/// @param A1 Arbol binario cargado de enteros
+/// @param A2 Arbol binario cargado de enteros
+/// @return Retorna una bandera que indica si los arboles son equivalentes
+int arbol_equivalentes(ArbolBinario A1, ArbolBinario A2){
+    int equivalentes = 1;
+    comparar_equivalencia(a_raiz(A1), a_raiz(A2), &equivalentes);
+    return equivalentes;
+}
+
+
+
 /// @brief Indica el nivel en el que se encuentra la clave pasada
 /// @param A Arbol binario cargado
 /// @param clave clave a buscar
@@ -700,4 +740,40 @@ Lista nodos_internos_nario(ArbolBinario A)
     Lista L = l_crear();
     nodos_internos_nario_aux(A, N, &L);
     return L;
+}
+
+/// @brief Funcion indica si todas las hojas del arbol estan al mismo nivel
+/// @param A Arbol binario cargado
+/// @return Devuelve true si todas las hojas estan al mismo nivel y false si no
+void nivel_hojas_nario_aux(ArbolBinario A, NodoArbol actual, Lista* L){
+    if(!a_es_rama_nula(actual)){
+        if(a_es_rama_nula(n_hijoizquierdo(actual))){
+            TipoElemento X = n_recuperar(actual);
+            int nivel = nivel_nario(A,X->clave);
+            TipoElemento X1 = te_crear(nivel);
+            l_agregar(*L,X1);
+        }
+        nivel_hojas_nario_aux(A, n_hijoizquierdo(actual),L);
+        nivel_hojas_nario_aux(A, n_hijoderecho(actual),L);
+    }
+}
+
+/// @brief Funcion que llama a nivel_hojas_nario
+/// @param A Arbol binario cargado
+/// @return Devuelve true si todas las hojas estan al mismo nivel y false si no
+bool nivel_hojas_nario(ArbolBinario A){
+    Lista l = l_crear();
+    NodoArbol R = a_raiz(A);
+    bool res = true;
+    TipoElemento X, X1;
+    nivel_hojas_nario_aux(A,R,&l);
+    Iterador ite = iterador(l);
+    if (!l_es_vacia(l)){
+       X = siguiente(ite);
+       while (hay_siguiente(ite) && res != false){   
+            X1 = siguiente(ite);
+            if (X->clave != X1->clave) res = false;
+        }
+    } else res = false;
+    return res;
 }

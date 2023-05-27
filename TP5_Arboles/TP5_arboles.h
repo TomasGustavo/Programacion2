@@ -65,10 +65,15 @@ NodoArbol padre_nario(ArbolBinario A, int clave);
 
 Lista hermanos_nario(ArbolBinario A, int clave);
 
+void comparar_equivalencia(NodoArbol Q1, NodoArbol Q2, int * equivalentes);
+
+int arbol_equivalentes(ArbolBinario A1, ArbolBinario A2);
+
 int nivel_nario(ArbolBinario A, int clave);
 
 Lista nodos_internos_nario(ArbolBinario A);
 
 Lista nodos_nivel(ArbolBinario A, int clave);
 
+bool nivel_hojas_nario(ArbolBinario A);
 #endif // TP5_ARBOLES_H
