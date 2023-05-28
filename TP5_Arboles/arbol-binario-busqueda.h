@@ -27,4 +27,6 @@ void abb_eliminar(ArbolBinarioBusqueda a, int claveABorrar);
 
 TipoElemento abb_buscar(ArbolBinarioBusqueda a, int clave);
 
+bool abb_es_rama_nula(NodoArbol pa);
+
 #endif // ARBOL_BINARIO_BUSQUEDA_H_INCLUDED

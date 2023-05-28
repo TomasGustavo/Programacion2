@@ -9,6 +9,10 @@
 #include "listas.h"
 #include "colas.h"
 #include "tipo_elemento.h"
+#include "arbol-binario.h"
+#include "arbol-binario-busqueda.h"
+#include "arbol-avl.h"
+#include <time.h>
 
 /// @brief Vacía el buffer de entrada.
 void vaciar_buffer()
@@ -490,7 +494,7 @@ int nodo_altura(NodoArbol Q)
     return H;
 }
 
-void nivel_ger(NodoArbol Q, NodoArbol P, int C)
+/* void nivel_ger(NodoArbol Q, NodoArbol P, int C)
 {
     if (!a_es_rama_nula(Q))
     {
@@ -506,7 +510,7 @@ void nivel_ger(NodoArbol Q, NodoArbol P, int C)
 int nodo_nivel_ger(NodoArbol Q)
 {
     nivel_ger(Q, Q, 0);
-}
+} */
 
 /// @brief Funcion que recorre el arbol n-ario y cuenta la cantidad de hojas
 /// @param N nodo actual
@@ -643,13 +647,15 @@ Lista hermanos_nario(ArbolBinario A, int clave)
 /// @param Q1 Nodo del arbol (recibe la raiz del arbol)
 /// @param Q2 Nodo del arbol (recibe la raiz del arbol)
 /// @param equivalentes bandera que indica si los arboles son equivalentes
-void comparar_equivalencia(NodoArbol Q1, NodoArbol Q2, int * equivalentes){
+void comparar_equivalencia(NodoArbol Q1, NodoArbol Q2, int *equivalentes)
+{
     TipoElemento X1;
     TipoElemento X2;
     if (Q1 == NULL && Q2 == NULL)
     {
     }
-    else{
+    else
+    {
         X1 = n_recuperar(Q1);
         X2 = n_recuperar(Q2);
         if (Q1 == NULL || Q2 == NULL)
@@ -658,26 +664,25 @@ void comparar_equivalencia(NodoArbol Q1, NodoArbol Q2, int * equivalentes){
         }
         else if (X1->clave == X2->clave)
         {
-            comparar_equivalencia(n_hijoizquierdo(Q1),n_hijoizquierdo(Q2), equivalentes);
+            comparar_equivalencia(n_hijoizquierdo(Q1), n_hijoizquierdo(Q2), equivalentes);
             comparar_equivalencia(n_hijoderecho(Q1), n_hijoderecho(Q2), equivalentes);
         }
-        else{
+        else
+        {
             *equivalentes = 0;
         }
-        
     }
 }
 /// @brief Funcion que llama a la funcion comparar_equivalencia
 /// @param A1 Arbol binario cargado de enteros
 /// @param A2 Arbol binario cargado de enteros
 /// @return Retorna una bandera que indica si los arboles son equivalentes
-int arbol_equivalentes(ArbolBinario A1, ArbolBinario A2){
+int arbol_equivalentes(ArbolBinario A1, ArbolBinario A2)
+{
     int equivalentes = 1;
     comparar_equivalencia(a_raiz(A1), a_raiz(A2), &equivalentes);
     return equivalentes;
 }
-
-
 
 /// @brief Indica el nivel en el que se encuentra la clave pasada
 /// @param A Arbol binario cargado
@@ -746,67 +751,194 @@ Lista nodos_internos_nario(ArbolBinario A)
 /// @brief Funcion indica si todas las hojas del arbol estan al mismo nivel
 /// @param A Arbol binario cargado
 /// @return Devuelve true si todas las hojas estan al mismo nivel y false si no
-void nivel_hojas_nario_aux(ArbolBinario A, NodoArbol actual, Lista* L){
-    if(!a_es_rama_nula(actual)){
-        if(a_es_rama_nula(n_hijoizquierdo(actual))){
+void nivel_hojas_nario_aux(ArbolBinario A, NodoArbol actual, Lista *L)
+{
+    if (!a_es_rama_nula(actual))
+    {
+        if (a_es_rama_nula(n_hijoizquierdo(actual)))
+        {
             TipoElemento X = n_recuperar(actual);
-            int nivel = nivel_nario(A,X->clave);
+            int nivel = nivel_nario(A, X->clave);
             TipoElemento X1 = te_crear(nivel);
-            l_agregar(*L,X1);
+            l_agregar(*L, X1);
         }
-        nivel_hojas_nario_aux(A, n_hijoizquierdo(actual),L);
-        nivel_hojas_nario_aux(A, n_hijoderecho(actual),L);
+        nivel_hojas_nario_aux(A, n_hijoizquierdo(actual), L);
+        nivel_hojas_nario_aux(A, n_hijoderecho(actual), L);
     }
 }
 
 /// @brief Funcion que llama a nivel_hojas_nario
 /// @param A Arbol binario cargado
 /// @return Devuelve true si todas las hojas estan al mismo nivel y false si no
-bool nivel_hojas_nario(ArbolBinario A){
+bool nivel_hojas_nario(ArbolBinario A)
+{
     Lista l = l_crear();
     NodoArbol R = a_raiz(A);
     bool res = true;
     TipoElemento X, X1;
-    nivel_hojas_nario_aux(A,R,&l);
+    nivel_hojas_nario_aux(A, R, &l);
     Iterador ite = iterador(l);
-    if (!l_es_vacia(l)){
-       X = siguiente(ite);
-       while (hay_siguiente(ite) && res != false){   
+    if (!l_es_vacia(l))
+    {
+        X = siguiente(ite);
+        while (hay_siguiente(ite) && res != false)
+        {
             X1 = siguiente(ite);
-            if (X->clave != X1->clave) res = false;
+            if (X->clave != X1->clave)
+                res = false;
         }
-    } else res = false;
+    }
+    else
+        res = false;
     return res;
 }
 
-Lista anchura_nario(ArbolBinario A){
+Lista anchura_nario(ArbolBinario A)
+{
     Lista L;
     Cola C;
     NodoArbol N, N1;
     TipoElemento X, X1;
-    if(!a_es_vacio(A)){
+    if (!a_es_vacio(A))
+    {
         L = l_crear();
         C = c_crear();
         N = a_raiz(A);
-        X = te_crear_con_valor(0,N);
-        c_encolar(C,X);
+        X = te_crear_con_valor(0, N);
+        c_encolar(C, X);
         while (!c_es_vacia(C))
         {
             X = c_desencolar(C);
-            N = (NodoArbol) X->valor;
-            l_agregar(L,n_recuperar(N));
-            if (!a_es_rama_nula(n_hijoizquierdo(N))){
+            N = (NodoArbol)X->valor;
+            l_agregar(L, n_recuperar(N));
+            if (!a_es_rama_nula(n_hijoizquierdo(N)))
+            {
                 N1 = n_hijoizquierdo(N);
-                X1 = te_crear_con_valor(0,N1);
-                c_encolar(C,X1);
+                X1 = te_crear_con_valor(0, N1);
+                c_encolar(C, X1);
             }
             while (!a_es_rama_nula(n_hijoderecho(N1)))
             {
                 N1 = n_hijoderecho(N1);
-                X = te_crear_con_valor(0,N1);
-                c_encolar(C,X);
+                X = te_crear_con_valor(0, N1);
+                c_encolar(C, X);
             }
         }
     }
     return L;
+}
+
+/*Función que genera y devuelve un arreglo de número aleatorios*/
+
+/// @brief Función que genera numeros aleatorios dentro de un rango
+/// @param min Rango minimo
+/// @param max Rango maximo
+/// @return Numero aleatorio generado
+int *getRandom(int min, int max)
+{
+    int *n_aleatorio;
+    srand((unsigned)time(NULL)); // Establecer semilla
+    n_aleatorio = min + (rand() % (max - min + 1));
+    return n_aleatorio;
+}
+
+/// @brief Función que carga un (sub)árbol en preorden a partir del nodo padre N recursivamente
+/// @param A Arbol binario donde se cargara el nuevo nodo
+/// @param N Nodo a cargar
+/// @param sa El entero 'sa' indica cómo se enlazará el nuevo valor:
+/// • 0: El nuevo nodo (con su TE) se asignará a la raíz de A. En este caso N no es utilizado.
+/// • -1: El nuevo nodo (con su TE) se enlazará como hijo izquierdo de N.
+/// • 1: El nuevo nodo (con su TE) se enlazará como hijo derecho de N.
+void Cargar_SubArbol_AVL_ABB(ArbolBinarioBusqueda A_BB, ArbolAVL A_AVL, int min, int max)
+{
+    TipoElemento X;
+    NodoArbol N1;
+    int n, *n_aleatorio;
+    bool b;
+
+    printf(ANSI_bMAGENTA "Ingrese el rango minimo de la serie aleatoria: " ANSI_YELLOW);
+    scanf("%d", min);
+    printf(ANSI_bMAGENTA "Ingrese el rango maximo de la serie aleatoria: " ANSI_YELLOW);
+    scanf("%d", max);
+
+    if (!abb_es_lleno(A_BB) && !avl_es_lleno(A_AVL))
+    {
+        n_aleatorio = getRandom(min, max);
+
+        X = te_crear(*n_aleatorio);
+        avl_insertar(A_AVL, X);
+        abb_insertar(A_BB, X);
+    }
+}
+
+void cargar_repeticiones(int repeticiones, int min, int max)
+{
+
+    for (int i = 1; i <= repeticiones; i++)
+    {
+        ArbolAVL A_AVL = avl_crear();
+        ArbolBinarioBusqueda A_BB = abb_crear();
+        Cargar_SubArbol_AVL_ABB(A_BB, A_AVL, min, max);
+
+    }
+}
+
+/// @brief Resuelve la altura. 'C' cuenta los pasos desde la raíz a cada nodo
+/// @param Q Nodo actual
+/// @param C Cantidad de pasos actual
+/// @param H Cantidad de pasos en la hoja anterior
+void altura_avl_aux(NodoArbol Q, int C, int H)
+{
+    if (avl_es_rama_nula(Q))
+    {
+        if (C > H) // cada vez que llega a la hoja pregunta si la cantidad de pasos fue mayor que la de la hoja anterior
+        {
+            H = C;
+        }
+        else
+        {
+            altura_avl_aux(n_hijoizquierdo(Q), C + 1, H);
+            altura_avl_aux(n_hijoderecho(Q), C + 1, H);
+        }
+    }
+}
+
+/// @brief Calcula la altura del arbol
+/// @param A_AVL Arbol AVL cargado
+/// @return Altura del arbol
+int altura_avl(ArbolAVL A_AVL)
+{
+    int H = 0;
+    altura_avl_aux(avl_raiz(A_AVL), 0, H);
+    return H;
+}
+
+/// @brief Resuelve la altura. 'C' cuenta los pasos desde la raíz a cada nodo
+/// @param Q Nodo actual
+/// @param C Cantidad de pasos actual
+/// @param H Cantidad de pasos en la hoja anterior
+void altura_bb_aux(NodoArbol Q, int C, int H)
+{
+    if (abb_es_rama_nula(Q))
+    {
+        if (C > H) // cada vez que llega a la hoja pregunta si la cantidad de pasos fue mayor que la de la hoja anterior
+        {
+            H = C;
+        }
+        else
+        {
+            altura_bb_aux(n_hijoizquierdo(Q), C + 1, H);
+            altura_bb_aux(n_hijoderecho(Q), C + 1, H);
+        }
+    }
+}
+
+/// @brief Calcula la altura del arbol
+/// @param A_AVL Arbol AVL cargado
+/// @return Altura del arbol
+int altura_bb(ArbolBinarioBusqueda A_BB)
+{
+    int H = 0;
+    altura_bb_aux(abb_raiz(A_BB), 0, H);
+    return H;
 }
