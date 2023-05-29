@@ -539,20 +539,76 @@ void main_punto10()
     const int N_MIN = 10;
     const int N_MAX = 2000;
     const int A_MAX = 10000;
-    int min, max, repeticiones, nodo;
-
-    // Validar entre 1 y 200
+    int min, max, repeticiones, nodo, validador;
+    // Cantidad de repeticiones
     printf(ANSI_bMAGENTA "Ingrese la cantidad de repeticiones que se ejecutara la carga de arboles [1-200]: " ANSI_YELLOW);
-    scanf("%d", &repeticiones);
-    // Validar entre 10 y 2000
-    printf(ANSI_bMAGENTA "Ingrese la cantidad de nodos a cargar en el arbol [%d-%d]: " ANSI_YELLOW, N_MIN, N_MAX);
+    validador = scanf("%d", &repeticiones);
+    while (validador != 1 || repeticiones < 1 || repeticiones > 200)
+    {
+        printf(ANSI_RED "\t\t-------- ERROR -------- \n");
+        printf("DATO FUERA DE RANGO\n\n" ANSI_RESET);
+        pausa();
+        printf(ANSI_bBLUE "Ingrese la cantidad de repeticiones que se ejecutara la carga de arboles [1-200]: " ANSI_YELLOW);
+        validador = scanf("%d", &repeticiones);
+        vaciar_buffer();
+    }
+    
+    // Cantidad de nodos de cada arbol
+    printf(ANSI_bMAGENTA "Ingrese la cantidad de nodos a cargar en cada arbol [%d-%d]: " ANSI_YELLOW, N_MIN, N_MAX);
     scanf("%d", &nodo);
-    // Validar entre 1 y 10000
+    while (validador != 1 || nodo < 10 || nodo > 2000)
+    {
+        printf(ANSI_RED "\t\t-------- ERROR -------- \n");
+        printf("DATO FUERA DE RANGO\n\n" ANSI_RESET);
+        pausa();
+        printf(ANSI_bBLUE "Ingrese la cantidad de nodos a cargar en cada arbol [%d-%d]: " ANSI_YELLOW, N_MIN, N_MAX);
+        validador = scanf("%d", &nodo);
+        vaciar_buffer();
+    }
+    
+    //Rango minimo
     printf(ANSI_bMAGENTA "Ingrese el rango minimo de la serie aleatoria [1-%d]: " ANSI_YELLOW, A_MAX);
     scanf("%d", &min);
-    // Validar que el maximo, sea [rango maximo - rango minimo] > "nodo" * 2
-    printf(ANSI_bMAGENTA "Ingrese el rango maximo de la serie aleatoria [%d-%d]: " ANSI_YELLOW, N_MAX, A_MAX);
+    while (validador != 1 || min < 1 || min > A_MAX)
+    {
+        printf(ANSI_RED "\t\t-------- ERROR -------- \n");
+        printf("DATO FUERA DE RANGO\n\n" ANSI_RESET);
+        pausa();
+        printf(ANSI_bBLUE "Ingrese el rango minimo de la serie aleatoria [1-%d]: " ANSI_YELLOW, A_MAX);
+        validador = scanf("%d", &min);
+        vaciar_buffer();
+    }    
+
+    // Rango maximo
+    printf(ANSI_bMAGENTA "Ingrese el rango maximo de la serie aleatoria [20-%d]: " ANSI_YELLOW, N_MAX, A_MAX);
     scanf("%d", &max);
+    while (validador != 1 || max < 20 || max > A_MAX || max <= min || (max - min) < (nodo * 2))
+    {
+        if (max > A_MAX || max < 20)
+        {
+            printf(ANSI_RED "\t\t-------- ERROR -------- \n");
+            printf("DATO FUERA DE RANGO\n\n" ANSI_RESET);
+            pausa();
+            printf(ANSI_bBLUE "Ingrese el rango maximo de la serie aleatoria [20-%d]: " ANSI_YELLOW, A_MAX);
+        }
+        else if (max <= min)
+        {
+            printf(ANSI_RED "\t\t-------- ERROR -------- \n");
+            printf("EL MAXIMO DEBE SER MAYOR AL MINIMO\n\n" ANSI_RESET);
+            pausa();
+            printf(ANSI_bBLUE "Ingrese el rango maximo de la serie aleatoria [20-%d]: " ANSI_YELLOW, A_MAX);
+        }
+        else if ((max - min) < (nodo * 2))
+        {
+            printf(ANSI_RED "\t\t-------- ERROR -------- \n");
+            printf("LA DIFERENCIA ENTRE MINIMO Y MAXIMO DEBE SER MAYOR AL DOBLE DE NODOS DEL ARBOL\n\n" ANSI_RESET);
+            pausa();
+            printf(ANSI_bBLUE "Ingrese el rango maximo de la serie aleatoria [20-%d]: " ANSI_YELLOW, A_MAX);
+        }
+        validador = scanf("%d", &min);
+        vaciar_buffer();
+    }   
+    
     cargar_repeticiones_AVL_BB(repeticiones, nodo, min, max);
     printf(ANSI_bMAGENTA "\nPodemos concluir que el arbol AVL al estar balanceado tiende a tener una altura menor respecto del arbol binario de busqueda (BB), ya que este puede estar desiquilibrado dependiendo del orden en el que se insertaron las claves, por lo cual su altura es mayor respecto del AVL.");
     vaciar_buffer();
