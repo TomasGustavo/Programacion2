@@ -6,6 +6,8 @@
 #include "nodo.h"
 #include "arbol-binario.h"
 #include "listas.h"
+#include "arbol-avl.h"
+#include "arbol-binario-busqueda.h"
 
 #define ANSI_RED "\e[31m"
 #define ANSI_GREEN "\e[32m"
@@ -86,5 +88,9 @@ void cargar_repeticiones_AVL_BB(int repeticiones, int nodos, int min, int max);
 void free_avl(NodoArbol Q);
 
 void free_abb(NodoArbol Q);
+
+ArbolAVL BToAVL(ArbolBinario AB);
+
+int altura_avl(ArbolAVL A_AVL);
 
 #endif // TP5_ARBOLES_H

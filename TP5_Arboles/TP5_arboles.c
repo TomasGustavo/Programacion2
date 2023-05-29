@@ -48,6 +48,7 @@ bool ingresoEntero(int *n)
     *n = 0;
     printf(ANSI_bMAGENTA "Ingrese una clave numérica o '.' para nulo: " ANSI_YELLOW);
     scanf("%s", s);
+    vaciar_buffer();
     if (s[0] == '.')
     {
         resultado = false;
@@ -103,6 +104,9 @@ void Cargar_SubArbol(ArbolBinario A, NodoArbol N, int sa)
 void cargar_arbol_binario(ArbolBinario A)
 {
     Cargar_SubArbol(A, NULL, 0);
+    printf(ANSI_bCYAN "\nArbol en pre orden:");
+    mostrar_pre_orden(a_raiz(A));
+    printf("\n\n");
 }
 
 /// @brief Muestra el arbol "pre orden" a partir de un nodo (de ahi hacia abajo)
@@ -1047,4 +1051,23 @@ void free_abb(NodoArbol Q)
     free_abb(n_hijoderecho(Q));
     free(Q);
     Q = NULL;
+}
+
+void BToAVL_aux(NodoArbol n_AB, ArbolAVL *A_AVL)
+{
+    TipoElemento X;
+    if (!a_es_rama_nula(n_AB))
+    {
+        X = n_recuperar(n_AB);
+        avl_insertar(*A_AVL, X);
+        BToAVL_aux(n_hijoizquierdo(n_AB), A_AVL);
+        BToAVL_aux(n_hijoderecho(n_AB), A_AVL);
+    }
+}
+
+ArbolAVL BToAVL(ArbolBinario AB)
+{
+    ArbolAVL A_AVL = avl_crear();
+    BToAVL_aux(a_raiz(AB), &A_AVL);
+    return A_AVL;
 }

@@ -9,6 +9,7 @@
 #include "nodo.h"
 #include "arbol-binario.h"
 #include "listas.h"
+#include "arbol-avl.h"
 
 /// @brief Menu principal del TP de Arboles
 void menu_principal()
@@ -517,7 +518,8 @@ void main_anchura_nario()
     limpiar_pantalla();
 }
 
-void main_altura_nario(){
+void main_altura_nario()
+{
     ArbolBinario A;
     NodoArbol N;
     int altura;
@@ -544,6 +546,7 @@ void main_punto10()
     const int N_MIN = 10;
     const int N_MAX = 2000;
     const int A_MAX = 10000;
+
     int min, max, repeticiones, nodo, validador;
     // Cantidad de repeticiones
     printf(ANSI_bMAGENTA "Ingrese la cantidad de repeticiones que se ejecutara la carga de arboles [1-200]: " ANSI_YELLOW);
@@ -558,7 +561,7 @@ void main_punto10()
         validador = scanf("%d", &repeticiones);
         vaciar_buffer();
     }
-    
+
     // Cantidad de nodos de cada arbol
     printf(ANSI_bMAGENTA "Ingrese la cantidad de nodos a cargar en cada arbol [%d-%d]: " ANSI_YELLOW, N_MIN, N_MAX);
     scanf("%d", &nodo);
@@ -572,8 +575,8 @@ void main_punto10()
         validador = scanf("%d", &nodo);
         vaciar_buffer();
     }
-    
-    //Rango minimo
+
+    // Rango minimo
     printf(ANSI_bMAGENTA "Ingrese el rango minimo de la serie aleatoria [1-%d]: " ANSI_YELLOW, A_MAX);
     scanf("%d", &min);
     while (validador != 1 || min < 1 || min > A_MAX)
@@ -585,25 +588,47 @@ void main_punto10()
         printf(ANSI_bBLUE "Ingrese el rango minimo de la serie aleatoria [1-%d]: " ANSI_YELLOW, A_MAX);
         validador = scanf("%d", &min);
         vaciar_buffer();
-    }    
+    }
 
     // Rango maximo
-    printf(ANSI_bMAGENTA "Ingrese el rango maximo de la serie aleatoria [20-%d]: " ANSI_YELLOW, N_MAX, A_MAX);
-    scanf("%d", &max);
-    printf(ANSI_bMAGENTA "Ingrese el rango maximo de la serie aleatoria [%d-999.999]: " ANSI_YELLOW, (min*2));
-    printf(ANSI_bMAGENTA "Tener en cuenta que la diferencia entre el maximo y el minimo tiene que ser superior a la cantida de nodos*2");
+    printf(ANSI_bMAGENTA "Ingrese el rango maximo de la serie aleatoria [%d-999.999]\n" ANSI_YELLOW, (min * 2));
+    printf(ANSI_bRED "Tener en cuenta que la diferencia entre el maximo y el minimo tiene que ser superior a la cantidad de nodos x2: " ANSI_YELLOW);
     validador = scanf("%d", &max);
-
-    while(validador!= 1 || (max-min) < (nodo*2) || max>999.999){
+    vaciar_buffer();
+    while ((validador != 1) || ((max - min) < (nodo * 2)) || (max > 999999))
+    {
         printf("ERROR\n");
-        printf("datos fuera de rango\nPor favor Ingrese nuevamente el rango maximo de la serie aleatoria [%d-999.999]: " ANSI_YELLOW, (min*2));
+        printf("datos fuera de rango\nPor favor Ingrese nuevamente el rango maximo de la serie aleatoria [%d-999.999]: " ANSI_YELLOW, (min * 2));
         validador = scanf("%d", &max);
-	    vaciar_buffer();
+        vaciar_buffer();
     }
-    
+
     cargar_repeticiones_AVL_BB(repeticiones, nodo, min, max);
     printf(ANSI_bMAGENTA "\nPodemos concluir que el arbol AVL al estar balanceado tiende a tener una altura menor respecto del arbol binario de busqueda (BB), ya que este puede estar desiquilibrado dependiendo del orden en el que se insertaron las claves, por lo cual su altura es mayor respecto del AVL.");
-    vaciar_buffer();
+    pausa();
+    limpiar_pantalla();
+}
+
+void main_punto9()
+{
+    ArbolBinario A = a_crear();
+    ArbolAVL A_AVL = avl_crear();
+    int altura_AB, altura_AVL;
+    cargar_arbol_binario(A);
+
+    if (!a_es_vacio(A))
+    {
+        altura_AB = nodo_altura(a_raiz(A));
+        A_AVL = BToAVL(A);
+        altura_AVL = altura_avl(A_AVL);
+        printf(ANSI_GREEN "La altura del arbol binario es: " ANSI_YELLOW "%d\n", altura_AB);
+        printf(ANSI_GREEN "La altura del arbol AVL es: " ANSI_YELLOW "%d\n", altura_AVL);
+    }
+    else
+    {
+        printf(ANSI_RED "El arbol se encuentra vacio.");
+    }
+    printf(ANSI_bMAGENTA "\nLa complejidad algorítmica de la solución empleada es O(n log n) ya que hay una función recursiva que recorre el arbol binario para poder recuperar todos sus nodos, siendo O(n) e insertarlos en el arbol AVL; al insertar en el arbol AVL la complejidad es O(log n) ya que va realizando una búsqueda binaria para insertar. Dado que estos 2 ciclos se encuentran anidados el Orden lineal * logaritmo.\n", altura_AB);
     pausa();
     limpiar_pantalla();
 }
@@ -715,6 +740,7 @@ int main()
             main_equivalentes();
             break;
         case 9:
+            main_punto9();
             break;
         case 10:
             main_punto10();
