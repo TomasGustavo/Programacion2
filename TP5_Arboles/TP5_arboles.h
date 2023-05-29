@@ -79,6 +79,8 @@ bool nivel_hojas_nario(ArbolBinario A);
 
 Lista anchura_nario(ArbolBinario A);
 
+int altura_nario(NodoArbol Q);
+
 void cargar_repeticiones_AVL_BB(int repeticiones, int nodos, int min, int max);
 
 void free_avl(NodoArbol Q);

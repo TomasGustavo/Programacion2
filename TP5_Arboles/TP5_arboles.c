@@ -815,6 +815,36 @@ Lista anchura_nario(ArbolBinario A)
     return L;
 }
 
+/// @brief Resuelve la altura. 'C' cuenta los pasos desde la raíz a cada nodo
+/// @param Q Nodo actual
+/// @param C Cantidad de pasos actual
+/// @param H Cantidad de pasos en la hoja anterior
+void altura_nario_aux(NodoArbol Q, int C, int *H)
+{
+    if (a_es_rama_nula(Q))
+    {
+        if (C > *H) // cada vez que llega a la hoja pregunta si la cantidad de pasos fue mayor que la de la hoja anterior
+        {
+            *H = C;
+        }
+    }
+    else
+    {
+        altura_nario_aux(n_hijoizquierdo(Q), C + 1, H);
+        altura_nario_aux(n_hijoderecho(Q), C, H);
+    }
+}
+
+/// @brief Dado un nodo, indica la altura del mismo
+/// @param Q Nodo actual
+/// @return Retorna la altura del nodo
+int altura_nario(NodoArbol Q)
+{
+    int H = 0;
+    altura_nario_aux(Q, 0, &H);
+    return H;
+}
+
 // -------------------------------------------------- PUNTO 10 --------------------------------------------------
 
 /// @brief Función que genera numeros aleatorios dentro de un rango

@@ -512,6 +512,28 @@ void main_anchura_nario()
     limpiar_pantalla();
 }
 
+void main_altura_nario(){
+    ArbolBinario A;
+    NodoArbol N;
+    int altura;
+    A = a_crear();
+    cargar_arbol_binario(A);
+    if (!a_es_vacio(A))
+    {
+        N = a_raiz(A);
+        altura = altura_nario(N);
+        printf(ANSI_bMAGENTA "La altura del arbol es " ANSI_bYELLOW "%d", altura);
+    }
+    else
+    {
+        printf(ANSI_bMAGENTA "\nEl arbol esta vacio" ANSI_YELLOW);
+    }
+    printf(ANSI_RESET);
+    vaciar_buffer();
+    pausa();
+    limpiar_pantalla();
+}
+
 void main_punto10()
 {
     const int N_MIN = 10;
@@ -624,6 +646,7 @@ int main()
                     main_hermanos_nario();
                     break;
                 case 6:
+                    main_altura_nario();
                     break;
                 case 7:
                     main_nivel_nario();
