@@ -582,32 +582,16 @@ void main_punto10()
     // Rango maximo
     printf(ANSI_bMAGENTA "Ingrese el rango maximo de la serie aleatoria [20-%d]: " ANSI_YELLOW, N_MAX, A_MAX);
     scanf("%d", &max);
-    while (validador != 1 || max < 20 || max > A_MAX || max <= min || (max - min) < (nodo * 2))
-    {
-        if (max > A_MAX || max < 20)
-        {
-            printf(ANSI_RED "\t\t-------- ERROR -------- \n");
-            printf("DATO FUERA DE RANGO\n\n" ANSI_RESET);
-            pausa();
-            printf(ANSI_bBLUE "Ingrese el rango maximo de la serie aleatoria [20-%d]: " ANSI_YELLOW, A_MAX);
-        }
-        else if (max <= min)
-        {
-            printf(ANSI_RED "\t\t-------- ERROR -------- \n");
-            printf("EL MAXIMO DEBE SER MAYOR AL MINIMO\n\n" ANSI_RESET);
-            pausa();
-            printf(ANSI_bBLUE "Ingrese el rango maximo de la serie aleatoria [20-%d]: " ANSI_YELLOW, A_MAX);
-        }
-        else if ((max - min) < (nodo * 2))
-        {
-            printf(ANSI_RED "\t\t-------- ERROR -------- \n");
-            printf("LA DIFERENCIA ENTRE MINIMO Y MAXIMO DEBE SER MAYOR AL DOBLE DE NODOS DEL ARBOL\n\n" ANSI_RESET);
-            pausa();
-            printf(ANSI_bBLUE "Ingrese el rango maximo de la serie aleatoria [20-%d]: " ANSI_YELLOW, A_MAX);
-        }
-        validador = scanf("%d", &min);
-        vaciar_buffer();
-    }   
+    printf(ANSI_bMAGENTA "Ingrese el rango maximo de la serie aleatoria [%d-999.999]: " ANSI_YELLOW, (min*2));
+    printf(ANSI_bMAGENTA "Tener en cuenta que la diferencia entre el maximo y el minimo tiene que ser superior a la cantida de nodos*2");
+    validador = scanf("%d", &max);
+
+    while(validador!= 1 || (max-min) < (nodo*2) || max>999.999){
+        printf("ERROR\n");
+        printf("datos fuera de rango\nPor favor Ingrese nuevamente el rango maximo de la serie aleatoria [%d-999.999]: " ANSI_YELLOW, (min*2));
+        validador = scanf("%d", &max);
+	    vaciar_buffer();
+    }
     
     cargar_repeticiones_AVL_BB(repeticiones, nodo, min, max);
     printf(ANSI_bMAGENTA "\nPodemos concluir que el arbol AVL al estar balanceado tiende a tener una altura menor respecto del arbol binario de busqueda (BB), ya que este puede estar desiquilibrado dependiendo del orden en el que se insertaron las claves, por lo cual su altura es mayor respecto del AVL.");
