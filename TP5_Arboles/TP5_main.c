@@ -128,6 +128,7 @@ void main_buscar()
         {
             printf(ANSI_RED "\t\t-------- ERROR -------- \n");
             printf("DATO FUERA DE RANGO\n\n" ANSI_RESET);
+            vaciar_buffer();
             pausa();
             printf(ANSI_bBLUE "Ingrese el elemento a buscar [-999.999 - 999.999]: " ANSI_YELLOW);
             validador = scanf("%d", &clave);
@@ -165,6 +166,7 @@ void main_nodo_binario()
         {
             printf(ANSI_RED "\t\t-------- ERROR -------- \n");
             printf("DATO FUERA DE RANGO\n\n" ANSI_RESET);
+            vaciar_buffer();
             pausa();
             printf(ANSI_bBLUE "Ingrese la clave [-999.999 - 999.999]: " ANSI_YELLOW);
             validador = scanf("%d", &clave);
@@ -293,6 +295,7 @@ void main_padre_nario()
         {
             printf(ANSI_RED "\t\t-------- ERROR -------- \n");
             printf("DATO FUERA DE RANGO\n\n" ANSI_RESET);
+            vaciar_buffer();
             pausa();
             printf(ANSI_bBLUE "Ingrese la clave [-999.999 - 999.999]: " ANSI_YELLOW);
             validador = scanf("%d", &clave);
@@ -338,6 +341,7 @@ void main_hermanos_nario()
         {
             printf(ANSI_RED "\t\t-------- ERROR -------- \n");
             printf("DATO FUERA DE RANGO\n\n" ANSI_RESET);
+            vaciar_buffer();
             pausa();
             printf(ANSI_bBLUE "Ingrese la clave [-999.999 - 999.999]: " ANSI_YELLOW);
             validador = scanf("%d", &clave);
@@ -413,6 +417,7 @@ void main_nivel_nario()
         {
             printf(ANSI_RED "\t\t-------- ERROR -------- \n");
             printf("DATO FUERA DE RANGO\n\n" ANSI_RESET);
+            vaciar_buffer();
             pausa();
             printf(ANSI_bBLUE "Ingrese la clave [-999.999 - 999.999]: " ANSI_YELLOW);
             validador = scanf("%d", &clave);
@@ -547,6 +552,7 @@ void main_punto10()
     {
         printf(ANSI_RED "\t\t-------- ERROR -------- \n");
         printf("DATO FUERA DE RANGO\n\n" ANSI_RESET);
+        vaciar_buffer();
         pausa();
         printf(ANSI_bBLUE "Ingrese la cantidad de repeticiones que se ejecutara la carga de arboles [1-200]: " ANSI_YELLOW);
         validador = scanf("%d", &repeticiones);
@@ -560,6 +566,7 @@ void main_punto10()
     {
         printf(ANSI_RED "\t\t-------- ERROR -------- \n");
         printf("DATO FUERA DE RANGO\n\n" ANSI_RESET);
+        vaciar_buffer();
         pausa();
         printf(ANSI_bBLUE "Ingrese la cantidad de nodos a cargar en cada arbol [%d-%d]: " ANSI_YELLOW, N_MIN, N_MAX);
         validador = scanf("%d", &nodo);
@@ -573,6 +580,7 @@ void main_punto10()
     {
         printf(ANSI_RED "\t\t-------- ERROR -------- \n");
         printf("DATO FUERA DE RANGO\n\n" ANSI_RESET);
+        vaciar_buffer();
         pausa();
         printf(ANSI_bBLUE "Ingrese el rango minimo de la serie aleatoria [1-%d]: " ANSI_YELLOW, A_MAX);
         validador = scanf("%d", &min);
@@ -580,32 +588,29 @@ void main_punto10()
     }    
 
     // Rango maximo
-    printf(ANSI_bMAGENTA "Ingrese el rango maximo de la serie aleatoria [20-%d]: " ANSI_YELLOW, N_MAX, A_MAX);
-    scanf("%d", &max);
+    printf(ANSI_bMAGENTA "Ingrese el rango maximo de la serie aleatoria [20-%d]: " ANSI_YELLOW, A_MAX);
+    validador = scanf("%d", &max);
     while (validador != 1 || max < 20 || max > A_MAX || max <= min || (max - min) < (nodo * 2))
     {
         if (max > A_MAX || max < 20)
         {
             printf(ANSI_RED "\t\t-------- ERROR -------- \n");
             printf("DATO FUERA DE RANGO\n\n" ANSI_RESET);
-            pausa();
-            printf(ANSI_bBLUE "Ingrese el rango maximo de la serie aleatoria [20-%d]: " ANSI_YELLOW, A_MAX);
         }
         else if (max <= min)
         {
             printf(ANSI_RED "\t\t-------- ERROR -------- \n");
             printf("EL MAXIMO DEBE SER MAYOR AL MINIMO\n\n" ANSI_RESET);
-            pausa();
-            printf(ANSI_bBLUE "Ingrese el rango maximo de la serie aleatoria [20-%d]: " ANSI_YELLOW, A_MAX);
         }
         else if ((max - min) < (nodo * 2))
         {
             printf(ANSI_RED "\t\t-------- ERROR -------- \n");
             printf("LA DIFERENCIA ENTRE MINIMO Y MAXIMO DEBE SER MAYOR AL DOBLE DE NODOS DEL ARBOL\n\n" ANSI_RESET);
-            pausa();
-            printf(ANSI_bBLUE "Ingrese el rango maximo de la serie aleatoria [20-%d]: " ANSI_YELLOW, A_MAX);
         }
-        validador = scanf("%d", &min);
+        vaciar_buffer();
+        pausa();
+        printf(ANSI_bBLUE "Ingrese el rango maximo de la serie aleatoria [20-%d]: " ANSI_YELLOW, A_MAX);
+        validador = scanf("%d", &max);
         vaciar_buffer();
     }   
     
