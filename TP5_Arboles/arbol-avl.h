@@ -7,7 +7,8 @@
 #include <string.h>
 #include "nodo.h"
 
-struct ArbolAVLRep {
+struct ArbolAVLRep
+{
     NodoArbol raiz;
     int cantidad_elementos;
 };

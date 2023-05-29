@@ -7,8 +7,11 @@
             "args": [
                 "-fdiagnostics-color=always",
                 "-g",
-                "${file}",
+                //"${file}",
+                "${fileDirname}\\TP5_main.c",
                 "${fileDirname}\\arbol-binario.c",
+                "${fileDirname}\\arbol-binario-busqueda.c",
+                "${fileDirname}\\arbol-avl.c",
                 "${fileDirname}\\listas_apuntadores.c",
                 "${fileDirname}\\colas_apuntadores.c",
                 "${fileDirname}\\nodo.c",

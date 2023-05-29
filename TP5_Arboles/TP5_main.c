@@ -204,7 +204,7 @@ void main_nodo_binario()
             printf(ANSI_bMAGENTA "\nHermano: " ANSI_YELLOW);
             NHermano = nodo_hermano(A, clave);
             if (NHermano == NULL)
-                printf(ANSI_bMAGENTA "Hhermano nulo");
+                printf(ANSI_bMAGENTA "Hermano nulo");
             else
             {
                 XHermano = n_recuperar(NHermano);
@@ -370,24 +370,26 @@ void main_hermanos_nario()
 }
 
 /// @brief PUNTO 7:  Determinar si dos árboles binarios son equivalentes.
-void main_equivalentes(){
+void main_equivalentes()
+{
     ArbolBinario A1;
     ArbolBinario A2;
     int equivalentes;
     A1 = a_crear();
     A2 = a_crear();
-    printf(ANSI_bMAGENTA"Carga del primer arbol: \n"ANSI_RESET);
+    printf(ANSI_bMAGENTA "Carga del primer arbol: \n" ANSI_RESET);
     cargar_arbol_binario(A1);
-    printf(ANSI_bMAGENTA"Carga del segundo arbol: \n"ANSI_RESET);
+    printf(ANSI_bMAGENTA "Carga del segundo arbol: \n" ANSI_RESET);
     cargar_arbol_binario(A2);
     equivalentes = arbol_equivalentes(A1, A2);
     vaciar_buffer();
     if (equivalentes == 1)
     {
-        printf(ANSI_bGREEN"Los arboles son equivalentes \n");
+        printf(ANSI_bGREEN "Los arboles son equivalentes \n");
     }
-    else{
-        printf(ANSI_bRED"Los arboles no son equivalentes\n");
+    else
+    {
+        printf(ANSI_bRED "Los arboles no son equivalentes\n");
     }
     printf(ANSI_RESET);
     vaciar_buffer();
@@ -419,7 +421,7 @@ void main_nivel_nario()
         if (existe_nodo(A, clave))
         {
             nivelNodo = nivel_nario(A, clave);
-            printf(ANSI_bMAGENTA "\nNivel: %i", nivelNodo);
+            printf(ANSI_bMAGENTA "\nNivel: " ANSI_YELLOW "%i", nivelNodo);
         }
         else
         {
@@ -463,16 +465,19 @@ void main_nodos_internos_nario()
     limpiar_pantalla();
 }
 
-void main_hojas_nivel_nario(){
+void main_hojas_nivel_nario()
+{
     ArbolBinario A;
     A = a_crear();
     bool res;
     cargar_arbol_binario(A);
     if (!a_es_vacio(A))
     {
-       res = nivel_hojas_nario(A);
-       if (res) printf(ANSI_bGREEN "\nTodas las hojas estan al mismo nivel" ANSI_YELLOW);
-       else printf(ANSI_bRED "\nLas hojas no estan al mismo nivel" ANSI_YELLOW);
+        res = nivel_hojas_nario(A);
+        if (res)
+            printf(ANSI_bGREEN "\nTodas las hojas estan al mismo nivel" ANSI_YELLOW);
+        else
+            printf(ANSI_bRED "\nLas hojas no estan al mismo nivel" ANSI_YELLOW);
     }
     else
     {
@@ -484,23 +489,50 @@ void main_hojas_nivel_nario(){
     limpiar_pantalla();
 }
 
-void main_anchura_nario(){
+void main_anchura_nario()
+{
     ArbolBinario A;
     Lista L;
     A = a_crear();
     cargar_arbol_binario(A);
     if (!a_es_vacio(A))
     {
-       L = l_crear();
-       L = anchura_nario(A);
-       printf(ANSI_bMAGENTA "\nRecorrido en anchura del arbol n-ario: \n");
-       l_mostrarLista(L);
+        L = l_crear();
+        L = anchura_nario(A);
+        printf(ANSI_bMAGENTA "\nRecorrido en anchura del arbol n-ario: \n");
+        l_mostrarLista(L);
     }
     else
     {
         printf(ANSI_bMAGENTA "\nEl arbol esta vacio" ANSI_YELLOW);
     }
     printf(ANSI_RESET);
+    vaciar_buffer();
+    pausa();
+    limpiar_pantalla();
+}
+
+void main_punto10()
+{
+    const int N_MIN = 10;
+    const int N_MAX = 2000;
+    const int A_MAX = 10000;
+    int min, max, repeticiones, nodo;
+
+    // Validar entre 1 y 200
+    printf(ANSI_bMAGENTA "Ingrese la cantidad de repeticiones que se ejecutara la carga de arboles [1-200]: " ANSI_YELLOW);
+    scanf("%d", &repeticiones);
+    // Validar entre 10 y 2000
+    printf(ANSI_bMAGENTA "Ingrese la cantidad de nodos a cargar en el arbol [%d-%d]: " ANSI_YELLOW, N_MIN, N_MAX);
+    scanf("%d", &nodo);
+    // Validar entre 1 y 10000
+    printf(ANSI_bMAGENTA "Ingrese el rango minimo de la serie aleatoria [1-%d]: " ANSI_YELLOW, A_MAX);
+    scanf("%d", &min);
+    // Validar que el maximo, sea [rango maximo - rango minimo] > "nodo" * 2
+    printf(ANSI_bMAGENTA "Ingrese el rango maximo de la serie aleatoria [%d-%d]: " ANSI_YELLOW, N_MAX, A_MAX);
+    scanf("%d", &max);
+    cargar_repeticiones_AVL_BB(repeticiones, nodo, min, max);
+    printf(ANSI_bMAGENTA "\nPodemos concluir que el arbol AVL al estar balanceado tiende a tener una altura menor respecto del arbol binario de busqueda (BB), ya que este puede estar desiquilibrado dependiendo del orden en el que se insertaron las claves, por lo cual su altura es mayor respecto del AVL.");
     vaciar_buffer();
     pausa();
     limpiar_pantalla();
@@ -614,6 +646,7 @@ int main()
         case 9:
             break;
         case 10:
+            main_punto10();
             break;
         case 0:
             salir = true;

@@ -65,7 +65,7 @@ NodoArbol padre_nario(ArbolBinario A, int clave);
 
 Lista hermanos_nario(ArbolBinario A, int clave);
 
-void comparar_equivalencia(NodoArbol Q1, NodoArbol Q2, int * equivalentes);
+void comparar_equivalencia(NodoArbol Q1, NodoArbol Q2, int *equivalentes);
 
 int arbol_equivalentes(ArbolBinario A1, ArbolBinario A2);
 
@@ -78,5 +78,11 @@ Lista nodos_nivel(ArbolBinario A, int clave);
 bool nivel_hojas_nario(ArbolBinario A);
 
 Lista anchura_nario(ArbolBinario A);
+
+void cargar_repeticiones_AVL_BB(int repeticiones, int nodos, int min, int max);
+
+void free_avl(NodoArbol Q);
+
+void free_abb(NodoArbol Q);
 
 #endif // TP5_ARBOLES_H

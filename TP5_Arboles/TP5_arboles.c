@@ -13,6 +13,7 @@
 #include "arbol-binario-busqueda.h"
 #include "arbol-avl.h"
 #include <time.h>
+// #include <sys/time.h>
 
 /// @brief Vacía el buffer de entrada.
 void vaciar_buffer()
@@ -398,6 +399,10 @@ bool existe_nodo(ArbolBinario A, int clave)
 /// @return Retorna el nodo hermano
 NodoArbol nodo_hermano(ArbolBinario A, int clave)
 {
+    if (n_recuperar(a_raiz(A))->clave == clave)
+    {
+        return NULL;
+    }
     NodoArbol N = nodo_padre(A, clave);
     if (n_recuperar(n_hijoizquierdo(N))->clave == clave)
         return n_hijoderecho(N);
@@ -468,19 +473,19 @@ Lista nodos_nivel(ArbolBinario A, int clave)
 /// @param Q Nodo actual
 /// @param C Cantidad de pasos actual
 /// @param H Cantidad de pasos en la hoja anterior
-void altura(NodoArbol Q, int C, int H)
+void altura(NodoArbol Q, int C, int *H)
 {
     if (a_es_rama_nula(Q))
     {
-        if (C > H) // cada vez que llega a la hoja pregunta si la cantidad de pasos fue mayor que la de la hoja anterior
+        if (C > *H) // cada vez que llega a la hoja pregunta si la cantidad de pasos fue mayor que la de la hoja anterior
         {
-            H = C;
+            *H = C;
         }
-        else
-        {
-            altura(n_hijoizquierdo(Q), C + 1, H);
-            altura(n_hijoderecho(Q), C + 1, H);
-        }
+    }
+    else
+    {
+        altura(n_hijoizquierdo(Q), C + 1, H);
+        altura(n_hijoderecho(Q), C + 1, H);
     }
 }
 
@@ -490,27 +495,9 @@ void altura(NodoArbol Q, int C, int H)
 int nodo_altura(NodoArbol Q)
 {
     int H = 0;
-    altura(Q, 0, H);
+    altura(Q, 0, &H);
     return H;
 }
-
-/* void nivel_ger(NodoArbol Q, NodoArbol P, int C)
-{
-    if (!a_es_rama_nula(Q))
-    {
-        if (Q == P)
-        {
-            return C;
-        }
-        nivel_ger(n_hijoizquierdo(Q), P, C + 1);
-        nivel_ger(n_hijoderecho(Q), P, C + 1);
-    }
-}
-
-int nodo_nivel_ger(NodoArbol Q)
-{
-    nivel_ger(Q, Q, 0);
-} */
 
 /// @brief Funcion que recorre el arbol n-ario y cuenta la cantidad de hojas
 /// @param N nodo actual
@@ -828,58 +815,45 @@ Lista anchura_nario(ArbolBinario A)
     return L;
 }
 
-/*Función que genera y devuelve un arreglo de número aleatorios*/
+// -------------------------------------------------- PUNTO 10 --------------------------------------------------
 
 /// @brief Función que genera numeros aleatorios dentro de un rango
 /// @param min Rango minimo
 /// @param max Rango maximo
 /// @return Numero aleatorio generado
-int *getRandom(int min, int max)
+int getRandom(int min, int max)
 {
-    int *n_aleatorio;
-    srand((unsigned)time(NULL)); // Establecer semilla
+    int n_aleatorio;
     n_aleatorio = min + (rand() % (max - min + 1));
     return n_aleatorio;
 }
 
-/// @brief Función que carga un (sub)árbol en preorden a partir del nodo padre N recursivamente
-/// @param A Arbol binario donde se cargara el nuevo nodo
-/// @param N Nodo a cargar
-/// @param sa El entero 'sa' indica cómo se enlazará el nuevo valor:
-/// • 0: El nuevo nodo (con su TE) se asignará a la raíz de A. En este caso N no es utilizado.
-/// • -1: El nuevo nodo (con su TE) se enlazará como hijo izquierdo de N.
-/// • 1: El nuevo nodo (con su TE) se enlazará como hijo derecho de N.
-void Cargar_SubArbol_AVL_ABB(ArbolBinarioBusqueda A_BB, ArbolAVL A_AVL, int min, int max)
+/*int getRandomMejorado(int min, int max)
+{
+    int n_aleatorio;
+    struct timeval tv;
+    gettimeofday(&tv, NULL);
+    srand(tv.tv_sec * 1000000 + tv.tv_usec);
+
+    n_aleatorio = rand()% max + min;
+ return n_aleatorio;
+}*/
+
+/// @brief Función que carga un (sub)árbol AVL y BB en preorden de forma aleatoria con las mismos nodos en ambos arboles
+/// @param A_BB Arbol Binario de Busqueda a cagar la serie aleatoria
+/// @param A_AVL Arbol AVL a cargar la serie aleatoria
+/// @param min Valor minimo del rango aleatorio
+/// @param max Valor maximo del rango aleatorio
+void cargar_nodos_AVL_ABB(ArbolBinarioBusqueda A_BB, ArbolAVL A_AVL, int min, int max)
 {
     TipoElemento X;
-    NodoArbol N1;
-    int n, *n_aleatorio;
-    bool b;
-
-    printf(ANSI_bMAGENTA "Ingrese el rango minimo de la serie aleatoria: " ANSI_YELLOW);
-    scanf("%d", min);
-    printf(ANSI_bMAGENTA "Ingrese el rango maximo de la serie aleatoria: " ANSI_YELLOW);
-    scanf("%d", max);
-
+    int n_aleatorio;
     if (!abb_es_lleno(A_BB) && !avl_es_lleno(A_AVL))
     {
         n_aleatorio = getRandom(min, max);
-
-        X = te_crear(*n_aleatorio);
+        X = te_crear(n_aleatorio);
         avl_insertar(A_AVL, X);
         abb_insertar(A_BB, X);
-    }
-}
-
-void cargar_repeticiones(int repeticiones, int min, int max)
-{
-
-    for (int i = 1; i <= repeticiones; i++)
-    {
-        ArbolAVL A_AVL = avl_crear();
-        ArbolBinarioBusqueda A_BB = abb_crear();
-        Cargar_SubArbol_AVL_ABB(A_BB, A_AVL, min, max);
-
     }
 }
 
@@ -887,19 +861,19 @@ void cargar_repeticiones(int repeticiones, int min, int max)
 /// @param Q Nodo actual
 /// @param C Cantidad de pasos actual
 /// @param H Cantidad de pasos en la hoja anterior
-void altura_avl_aux(NodoArbol Q, int C, int H)
+void altura_avl_aux(NodoArbol Q, int C, int *H)
 {
     if (avl_es_rama_nula(Q))
     {
-        if (C > H) // cada vez que llega a la hoja pregunta si la cantidad de pasos fue mayor que la de la hoja anterior
+        if (C > *H) // cada vez que llega a la hoja pregunta si la cantidad de pasos fue mayor que la de la hoja anterior
         {
-            H = C;
+            *H = C;
         }
-        else
-        {
-            altura_avl_aux(n_hijoizquierdo(Q), C + 1, H);
-            altura_avl_aux(n_hijoderecho(Q), C + 1, H);
-        }
+    }
+    else
+    {
+        altura_avl_aux(n_hijoizquierdo(Q), C + 1, H);
+        altura_avl_aux(n_hijoderecho(Q), C + 1, H);
     }
 }
 
@@ -909,7 +883,7 @@ void altura_avl_aux(NodoArbol Q, int C, int H)
 int altura_avl(ArbolAVL A_AVL)
 {
     int H = 0;
-    altura_avl_aux(avl_raiz(A_AVL), 0, H);
+    altura_avl_aux(avl_raiz(A_AVL), 0, &H);
     return H;
 }
 
@@ -917,28 +891,130 @@ int altura_avl(ArbolAVL A_AVL)
 /// @param Q Nodo actual
 /// @param C Cantidad de pasos actual
 /// @param H Cantidad de pasos en la hoja anterior
-void altura_bb_aux(NodoArbol Q, int C, int H)
+void altura_bb_aux(NodoArbol Q, int C, int *H)
 {
     if (abb_es_rama_nula(Q))
     {
-        if (C > H) // cada vez que llega a la hoja pregunta si la cantidad de pasos fue mayor que la de la hoja anterior
+        if (C > *H) // cada vez que llega a la hoja pregunta si la cantidad de pasos fue mayor que la de la hoja anterior
         {
-            H = C;
+            *H = C;
         }
-        else
-        {
-            altura_bb_aux(n_hijoizquierdo(Q), C + 1, H);
-            altura_bb_aux(n_hijoderecho(Q), C + 1, H);
-        }
+    }
+    else
+    {
+        altura_bb_aux(n_hijoizquierdo(Q), C + 1, H);
+        altura_bb_aux(n_hijoderecho(Q), C + 1, H);
     }
 }
 
 /// @brief Calcula la altura del arbol
-/// @param A_AVL Arbol AVL cargado
+/// @param A_BB Arbol BB cargado
 /// @return Altura del arbol
 int altura_bb(ArbolBinarioBusqueda A_BB)
 {
     int H = 0;
-    altura_bb_aux(abb_raiz(A_BB), 0, H);
+    altura_bb_aux(abb_raiz(A_BB), 0, &H);
     return H;
+}
+
+/// @brief Funcion que repite 'repeticiones' veces el proceso de carga del arbol AVL y BB
+/// @param repeticiones Cantidad de repeticiones
+/// @param min Valor minimo del rango aleatorio
+/// @param max Valor maximo del rango aleatorio
+void cargar_repeticiones_AVL_BB(int repeticiones, int nodos, int min, int max)
+{
+    int altura_minima_avl, altura_maxima_avl, altura_suma_avl = 0, altura_actual_avl;
+    int altura_minima_bb, altura_maxima_bb, altura_suma_bb = 0, altura_actual_bb;
+    float altura_media_avl, altura_media_bb;
+    srand(time(NULL)); // Establecer semilla
+    // Se ejecuta el proceso de carga de arboles 1 vez, para poder guardar los valores minimos y maximos iniciales
+
+    ArbolAVL A_AVL = avl_crear();
+    ArbolBinarioBusqueda A_BB = abb_crear();
+    for (int i = 1; i <= nodos; i++) // Repite n veces el proceso de carga de los nodos
+    {
+        cargar_nodos_AVL_ABB(A_BB, A_AVL, min, max);
+    }
+    // Estadisticas iniciales del arbol AVL
+    altura_actual_avl = altura_avl(A_AVL);
+    altura_minima_avl = altura_actual_avl;
+    altura_maxima_avl = altura_actual_avl;
+    altura_suma_avl += altura_actual_avl;
+    // Estadisticas iniciales del arbol BB
+    altura_actual_bb = altura_bb(A_BB);
+    altura_minima_bb = altura_actual_bb;
+    altura_maxima_bb = altura_actual_bb;
+    altura_suma_bb += altura_actual_bb;
+    free_avl(avl_raiz(A_AVL));
+    free_abb(abb_raiz(A_BB));
+
+    // Se ejecuta el proceso de carga de arboles n-1
+    for (int i = 1; i < repeticiones; i++)
+    {
+        ArbolAVL A_AVL = avl_crear();
+        ArbolBinarioBusqueda A_BB = abb_crear();
+        for (int i = 1; i <= nodos; i++) // Repite n veces el proceso de carga de los nodos
+        {
+            cargar_nodos_AVL_ABB(A_BB, A_AVL, min, max);
+        }
+        // Estadisticas del arbol AVL
+        altura_actual_avl = altura_avl(A_AVL);
+        if (altura_minima_avl > altura_actual_avl)
+        {
+            altura_minima_avl = altura_actual_avl;
+        }
+        if (altura_maxima_avl < altura_actual_avl)
+        {
+            altura_maxima_avl = altura_actual_avl;
+        }
+        altura_suma_avl += altura_actual_avl;
+        // Estadisticas del arbol BB
+        altura_actual_bb = altura_bb(A_BB);
+        if (altura_minima_bb > altura_actual_bb)
+        {
+            altura_minima_bb = altura_actual_bb;
+        }
+        if (altura_maxima_bb < altura_actual_bb)
+        {
+            altura_maxima_bb = altura_actual_bb;
+        }
+        altura_suma_bb += altura_actual_bb;
+        free_avl(avl_raiz(A_AVL));
+        free_abb(abb_raiz(A_BB));
+    }
+    altura_media_avl = altura_suma_avl / repeticiones;
+    altura_media_bb = altura_suma_bb / repeticiones;
+    printf(ANSI_GREEN "\nSe cargaron los arboles AVL y BB %d veces, las estadisticas son:\n", repeticiones);
+    printf(ANSI_GREEN "La altura minima del arbol AVL es: " ANSI_YELLOW "%d\n", altura_minima_avl);
+    printf(ANSI_GREEN "La altura maxima del arbol AVL es: " ANSI_YELLOW "%d\n", altura_maxima_avl);
+    printf(ANSI_GREEN "La altura media del arbol AVL es: " ANSI_YELLOW "%.2f\n\n", altura_media_avl);
+    printf(ANSI_GREEN "La altura minima del arbol BB es: " ANSI_YELLOW "%d\n", altura_minima_bb);
+    printf(ANSI_GREEN "La altura maxima del arbol BB es: " ANSI_YELLOW "%d\n", altura_maxima_bb);
+    printf(ANSI_GREEN "La altura media del arbol BB es: " ANSI_YELLOW "%.2f\n", altura_media_bb);
+}
+
+void free_avl(NodoArbol Q)
+{
+    if (avl_es_rama_nula(Q))
+    {
+        return;
+    }
+
+    free_avl(n_hijoizquierdo(Q));
+    free_avl(n_hijoderecho(Q));
+    free(Q);
+    Q = NULL;
+}
+
+void free_abb(NodoArbol Q)
+{
+    if (abb_es_rama_nula(Q))
+    {
+        return;
+    }
+
+    free_abb(n_hijoizquierdo(Q));
+    free_abb(n_hijoderecho(Q));
+    free(Q);
+    Q = NULL;
 }
