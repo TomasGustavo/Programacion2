@@ -45,24 +45,37 @@ bool ingresoEntero(int *n)
 {
     char s[10];
     bool resultado = true;
-    *n = 0;
-    printf(ANSI_bMAGENTA "Ingrese una clave numérica o '.' para nulo: " ANSI_YELLOW);
-    scanf("%s", s);
-    vaciar_buffer();
-    if (s[0] == '.')
+    bool esNumero;
+    int i;
+    do
     {
-        resultado = false;
-    }
-    else
-    {
-        for (int i = 0; s[i] != '\0'; i++)
+        i = 0;
+        *n = 0;
+        esNumero = true;
+        printf(ANSI_bMAGENTA "Ingrese una clave numérica o '.' para nulo: " ANSI_YELLOW);
+        scanf("%s", s);
+        vaciar_buffer();
+        if (s[0] == '.')
         {
-            if ((s[i] >= '0') && (s[i] <= '9'))
+            resultado = false;
+        }
+        else
+        {
+            while ((s[i] != '\0') && esNumero)
             {
-                *n = *n * 10 + (s[i] - 48);
+                if ((s[i] >= '0') && (s[i] <= '9'))
+                {
+                    *n = *n * 10 + (s[i] - 48);
+                }
+                else
+                {
+                    esNumero = false;
+                    printf(ANSI_RED "DATO INVALIDO\n");
+                }
+                i++;
             }
         }
-    }
+    } while (!esNumero);
     return resultado;
 }
 
@@ -175,10 +188,10 @@ void buscar_hojas(NodoArbol Q, Lista *L)
         if (a_es_rama_nula(n_hijoizquierdo(Q)) && a_es_rama_nula(n_hijoderecho(Q)))
         {
             x = n_recuperar(Q);
-            l_agregar(*L,x);
+            l_agregar(*L, x);
         }
-        buscar_hojas(n_hijoizquierdo(Q),L);
-        buscar_hojas(n_hijoderecho(Q),L);
+        buscar_hojas(n_hijoizquierdo(Q), L);
+        buscar_hojas(n_hijoderecho(Q), L);
     }
 }
 
@@ -671,8 +684,10 @@ void comparar_equivalencia(NodoArbol Q1, NodoArbol Q2, int *equivalentes)
 /// @return Retorna una bandera que indica si los arboles son equivalentes
 int arbol_equivalentes(ArbolBinario A1, ArbolBinario A2)
 {
-    if (a_es_vacio(A1) && a_es_vacio(A2)) return 1;
-    if ((a_es_vacio(A1) && !a_es_vacio(A2)) || (!a_es_vacio(A1) && a_es_vacio(A2))) return 0;
+    if (a_es_vacio(A1) && a_es_vacio(A2))
+        return 1;
+    if ((a_es_vacio(A1) && !a_es_vacio(A2)) || (!a_es_vacio(A1) && a_es_vacio(A2)))
+        return 0;
     int equivalentes = 1;
     comparar_equivalencia(a_raiz(A1), a_raiz(A2), &equivalentes);
     return equivalentes;
@@ -888,7 +903,7 @@ void cargar_nodos_AVL_ABB(ArbolBinarioBusqueda A_BB, ArbolAVL A_AVL, int min, in
     if (!abb_es_lleno(A_BB) && !avl_es_lleno(A_AVL))
     {
         n_aleatorio = getRandom(min, max);
-        while (avl_buscar(A_AVL,n_aleatorio) != NULL)
+        while (avl_buscar(A_AVL, n_aleatorio) != NULL)
         {
             n_aleatorio = getRandom(min, max);
         }
