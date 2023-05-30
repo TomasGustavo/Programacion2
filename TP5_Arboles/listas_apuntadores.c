@@ -181,7 +181,7 @@ TipoElemento l_buscar(Lista lista, int clave)
 void l_mostrarLista(Lista lista)
 {
     struct Nodo *temp2 = lista->inicio;
-    printf("Contenido de la lista: ");
+    //printf("Contenido de la lista: ");
     while (temp2 != NULL)
     {
         printf("%d ", temp2->datos->clave);

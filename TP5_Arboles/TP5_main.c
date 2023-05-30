@@ -81,9 +81,17 @@ void menu_punto4()
 void main_hojas()
 {
     ArbolBinario A;
+    Lista L;
     A = a_crear();
     cargar_arbol_binario(A);
-    hojas(A);
+    if(!a_es_vacio(A))
+    {
+        L = hojas(A);
+        printf(ANSI_bMAGENTA "\nLas hojas son: " ANSI_bYELLOW);
+        l_mostrarLista(L);
+    } 
+    else printf(ANSI_bMAGENTA "\nEl arbol esta vacio" ANSI_YELLOW);
+    
     vaciar_buffer();
     pausa();
     limpiar_pantalla();
@@ -97,14 +105,19 @@ void main_interior()
     A = a_crear();
     L = l_crear();
     cargar_arbol_binario(A);
-    L = nodos_interiores(A);
-    vaciar_buffer();
-    printf(ANSI_bGREEN "Nodos interiores: \n");
-    l_mostrarLista(L);
-    if (l_es_vacia(L))
+    if (!a_es_vacio(A))
     {
-        printf("La lista esta vacia");
+        L = nodos_interiores(A);
+        vaciar_buffer();
+        if (l_es_vacia(L)){
+            printf("No hay nodos interiores");
+        } else {
+            printf(ANSI_bGREEN "Nodos interiores: \n");
+            l_mostrarLista(L);
+        }      
     }
+    else printf(ANSI_bMAGENTA "\nEl arbol esta vacio" ANSI_YELLOW);
+
     printf(ANSI_RESET);
     vaciar_buffer();
     pausa();
@@ -146,7 +159,7 @@ void main_buscar()
         vaciar_buffer();
         pausa();
         limpiar_pantalla();
-    }
+    } else printf(ANSI_bMAGENTA "\nEl arbol esta vacio" ANSI_YELLOW);
 }
 
 /// @brief Punto 3

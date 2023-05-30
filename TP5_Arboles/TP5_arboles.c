@@ -167,7 +167,7 @@ void mostrar_post_orden(NodoArbol N)
 
 /// @brief Recorre el arbol binario en busca de los nodos hojas
 /// @param Q Nodo del arbol (recibe la raíz de arbol)
-void buscar_hojas(NodoArbol Q)
+void buscar_hojas(NodoArbol Q, Lista *L)
 {
     TipoElemento x;
     if (!a_es_rama_nula(Q))
@@ -175,19 +175,20 @@ void buscar_hojas(NodoArbol Q)
         if (a_es_rama_nula(n_hijoizquierdo(Q)) && a_es_rama_nula(n_hijoderecho(Q)))
         {
             x = n_recuperar(Q);
-            printf("%d ", x->clave);
+            l_agregar(*L,x);
         }
-        buscar_hojas(n_hijoizquierdo(Q));
-        buscar_hojas(n_hijoderecho(Q));
+        buscar_hojas(n_hijoizquierdo(Q),L);
+        buscar_hojas(n_hijoderecho(Q),L);
     }
 }
 
 /// @brief Muestra los nodos hojas de un arbol
 /// @param A Arbol binario cargado de enteros
-void hojas(ArbolBinario A)
+Lista hojas(ArbolBinario A)
 {
-    printf(ANSI_GREEN "Las hojas son: ");
-    buscar_hojas(a_raiz(A));
+    Lista L = l_crear();
+    buscar_hojas(a_raiz(A), &L);
+    return L;
 }
 
 /// @brief Recorre el arbol binario en busca de los nodos interiores
@@ -670,6 +671,8 @@ void comparar_equivalencia(NodoArbol Q1, NodoArbol Q2, int *equivalentes)
 /// @return Retorna una bandera que indica si los arboles son equivalentes
 int arbol_equivalentes(ArbolBinario A1, ArbolBinario A2)
 {
+    if (a_es_vacio(A1) && a_es_vacio(A2)) return 1;
+    if ((a_es_vacio(A1) && !a_es_vacio(A2)) || (!a_es_vacio(A1) && a_es_vacio(A2))) return 0;
     int equivalentes = 1;
     comparar_equivalencia(a_raiz(A1), a_raiz(A2), &equivalentes);
     return equivalentes;
@@ -885,6 +888,10 @@ void cargar_nodos_AVL_ABB(ArbolBinarioBusqueda A_BB, ArbolAVL A_AVL, int min, in
     if (!abb_es_lleno(A_BB) && !avl_es_lleno(A_AVL))
     {
         n_aleatorio = getRandom(min, max);
+        while (avl_buscar(A_AVL,n_aleatorio) != NULL)
+        {
+            n_aleatorio = getRandom(min, max);
+        }
         X = te_crear(n_aleatorio);
         avl_insertar(A_AVL, X);
         abb_insertar(A_BB, X);

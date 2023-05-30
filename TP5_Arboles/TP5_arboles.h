@@ -39,7 +39,7 @@ void mostrar_in_orden(NodoArbol N);
 
 void mostrar_post_orden(NodoArbol N);
 
-void hojas(ArbolBinario A);
+Lista hojas(ArbolBinario A);
 
 Lista nodos_interiores(ArbolBinario A);
 
