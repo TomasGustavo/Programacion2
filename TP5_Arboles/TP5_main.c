@@ -308,7 +308,7 @@ void main_padre_nario()
     NodoArbol N;
     TipoElemento X;
     A = a_crear();
-    cargar_arbol_binario(A);
+    cargar_arbol_binario_sin_repeticiones(A);
     if (!a_es_vacio(A))
     {
         printf(ANSI_bMAGENTA "Ingrese la clave [-999.999 - 999.999]: " ANSI_YELLOW);
@@ -354,7 +354,7 @@ void main_hermanos_nario()
     int validador, clave;
     Lista L = l_crear();
     A = a_crear();
-    cargar_arbol_binario(A);
+    cargar_arbol_binario_sin_repeticiones(A);
     if (!a_es_vacio(A))
     {
         printf(ANSI_bMAGENTA "Ingrese la clave [-999.999 - 999.999]: " ANSI_YELLOW);
@@ -636,7 +636,7 @@ void main_punto9()
     ArbolBinario A = a_crear();
     ArbolAVL A_AVL = avl_crear();
     int altura_AB, altura_AVL;
-    cargar_arbol_binario(A);
+    cargar_arbol_binario_sin_repeticiones(A);
 
     if (!a_es_vacio(A))
     {
