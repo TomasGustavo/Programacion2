@@ -200,7 +200,7 @@ void main_nodo_binario()
             // PUNTO 3A: Indicar el nombre del nodo padre.
             N = nodo_padre(A, clave);
             X = n_recuperar(N);
-            if (N == NULL)
+            if (a_es_rama_nula(N))
                 printf(ANSI_bMAGENTA "\nLa clave pertenece a la raíz y no tiene padre");
             else
                 printf(ANSI_bMAGENTA "\nNodo padre: %i", X->clave);
@@ -210,14 +210,14 @@ void main_nodo_binario()
             HI = n_hijoizquierdo(N1);
             HD = n_hijoderecho(N1);
             printf(ANSI_bMAGENTA "\nHijos: ");
-            if (HI != NULL)
+            if (!a_es_rama_nula(HI))
             {
                 XI = n_recuperar(HI);
                 printf(ANSI_bMAGENTA "%i (Hijo izquierdo) ", XI->clave);
             }
             else
                 printf(ANSI_bMAGENTA "Hijo izquierdo nulo ");
-            if (HD != NULL)
+            if (!a_es_rama_nula(HI))
             {
                 XD = n_recuperar(HD);
                 printf(ANSI_bMAGENTA "%i (Hijo derecho) ", XD->clave);
@@ -228,7 +228,7 @@ void main_nodo_binario()
             // PUNTO 3C: Listar el hermano
             printf(ANSI_bMAGENTA "\nHermano: " ANSI_YELLOW);
             NHermano = nodo_hermano(A, clave);
-            if (NHermano == NULL)
+            if (a_es_rama_nula(NHermano))
                 printf(ANSI_bMAGENTA "Hermano nulo");
             else
             {
@@ -328,7 +328,7 @@ void main_padre_nario()
         {
             N = padre_nario(A, clave);
             X = n_recuperar(N);
-            if (N == NULL)
+            if (a_es_rama_nula(N))
                 printf(ANSI_bMAGENTA "\nLa clave pertenece a la raíz y no tiene padre");
             else
                 printf(ANSI_bMAGENTA "\nNodo padre: %i", X->clave);
