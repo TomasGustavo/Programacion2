@@ -172,7 +172,7 @@ void cargar_arbol_binario_sin_repeticiones(ArbolBinario A)
 void mostrar_pre_orden(NodoArbol N)
 {
     TipoElemento x;
-    if (N == NULL)
+    if (a_es_rama_nula(N))
     {
         printf(".");
     }
@@ -190,7 +190,7 @@ void mostrar_pre_orden(NodoArbol N)
 void mostrar_in_orden(NodoArbol N)
 {
     TipoElemento x;
-    if (N == NULL)
+    if (a_es_rama_nula(N))
     {
         printf(".");
     }
@@ -208,7 +208,7 @@ void mostrar_in_orden(NodoArbol N)
 void mostrar_post_orden(NodoArbol N)
 {
     TipoElemento x;
-    if (N == NULL)
+    if (a_es_rama_nula(N))
     {
         printf(".");
     }
@@ -256,14 +256,14 @@ Lista hojas(ArbolBinario A)
 void buscar_nodos(NodoArbol Q, Lista L, bool raiz)
 {
     TipoElemento X;
-    if (Q == NULL)
+    if (a_es_rama_nula(Q))
     {
     }
     else
     {
         if (raiz == false)
         {
-            if (n_hijoizquierdo(Q) != NULL || n_hijoderecho(Q) != NULL)
+            if (!a_es_rama_nula(n_hijoizquierdo(Q)) || !es_rama_nula(n_hijoderecho(Q)))
             {
                 X = n_recuperar(Q);
                 l_agregar(L, X);
@@ -315,7 +315,7 @@ void l_mostrarLista_valor(Lista L)
 void buscar_ocurrencias(NodoArbol Q, Lista lista, int elemento)
 {
     TipoElemento X;
-    if (Q == NULL)
+    if (a_es_rama_nula(Q))
     {
     }
     else
@@ -447,7 +447,7 @@ bool existe_nodo(ArbolBinario A, int clave)
     NodoArbol R;
     bool resultado = false;
     R = a_raiz(A);
-    if (!(n_recuperar(R) == NULL))
+    if (!(a_es_rama_nula(n_recuperar(R))))
     {
         if (n_recuperar(R)->clave == clave)
             return true;
@@ -489,7 +489,7 @@ NodoArbol nodo_hermano(ArbolBinario A, int clave)
 void nivel_aux(NodoArbol actual, int clave, int n, int *resultado)
 {
     TipoElemento X = te_crear(0);
-    if (actual != NULL)
+    if (!a_es_rama_nula(actual))
     {
         X = n_recuperar(actual);
         if (X->clave == clave)
@@ -708,14 +708,14 @@ void comparar_equivalencia(NodoArbol Q1, NodoArbol Q2, int *equivalentes)
 {
     TipoElemento X1;
     TipoElemento X2;
-    if (Q1 == NULL && Q2 == NULL)
+    if (a_es_rama_nula(Q1) && a_es_rama_nula(Q2))
     {
     }
     else
     {
         X1 = n_recuperar(Q1);
         X2 = n_recuperar(Q2);
-        if (Q1 == NULL || Q2 == NULL)
+        if (a_es_rama_nula(Q1) || a_es_rama_nula(Q2))
         {
             *equivalentes = 0;
         }
@@ -754,7 +754,7 @@ int arbol_equivalentes(ArbolBinario A1, ArbolBinario A2)
 void nivel_nario_aux(NodoArbol actual, int clave, int n, int *resultado)
 {
     TipoElemento X = te_crear(0);
-    if (actual != NULL)
+    if (!a_es_rama_nula(actual))
     {
         X = n_recuperar(actual);
         if (X->clave == clave)
@@ -955,7 +955,7 @@ void cargar_nodos_AVL_ABB(ArbolBinarioBusqueda A_BB, ArbolAVL A_AVL, int min, in
     if (!abb_es_lleno(A_BB) && !avl_es_lleno(A_AVL))
     {
         n_aleatorio = getRandom(min, max);
-        while (avl_buscar(A_AVL, n_aleatorio) != NULL)
+        while (!avl_es_rama_nula(avl_buscar(A_AVL, n_aleatorio)))
         {
             n_aleatorio = getRandom(min, max);
         }
