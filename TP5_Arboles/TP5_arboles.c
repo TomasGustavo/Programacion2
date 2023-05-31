@@ -112,11 +112,56 @@ void Cargar_SubArbol(ArbolBinario A, NodoArbol N, int sa)
     }
 }
 
+void Cargar_SubArbol_Sin_Repeticiones(ArbolBinario A, NodoArbol N, int sa)
+{
+    TipoElemento X;
+    NodoArbol N1;
+    int n;
+    bool b, existe;
+
+    if (!a_es_lleno(A))
+    {
+        do
+        {
+            b = ingresoEntero(&n);
+            existe = existe_nodo(A, n);
+            if (existe)
+            {
+                printf(ANSI_RED "Clave duplicada\n");
+            }
+        } while (existe);
+        if (b)
+        {
+            X = te_crear(n);
+
+            if (sa == -1)
+                N1 = a_conectar_hi(A, N, X);
+            else if (sa == 1)
+                N1 = a_conectar_hd(A, N, X);
+            else
+                N1 = a_establecer_raiz(A, X);
+
+            Cargar_SubArbol_Sin_Repeticiones(A, N1, -1);
+            Cargar_SubArbol_Sin_Repeticiones(A, N1, 1);
+        }
+    }
+}
+
 /// @brief Función que recibe el árbol a ser cargado y llama a la función recursiva que realiza la carga nodo por nodo
 /// @param A Arbol binario donde se cargaran los nodos
 void cargar_arbol_binario(ArbolBinario A)
 {
     Cargar_SubArbol(A, NULL, 0);
+    printf(ANSI_bCYAN "\nArbol en pre orden:");
+    mostrar_pre_orden(a_raiz(A));
+    printf("\n\n");
+}
+
+/// @brief Función que recibe el árbol a ser cargado y llama a la función recursiva que realiza la carga nodo por nodo
+/// @param A Arbol binario donde se cargaran los nodos
+void cargar_arbol_binario_sin_repeticiones(ArbolBinario A)
+{
+    Cargar_SubArbol_Sin_Repeticiones(A, NULL, 0);
     printf(ANSI_bCYAN "\nArbol en pre orden:");
     mostrar_pre_orden(a_raiz(A));
     printf("\n\n");
@@ -205,9 +250,9 @@ Lista hojas(ArbolBinario A)
 }
 
 /// @brief Recorre el arbol binario en busca de los nodos interiores
-/// @param Q Nodo del arbol (recibe la raiz del arbol)
-/// @param L Lista vacia que va a contener todos los nodos interiores
-/// @param raiz Condicion para ignorar la raiz asi no se guarda como nodo interior
+/// @param Q Nodo del arbol (recibe la raíz del arbol)
+/// @param L Lista vacía que va a contener todos los nodos interiores
+/// @param raiz Condición para ignorar la raíz así no se guarda como nodo interior
 void buscar_nodos(NodoArbol Q, Lista L, bool raiz)
 {
     TipoElemento X;
@@ -229,7 +274,7 @@ void buscar_nodos(NodoArbol Q, Lista L, bool raiz)
     }
 }
 
-/// @brief Funcion que llama a la funcion buscar_nodos
+/// @brief Función que llama a la función buscar_nodos
 /// @param A Arbol binario cargado de enteros
 /// @return Retorna la lista cargada con los nodos interiores
 Lista nodos_interiores(ArbolBinario A)
@@ -240,7 +285,7 @@ Lista nodos_interiores(ArbolBinario A)
     return lista;
 }
 
-/// @brief Funcion que muestra el contenido de la lista por valor
+/// @brief Función que muestra el contenido de la lista por valor
 /// @param L Lista cargada de valores
 void l_mostrarLista_valor(Lista L)
 {
@@ -249,7 +294,7 @@ void l_mostrarLista_valor(Lista L)
     printf("contenido de la lista: ");
     if (l_es_vacia(L))
     {
-        printf("la lista esta vacia");
+        printf("la lista esta vacía");
     }
     else
     {
@@ -263,9 +308,9 @@ void l_mostrarLista_valor(Lista L)
     printf("\n");
 }
 
-/// @brief Busca todas las ocurrencias del elemento y carga su posicion en una lista
-/// @param Q  Nodo del arbol (recibe la raiz del arbol)
-/// @param lista Lista vacia que va a contener todas las ocurrencias
+/// @brief Busca todas las ocurrencias del elemento y carga su posición en una lista
+/// @param Q  Nodo del arbol (recibe la raíz del arbol)
+/// @param lista Lista vacía que va a contener todas las ocurrencias
 /// @param elemento Elemento a buscar
 void buscar_ocurrencias(NodoArbol Q, Lista lista, int elemento)
 {
@@ -286,10 +331,10 @@ void buscar_ocurrencias(NodoArbol Q, Lista lista, int elemento)
     }
 }
 
-/// @brief Funcion que llama a la funcion buscar_ocurrencias
+/// @brief Función que llama a la función buscar_ocurrencias
 /// @param A Arbol Binario cargado de enteros
 /// @param elemento Elemento a buscar en el arbol
-/// @return Retorna la lista cargada con la posicion del elemento
+/// @return Retorna la lista cargada con la posición del elemento
 Lista ocurrencias(ArbolBinario A, int elemento)
 {
     Lista lista = l_crear();
@@ -317,7 +362,7 @@ void devolver_nodo_aux(ArbolBinario A, NodoArbol actual, int clave, NodoArbol *N
     }
 }
 
-/// @brief Funcion que llama a devolver_nodo_aux
+/// @brief Función que llama a devolver_nodo_aux
 /// @param A arbol binario cargado
 /// @param clave clave a buscar en el arbol
 /// @return Retorna el nodo buscado
@@ -332,10 +377,10 @@ NodoArbol devolver_nodo(ArbolBinario A, int clave)
     return N;
 }
 
-/// @brief Funcion que busca el nodo padre recursivamente
+/// @brief Función que busca el nodo padre recursivamente
 /// @param A Arbol Binario cargado de enteros
 /// @param actual Nodo actual
-/// @param padre Parametro que guarda el padre del nodo actual
+/// @param padre Parámetro que guarda el padre del nodo actual
 /// @param clave Clave a buscar en el arbol
 /// @param R Nodo donde se va a guardar resultado
 /// @return Retorna el nodo padre
@@ -353,7 +398,7 @@ void nodo_padre_aux(ArbolBinario A, NodoArbol actual, NodoArbol padre, int clave
     }
 }
 
-/// @brief Funcion que llama a la funcion nodo_padre_aux
+/// @brief Función que llama a la función nodo_padre_aux
 /// @param A Arbol Binario cargado de enteros
 /// @param clave Clave a buscar en el arbol
 /// @return Retorna el nodo padre
@@ -373,7 +418,7 @@ NodoArbol nodo_padre(ArbolBinario A, int clave)
     }
 }
 
-/// @brief Funcion que devuelve true si existe el nodo y false si no
+/// @brief Función que devuelve true si existe el nodo y false si no
 /// @param A Arbol Binario cargado de enteros
 /// @param actual Nodo actual
 /// @param clave Clave a buscar en el arbol
@@ -393,7 +438,7 @@ void existe_nodo_aux(ArbolBinario A, NodoArbol actual, int clave, bool *resultad
     }
 }
 
-/// @brief Funcion que llama a existe_nodo_aux
+/// @brief Función que llama a existe_nodo_aux
 /// @param A Arbol Binario cargado de enteros
 /// @param clave Clave a buscar en el arbol
 /// @return Retorna true si existe el nodo y false si no existe
@@ -402,16 +447,23 @@ bool existe_nodo(ArbolBinario A, int clave)
     NodoArbol R;
     bool resultado = false;
     R = a_raiz(A);
-    if (n_recuperar(R)->clave == clave)
-        return true;
+    if (!(n_recuperar(R) == NULL))
+    {
+        if (n_recuperar(R)->clave == clave)
+            return true;
+        else
+        {
+            existe_nodo_aux(A, R, clave, &resultado);
+            return resultado;
+        }
+    }
     else
     {
-        existe_nodo_aux(A, R, clave, &resultado);
         return resultado;
     }
 }
 
-/// @brief Funcion que llama a nodo_hermano_aux
+/// @brief Función que llama a nodo_hermano_aux
 /// @param A Arbol Binario cargado de enteros
 /// @param clave Clave a buscar en el arbol
 /// @return Retorna el nodo hermano
@@ -432,7 +484,7 @@ NodoArbol nodo_hermano(ArbolBinario A, int clave)
 /// @param A Arbol binario cargado
 /// @param clave clave a buscar
 /// @param n contador de niveles
-/// @param resultado parametro que devuelve el resultado
+/// @param resultado parámetro que devuelve el resultado
 /// @return Devuelve el nivel en el que se encuentra la clave
 void nivel_aux(NodoArbol actual, int clave, int n, int *resultado)
 {
@@ -452,7 +504,7 @@ void nivel_aux(NodoArbol actual, int clave, int n, int *resultado)
     }
 }
 
-/// @brief Funcion que llama a nive_aux
+/// @brief Función que llama a nivel_aux
 /// @param A Arbol binario cargado
 /// @param clave clave a buscar
 /// @return Devuelve el nivel en el que se encuentra la clave
@@ -517,7 +569,7 @@ int nodo_altura(NodoArbol Q)
     return H;
 }
 
-/// @brief Funcion que recorre el arbol n-ario y cuenta la cantidad de hojas
+/// @brief Función que recorre el arbol n-ario y cuenta la cantidad de hojas
 /// @param N nodo actual
 /// @param cantidad variable que devuelve la cantidad de nodos hoja
 /// @return Retorna la cantidad de nodos hoja del arbol
@@ -533,7 +585,7 @@ void hojas_nario_aux(NodoArbol N, int *cantidad)
     }
 }
 
-/// @brief Funcion que llama a hojas_nario_aux
+/// @brief Función que llama a hojas_nario_aux
 /// @param A Arbol n-ario cargado como binario
 /// @return Retorna la cantidad de nodos hoja del arbol
 int hojas_nario(ArbolBinario A)
@@ -544,7 +596,7 @@ int hojas_nario(ArbolBinario A)
     return cantidad;
 }
 
-/// @brief Funcion que devuelve true si los arboles son similares y false si no
+/// @brief Función que devuelve true si los arboles son similares y false si no
 /// @param N1 Nodo actual del arbol 1
 /// @param N2 Nodo actual del arbol 2
 /// @return Retorna true si son arboles similares y false si no
@@ -565,7 +617,7 @@ void arbol_similar_aux(NodoArbol N1, NodoArbol N2, bool *rta)
     }
 }
 
-/// @brief Funcion que llama a arbol_similar_aux
+/// @brief Función que llama a arbol_similar_aux
 /// @param A1 Arbol n-ario cargado como binario
 /// @param A2 Arbol n-ario cargado como binario
 /// @return Retorna true si son arboles similares y false si no
@@ -582,7 +634,7 @@ bool arbol_similar(ArbolBinario A1, ArbolBinario A2)
     return rta;
 }
 
-/// @brief Funcion que devuelve el padre de un nodo
+/// @brief Función que devuelve el padre de un nodo
 /// @param A Arbol n-ario cargado como binario
 /// @param clave clave del nodo a buscar
 /// @return Retorna true si son arboles similares y false si no
@@ -600,7 +652,7 @@ void padre_nario_aux(NodoArbol actual, NodoArbol padre, int clave, NodoArbol *R)
     }
 }
 
-/// @brief Funcion que llama a padre_nario_aux
+/// @brief Función que llama a padre_nario_aux
 /// @param A Arbol n-ario cargado como binario
 /// @param clave clave del nodo a buscar
 /// @return Retorna true si son arboles similares y false si no
@@ -633,7 +685,7 @@ void hermanos_nario_aux(NodoArbol actual, int clave, Lista *L)
     }
 }
 
-/// @brief Funcion que llama hermanos_nario_auz
+/// @brief Función que llama hermanos_nario_aux
 /// @param A Arbol n-ario cargado como binario
 /// @param clave clave del nodo a buscar
 /// @return Retorna una lista con los hermanos del nodo
@@ -649,8 +701,8 @@ Lista hermanos_nario(ArbolBinario A, int clave)
 }
 
 /// @brief Recorre los arboles binarios para comparar si son equivalentes
-/// @param Q1 Nodo del arbol (recibe la raiz del arbol)
-/// @param Q2 Nodo del arbol (recibe la raiz del arbol)
+/// @param Q1 Nodo del arbol (recibe la raíz del arbol)
+/// @param Q2 Nodo del arbol (recibe la raíz del arbol)
 /// @param equivalentes bandera que indica si los arboles son equivalentes
 void comparar_equivalencia(NodoArbol Q1, NodoArbol Q2, int *equivalentes)
 {
@@ -678,7 +730,7 @@ void comparar_equivalencia(NodoArbol Q1, NodoArbol Q2, int *equivalentes)
         }
     }
 }
-/// @brief Funcion que llama a la funcion comparar_equivalencia
+/// @brief Función que llama a la Función comparar_equivalencia
 /// @param A1 Arbol binario cargado de enteros
 /// @param A2 Arbol binario cargado de enteros
 /// @return Retorna una bandera que indica si los arboles son equivalentes
@@ -697,7 +749,7 @@ int arbol_equivalentes(ArbolBinario A1, ArbolBinario A2)
 /// @param A Arbol binario cargado
 /// @param clave clave a buscar
 /// @param n contador de niveles
-/// @param resultado parametro que devuelve el resultado
+/// @param resultado parámetro que devuelve el resultado
 /// @return Devuelve el nivel en el que se encuentra la clave
 void nivel_nario_aux(NodoArbol actual, int clave, int n, int *resultado)
 {
@@ -717,7 +769,7 @@ void nivel_nario_aux(NodoArbol actual, int clave, int n, int *resultado)
     }
 }
 
-/// @brief Funcion que llama a nivel_nario_aux
+/// @brief Función que llama a nivel_nario_aux
 /// @param A Arbol binario cargado
 /// @param clave clave a buscar
 /// @return Devuelve el nivel en el que se encuentra la clave
@@ -729,7 +781,7 @@ int nivel_nario(ArbolBinario A, int clave)
     return N;
 }
 
-/// @brief Funcion que llama a nodos_internos_nario_auz
+/// @brief Función que llama a nodos_internos_nario_aux
 /// @param A Arbol binario cargado
 /// @return Devuelve una lista con los nodos internos del arbol n-ario
 void nodos_internos_nario_aux(ArbolBinario A, NodoArbol actual, Lista *L)
@@ -746,7 +798,7 @@ void nodos_internos_nario_aux(ArbolBinario A, NodoArbol actual, Lista *L)
     }
 }
 
-/// @brief Funcion que llama a nodos_internos_nario_auz
+/// @brief Función que llama a nodos_internos_nario_aux
 /// @param A Arbol binario cargado
 /// @return Devuelve una lista con los nodos internos del arbol n-ario
 Lista nodos_internos_nario(ArbolBinario A)
@@ -757,9 +809,9 @@ Lista nodos_internos_nario(ArbolBinario A)
     return L;
 }
 
-/// @brief Funcion indica si todas las hojas del arbol estan al mismo nivel
+/// @brief Función indica si todas las hojas del arbol están al mismo nivel
 /// @param A Arbol binario cargado
-/// @return Devuelve true si todas las hojas estan al mismo nivel y false si no
+/// @return Devuelve true si todas las hojas están al mismo nivel y false si no
 void nivel_hojas_nario_aux(ArbolBinario A, NodoArbol actual, Lista *L)
 {
     if (!a_es_rama_nula(actual))
@@ -776,9 +828,9 @@ void nivel_hojas_nario_aux(ArbolBinario A, NodoArbol actual, Lista *L)
     }
 }
 
-/// @brief Funcion que llama a nivel_hojas_nario
+/// @brief Función que llama a nivel_hojas_nario
 /// @param A Arbol binario cargado
-/// @return Devuelve true si todas las hojas estan al mismo nivel y false si no
+/// @return Devuelve true si todas las hojas están al mismo nivel y false si no
 bool nivel_hojas_nario(ArbolBinario A)
 {
     Lista l = l_crear();
@@ -869,9 +921,9 @@ int altura_nario(NodoArbol Q)
 
 // -------------------------------------------------- PUNTO 10 --------------------------------------------------
 
-/// @brief Función que genera numeros aleatorios dentro de un rango
-/// @param min Rango minimo
-/// @param max Rango maximo
+/// @brief Función que genera números aleatorios dentro de un rango
+/// @param min Rango mínimo
+/// @param max Rango máximo
 /// @return Numero aleatorio generado
 int getRandom(int min, int max)
 {
@@ -892,10 +944,10 @@ int getRandom(int min, int max)
 }*/
 
 /// @brief Función que carga un (sub)árbol AVL y BB en preorden de forma aleatoria con las mismos nodos en ambos arboles
-/// @param A_BB Arbol Binario de Busqueda a cagar la serie aleatoria
+/// @param A_BB Arbol Binario de Búsqueda a cagar la serie aleatoria
 /// @param A_AVL Arbol AVL a cargar la serie aleatoria
-/// @param min Valor minimo del rango aleatorio
-/// @param max Valor maximo del rango aleatorio
+/// @param min Valor mínimo del rango aleatorio
+/// @param max Valor máximo del rango aleatorio
 void cargar_nodos_AVL_ABB(ArbolBinarioBusqueda A_BB, ArbolAVL A_AVL, int min, int max)
 {
     TipoElemento X;
@@ -973,17 +1025,17 @@ int altura_bb(ArbolBinarioBusqueda A_BB)
     return H;
 }
 
-/// @brief Funcion que repite 'repeticiones' veces el proceso de carga del arbol AVL y BB
+/// @brief Función que repite 'repeticiones' veces el proceso de carga del arbol AVL y BB
 /// @param repeticiones Cantidad de repeticiones
-/// @param min Valor minimo del rango aleatorio
-/// @param max Valor maximo del rango aleatorio
+/// @param min Valor mínimo del rango aleatorio
+/// @param max Valor máximo del rango aleatorio
 void cargar_repeticiones_AVL_BB(int repeticiones, int nodos, int min, int max)
 {
     int altura_minima_avl, altura_maxima_avl, altura_suma_avl = 0, altura_actual_avl;
     int altura_minima_bb, altura_maxima_bb, altura_suma_bb = 0, altura_actual_bb;
     float altura_media_avl, altura_media_bb;
     srand(time(NULL)); // Establecer semilla
-    // Se ejecuta el proceso de carga de arboles 1 vez, para poder guardar los valores minimos y maximos iniciales
+    // Se ejecuta el proceso de carga de arboles 1 vez, para poder guardar los valores mínimos y máximos iniciales
 
     ArbolAVL A_AVL = avl_crear();
     ArbolBinarioBusqueda A_BB = abb_crear();
@@ -991,12 +1043,12 @@ void cargar_repeticiones_AVL_BB(int repeticiones, int nodos, int min, int max)
     {
         cargar_nodos_AVL_ABB(A_BB, A_AVL, min, max);
     }
-    // Estadisticas iniciales del arbol AVL
+    // Estadísticas iniciales del arbol AVL
     altura_actual_avl = altura_avl(A_AVL);
     altura_minima_avl = altura_actual_avl;
     altura_maxima_avl = altura_actual_avl;
     altura_suma_avl += altura_actual_avl;
-    // Estadisticas iniciales del arbol BB
+    // Estadísticas iniciales del arbol BB
     altura_actual_bb = altura_bb(A_BB);
     altura_minima_bb = altura_actual_bb;
     altura_maxima_bb = altura_actual_bb;
@@ -1013,7 +1065,7 @@ void cargar_repeticiones_AVL_BB(int repeticiones, int nodos, int min, int max)
         {
             cargar_nodos_AVL_ABB(A_BB, A_AVL, min, max);
         }
-        // Estadisticas del arbol AVL
+        // Estadísticas del arbol AVL
         altura_actual_avl = altura_avl(A_AVL);
         if (altura_minima_avl > altura_actual_avl)
         {
@@ -1024,7 +1076,7 @@ void cargar_repeticiones_AVL_BB(int repeticiones, int nodos, int min, int max)
             altura_maxima_avl = altura_actual_avl;
         }
         altura_suma_avl += altura_actual_avl;
-        // Estadisticas del arbol BB
+        // Estadísticas del arbol BB
         altura_actual_bb = altura_bb(A_BB);
         if (altura_minima_bb > altura_actual_bb)
         {
@@ -1040,7 +1092,7 @@ void cargar_repeticiones_AVL_BB(int repeticiones, int nodos, int min, int max)
     }
     altura_media_avl = altura_suma_avl / repeticiones;
     altura_media_bb = altura_suma_bb / repeticiones;
-    printf(ANSI_GREEN "\nSe cargaron los arboles AVL y BB %d veces, las estadisticas son:\n", repeticiones);
+    printf(ANSI_GREEN "\nSe cargaron los arboles AVL y BB %d veces, las estadísticas son:\n", repeticiones);
     printf(ANSI_GREEN "La altura minima del arbol AVL es: " ANSI_YELLOW "%d\n", altura_minima_avl);
     printf(ANSI_GREEN "La altura maxima del arbol AVL es: " ANSI_YELLOW "%d\n", altura_maxima_avl);
     printf(ANSI_GREEN "La altura media del arbol AVL es: " ANSI_YELLOW "%.2f\n\n", altura_media_avl);

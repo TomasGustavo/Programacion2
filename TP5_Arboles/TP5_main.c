@@ -84,14 +84,15 @@ void main_hojas()
     Lista L;
     A = a_crear();
     cargar_arbol_binario(A);
-    if(!a_es_vacio(A))
+    if (!a_es_vacio(A))
     {
         L = hojas(A);
         printf(ANSI_bMAGENTA "\nLas hojas son: " ANSI_bYELLOW);
         l_mostrarLista(L);
-    } 
-    else printf(ANSI_bMAGENTA "\nEl arbol esta vacio" ANSI_YELLOW);
-    
+    }
+    else
+        printf(ANSI_bMAGENTA "\nEl arbol esta vacío" ANSI_YELLOW);
+    printf(ANSI_bMAGENTA "\nLa complejidad algorítmico de la solución empleada es O(n), ya que que recorre todo el arbol\n");
     vaciar_buffer();
     pausa();
     limpiar_pantalla();
@@ -109,14 +110,19 @@ void main_interior()
     {
         L = nodos_interiores(A);
         vaciar_buffer();
-        if (l_es_vacia(L)){
+        if (l_es_vacia(L))
+        {
             printf("No hay nodos interiores");
-        } else {
+        }
+        else
+        {
             printf(ANSI_bGREEN "Nodos interiores: \n");
             l_mostrarLista(L);
-        }      
+        }
     }
-    else printf(ANSI_bMAGENTA "\nEl arbol esta vacio" ANSI_YELLOW);
+    else
+        printf(ANSI_bMAGENTA "\nEl arbol esta vacío" ANSI_YELLOW);
+    printf(ANSI_bMAGENTA "\nLa complejidad algorítmico de la solución empleada es O(n), ya que que recorre todo el arbol\n");
 
     printf(ANSI_RESET);
     vaciar_buffer();
@@ -153,13 +159,16 @@ void main_buscar()
         l_mostrarLista_valor(L);
         if (l_es_vacia(L))
         {
-            printf(ANSI_bRED "no se encontro el elemento en el arbol\n");
+            printf(ANSI_bRED "no se encontró el elemento en el arbol\n");
         }
-        printf(ANSI_RESET);
-        vaciar_buffer();
-        pausa();
-        limpiar_pantalla();
-    } else printf(ANSI_bMAGENTA "\nEl arbol esta vacio" ANSI_YELLOW);
+    }
+    else
+        printf(ANSI_bMAGENTA "\nEl arbol esta vacío" ANSI_YELLOW);
+    printf(ANSI_bMAGENTA "\nLa complejidad algorítmico de la solución empleada es O(n), ya que que recorre todo el arbol\n");
+    printf(ANSI_RESET);
+    vaciar_buffer();
+    pausa();
+    limpiar_pantalla();
 }
 
 /// @brief Punto 3
@@ -170,7 +179,7 @@ void main_nodo_binario()
     NodoArbol N, N1, HI, HD, NHermano;
     TipoElemento X, XI, XD, XHermano;
     A = a_crear();
-    cargar_arbol_binario(A);
+    cargar_arbol_binario_sin_repeticiones(A);
     if (!a_es_vacio(A))
     {
         printf(ANSI_bMAGENTA "Ingrese la clave [-999.999 - 999.999]: " ANSI_YELLOW);
@@ -192,7 +201,7 @@ void main_nodo_binario()
             N = nodo_padre(A, clave);
             X = n_recuperar(N);
             if (N == NULL)
-                printf(ANSI_bMAGENTA "\nLa clave pertenece a la raiz y no tiene padre");
+                printf(ANSI_bMAGENTA "\nLa clave pertenece a la raíz y no tiene padre");
             else
                 printf(ANSI_bMAGENTA "\nNodo padre: %i", X->clave);
 
@@ -244,7 +253,7 @@ void main_nodo_binario()
     }
     else
     {
-        printf(ANSI_bMAGENTA "\nEl arbol esta vacio" ANSI_YELLOW);
+        printf(ANSI_bMAGENTA "\nEl arbol esta vacío" ANSI_YELLOW);
     }
     printf(ANSI_RESET);
     vaciar_buffer();
@@ -259,7 +268,7 @@ void main_cantidad_hojas()
     A = a_crear();
     cargar_arbol_binario(A);
     if (a_es_vacio(A))
-        printf(ANSI_bMAGENTA "\n El arbol esta vacio");
+        printf(ANSI_bMAGENTA "\n El arbol esta vacío");
     else
     {
         cantidadHojas = hojas_nario(A);
@@ -320,7 +329,7 @@ void main_padre_nario()
             N = padre_nario(A, clave);
             X = n_recuperar(N);
             if (N == NULL)
-                printf(ANSI_bMAGENTA "\nLa clave pertenece a la raiz y no tiene padre");
+                printf(ANSI_bMAGENTA "\nLa clave pertenece a la raíz y no tiene padre");
             else
                 printf(ANSI_bMAGENTA "\nNodo padre: %i", X->clave);
         }
@@ -331,7 +340,7 @@ void main_padre_nario()
     }
     else
     {
-        printf(ANSI_bMAGENTA "\nEl arbol esta vacio" ANSI_YELLOW);
+        printf(ANSI_bMAGENTA "\nEl arbol esta vacío" ANSI_YELLOW);
     }
     printf(ANSI_RESET);
     vaciar_buffer();
@@ -379,7 +388,7 @@ void main_hermanos_nario()
     }
     else
     {
-        printf(ANSI_bMAGENTA "\nEl arbol esta vacio" ANSI_YELLOW);
+        printf(ANSI_bMAGENTA "\nEl arbol esta vacío" ANSI_YELLOW);
     }
     printf(ANSI_RESET);
     vaciar_buffer();
@@ -449,7 +458,7 @@ void main_nivel_nario()
     }
     else
     {
-        printf(ANSI_bMAGENTA "\nEl arbol esta vacio" ANSI_YELLOW);
+        printf(ANSI_bMAGENTA "\nEl arbol esta vacío" ANSI_YELLOW);
     }
     printf(ANSI_RESET);
     vaciar_buffer();
@@ -476,7 +485,7 @@ void main_nodos_internos_nario()
     }
     else
     {
-        printf(ANSI_bMAGENTA "\nEl arbol esta vacio" ANSI_YELLOW);
+        printf(ANSI_bMAGENTA "\nEl arbol esta vacío" ANSI_YELLOW);
     }
     printf(ANSI_RESET);
     vaciar_buffer();
@@ -494,13 +503,13 @@ void main_hojas_nivel_nario()
     {
         res = nivel_hojas_nario(A);
         if (res)
-            printf(ANSI_bGREEN "\nTodas las hojas estan al mismo nivel" ANSI_YELLOW);
+            printf(ANSI_bGREEN "\nTodas las hojas están al mismo nivel" ANSI_YELLOW);
         else
-            printf(ANSI_bRED "\nLas hojas no estan al mismo nivel" ANSI_YELLOW);
+            printf(ANSI_bRED "\nLas hojas no están al mismo nivel" ANSI_YELLOW);
     }
     else
     {
-        printf(ANSI_bMAGENTA "\nEl arbol esta vacio" ANSI_YELLOW);
+        printf(ANSI_bMAGENTA "\nEl arbol esta vacío" ANSI_YELLOW);
     }
     printf(ANSI_RESET);
     vaciar_buffer();
@@ -523,7 +532,7 @@ void main_anchura_nario()
     }
     else
     {
-        printf(ANSI_bMAGENTA "\nEl arbol esta vacio" ANSI_YELLOW);
+        printf(ANSI_bMAGENTA "\nEl arbol esta vacío" ANSI_YELLOW);
     }
     printf(ANSI_RESET);
     vaciar_buffer();
@@ -546,7 +555,7 @@ void main_altura_nario()
     }
     else
     {
-        printf(ANSI_bMAGENTA "\nEl arbol esta vacio" ANSI_YELLOW);
+        printf(ANSI_bMAGENTA "\nEl arbol esta vacío" ANSI_YELLOW);
     }
     printf(ANSI_RESET);
     vaciar_buffer();
@@ -589,8 +598,8 @@ void main_punto10()
         vaciar_buffer();
     }
 
-    // Rango minimo
-    printf(ANSI_bMAGENTA "Ingrese el rango minimo de la serie aleatoria [1-%d]: " ANSI_YELLOW, A_MAX);
+    // Rango mínimo
+    printf(ANSI_bMAGENTA "Ingrese el rango mínimo de la serie aleatoria [1-%d]: " ANSI_YELLOW, A_MAX);
     scanf("%d", &min);
     while (validador != 1 || min < 1 || min > A_MAX)
     {
@@ -598,26 +607,26 @@ void main_punto10()
         printf("DATO FUERA DE RANGO\n\n" ANSI_RESET);
         vaciar_buffer();
         pausa();
-        printf(ANSI_bBLUE "Ingrese el rango minimo de la serie aleatoria [1-%d]: " ANSI_YELLOW, A_MAX);
+        printf(ANSI_bBLUE "Ingrese el rango mínimo de la serie aleatoria [1-%d]: " ANSI_YELLOW, A_MAX);
         validador = scanf("%d", &min);
         vaciar_buffer();
     }
 
-    // Rango maximo
-    printf(ANSI_bMAGENTA "Ingrese el rango maximo de la serie aleatoria [%d-999.999]\n" ANSI_YELLOW, (min * 2));
-    printf(ANSI_bRED "Tener en cuenta que la diferencia entre el maximo y el minimo tiene que ser superior a la cantidad de nodos x2: " ANSI_YELLOW);
+    // Rango máximo
+    printf(ANSI_bMAGENTA "Ingrese el rango máximo de la serie aleatoria [%d-999.999]\n" ANSI_YELLOW, (min * 2));
+    printf(ANSI_bRED "Tener en cuenta que la diferencia entre el máximo y el mínimo tiene que ser superior a la cantidad de nodos x2: " ANSI_YELLOW);
     validador = scanf("%d", &max);
     vaciar_buffer();
     while ((validador != 1) || ((max - min) < (nodo * 2)) || (max > 999999))
     {
         printf("ERROR\n");
-        printf("datos fuera de rango\nPor favor Ingrese nuevamente el rango maximo de la serie aleatoria [%d-999.999]: " ANSI_YELLOW, (min * 2));
+        printf("datos fuera de rango\nPor favor Ingrese nuevamente el rango máximo de la serie aleatoria [%d-999.999]: " ANSI_YELLOW, (min * 2));
         validador = scanf("%d", &max);
         vaciar_buffer();
     }
 
     cargar_repeticiones_AVL_BB(repeticiones, nodo, min, max);
-    printf(ANSI_bMAGENTA "\nPodemos concluir que el arbol AVL al estar balanceado tiende a tener una altura menor respecto del arbol binario de busqueda (BB), ya que este puede estar desiquilibrado dependiendo del orden en el que se insertaron las claves, por lo cual su altura es mayor respecto del AVL.");
+    printf(ANSI_bMAGENTA "\nPodemos concluir que el arbol AVL al estar balanceado tiende a tener una altura menor respecto del arbol binario de búsqueda (BB), ya que este puede estar desequilibrado dependiendo del orden en el que se insertaron las claves, por lo cual su altura es mayor respecto del AVL.");
     pausa();
     limpiar_pantalla();
 }
@@ -639,9 +648,9 @@ void main_punto9()
     }
     else
     {
-        printf(ANSI_RED "El arbol se encuentra vacio.");
+        printf(ANSI_RED "El arbol se encuentra vacío.");
     }
-    printf(ANSI_bMAGENTA "\nLa complejidad algorítmica de la solución empleada es O(n log n) ya que hay una función recursiva que recorre el arbol binario para poder recuperar todos sus nodos, siendo O(n) e insertarlos en el arbol AVL; al insertar en el arbol AVL la complejidad es O(log n) ya que va realizando una búsqueda binaria para insertar. Dado que estos 2 ciclos se encuentran anidados el Orden lineal * logaritmo.\n", altura_AB);
+    printf(ANSI_bMAGENTA "\nLa complejidad algorítmica de la solución empleada es O(n log n) ya que hay una función recursiva que recorre el arbol binario para poder recuperar todos sus nodos, siendo O(n) e insertarlos en el arbol AVL; al insertar en el arbol AVL la complejidad es O(log n) ya que va realizando una búsqueda binaria para insertar. Dado que estos 2 ciclos se encuentran anidados el Orden lineal * logaritmo.\n");
     pausa();
     limpiar_pantalla();
 }
