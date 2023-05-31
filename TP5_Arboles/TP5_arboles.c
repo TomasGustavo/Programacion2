@@ -263,7 +263,7 @@ void buscar_nodos(NodoArbol Q, Lista L, bool raiz)
     {
         if (raiz == false)
         {
-            if (!a_es_rama_nula(n_hijoizquierdo(Q)) || !es_rama_nula(n_hijoderecho(Q)))
+            if (!a_es_rama_nula(n_hijoizquierdo(Q)) || !a_es_rama_nula(n_hijoderecho(Q)))
             {
                 X = n_recuperar(Q);
                 l_agregar(L, X);
@@ -447,7 +447,7 @@ bool existe_nodo(ArbolBinario A, int clave)
     NodoArbol R;
     bool resultado = false;
     R = a_raiz(A);
-    if (!(a_es_rama_nula(n_recuperar(R))))
+    if (!(a_es_rama_nula(R)))
     {
         if (n_recuperar(R)->clave == clave)
             return true;
@@ -955,7 +955,7 @@ void cargar_nodos_AVL_ABB(ArbolBinarioBusqueda A_BB, ArbolAVL A_AVL, int min, in
     if (!abb_es_lleno(A_BB) && !avl_es_lleno(A_AVL))
     {
         n_aleatorio = getRandom(min, max);
-        while (!avl_es_rama_nula(avl_buscar(A_AVL, n_aleatorio)))
+        while (avl_buscar(A_AVL, n_aleatorio) != NULL)
         {
             n_aleatorio = getRandom(min, max);
         }
