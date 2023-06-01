@@ -57,7 +57,7 @@ void menu_punto4()
 {
     printf("\n");
     printf(ANSI_BLUE "  ============================================================================\n");
-    printf(" |                     4   Operaciones con un arbol n-ario                     |\n");
+    printf(" |                    4-8   Operaciones con un arbol n-ario                    |\n");
     printf("  ============================================================================\n");
     printf("\n");
     printf("  1   Mostrar recorrido en anchura\n");
@@ -93,7 +93,6 @@ void main_hojas()
     else
         printf(ANSI_bMAGENTA "\nEl arbol esta vacío" ANSI_YELLOW);
     printf(ANSI_bMAGENTA "\nLa complejidad algorítmico de la solución empleada es O(n), ya que que recorre todo el arbol\n");
-    vaciar_buffer();
     pausa();
     limpiar_pantalla();
 }
@@ -109,7 +108,6 @@ void main_interior()
     if (!a_es_vacio(A))
     {
         L = nodos_interiores(A);
-        vaciar_buffer();
         if (l_es_vacia(L))
         {
             printf("No hay nodos interiores");
@@ -123,9 +121,7 @@ void main_interior()
     else
         printf(ANSI_bMAGENTA "\nEl arbol esta vacío" ANSI_YELLOW);
     printf(ANSI_bMAGENTA "\nLa complejidad algorítmico de la solución empleada es O(n), ya que que recorre todo el arbol\n");
-
     printf(ANSI_RESET);
-    vaciar_buffer();
     pausa();
     limpiar_pantalla();
 }
@@ -148,14 +144,13 @@ void main_buscar()
         {
             printf(ANSI_RED "\t\t-------- ERROR -------- \n");
             printf("DATO FUERA DE RANGO\n\n" ANSI_RESET);
-            vaciar_buffer();
             pausa();
             printf(ANSI_bBLUE "Ingrese el elemento a buscar [-999.999 - 999.999]: " ANSI_YELLOW);
             validador = scanf("%d", &clave);
             vaciar_buffer();
         }
         L = ocurrencias(A, clave);
-        printf(ANSI_bGREEN "Posiciones del elemento %d: \n", clave);
+        printf(ANSI_bGREEN "Direcciones de memoria de las posiciones encontradas del elemento %d: \n", clave);
         l_mostrarLista_valor(L);
         if (l_es_vacia(L))
         {
@@ -166,7 +161,6 @@ void main_buscar()
         printf(ANSI_bMAGENTA "\nEl arbol esta vacío" ANSI_YELLOW);
     printf(ANSI_bMAGENTA "\nLa complejidad algorítmico de la solución empleada es O(n), ya que que recorre todo el arbol\n");
     printf(ANSI_RESET);
-    vaciar_buffer();
     pausa();
     limpiar_pantalla();
 }
@@ -189,7 +183,6 @@ void main_nodo_binario()
         {
             printf(ANSI_RED "\t\t-------- ERROR -------- \n");
             printf("DATO FUERA DE RANGO\n\n" ANSI_RESET);
-            vaciar_buffer();
             pausa();
             printf(ANSI_bBLUE "Ingrese la clave [-999.999 - 999.999]: " ANSI_YELLOW);
             validador = scanf("%d", &clave);
@@ -217,7 +210,7 @@ void main_nodo_binario()
             }
             else
                 printf(ANSI_bMAGENTA "Hijo izquierdo nulo ");
-            if (!a_es_rama_nula(HI))
+            if (!a_es_rama_nula(HD))
             {
                 XD = n_recuperar(HD);
                 printf(ANSI_bMAGENTA "%i (Hijo derecho) ", XD->clave);
@@ -256,7 +249,6 @@ void main_nodo_binario()
         printf(ANSI_bMAGENTA "\nEl arbol esta vacío" ANSI_YELLOW);
     }
     printf(ANSI_RESET);
-    vaciar_buffer();
     pausa();
     limpiar_pantalla();
 }
@@ -275,7 +267,6 @@ void main_cantidad_hojas()
         printf(ANSI_bMAGENTA "\n La cantidad de hojas del arbol es %i", cantidadHojas);
     }
     printf(ANSI_RESET);
-    vaciar_buffer();
     pausa();
     limpiar_pantalla();
 }
@@ -296,7 +287,6 @@ void main_arboles_similares()
     else
         printf(ANSI_bRED "\n Los arboles no tienen la misma estructura\n");
     printf(ANSI_RESET);
-    vaciar_buffer();
     pausa();
     limpiar_pantalla();
 }
@@ -343,7 +333,6 @@ void main_padre_nario()
         printf(ANSI_bMAGENTA "\nEl arbol esta vacío" ANSI_YELLOW);
     }
     printf(ANSI_RESET);
-    vaciar_buffer();
     pausa();
     limpiar_pantalla();
 }
@@ -391,7 +380,6 @@ void main_hermanos_nario()
         printf(ANSI_bMAGENTA "\nEl arbol esta vacío" ANSI_YELLOW);
     }
     printf(ANSI_RESET);
-    vaciar_buffer();
     pausa();
     limpiar_pantalla();
 }
@@ -409,7 +397,6 @@ void main_equivalentes()
     printf(ANSI_bMAGENTA "Carga del segundo arbol: \n" ANSI_RESET);
     cargar_arbol_binario(A2);
     equivalentes = arbol_equivalentes(A1, A2);
-    vaciar_buffer();
     if (equivalentes == 1)
     {
         printf(ANSI_bGREEN "Los arboles son equivalentes \n");
@@ -419,7 +406,6 @@ void main_equivalentes()
         printf(ANSI_bRED "Los arboles no son equivalentes\n");
     }
     printf(ANSI_RESET);
-    vaciar_buffer();
     pausa();
     limpiar_pantalla();
 }
@@ -440,7 +426,6 @@ void main_nivel_nario()
         {
             printf(ANSI_RED "\t\t-------- ERROR -------- \n");
             printf("DATO FUERA DE RANGO\n\n" ANSI_RESET);
-            vaciar_buffer();
             pausa();
             printf(ANSI_bBLUE "Ingrese la clave [-999.999 - 999.999]: " ANSI_YELLOW);
             validador = scanf("%d", &clave);
@@ -461,7 +446,6 @@ void main_nivel_nario()
         printf(ANSI_bMAGENTA "\nEl arbol esta vacío" ANSI_YELLOW);
     }
     printf(ANSI_RESET);
-    vaciar_buffer();
     pausa();
     limpiar_pantalla();
 }
@@ -488,7 +472,6 @@ void main_nodos_internos_nario()
         printf(ANSI_bMAGENTA "\nEl arbol esta vacío" ANSI_YELLOW);
     }
     printf(ANSI_RESET);
-    vaciar_buffer();
     pausa();
     limpiar_pantalla();
 }
@@ -512,7 +495,6 @@ void main_hojas_nivel_nario()
         printf(ANSI_bMAGENTA "\nEl arbol esta vacío" ANSI_YELLOW);
     }
     printf(ANSI_RESET);
-    vaciar_buffer();
     pausa();
     limpiar_pantalla();
 }
@@ -535,7 +517,6 @@ void main_anchura_nario()
         printf(ANSI_bMAGENTA "\nEl arbol esta vacío" ANSI_YELLOW);
     }
     printf(ANSI_RESET);
-    vaciar_buffer();
     pausa();
     limpiar_pantalla();
 }
@@ -558,7 +539,6 @@ void main_altura_nario()
         printf(ANSI_bMAGENTA "\nEl arbol esta vacío" ANSI_YELLOW);
     }
     printf(ANSI_RESET);
-    vaciar_buffer();
     pausa();
     limpiar_pantalla();
 }
@@ -573,11 +553,11 @@ void main_punto10()
     // Cantidad de repeticiones
     printf(ANSI_bMAGENTA "Ingrese la cantidad de repeticiones que se ejecutara la carga de arboles [1-200]: " ANSI_YELLOW);
     validador = scanf("%d", &repeticiones);
+    vaciar_buffer();
     while (validador != 1 || repeticiones < 1 || repeticiones > 200)
     {
         printf(ANSI_RED "\t\t-------- ERROR -------- \n");
         printf("DATO FUERA DE RANGO\n\n" ANSI_RESET);
-        vaciar_buffer();
         pausa();
         printf(ANSI_bBLUE "Ingrese la cantidad de repeticiones que se ejecutara la carga de arboles [1-200]: " ANSI_YELLOW);
         validador = scanf("%d", &repeticiones);
@@ -586,12 +566,12 @@ void main_punto10()
 
     // Cantidad de nodos de cada arbol
     printf(ANSI_bMAGENTA "Ingrese la cantidad de nodos a cargar en cada arbol [%d-%d]: " ANSI_YELLOW, N_MIN, N_MAX);
-    scanf("%d", &nodo);
+    validador = scanf("%d", &nodo);
+    vaciar_buffer();
     while (validador != 1 || nodo < 10 || nodo > 2000)
     {
         printf(ANSI_RED "\t\t-------- ERROR -------- \n");
         printf("DATO FUERA DE RANGO\n\n" ANSI_RESET);
-        vaciar_buffer();
         pausa();
         printf(ANSI_bBLUE "Ingrese la cantidad de nodos a cargar en cada arbol [%d-%d]: " ANSI_YELLOW, N_MIN, N_MAX);
         validador = scanf("%d", &nodo);
@@ -600,12 +580,12 @@ void main_punto10()
 
     // Rango mínimo
     printf(ANSI_bMAGENTA "Ingrese el rango mínimo de la serie aleatoria [1-%d]: " ANSI_YELLOW, A_MAX);
-    scanf("%d", &min);
+    validador = scanf("%d", &min);
+    vaciar_buffer();
     while (validador != 1 || min < 1 || min > A_MAX)
     {
         printf(ANSI_RED "\t\t-------- ERROR -------- \n");
         printf("DATO FUERA DE RANGO\n\n" ANSI_RESET);
-        vaciar_buffer();
         pausa();
         printf(ANSI_bBLUE "Ingrese el rango mínimo de la serie aleatoria [1-%d]: " ANSI_YELLOW, A_MAX);
         validador = scanf("%d", &min);
@@ -655,11 +635,61 @@ void main_punto9()
     limpiar_pantalla();
 }
 
+void punto4_8()
+{
+    bool salir_p4 = false;
+    int opcion;
+    while (!salir_p4)
+    {
+        menu_punto4();
+        int validador = scanf("%i", &opcion);
+        while (validador != 1 || opcion < 0 || opcion > 9)
+        {
+            printf(ANSI_RED "Opción incorrecta\n" ANSI_RESET);
+            printf(ANSI_BLUE "  Por favor seleccione una opción: " ANSI_YELLOW);
+            while (getchar() != '\n')
+                ;
+            validador = scanf("%i", &opcion);
+        }
+        switch (opcion)
+        {
+        case 1:
+            main_anchura_nario();
+            break;
+        case 2:
+            main_cantidad_hojas();
+            break;
+        case 3:
+            main_arboles_similares();
+            break;
+        case 4:
+            main_padre_nario();
+            break;
+        case 5:
+            main_hermanos_nario();
+            break;
+        case 6:
+            main_altura_nario();
+            break;
+        case 7:
+            main_nivel_nario();
+            break;
+        case 8:
+            main_nodos_internos_nario();
+            break;
+        case 9:
+            main_hojas_nivel_nario();
+            break;
+        case 0:
+            salir_p4 = true;
+        }
+    }
+}
+
 int main()
 {
     bool salir = false;
     bool salir_p2 = false;
-    bool salir_p4 = false;
     int opcion;
     while (!salir)
     {
@@ -711,51 +741,11 @@ int main()
             main_nodo_binario();
             break;
         case 4:
-            while (!salir_p4)
-            {
-                menu_punto4();
-                validador = scanf("%i", &opcion);
-                while (validador != 1 || opcion < 0 || opcion > 9)
-                {
-                    printf(ANSI_RED "Opción incorrecta\n" ANSI_RESET);
-                    printf(ANSI_BLUE "  Por favor seleccione una opción: " ANSI_YELLOW);
-                    while (getchar() != '\n')
-                        ;
-                    validador = scanf("%i", &opcion);
-                }
-                switch (opcion)
-                {
-                case 1:
-                    main_anchura_nario();
-                    break;
-                case 2:
-                    main_cantidad_hojas();
-                    break;
-                case 3:
-                    main_arboles_similares();
-                    break;
-                case 4:
-                    main_padre_nario();
-                    break;
-                case 5:
-                    main_hermanos_nario();
-                    break;
-                case 6:
-                    main_altura_nario();
-                    break;
-                case 7:
-                    main_nivel_nario();
-                    break;
-                case 8:
-                    main_nodos_internos_nario();
-                    break;
-                case 9:
-                    main_hojas_nivel_nario();
-                    break;
-                case 0:
-                    salir_p4 = true;
-                }
-            }
+            punto4_8();
+            break;
+            menu_principal();
+        case 8:
+            punto4_8();
             break;
             menu_principal();
         case 7:

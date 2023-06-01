@@ -474,10 +474,17 @@ NodoArbol nodo_hermano(ArbolBinario A, int clave)
         return NULL;
     }
     NodoArbol N = nodo_padre(A, clave);
-    if (n_recuperar(n_hijoizquierdo(N))->clave == clave)
-        return n_hijoderecho(N);
+    if (!a_es_rama_nula(n_hijoizquierdo(N)))
+    {
+        if (n_recuperar(n_hijoizquierdo(N))->clave == clave)
+            return n_hijoderecho(N);
+        else
+            return n_hijoizquierdo(N);
+    }
     else
-        return n_hijoderecho(N);
+    {
+        return n_hijoizquierdo(N);
+    }
 }
 
 /// @brief Indica el nivel en el que se encuentra la clave pasada
