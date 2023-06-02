@@ -8,8 +8,9 @@
                 "-fdiagnostics-color=always",
                 "-g",
                 "${file}",
-                "listas.h",
-                "tabla_hash.h",
+                "listas_apuntadores.c",
+                "tipo_elemento.c",
+                "TP6_Tabla_Hash.c",
                 "-o",
                 "${fileDirname}\\${fileBasenameNoExtension}.exe"
             ],

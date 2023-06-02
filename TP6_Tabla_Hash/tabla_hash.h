@@ -3,6 +3,8 @@
 
 #include "tipo_elemento.h"
 
+
+
 struct TablaHashRep;
 typedef struct TablaHashRep *TablaHash;
 
