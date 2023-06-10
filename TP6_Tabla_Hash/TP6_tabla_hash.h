@@ -43,4 +43,8 @@ void pausa();
 
 void limpiar_pantalla();
 
+bool validarFecha(unsigned int dia, unsigned int mes,unsigned int anio);
+
+int juntarNumeros(unsigned int dia, unsigned int mes, unsigned int anio);
+
 #endif // Tabla hash
