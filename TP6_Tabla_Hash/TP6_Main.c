@@ -8,7 +8,8 @@
 #include "archivos.h"
 #include "tabla_hash.h"
 
-void menu_alumnos(){
+void menu_alumnos()
+{
     printf("\n");
     printf(ANSI_BLUE "  ============================================================================\n");
     printf(" |                                  ABM alumnos                                |\n");
@@ -25,53 +26,57 @@ void menu_alumnos(){
     printf("  Por favor seleccione una opción: " ANSI_YELLOW);
 }
 
-void main_baja(TablaHash th){
+void main_baja(TablaHash th)
+{
     int validador;
     int legajo;
-    printf(ANSI_bMAGENTA "Ingrese el legajo [100000 - 999999]: " ANSI_YELLOW);
+    printf(ANSI_bMAGENTA "Ingrese el legajo [1 - 999999]: " ANSI_YELLOW);
+    validador = scanf("%d", &legajo);
+    vaciar_buffer();
+    while (validador != 1 || legajo < 1 || legajo > 999999)
+    {
+        printf(ANSI_RED "\t\t-------- ERROR -------- \n");
+        printf("DATO FUERA DE RANGO\n\n" ANSI_RESET);
+        pausa();
+        printf(ANSI_bBLUE "Ingrese el legajo [1 - 999.999]: " ANSI_YELLOW);
         validador = scanf("%d", &legajo);
         vaciar_buffer();
-        while (validador != 1 || legajo < 100000 || legajo > 999999)
-        {
-            printf(ANSI_RED "\t\t-------- ERROR -------- \n");
-            printf("DATO FUERA DE RANGO\n\n" ANSI_RESET);
-            pausa();
-            printf(ANSI_bBLUE "Ingrese el legajo [100000 - 999.999]: " ANSI_YELLOW);
-            validador = scanf("%d", &legajo);
-            vaciar_buffer();
-        }
+    }
     bajas(th, legajo);
 }
 
-void main_modificar(TablaHash th){
-    FILE * archivo;
+void main_modificar(TablaHash th)
+{
+    FILE *archivo;
     int validador;
     int legajo;
-    printf(ANSI_bMAGENTA "Ingrese el legajo [100000 - 999999]: " ANSI_YELLOW);
+    printf(ANSI_bMAGENTA "Ingrese el legajo [1 - 999999]: " ANSI_YELLOW);
+    validador = scanf("%d", &legajo);
+    vaciar_buffer();
+    while (validador != 1 || legajo < 1 || legajo > 999999)
+    {
+        printf(ANSI_RED "\t\t-------- ERROR -------- \n");
+        printf("DATO FUERA DE RANGO\n\n" ANSI_RESET);
+        pausa();
+        printf(ANSI_bBLUE "Ingrese el legajo [1 - 999.999]: " ANSI_YELLOW);
         validador = scanf("%d", &legajo);
         vaciar_buffer();
-        while (validador != 1 || legajo < 100000 || legajo > 999999)
-        {
-            printf(ANSI_RED "\t\t-------- ERROR -------- \n");
-            printf("DATO FUERA DE RANGO\n\n" ANSI_RESET);
-            pausa();
-            printf(ANSI_bBLUE "Ingrese el legajo [100000 - 999.999]: " ANSI_YELLOW);
-            validador = scanf("%d", &legajo);
-            vaciar_buffer();
-        }
+    }
     modificar(archivo, th, legajo);
 }
 
-void main_punto4(){
+void main_punto4()
+{
     bool salir_p4 = false;
     int opcion;
+    crear_txt();
 
     TablaHash th = th_crear(TAMANIO_MAXIMO, &FuncionHash);
     while (!salir_p4)
     {
         menu_alumnos();
         int validador = scanf("%i", &opcion);
-        while (validador != 1 || opcion < 0  || opcion > 9)
+        while (validador != 1 || opcion < 0 || opcion > 9)
         {
             printf(ANSI_RED "Opción incorrecta\n" ANSI_RESET);
             printf(ANSI_BLUE "  Por favor seleccione una opción: " ANSI_YELLOW);
@@ -96,7 +101,6 @@ void main_punto4(){
     }
 }
 
-
 /// @brief Menú principal del TP de tabla hash
 void menu_principal()
 {
@@ -116,40 +120,42 @@ void menu_principal()
     printf("  Por favor seleccione una opción: " ANSI_YELLOW);
 }
 
-
-
-int main(){
+int main()
+{
     bool salir = false;
     int opcion;
 
-    while(!salir){
+    while (!salir)
+    {
         menu_principal();
         int validador = scanf("%i", &opcion);
         vaciar_buffer();
-        while (validador != 1 || opcion < 0 || opcion > 3 ){
+        while (validador != 1 || opcion < 0 || opcion > 3)
+        {
             printf(ANSI_RED "Opción incorrecta\n" ANSI_RESET);
             printf(ANSI_BLUE "  Por favor seleccione una opción: " ANSI_YELLOW);
             validador = scanf("%i", &opcion);
             vaciar_buffer();
         }
 
-        switch(opcion){
-            
-            case 1:
-                menu_alumnos();
-                break;
-            case 2:
-                //main_punto5()
-                break;
-            case 3:
-                //main_punto6()
-                break;
-            case 0:
-                salir = true;
-                break;
+        switch (opcion)
+        {
+
+        case 1:
+            menu_alumnos();
+            main_punto4();
+            break;
+        case 2:
+            // main_punto5()
+            break;
+        case 3:
+            // main_punto6()
+            break;
+        case 0:
+            salir = true;
+            break;
         }
     }
-
 
     return 0;
 }

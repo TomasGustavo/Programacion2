@@ -26,7 +26,6 @@ static const int NRO_PRIMO = 97;
 
 struct AlumnoRep{
     int legajo;
-    int dni;
     char nombre[20];
     char apellido[20];
     char domicilio [20];
@@ -37,7 +36,7 @@ typedef struct AlumnoRep *Alumno;
 struct PosicionEstadoRep{
     int legajo;
     bool estado;
-    int posicion;
+    long long posicion;
 };
 typedef struct PosicionEstadoRep *PosicionEstado;
 
@@ -62,17 +61,5 @@ int juntarNumeros(unsigned int dia, unsigned int mes, unsigned int anio);
 void cargarPersona();
 
 int FuncionHash (int n);
-
-void alta(TablaHash th);
-
-void bajas(TablaHash th, int legajo);
-
-void modificar(FILE *archivo,TablaHash th,int legajo);
-
-bool buscarAlumnoEnTabla(TablaHash th, int legajo);
-
-void menu_modificar();
-
-void mostrar_modificacion(FILE *archivo, TablaHash th, int legajo );
 
 #endif // Tabla hash
