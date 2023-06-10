@@ -10,8 +10,6 @@
 #include "tabla_hash.h"
 #include "tipo_elemento.h"
 
-static const int TAMANIO_MAXIMO = 100;
-static const int NRO_PRIMO = 97;
 
 int FuncionHash (int n){
     return n % NRO_PRIMO;
@@ -114,7 +112,27 @@ int juntarNumeros(unsigned int dia, unsigned int mes, unsigned int anio){
     return entero;
 }
 
+void cargarPersona()
+{
+    int min, max, validador,dni, dia, mes, anio;
+    char nombre[20];
+    char apellido[20];
+    // Cargar DNI
+    printf(ANSI_bMAGENTA "DNI: " ANSI_YELLOW);
+    validador = scanf("%d", &dni);
+    vaciar_buffer();
+    while (validador != 1 || dni < 1 || dni > 99999999)
+    {
+        printf(ANSI_RED "\t\t-------- ERROR -------- \n");
+        printf("DATO FUERA DE RANGO\n\n" ANSI_RESET);
+        pausa();
+        printf(ANSI_bBLUE "DNI: " ANSI_YELLOW);
+        validador = scanf("%d", &dni);
+        vaciar_buffer();
+    }
 
-
-
-
+    // Cargar nombre
+    printf("Nombre: ");
+    //scanf();
+    vaciar_buffer();
+}

@@ -19,6 +19,10 @@
 
 #include "tipo_elemento.h"
 #include "listas.h"
+#include "tabla_hash.h"
+
+static const int TAMANIO_MAXIMO = 100;
+static const int NRO_PRIMO = 97;
 
 struct AlumnoRep{
     int legajo;
@@ -37,6 +41,14 @@ struct PosicionEstadoRep{
 };
 typedef struct PosicionEstadoRep *PosicionEstado;
 
+struct PersonaRep{
+    int fecha;
+    int dni;
+    char nombre[20];
+    char apellido[20];
+};
+typedef struct PersonaRep *Persona;
+
 void vaciar_buffer();
 
 void pausa();
@@ -46,5 +58,21 @@ void limpiar_pantalla();
 bool validarFecha(unsigned int dia, unsigned int mes,unsigned int anio);
 
 int juntarNumeros(unsigned int dia, unsigned int mes, unsigned int anio);
+
+void cargarPersona();
+
+int FuncionHash (int n);
+
+void alta(TablaHash th);
+
+void bajas(TablaHash th, int legajo);
+
+void modificar(FILE *archivo,TablaHash th,int legajo);
+
+bool buscarAlumnoEnTabla(TablaHash th, int legajo);
+
+void menu_modificar();
+
+void mostrar_modificacion(FILE *archivo, TablaHash th, int legajo );
 
 #endif // Tabla hash

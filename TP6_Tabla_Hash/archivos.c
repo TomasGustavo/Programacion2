@@ -29,14 +29,17 @@ void alta(TablaHash th){
         }
     }
     else{
-        printf("Ingrese Dni del alumno: ");
-        scanf("%d",&alumno->dni);
-        vaciar_buffer();
-        printf("Ingrese Nombre del alumno: ");
-        fscanf(&alumno->nombre,20,stdin);
+       printf("Ingrese Nombre del alumno: ");
+        fgets(alumno->nombre,20,stdin);
         vaciar_buffer();
         printf("Ingrese Apellido del alumno: ");
-        fscanf(&alumno->apellido,20,stdin);
+        fgets(alumno->apellido,20,stdin);
+        vaciar_buffer();
+        printf("Ingrese Domicilio del alumno: ");
+        fgets(alumno->domicilio,20,stdin);
+        vaciar_buffer();
+        printf("Ingrese Telefono del alumno: ");
+        scanf("%d",&alumno->TE);
         vaciar_buffer();
         pe->estado = true;
 
@@ -47,7 +50,7 @@ void alta(TablaHash th){
     }
     
     fclose(archivo);
-    TipoElemento x = te_crear_con_valor(alumno->legajo,pe->posicion);
+    TipoElemento x = te_crear_con_valor(alumno->legajo,(void*)&(pe->posicion));
     th_insertar(th,x);
 }
 
@@ -71,6 +74,58 @@ void bajas(TablaHash th, int legajo){
 
 }
 
+void modificar(FILE *archivo,TablaHash th,int legajo){
+    archivo = fopen("alumnos.dat","r+b");
+    Alumno alumno = (Alumno) malloc (sizeof(struct AlumnoRep));
+    PosicionEstado pe = (PosicionEstado) malloc (sizeof(struct PosicionEstadoRep));
+    int opc;
+    TipoElemento x;
+
+    x = th_recuperar(th,legajo);
+    pe = (PosicionEstado)x->valor;
+    if (x != NULL && pe->estado!= false){
+
+        fseek(archivo,pe->posicion,SEEK_SET);
+        fread(&alumno,sizeof(Alumno),1,archivo);
+        menu_modificar();
+        scanf("%d",&opc);
+        switch (opc)
+            {
+            case 1:
+                printf("escriba el nuevo nombre\n");
+                fgets(alumno->nombre, 20, stdin);
+                vaciar_buffer();
+                fseek(archivo, -4, SEEK_CUR);
+                fwrite(&alumno->nombre, sizeof(Alumno), 1, archivo); 
+                break;
+            case 2:
+                printf("escriba el nuevo apellido\n");
+                fgets(alumno->apellido, 20, stdin);
+                vaciar_buffer();
+                fseek(archivo, -3, SEEK_CUR);
+                fwrite(&alumno->apellido, sizeof(Alumno), 1, archivo);
+                break;
+            case 3:
+                printf("escriba el nuevo domicilio\n");
+                fgets(alumno->domicilio, 20, stdin);
+                vaciar_buffer();
+                fseek(archivo, -2, SEEK_CUR);
+                fwrite(&alumno->domicilio, sizeof(Alumno), 1, archivo);
+                break;
+            case 4:
+                printf("escriba el nuevo numero de telefono\n");
+                scanf("%d", &alumno->TE);
+                vaciar_buffer();
+                fseek(archivo, -1, SEEK_CUR);
+                fwrite(&alumno->TE, sizeof(Alumno), 1, archivo);
+                break;
+            default:
+                break;
+            }
+
+    }
+}
+/* MOdificar VIEJO
 void modificar(FILE *archivo,TablaHash th,int legajo){
     FILE *archivo = fopen("alumnos.dat","r+b");
     Alumno alumno = (Alumno) malloc (sizeof(struct AlumnoRep));
@@ -116,7 +171,6 @@ void modificar(FILE *archivo,TablaHash th,int legajo){
         }
     }*/
 
-}
 
 
 bool buscarAlumnoEnTabla(TablaHash th, int legajo) { 
@@ -153,6 +207,36 @@ bool buscarAlumnoArchivo(FILE* archivo, int legajo) {
     else{
         return true;
     }
+}
+
+void mostrar_modificacion(FILE* archivo, TablaHash th, int legajo ){
+    archivo = fopen("alumnos.dat","rb");
+    Alumno alumno = (Alumno) malloc (sizeof(struct AlumnoRep));
+    PosicionEstado pe = (PosicionEstado) malloc (sizeof(struct PosicionEstadoRep));
+    int opc;
+    TipoElemento x;
+
+    x = th_recuperar(th,legajo);
+    pe = (PosicionEstado)x->valor;
+    fseek(archivo,pe->posicion,SEEK_SET);
+    fread(&alumno,sizeof(Alumno),1,archivo);
+    printf("legajo\tapellido\tnombre\tdomicilio\ttelefono\n");
+    printf("%d\t", alumno->legajo);
+    for (int i = 0; i < sizeof(alumno->apellido); i++)
+    {
+        printf("%c", alumno->apellido[i]);
+    }
+    for (int i = 0; i < sizeof(alumno->nombre); i++)
+    {
+        printf("%c", alumno->nombre[i]);
+    }
+    for (int i = 0; i < sizeof(alumno->domicilio); i++)
+    {
+        printf("%c", alumno->domicilio[i]);
+    }
+    printf("%d\n",alumno->TE);
+    fclose(archivo);
+
 }
 
 void menu_modificar(){

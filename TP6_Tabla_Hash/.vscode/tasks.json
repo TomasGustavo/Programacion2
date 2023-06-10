@@ -12,6 +12,7 @@
                 "listas_apuntadores.c",
                 "tipo_elemento.c",
                 "TP6_Tabla_Hash.c",
+                "archivos.c",
                 "-o",
                 "${fileDirname}\\${fileBasenameNoExtension}.exe"
             ],

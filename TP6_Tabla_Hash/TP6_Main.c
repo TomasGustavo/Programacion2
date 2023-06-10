@@ -6,6 +6,96 @@
 #include <string.h>
 #include "TP6_tabla_hash.h"
 #include "archivos.h"
+#include "tabla_hash.h"
+
+void menu_alumnos(){
+    printf("\n");
+    printf(ANSI_BLUE "  ============================================================================\n");
+    printf(" |                                  ABM alumnos                                |\n");
+    printf("  ============================================================================\n");
+    printf("\n");
+    printf("  1   dar de alta un alumno\n");
+    printf("  2   dar de baja un alumno\n");
+    printf("  3   modificar datos de alumnos\n");
+    printf("\n");
+    printf("  0   Salir\n");
+    printf("\n");
+    printf(" ------------------------------------------------------------------------------\n");
+    printf("\n");
+    printf("  Por favor seleccione una opción: " ANSI_YELLOW);
+}
+
+void main_baja(TablaHash th){
+    int validador;
+    int legajo;
+    printf(ANSI_bMAGENTA "Ingrese el legajo [100000 - 999999]: " ANSI_YELLOW);
+        validador = scanf("%d", &legajo);
+        vaciar_buffer();
+        while (validador != 1 || legajo < 100000 || legajo > 999999)
+        {
+            printf(ANSI_RED "\t\t-------- ERROR -------- \n");
+            printf("DATO FUERA DE RANGO\n\n" ANSI_RESET);
+            pausa();
+            printf(ANSI_bBLUE "Ingrese el legajo [100000 - 999.999]: " ANSI_YELLOW);
+            validador = scanf("%d", &legajo);
+            vaciar_buffer();
+        }
+    bajas(th, legajo);
+}
+
+void main_modificar(TablaHash th){
+    FILE * archivo;
+    int validador;
+    int legajo;
+    printf(ANSI_bMAGENTA "Ingrese el legajo [100000 - 999999]: " ANSI_YELLOW);
+        validador = scanf("%d", &legajo);
+        vaciar_buffer();
+        while (validador != 1 || legajo < 100000 || legajo > 999999)
+        {
+            printf(ANSI_RED "\t\t-------- ERROR -------- \n");
+            printf("DATO FUERA DE RANGO\n\n" ANSI_RESET);
+            pausa();
+            printf(ANSI_bBLUE "Ingrese el legajo [100000 - 999.999]: " ANSI_YELLOW);
+            validador = scanf("%d", &legajo);
+            vaciar_buffer();
+        }
+    modificar(archivo, th, legajo);
+}
+
+void main_punto4(){
+    bool salir_p4 = false;
+    int opcion;
+
+    TablaHash th = th_crear(TAMANIO_MAXIMO, &FuncionHash);
+    while (!salir_p4)
+    {
+        menu_alumnos();
+        int validador = scanf("%i", &opcion);
+        while (validador != 1 || opcion < 0  || opcion > 9)
+        {
+            printf(ANSI_RED "Opción incorrecta\n" ANSI_RESET);
+            printf(ANSI_BLUE "  Por favor seleccione una opción: " ANSI_YELLOW);
+            while (getchar() != '\n')
+                ;
+            validador = scanf("%i", &opcion);
+        }
+        switch (opcion)
+        {
+        case 1:
+            alta(th);
+            break;
+        case 2:
+            main_baja(th);
+            break;
+        case 3:
+            main_modificar(th);
+            break;
+        case 0:
+            salir_p4 = true;
+        }
+    }
+}
+
 
 /// @brief Menú principal del TP de tabla hash
 void menu_principal()
@@ -26,22 +116,7 @@ void menu_principal()
     printf("  Por favor seleccione una opción: " ANSI_YELLOW);
 }
 
-void menu_alumnos(){
-    printf("\n");
-    printf(ANSI_BLUE "  ============================================================================\n");
-    printf(" |                                  ABM alumnos                                |\n");
-    printf("  ============================================================================\n");
-    printf("\n");
-    printf("  1   dar de alta un alumno\n");
-    printf("  2   dar de baja un alumno\n");
-    printf("  3   modificar datos de alumnos\n");
-    printf("\n");
-    printf("  0   Salir\n");
-    printf("\n");
-    printf(" ------------------------------------------------------------------------------\n");
-    printf("\n");
-    printf("  Por favor seleccione una opción: " ANSI_YELLOW);
-}
+
 
 int main(){
     bool salir = false;
