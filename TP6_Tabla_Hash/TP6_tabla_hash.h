@@ -20,6 +20,23 @@
 #include "tipo_elemento.h"
 #include "listas.h"
 
+struct AlumnoRep{
+    int legajo;
+    int dni;
+    char nombre[20];
+    char apellido[20];
+    char domicilio [20];
+    int TE;
+};
+typedef struct AlumnoRep *Alumno;
+
+struct PosicionEstadoRep{
+    int legajo;
+    bool estado;
+    int posicion;
+};
+typedef struct PosicionEstadoRep *PosicionEstado;
+
 void vaciar_buffer();
 
 void pausa();

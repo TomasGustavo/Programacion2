@@ -6,6 +6,16 @@
 #include <string.h>
 #include <ctype.h>
 #include "TP6_tabla_hash.h"
+#include "listas.h"
+#include "tabla_hash.h"
+#include "tipo_elemento.h"
+
+static const int TAMANIO_MAXIMO = 100;
+static const int NRO_PRIMO = 97;
+
+int FuncionHash (int n){
+    return n % NRO_PRIMO;
+}
 
 /// @brief Vacía el buffer de entrada.
 void vaciar_buffer()
@@ -27,3 +37,5 @@ void limpiar_pantalla()
     printf("\033[2J\033[1;1H");
     return;
 }
+
+// Punto 6

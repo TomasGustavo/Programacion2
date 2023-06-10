@@ -4,6 +4,7 @@
         "tp5_arboles.h": "c",
         "nodo.h": "c",
         "arbol-binario.h": "c",
-        "listas.h": "c"
+        "listas.h": "c",
+        "ctype.h": "c"
     }
 }
