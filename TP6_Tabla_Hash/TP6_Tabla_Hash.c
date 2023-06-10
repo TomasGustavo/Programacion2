@@ -37,8 +37,23 @@ void limpiar_pantalla()
     printf("\033[2J\033[1;1H");
     return;
 }
-//......................................................................................................
-// Punto 6
+
+// -------------------------------------------------- PUNTO 5 --------------------------------------------------
+
+/// @brief Función que genera números aleatorios dentro de un rango
+/// @param min Rango mínimo
+/// @param max Rango máximo
+/// @return Numero aleatorio generado
+int getRandom(int min, int max)
+{
+    int n_aleatorio;
+    n_aleatorio = min + (rand() % (max - min + 1));
+    return n_aleatorio;
+}
+//NO OLVIDARSE DE USAR SEMILLA UNA VEZ EN LA FUNCION QUE LA LLAMA
+//srand(time(NULL)); // Establecer semilla
+
+// -------------------------------------------------- PUNTO 6 --------------------------------------------------
 
 ///@brief Funcion que dado un dia, mes y año indica si la fecha es valida
 bool validarFecha(unsigned int dia, unsigned int mes,unsigned int anio)
