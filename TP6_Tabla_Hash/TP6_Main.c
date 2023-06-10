@@ -5,6 +5,7 @@
 #include <stdbool.h>
 #include <string.h>
 #include "TP6_tabla_hash.h"
+#include "archivos.h"
 
 /// @brief Menú principal del TP de tabla hash
 void menu_principal()
@@ -17,6 +18,23 @@ void menu_principal()
     printf("  1   ABM Alumnos\n");
     printf("  2   Comparación en tiempos de acceso\n");
     printf("  3   Buscar por fecha\n");
+    printf("\n");
+    printf("  0   Salir\n");
+    printf("\n");
+    printf(" ------------------------------------------------------------------------------\n");
+    printf("\n");
+    printf("  Por favor seleccione una opción: " ANSI_YELLOW);
+}
+
+void menu_alumnos(){
+    printf("\n");
+    printf(ANSI_BLUE "  ============================================================================\n");
+    printf(" |                                  ABM alumnos                                |\n");
+    printf("  ============================================================================\n");
+    printf("\n");
+    printf("  1   dar de alta un alumno\n");
+    printf("  2   dar de baja un alumno\n");
+    printf("  3   modificar datos de alumnos\n");
     printf("\n");
     printf("  0   Salir\n");
     printf("\n");
@@ -43,7 +61,7 @@ int main(){
         switch(opcion){
             
             case 1:
-                //main_punto4()
+                menu_alumnos();
                 break;
             case 2:
                 //main_punto5()
