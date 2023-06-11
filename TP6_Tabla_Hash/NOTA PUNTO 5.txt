@@ -1,0 +1,7 @@
+- listado de los tiempos de búsqueda individuales para cada estructura cuando la
+clave no se encuentra.
+- tiempo mínimo, máximo y promedio de busqueda para cada estructura.
+- validar que la cantidad de valores a generar sin repeticiones sea compatible con el rango.
+- verificar que no se generen números repetidos entre las claves a insertar (esto ocasiona que la cantidad de claves cargadas en el árbol puede ser distinta de la tabla).
+- Las estructuras se llenan de claves una sola vez 
+- se realiza n veces las búsquedas en esas estructuras.
