@@ -114,7 +114,7 @@ void main_punto5()
 
     int min, max, repeticiones, clave, validador;
     // Cantidad de repeticiones
-    printf(ANSI_bMAGENTA "Ingrese la cantidad de repeticiones que se ejecutara la carga de estructuras [1-1000]: " ANSI_YELLOW);
+    printf(ANSI_bMAGENTA "Ingrese la cantidad de repeticiones que se ejecutara la busqueda de un clave en las estructuras [1-1000]: " ANSI_YELLOW);
     validador = scanf("%d", &repeticiones);
     vaciar_buffer();
     while (validador != 1 || repeticiones < N_MIN || repeticiones > 1000)
@@ -122,7 +122,7 @@ void main_punto5()
         printf(ANSI_RED "\t\t-------- ERROR -------- \n");
         printf("DATO FUERA DE RANGO\n\n" ANSI_RESET);
         pausa();
-        printf(ANSI_bBLUE "Ingrese la cantidad de repeticiones que se ejecutara la carga de arboles [1-1000]: " ANSI_YELLOW);
+        printf(ANSI_bBLUE "Ingrese la cantidad de repeticiones que se ejecutara la busqueda de un clave en las estructuras [1-1000]: " ANSI_YELLOW);
         validador = scanf("%d", &repeticiones);
         vaciar_buffer();
     }
@@ -163,7 +163,7 @@ void main_punto5()
     while ((validador != 1) || ((max - min) < (clave * 2)) || (max > 999999))
     {
         printf("ERROR\n");
-        printf("datos fuera de rango\nPor favor Ingrese nuevamente el rango máximo de la serie aleatoria [%d-999.999]: " ANSI_YELLOW, (min * 2));
+        printf("Datos fuera de rango\nPor favor Ingrese nuevamente el rango máximo de la serie aleatoria [%d-999.999]: " ANSI_YELLOW, (min * 2));
         validador = scanf("%d", &max);
         vaciar_buffer();
     }
