@@ -12,12 +12,13 @@ void menu_alumnos()
 {
     printf("\n");
     printf(ANSI_BLUE "  ============================================================================\n");
-    printf(" |                                  ABM alumnos                                |\n");
+    printf(" |                                 ABM Alumnos                                |\n");
     printf("  ============================================================================\n");
     printf("\n");
-    printf("  1   dar de alta un alumno\n");
-    printf("  2   dar de baja un alumno\n");
-    printf("  3   modificar datos de alumnos\n");
+    printf("  1   Dar de alta un alumno\n");
+    printf("  2   Dar de baja un alumno\n");
+    printf("  3   Modificar datos de un alumno\n");
+    printf("  4   Mostrar archivo binario\n");
     printf("\n");
     printf("  0   Salir\n");
     printf("\n");
@@ -76,7 +77,8 @@ void main_punto4()
         limpiar_pantalla();
         menu_alumnos();
         int validador = scanf("%i", &opcion);
-        while (validador != 1 || opcion < 0 || opcion > 3)
+        vaciar_buffer();
+        while (validador != 1 || opcion < 0 || opcion > 4)
         {
             printf(ANSI_RED "Opción incorrecta\n" ANSI_RESET);
             printf(ANSI_BLUE "  Por favor seleccione una opción: " ANSI_YELLOW);
@@ -94,6 +96,9 @@ void main_punto4()
             break;
         case 3:
             main_modificar(th);
+            break;
+        case 4:
+            mostrarArchivo();
             break;
         case 0:
             salir_p4 = true;
@@ -168,10 +173,11 @@ void main_punto5()
     limpiar_pantalla();
 }
 
-void menu_personas(){
-     printf("\n");
+void menu_personas()
+{
+    printf("\n");
     printf(ANSI_BLUE "  ============================================================================\n");
-    printf(" |                                 PUNTO 6                                |\n");
+    printf(" |                                  PUNTO 6                                   |\n");
     printf("  ============================================================================\n");
     printf("\n");
     printf("  1   Agregar persona\n");
@@ -184,7 +190,8 @@ void menu_personas(){
     printf("  Por favor seleccione una opción: " ANSI_YELLOW);
 }
 
-void main_6b(TablaHash* th){
+void main_6b(TablaHash *th)
+{
     int validador, fecha;
     unsigned int dia, mes, anio;
     bool fechaValida = false;
@@ -236,17 +243,18 @@ void main_6b(TablaHash* th){
         }
 
         fechaValida = validarFecha(dia, mes, anio);
-        printf("%s", fechaValida ? "La fecha es válida" : "La fecha no es válida, vuelva a ingresarla");
+        printf("%s", fechaValida ? ANSI_GREEN "\nLa fecha es válida\n" : ANSI_RED "\nLa fecha no es válida, vuelva a ingresarla\n");
     }
 
     fecha = juntarNumeros(dia, mes, anio);
     recuperarPersonas(*th, fecha);
 }
 
-void main_punto6(){
+void main_punto6()
+{
     bool salir_p6 = false;
     int opcion;
-    TablaHash th = th_crear(50, FuncionHash1);
+    TablaHash th = th_crear(TAMANIO_MAXIMO_P6, FuncionHash_Punto6);
     while (!salir_p6)
     {
         limpiar_pantalla();
@@ -272,14 +280,14 @@ void main_punto6(){
             salir_p6 = true;
         }
     }
- }
+}
 
 /// @brief Menú principal del TP de tabla hash
 void menu_principal()
 {
     printf("\n");
     printf(ANSI_BLUE "  ============================================================================\n");
-    printf(" |                                 TP6 TABLA HASH                                 |\n");
+    printf(" |                               TP6 TABLA HASH                               |\n");
     printf("  ============================================================================\n");
     printf("\n");
     printf("  1   ABM Alumnos\n");
@@ -300,6 +308,7 @@ int main()
 
     while (!salir)
     {
+        limpiar_pantalla();
         menu_principal();
         int validador = scanf("%i", &opcion);
         vaciar_buffer();

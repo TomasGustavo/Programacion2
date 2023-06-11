@@ -24,6 +24,9 @@
 static const int TAMANIO_MAXIMO = 100;
 static const int NRO_PRIMO = 97;
 
+static const int TAMANIO_MAXIMO_P6 = 50;
+static const int NRO_PRIMO_P6 = 47;
+
 struct AlumnoRep{
     int legajo;
     char nombre[20];
@@ -65,4 +68,7 @@ void cargarPersona(TablaHash* th);
 void agregarATabla(TablaHash* th, Persona persona);
 
 void recuperarPersonas(TablaHash th, int fecha);
+
+int FuncionHash_Punto6(int n);
+
 #endif // Tabla hash

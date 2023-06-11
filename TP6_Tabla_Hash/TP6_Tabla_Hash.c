@@ -13,6 +13,33 @@
 #include "tipo_elemento.h"
 #include "arbol-avl.h"
 
+// Valida si todos los elementos de una cadena son letras
+bool sonLetras(char *cadena)
+{
+    bool res = true;
+    for (int i = 0; i < strlen(cadena) - 1; i++)
+    {
+        if (!isalpha(cadena[i]))
+        {
+            res = false;
+        }
+    }
+    return res;
+}
+
+// Pasa todos los caracteres de la cadena a minúscula
+
+void a_mayuscula(char *cadena)
+{
+    int i = 0;
+
+    while (cadena[i] != '\0')
+    {
+        cadena[i] = toupper(cadena[i]);
+        i++;
+    }
+}
+
 int FuncionHash(int n)
 {
     return n % NRO_PRIMO;
@@ -40,9 +67,37 @@ void limpiar_pantalla()
 }
 
 // -------------------------------------------------- PUNTO 5 --------------------------------------------------
-int FuncionHash1(int n)
+
+bool esPrimo(int numero) {
+    if (numero <= 1) {
+        return false;
+    }
+    for (int i = 2; i <= sqrt(numero); i++) {
+        if (numero % i == 0) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+int numeroPrimoMasCercanoMenor(int numero) {
+    int numeroPrimo = numero - 1;
+
+    while (numeroPrimo > 1) {
+        if (esPrimo(numeroPrimo)) {
+            return numeroPrimo;
+        }
+
+        numeroPrimo--;
+    }
+
+    return -1; // No se encontró un número primo menor
+}
+
+int FuncionHash_Punto5(int n)
 {
-    return n % 10;
+    return n % numeroPrimoMasCercanoMenor(n);
 }
 
 /// @brief Función que genera números aleatorios dentro de un rango
@@ -108,7 +163,7 @@ void cargar_AVL_HASH(int repeticiones, int claves, int rango_min, int rango_max)
     for (int i = 1; i <= repeticiones; i++)
     {
         ArbolAVL A_AVL = avl_crear();
-        TablaHash th = th_crear(claves, FuncionHash1);
+        TablaHash th = th_crear(claves, FuncionHash_Punto5);
         for (int i = 1; i <= claves; i++) // Repite n veces el proceso de carga de los nodos
         {
             cargar_clave_AVL_HASH(&th, &A_AVL, rango_min, rango_max);
@@ -135,6 +190,11 @@ void cargar_AVL_HASH(int repeticiones, int claves, int rango_min, int rango_max)
 }
 
 // -------------------------------------------------- PUNTO 6 --------------------------------------------------
+
+int FuncionHash_Punto6(int n)
+{
+    return n % NRO_PRIMO_P6;
+}
 
 ///@brief Funcion que dado un dia, mes y año indica si la fecha es valida
 bool validarFecha(unsigned int dia, unsigned int mes, unsigned int anio)
@@ -176,31 +236,6 @@ bool validarFecha(unsigned int dia, unsigned int mes, unsigned int anio)
     return fecha_correcta;
 }
 
-// Funciones para pasar la fecha a un mismo string y luego devolver el numero resultado
-//  para pasar a la funcion hash
-/*
-void enteroACadena(unsigned int numero, char *bufer)
-{
-    sprintf(bufer, "%u", numero);
-}
-
-int juntarNumeros(unsigned int dia, unsigned int mes, unsigned int anio)
-{
-    char cadenadia[3];
-    char cadenames[3];
-    char cadenaanio[5];
-    char fecha[9];
-    memset(&fecha, 0, sizeof(fecha));
-    enteroACadena(dia, cadenadia);
-    enteroACadena(mes, cadenames);
-    enteroACadena(anio, cadenaanio);
-    strcat(fecha, cadenadia);
-    strcat(fecha, cadenames);
-    strcat(fecha, cadenaanio);
-    int entero = (int)strtol(fecha, NULL, 10);
-    return entero;
-}
-*/
 int juntarNumeros(unsigned int dia, unsigned int mes, unsigned int anio)
 {
     char fecha[9];
@@ -219,7 +254,7 @@ void cargarPersona(TablaHash *th)
     printf(ANSI_bMAGENTA "DNI: " ANSI_YELLOW);
     validador = scanf("%u", &persona->dni);
     vaciar_buffer();
-    while (validador != 1 || persona->dni < 1 ||  persona->dni > 99999999)
+    while (validador != 1 || persona->dni < 1 || persona->dni > 99999999)
     {
         printf(ANSI_RED "\t\t-------- ERROR -------- \n");
         printf("DATO FUERA DE RANGO\n\n" ANSI_RESET);
@@ -228,14 +263,33 @@ void cargarPersona(TablaHash *th)
         validador = scanf("%d", &persona->dni);
         vaciar_buffer();
     }
-
     // Cargar nombre
-    printf(ANSI_bMAGENTA "Nombre: " ANSI_YELLOW);
-    fgets(persona->nombre, 20, stdin);
+    bool estado_nombre = true;
+    do
+    {
+        if (!estado_nombre)
+        {
+            printf(ANSI_RED "ERROR\tNO ES UNA CADENA VALIDA\n" ANSI_RESET);
+        }
+        printf(ANSI_bMAGENTA "Nombre: " ANSI_YELLOW);
+        fgets(persona->nombre, 20, stdin);
+        persona->nombre[strcspn(persona->nombre, "\n")] = '\0'; // Eliminar el carácter de nueva línea
+        estado_nombre = sonLetras(persona->nombre);
+    } while (!estado_nombre);
 
     // Cargar apellido
-    printf(ANSI_bMAGENTA "Apellido: " ANSI_YELLOW);
-    fgets(persona->apellido, 20, stdin);
+    bool estado_apellido = true;
+    do
+    {
+        if (!estado_apellido)
+        {
+            printf(ANSI_RED "ERROR\tNO ES UNA CADENA VALIDA\n" ANSI_RESET);
+        }
+        printf(ANSI_bMAGENTA "Apellido: " ANSI_YELLOW);
+        fgets(persona->apellido, 20, stdin);
+        persona->apellido[strcspn(persona->apellido, "\n")] = '\0'; // Eliminar el carácter de nueva línea
+        estado_apellido = sonLetras(persona->apellido);
+    } while (!estado_apellido);
 
     while (!fechaValida)
     {
@@ -274,10 +328,11 @@ void cargarPersona(TablaHash *th)
         printf(ANSI_bMAGENTA "Año: " ANSI_YELLOW);
         validador = scanf("%u", &anio);
         vaciar_buffer();
-        while (validador != 1 || anio < 2020 || anio > 2023)
+        while (validador != 1 || anio < 2020 || anio > 2025)
         {
             printf(ANSI_RED "\t\t-------- ERROR -------- \n");
-            printf("DATO FUERA DE RANGO\n\n" ANSI_RESET);
+            printf("DATO FUERA DE RANGO\n\n");
+            printf("El rango es entre 2020 y 2025\n\n" ANSI_RESET);
             pausa();
             printf(ANSI_bMAGENTA "Año: " ANSI_YELLOW);
             validador = scanf("%u", &anio);
@@ -291,7 +346,7 @@ void cargarPersona(TablaHash *th)
     persona->fecha = juntarNumeros(dia, mes, anio);
 
     agregarATabla(th, persona);
-    printf(ANSI_bGREEN "Persona cargada correctamente!\n" ANSI_bYELLOW);
+    printf(ANSI_bGREEN "\nPersona cargada correctamente!\n" ANSI_bYELLOW);
     pausa();
 }
 
@@ -317,7 +372,8 @@ void agregarATabla(TablaHash *th, Persona persona)
     }
 }
 
-void mostrarPersonas(Lista L){
+void mostrarPersonas(Lista L)
+{
     Persona persona = malloc(sizeof(struct PersonaRep));
     TipoElemento X = te_crear(0);
     Iterador ite = iterador(L);
@@ -326,24 +382,25 @@ void mostrarPersonas(Lista L){
     {
         X = siguiente(ite);
         persona = (Persona)X->valor;
-        printf(ANSI_bMAGENTA "\nNombre: " ANSI_YELLOW "%s", persona->nombre);
-        printf(ANSI_bMAGENTA "Apellido: " ANSI_YELLOW "%s", persona->apellido);
+        printf(ANSI_bMAGENTA "\nNombre: " ANSI_YELLOW "%s\n", persona->nombre);
+        printf(ANSI_bMAGENTA "Apellido: " ANSI_YELLOW "%s\n", persona->apellido);
         printf(ANSI_bMAGENTA "DNI: " ANSI_YELLOW "%u \n", persona->dni);
     }
-    pausa();   
+    pausa();
 }
 
-void recuperarPersonas(TablaHash th, int fecha){
+void recuperarPersonas(TablaHash th, int fecha)
+{
     TipoElemento X = th_recuperar(th, fecha);
     if (X == NULL)
     {
         printf(ANSI_bRED "\nNo hay personas vacunadas en esa fecha");
         pausa();
     }
-    else 
+    else
     {
         Lista L = (Lista)X->valor;
+        printf(ANSI_CYAN "\n\nListado de personas que se vacunaron en esa fecha\n\n");
         mostrarPersonas(L);
     }
 }
-
