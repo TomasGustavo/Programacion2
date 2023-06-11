@@ -13,6 +13,9 @@
 #include "tipo_elemento.h"
 #include "arbol-avl.h"
 #include <float.h>
+#include <math.h>
+
+int primo;
 
 // Valida si todos los elementos de una cadena son letras
 bool sonLetras(char *cadena)
@@ -41,7 +44,7 @@ void a_mayuscula(char *cadena)
     }
 }
 
-int FuncionHash(int n)
+int FuncionHash_Punto4(int n)
 {
     return n % NRO_PRIMO;
 }
@@ -105,7 +108,8 @@ int numeroPrimoMasCercanoMenor(int numero)
 
 int FuncionHash_Punto5(int n)
 {
-    return n % numeroPrimoMasCercanoMenor(n);
+    return n % primo;
+    // return n % numeroPrimoMasCercanoMenor(n);
 }
 
 /// @brief Función que genera números aleatorios dentro de un rango
@@ -175,14 +179,15 @@ void cargar_AVL_HASH(int repeticiones, int claves, int rango_min, int rango_max)
     struct timespec start, end;
     TipoElemento X;
 
-    long long tiempo_minimo_avl, tiempo_maximo_avl, tiempo_suma_avl = 0, tiempo_actual_avl;
-    long long tiempo_minimo_th, tiempo_maximo_th, tiempo_suma_th = 0, tiempo_actual_th;
+    unsigned long long tiempo_minimo_avl, tiempo_maximo_avl, tiempo_suma_avl = 0, tiempo_actual_avl;
+    unsigned long long tiempo_minimo_th, tiempo_maximo_th, tiempo_suma_th = 0, tiempo_actual_th;
     double tiempo_promedio_avl, tiempo_promedio_th, tiempo_no_esta_promedio_th, tiempo_no_esta_promedio_avl;
-    long long tiempo_no_esta_avl = 0, tiempo_no_esta_th = 0;
+    unsigned long long tiempo_no_esta_avl = 0, tiempo_no_esta_th = 0;
     int no_esta_avl = 0, no_esta_th = 0;
 
     ArbolAVL A_AVL = avl_crear();
-    TablaHash th = th_crear(claves, FuncionHash_Punto5);
+    primo = numeroPrimoMasCercanoMenor(claves);
+    TablaHash th = th_crear(claves, &FuncionHash_Punto5);
     for (int i = 1; i <= claves; i++) // Repite n veces el proceso de carga de los nodos
     {
         cargar_clave_AVL_HASH(&th, &A_AVL, rango_min, rango_max);
@@ -190,7 +195,7 @@ void cargar_AVL_HASH(int repeticiones, int claves, int rango_min, int rango_max)
     // generar un random y buscar en las dos tablas tomando tiempo
     claveABuscar = getRandom(rango_min, rango_max);
 
-    // Tiempo y busqueda en hash
+    // Tiempo y búsqueda en hash
     clock_gettime(CLOCK_REALTIME, &start);
     X = th_recuperar(th, claveABuscar); // Busco la clave
     clock_gettime(CLOCK_REALTIME, &end);
@@ -205,7 +210,7 @@ void cargar_AVL_HASH(int repeticiones, int claves, int rango_min, int rango_max)
     tiempo_maximo_th = tiempo_actual_th;
     tiempo_suma_th += tiempo_actual_th;
 
-    // Tiempo y busqueda en avl
+    // Tiempo y búsqueda en avl
     clock_gettime(CLOCK_REALTIME, &start);
     X = avl_buscar(A_AVL, claveABuscar); // Busco la clave
     clock_gettime(CLOCK_REALTIME, &end);
@@ -225,7 +230,7 @@ void cargar_AVL_HASH(int repeticiones, int claves, int rango_min, int rango_max)
         // generar un random y buscar en las dos tablas tomando tiempo
         claveABuscar = getRandom(rango_min, rango_max);
 
-        // Tiempo y busqueda en hash
+        // Tiempo y búsqueda en hash
         clock_gettime(CLOCK_REALTIME, &start);
         X = th_recuperar(th, claveABuscar); // Busco la clave
         clock_gettime(CLOCK_REALTIME, &end);
@@ -247,7 +252,7 @@ void cargar_AVL_HASH(int repeticiones, int claves, int rango_min, int rango_max)
         }
         tiempo_suma_th += tiempo_actual_th;
 
-        // Tiempo y busqueda en avl
+        // Tiempo y búsqueda en avl
         clock_gettime(CLOCK_REALTIME, &start);
         X = avl_buscar(A_AVL, claveABuscar); // Busco la clave
         clock_gettime(CLOCK_REALTIME, &end);
@@ -283,22 +288,22 @@ void cargar_AVL_HASH(int repeticiones, int claves, int rango_min, int rango_max)
         tiempo_no_esta_promedio_avl = tiempo_no_esta_avl / no_esta_avl;
     }
     printf(ANSI_GREEN "\nSe realizaron %d búsquedas en las estructuras, las estadísticas son:\n", repeticiones);
-    printf(ANSI_GREEN "El tiempo mínimo del arbol AVL es: " ANSI_YELLOW "%lld nanosegundos\n", tiempo_minimo_avl);
-    printf(ANSI_GREEN "El tiempo máximo del arbol AVL es: " ANSI_YELLOW "%lld nanosegundos\n", tiempo_maximo_avl);
+    printf(ANSI_GREEN "El tiempo mínimo del arbol AVL es: " ANSI_YELLOW "%llu nanosegundos\n", tiempo_minimo_avl);
+    printf(ANSI_GREEN "El tiempo máximo del arbol AVL es: " ANSI_YELLOW "%llu nanosegundos\n", tiempo_maximo_avl);
     printf(ANSI_GREEN "El tiempo promedio del arbol AVL es: " ANSI_YELLOW "%.2f nanosegundos\n", tiempo_promedio_avl);
     if (no_esta_avl != 0)
     {
         printf(ANSI_GREEN "El tiempo promedio del arbol AVL si no esta la clave es: " ANSI_YELLOW "%.2f nanosegundos\n", tiempo_no_esta_promedio_avl);
     }
-    printf(ANSI_GREEN "El tiempo total del arbol AVL es: " ANSI_YELLOW "%lld nanosegundos\n\n", tiempo_suma_avl);
-    printf(ANSI_GREEN "El tiempo mínimo de la tabla hash es: " ANSI_YELLOW "%lld nanosegundos\n", tiempo_minimo_th);
-    printf(ANSI_GREEN "El tiempo máximo de la tabla hash es: " ANSI_YELLOW "%lld nanosegundos\n", tiempo_maximo_th);
+    printf(ANSI_GREEN "El tiempo total del arbol AVL es: " ANSI_YELLOW "%llu nanosegundos\n\n", tiempo_suma_avl);
+    printf(ANSI_GREEN "El tiempo mínimo de la tabla hash es: " ANSI_YELLOW "%llu nanosegundos\n", tiempo_minimo_th);
+    printf(ANSI_GREEN "El tiempo máximo de la tabla hash es: " ANSI_YELLOW "%llu nanosegundos\n", tiempo_maximo_th);
     printf(ANSI_GREEN "El tiempo promedio de la tabla hash es: " ANSI_YELLOW "%.2f nanosegundos\n", tiempo_promedio_th);
     if (no_esta_avl != 0)
     {
         printf(ANSI_GREEN "El tiempo promedio de la tabla hash si no esta la clave es: " ANSI_YELLOW "%.2f nanosegundos\n", tiempo_no_esta_promedio_th);
     }
-    printf(ANSI_GREEN "El tiempo total de la tabla hash es: " ANSI_YELLOW "%lld nanosegundos\n\n", tiempo_suma_th);
+    printf(ANSI_GREEN "El tiempo total de la tabla hash es: " ANSI_YELLOW "%llu nanosegundos\n\n", tiempo_suma_th);
 }
 
 // -------------------------------------------------- PUNTO 6 --------------------------------------------------
@@ -308,7 +313,7 @@ int FuncionHash_Punto6(int n)
     return n % NRO_PRIMO_P6;
 }
 
-///@brief Funcion que dado un dia, mes y año indica si la fecha es valida
+///@brief Función que dado un día, mes y año indica si la fecha es valida
 bool validarFecha(unsigned int dia, unsigned int mes, unsigned int anio)
 {
     unsigned int dia_maximo;
@@ -408,7 +413,7 @@ void cargarPersona(TablaHash *th)
         // Cargar fecha
         printf(ANSI_bMAGENTA "Ingresar la fecha de vacunación\n" ANSI_YELLOW);
 
-        // Cargar dia
+        // Cargar día
         printf(ANSI_bMAGENTA "Día: " ANSI_YELLOW);
         validador = scanf("%u", &dia);
         vaciar_buffer();

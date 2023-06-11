@@ -3,8 +3,6 @@
 
 #include "tipo_elemento.h"
 
-
-
 struct TablaHashRep;
 typedef struct TablaHashRep *TablaHash;
 
@@ -56,4 +54,4 @@ void th_mostrar(TablaHash th);
  */
 void th_mostrar_solo_ocupados(TablaHash th);
 
-#endif //TABLA_HASH_H
+#endif // TABLA_HASH_H

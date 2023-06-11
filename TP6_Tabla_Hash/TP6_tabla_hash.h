@@ -27,17 +27,19 @@ static const int NRO_PRIMO = 97;
 static const int TAMANIO_MAXIMO_P6 = 50;
 static const int NRO_PRIMO_P6 = 47;
 
-struct AlumnoRep{
+struct AlumnoRep
+{
     int legajo;
     char nombre[20];
     char apellido[20];
-    char domicilio [20];
+    char domicilio[20];
     long long TE;
     bool estado;
 };
 typedef struct AlumnoRep *Alumno;
 
-struct PersonaRep{
+struct PersonaRep
+{
     int fecha;
     unsigned int dni;
     char nombre[20];
@@ -51,21 +53,21 @@ void pausa();
 
 void limpiar_pantalla();
 
-bool validarFecha(unsigned int dia, unsigned int mes,unsigned int anio);
+bool validarFecha(unsigned int dia, unsigned int mes, unsigned int anio);
 
 int juntarNumeros(unsigned int dia, unsigned int mes, unsigned int anio);
 
 void cargarPersona();
 
-int FuncionHash (int n);
+int FuncionHash_Punto4(int n);
 
-int FuncionHash1 (int n);
+int FuncionHash_Punto5(int n);
 
 void cargar_AVL_HASH(int repeticiones, int claves, int rango_min, int rango_max);
 
-void cargarPersona(TablaHash* th);
+void cargarPersona(TablaHash *th);
 
-void agregarATabla(TablaHash* th, Persona persona);
+void agregarATabla(TablaHash *th, Persona persona);
 
 void recuperarPersonas(TablaHash th, int fecha);
 

@@ -22,7 +22,7 @@ void continuar()
 }
 
 /// @brief Busca si N° de legajo se encuentra cargado en la tabla hash
-/// @param th Tabla Hash utilizada como indice para accesos directo al archivo
+/// @param th Tabla Hash utilizada como índice para accesos directo al archivo
 /// @param legajo N° de legajo a buscar
 /// @return Si el legajo se encuentra retorna verdadero, caso contrario devuelve falso
 bool buscarAlumnoEnTabla(TablaHash th, int legajo)
@@ -53,8 +53,8 @@ void crear_archivo_binario()
     fclose(archivo);
 }
 
-/// @brief Realiza un alta fisica de los datos del alumno, si se encuentra dado de baja, realiza un alta logica
-/// @param th Tabla Hash utilizada como indice para accesos directo al archivo
+/// @brief Realiza un alta física de los datos del alumno, si se encuentra dado de baja, realiza un alta lógica
+/// @param th Tabla Hash utilizada como índice para accesos directo al archivo
 void alta(TablaHash th)
 {
     FILE *archivo;
@@ -112,8 +112,8 @@ void alta(TablaHash th)
     continuar();
 }
 
-/// @brief Realiza un baja logica de los datos del alumno
-/// @param th Tabla Hash utilizada como indice para accesos directo al archivo
+/// @brief Realiza un baja lógica de los datos del alumno
+/// @param th Tabla Hash utilizada como índice para accesos directo al archivo
 /// @param legajo N° de legajo a buscar
 void baja(TablaHash th, int legajo)
 {
@@ -144,7 +144,7 @@ void baja(TablaHash th, int legajo)
 }
 
 /// @brief Permite modificar todos los datos asociados a un legajo
-/// @param th Tabla Hash utilizada como indice para accesos directo al archivo
+/// @param th Tabla Hash utilizada como índice para accesos directo al archivo
 /// @param legajo N° de legajo a buscar
 void modificar(TablaHash th, int legajo)
 {

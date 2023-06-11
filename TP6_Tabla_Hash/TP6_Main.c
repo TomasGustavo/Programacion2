@@ -71,7 +71,7 @@ void main_punto4()
     int opcion;
     FILE *archivo;
     crear_archivo_binario();
-    TablaHash th = th_crear(TAMANIO_MAXIMO, &FuncionHash);
+    TablaHash th = th_crear(TAMANIO_MAXIMO, &FuncionHash_Punto4);
     while (!salir_p4)
     {
         limpiar_pantalla();
@@ -114,15 +114,15 @@ void main_punto5()
 
     int min, max, repeticiones, clave, validador;
     // Cantidad de repeticiones
-    printf(ANSI_bMAGENTA "Ingrese la cantidad de repeticiones que se ejecutara la busqueda de un clave en las estructuras [1-1000]: " ANSI_YELLOW);
+    printf(ANSI_bMAGENTA "Ingrese la cantidad de repeticiones que se ejecutara la búsqueda de un clave en las estructuras [1-100000]: " ANSI_YELLOW);
     validador = scanf("%d", &repeticiones);
     vaciar_buffer();
-    while (validador != 1 || repeticiones < N_MIN || repeticiones > 1000)
+    while (validador != 1 || repeticiones < N_MIN || repeticiones > 100000)
     {
         printf(ANSI_RED "\t\t-------- ERROR -------- \n");
         printf("DATO FUERA DE RANGO\n\n" ANSI_RESET);
         pausa();
-        printf(ANSI_bBLUE "Ingrese la cantidad de repeticiones que se ejecutara la busqueda de un clave en las estructuras [1-1000]: " ANSI_YELLOW);
+        printf(ANSI_bMAGENTA "Ingrese la cantidad de repeticiones que se ejecutara la búsqueda de un clave en las estructuras [1-100000]: " ANSI_YELLOW);
         validador = scanf("%d", &repeticiones);
         vaciar_buffer();
     }
@@ -136,7 +136,7 @@ void main_punto5()
         printf(ANSI_RED "\t\t-------- ERROR -------- \n");
         printf("DATO FUERA DE RANGO\n\n" ANSI_RESET);
         pausa();
-        printf(ANSI_bBLUE "Ingrese la cantidad de claves a cargar en cada estructura [%d-%d]: " ANSI_YELLOW, N_MIN, N_MAX);
+        printf(ANSI_bMAGENTA "Ingrese la cantidad de claves a cargar en cada estructura [%d-%d]: " ANSI_YELLOW, N_MIN, N_MAX);
         validador = scanf("%d", &clave);
         vaciar_buffer();
     }
@@ -150,7 +150,7 @@ void main_punto5()
         printf(ANSI_RED "\t\t-------- ERROR -------- \n");
         printf("DATO FUERA DE RANGO\n\n" ANSI_RESET);
         pausa();
-        printf(ANSI_bBLUE "Ingrese el rango mínimo de la serie aleatoria [1-%d]: " ANSI_YELLOW, A_MAX);
+        printf(ANSI_bMAGENTA "Ingrese el rango mínimo de la serie aleatoria [1-%d]: " ANSI_YELLOW, A_MAX);
         validador = scanf("%d", &min);
         vaciar_buffer();
     }
@@ -169,6 +169,7 @@ void main_punto5()
     }
 
     cargar_AVL_HASH(repeticiones, clave, min, max);
+    printf(ANSI_MAGENTA "\nEl tiempo de búsqueda en un árbol AVL es logarítmico, a diferencia del tiempo de búsqueda en una tabla hash que depende de la calidad de la función de hash utilizada y del porcentaje ocupado de la tabla.\nSi la función de hash distribuye uniformemente las claves en la tabla y el porcentaje ocupado es bajo, el tiempo de acceso  en promedio será cercano a O(1). Sin embargo, si el porcentaje de ocupación de la tabla es alto y hay muchas colisiones, el tiempo de acceso puede ser de O(n), donde n es el número de elementos almacenados en la tabla.\nEn conclusión, en escenarios en los que la función de hash es efectiva y el porcentaje de ocupación es bajo, la tabla hash tendrá tiempos de acceso constantes O(1). En contraparte, el árbol AVL garantiza en promedio tiempos de acceso logarítmicos , lo que significa que es más eficiente que una tabla hash cuando el porcentaje de ocupación es grande.");
     pausa();
     limpiar_pantalla();
 }
@@ -200,7 +201,7 @@ void main_6b(TablaHash *th)
         // Cargar fecha
         printf(ANSI_bMAGENTA "Ingresar la fecha de vacunación\n" ANSI_YELLOW);
 
-        // Cargar dia
+        // Cargar día
         printf(ANSI_bMAGENTA "Día: " ANSI_YELLOW);
         validador = scanf("%u", &dia);
         vaciar_buffer();
@@ -254,7 +255,7 @@ void main_punto6()
 {
     bool salir_p6 = false;
     int opcion;
-    TablaHash th = th_crear(TAMANIO_MAXIMO_P6, FuncionHash_Punto6);
+    TablaHash th = th_crear(TAMANIO_MAXIMO_P6, &FuncionHash_Punto6);
     while (!salir_p6)
     {
         limpiar_pantalla();
