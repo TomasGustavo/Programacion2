@@ -200,6 +200,15 @@ int juntarNumeros(unsigned int dia, unsigned int mes, unsigned int anio)
     return entero;
 }
 
+int juntarNumeros_mas_bonita(unsigned int dia, unsigned int mes, unsigned int anio)
+{
+    char fecha[9];
+    sprintf(fecha, "%02u%02u%04u", dia, mes, anio);
+    int entero = atoi(fecha);
+    return entero;
+}
+
+
 void cargarPersona()
 {
     int min, max, validador, dni, dia, mes, anio;
