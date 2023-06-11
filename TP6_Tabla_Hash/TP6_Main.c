@@ -76,7 +76,7 @@ void main_punto4()
         limpiar_pantalla();
         menu_alumnos();
         int validador = scanf("%i", &opcion);
-        while (validador != 1 || opcion < 0 || opcion > 9)
+        while (validador != 1 || opcion < 0 || opcion > 3)
         {
             printf(ANSI_RED "Opción incorrecta\n" ANSI_RESET);
             printf(ANSI_BLUE "  Por favor seleccione una opción: " ANSI_YELLOW);
@@ -168,6 +168,112 @@ void main_punto5()
     limpiar_pantalla();
 }
 
+void menu_personas(){
+     printf("\n");
+    printf(ANSI_BLUE "  ============================================================================\n");
+    printf(" |                                 PUNTO 6                                |\n");
+    printf("  ============================================================================\n");
+    printf("\n");
+    printf("  1   Agregar persona\n");
+    printf("  2   Buscar por fecha\n");
+    printf("\n");
+    printf("  0   Salir\n");
+    printf("\n");
+    printf(" ------------------------------------------------------------------------------\n");
+    printf("\n");
+    printf("  Por favor seleccione una opción: " ANSI_YELLOW);
+}
+
+void main_6b(TablaHash* th){
+    int validador, fecha;
+    unsigned int dia, mes, anio;
+    bool fechaValida = false;
+    while (!fechaValida)
+    {
+        // Cargar fecha
+        printf(ANSI_bMAGENTA "Ingresar la fecha de vacunación\n" ANSI_YELLOW);
+
+        // Cargar dia
+        printf(ANSI_bMAGENTA "Día: " ANSI_YELLOW);
+        validador = scanf("%u", &dia);
+        vaciar_buffer();
+        while (validador != 1 || dia < 1 || dia > 31)
+        {
+            printf(ANSI_RED "\t\t-------- ERROR -------- \n");
+            printf("DATO FUERA DE RANGO\n\n" ANSI_RESET);
+            pausa();
+            printf(ANSI_bMAGENTA "Día: " ANSI_YELLOW);
+            validador = scanf("%u", &dia);
+            vaciar_buffer();
+        }
+
+        // Cargar mes
+        printf(ANSI_bMAGENTA "Mes: " ANSI_YELLOW);
+        validador = scanf("%u", &mes);
+        vaciar_buffer();
+        while (validador != 1 || mes < 1 || mes > 12)
+        {
+            printf(ANSI_RED "\t\t-------- ERROR -------- \n");
+            printf("DATO FUERA DE RANGO\n\n" ANSI_RESET);
+            pausa();
+            printf(ANSI_bMAGENTA "Mes: " ANSI_YELLOW);
+            validador = scanf("%u", &mes);
+            vaciar_buffer();
+        }
+
+        // Cargar año
+        printf(ANSI_bMAGENTA "Año: " ANSI_YELLOW);
+        validador = scanf("%u", &anio);
+        vaciar_buffer();
+        while (validador != 1 || anio < 2020 || anio > 2023)
+        {
+            printf(ANSI_RED "\t\t-------- ERROR -------- \n");
+            printf("DATO FUERA DE RANGO\n\n" ANSI_RESET);
+            pausa();
+            printf(ANSI_bMAGENTA "Año: " ANSI_YELLOW);
+            validador = scanf("%u", &anio);
+            vaciar_buffer();
+        }
+
+        fechaValida = validarFecha(dia, mes, anio);
+        printf("%s", fechaValida ? "La fecha es válida" : "La fecha no es válida, vuelva a ingresarla");
+    }
+
+    fecha = juntarNumeros(dia, mes, anio);
+    recuperarPersonas(*th, fecha);
+}
+
+void main_punto6(){
+    bool salir_p6 = false;
+    int opcion;
+    TablaHash th = th_crear(50, FuncionHash1);
+    while (!salir_p6)
+    {
+        limpiar_pantalla();
+        menu_personas();
+        int validador = scanf("%i", &opcion);
+        while (validador != 1 || opcion < 0 || opcion > 2)
+        {
+            printf(ANSI_RED "Opción incorrecta\n" ANSI_RESET);
+            printf(ANSI_BLUE "Por favor seleccione una opción: " ANSI_YELLOW);
+            while (getchar() != '\n')
+                ;
+            validador = scanf("%i", &opcion);
+        }
+        switch (opcion)
+        {
+        case 1:
+            cargarPersona(&th);
+            break;
+        case 2:
+            main_6b(&th);
+            break;
+        case 0:
+            salir_p6 = true;
+        }
+    }
+ }
+
 /// @brief Menú principal del TP de tabla hash
 void menu_principal()
 {
@@ -200,7 +306,7 @@ int main()
         while (validador != 1 || opcion < 0 || opcion > 3)
         {
             printf(ANSI_RED "Opción incorrecta\n" ANSI_RESET);
-            printf(ANSI_BLUE "  Por favor seleccione una opción: " ANSI_YELLOW);
+            printf(ANSI_BLUE "Por favor seleccione una opción: " ANSI_YELLOW);
             validador = scanf("%i", &opcion);
             vaciar_buffer();
         }
@@ -215,7 +321,7 @@ int main()
             main_punto5();
             break;
         case 3:
-            // main_punto6();
+            main_punto6();
             break;
         case 0:
             salir = true;

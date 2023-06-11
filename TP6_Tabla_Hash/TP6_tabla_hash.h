@@ -36,7 +36,7 @@ typedef struct AlumnoRep *Alumno;
 
 struct PersonaRep{
     int fecha;
-    int dni;
+    unsigned int dni;
     char nombre[20];
     char apellido[20];
 };
@@ -56,6 +56,13 @@ void cargarPersona();
 
 int FuncionHash (int n);
 
+int FuncionHash1 (int n);
+
 void cargar_AVL_HASH(int repeticiones, int claves, int rango_min, int rango_max);
 
+void cargarPersona(TablaHash* th);
+
+void agregarATabla(TablaHash* th, Persona persona);
+
+void recuperarPersonas(TablaHash th, int fecha);
 #endif // Tabla hash
