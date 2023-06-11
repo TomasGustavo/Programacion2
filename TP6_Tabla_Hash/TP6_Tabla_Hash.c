@@ -5,10 +5,13 @@
 #include <stdbool.h>
 #include <string.h>
 #include <ctype.h>
+#include <time.h>
+#include <sys/time.h>
 #include "TP6_tabla_hash.h"
 #include "listas.h"
 #include "tabla_hash.h"
 #include "tipo_elemento.h"
+#include "arbol-avl.h"
 
 int FuncionHash(int n)
 {
@@ -37,6 +40,10 @@ void limpiar_pantalla()
 }
 
 // -------------------------------------------------- PUNTO 5 --------------------------------------------------
+int FuncionHash1(int n)
+{
+    return n % 10;
+}
 
 /// @brief Función que genera números aleatorios dentro de un rango
 /// @param min Rango mínimo
@@ -48,8 +55,84 @@ int getRandom(int min, int max)
     n_aleatorio = min + (rand() % (max - min + 1));
     return n_aleatorio;
 }
-// NO OLVIDARSE DE USAR SEMILLA UNA VEZ EN LA FUNCION QUE LA LLAMA
-// srand(time(NULL)); // Establecer semilla
+
+void free_avl(NodoArbol Q)
+{
+    if (avl_es_rama_nula(Q))
+    {
+        return;
+    }
+
+    free_avl(n_hijoizquierdo(Q));
+    free_avl(n_hijoderecho(Q));
+    free(Q);
+    Q = NULL;
+}
+
+/// @brief Función que carga una clave en un arbol AVL y en una Tabla Hash
+/// @param th Tabla Hash a cargar
+/// @param A_AVL Arbol AVL a cargar la serie aleatoria
+/// @param min Valor mínimo del rango aleatorio
+/// @param max Valor máximo del rango aleatorio
+void cargar_clave_AVL_HASH(TablaHash* th, ArbolAVL* A_AVL, int min, int max)
+{
+    TipoElemento X;
+    int n_aleatorio;
+    if (!avl_es_lleno(*A_AVL))
+    {
+        n_aleatorio = getRandom(min, max);
+        while (avl_buscar(*A_AVL, n_aleatorio) != NULL)
+        {
+            n_aleatorio = getRandom(min, max);
+        }
+        X = te_crear(n_aleatorio);
+        avl_insertar(*A_AVL, X);
+        th_insertar(*th, X);
+    }
+}
+
+/// @brief Función que repite 'repeticiones' veces el proceso de carga del arbol AVL y la Tabla Hash
+/// @param repeticiones Cantidad de repeticiones
+/// @param claves Cantidad de claves a cargar en cada estructura
+/// @param min Valor mínimo del rango aleatorio
+/// @param max Valor máximo del rango aleatorio
+void cargar_AVL_HASH(int repeticiones, int claves, int rango_min, int rango_max)
+{
+    srand(time(NULL)); // Establecer semilla
+    int claveABuscar;
+    long long totalAVL = 0;
+    long long totalHASH = 0;
+    struct timespec start, end;
+    long long msHASH, msAVL;
+    TipoElemento X;
+    for (int i = 1; i <= repeticiones; i++)
+    {
+        ArbolAVL A_AVL = avl_crear();
+        TablaHash th = th_crear(claves, FuncionHash1);
+        for (int i = 1; i <= claves; i++) // Repite n veces el proceso de carga de los nodos
+        {
+            cargar_clave_AVL_HASH(&th, &A_AVL, rango_min, rango_max);
+        }
+        //generar un random y buscar en las dos tablas tomando tiempo
+        claveABuscar = getRandom(rango_min, rango_max);
+        clock_gettime(CLOCK_REALTIME, &start);
+        X = th_recuperar(th,claveABuscar);//Busco la clave
+        clock_gettime(CLOCK_REALTIME, &end);
+        msHASH = (end.tv_nsec - start.tv_nsec);
+        totalHASH += msHASH;
+
+        clock_gettime(CLOCK_REALTIME, &start);
+        X = avl_buscar(A_AVL,claveABuscar);//Busco la clave
+        clock_gettime(CLOCK_REALTIME, &end);
+        msAVL = (end.tv_nsec - start.tv_nsec);
+        totalAVL += msAVL;
+
+        free(th);
+        free_avl(avl_raiz(A_AVL));
+    }  
+    printf(ANSI_GREEN "El tiempo total de HASH en ms es: " ANSI_YELLOW "%lld nanosegundos\n", totalHASH);
+    printf(ANSI_GREEN "El tiempo total de AVL en ms es: " ANSI_YELLOW "%lld nanosegundos\n", totalAVL);
+}
 
 // -------------------------------------------------- PUNTO 6 --------------------------------------------------
 

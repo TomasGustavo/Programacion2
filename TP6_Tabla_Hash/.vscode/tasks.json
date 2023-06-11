@@ -12,6 +12,8 @@
                 "${fileDirname}\\listas_apuntadores.c",
                 "${fileDirname}\\tipo_elemento.c",
                 "${fileDirname}\\TP6_Tabla_Hash.c",
+                "${fileDirname}\\arbol-avl.c",
+                "${fileDirname}\\nodo.c",
                 "${fileDirname}\\archivos.c",
                 "-o",
                 "${fileDirname}\\${fileBasenameNoExtension}.exe"
@@ -40,6 +42,8 @@
                 "${fileDirname}\\listas_apuntadores.c",
                 "${fileDirname}\\tipo_elemento.c",
                 "${fileDirname}\\TP6_Tabla_Hash.c",
+                "${fileDirname}\\arbol-avl.c",
+                "${fileDirname}\\nodo.c",
                 "${fileDirname}\\archivos.c",
                 "-o",
                 "${fileDirname}\\${fileBasenameNoExtension}.exe"

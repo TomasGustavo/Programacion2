@@ -100,6 +100,72 @@ void main_punto4()
     }
 }
 
+ void main_punto5(){
+     const int N_MIN = 1;
+    const int N_MAX = 2000;
+    const int A_MAX = 10000;
+
+    int min, max, repeticiones, clave, validador;
+    // Cantidad de repeticiones
+    printf(ANSI_bMAGENTA "Ingrese la cantidad de repeticiones que se ejecutara la carga de estructuras [1-1000]: " ANSI_YELLOW);
+    validador = scanf("%d", &repeticiones);
+    vaciar_buffer();
+    while (validador != 1 || repeticiones < N_MIN || repeticiones > 1000)
+    {
+        printf(ANSI_RED "\t\t-------- ERROR -------- \n");
+        printf("DATO FUERA DE RANGO\n\n" ANSI_RESET);
+        pausa();
+        printf(ANSI_bBLUE "Ingrese la cantidad de repeticiones que se ejecutara la carga de arboles [1-1000]: " ANSI_YELLOW);
+        validador = scanf("%d", &repeticiones);
+        vaciar_buffer();
+    }
+
+    // Cantidad de claves a cargar en cada estructura
+    printf(ANSI_bMAGENTA "Ingrese la cantidad de claves a cargar en cada estructura [%d-%d]: " ANSI_YELLOW, N_MIN, N_MAX);
+    validador = scanf("%d", &clave);
+    vaciar_buffer();
+    while (validador != 1 || clave < N_MIN || clave > N_MAX)
+    {
+        printf(ANSI_RED "\t\t-------- ERROR -------- \n");
+        printf("DATO FUERA DE RANGO\n\n" ANSI_RESET);
+        pausa();
+        printf(ANSI_bBLUE "Ingrese la cantidad de claves a cargar en cada estructura [%d-%d]: " ANSI_YELLOW, N_MIN, N_MAX);
+        validador = scanf("%d", &clave);
+        vaciar_buffer();
+    }
+
+    // Rango mínimo
+    printf(ANSI_bMAGENTA "Ingrese el rango mínimo de la serie aleatoria [1-%d]: " ANSI_YELLOW, A_MAX);
+    validador = scanf("%d", &min);
+    vaciar_buffer();
+    while (validador != 1 || min < N_MIN || min > A_MAX)
+    {
+        printf(ANSI_RED "\t\t-------- ERROR -------- \n");
+        printf("DATO FUERA DE RANGO\n\n" ANSI_RESET);
+        pausa();
+        printf(ANSI_bBLUE "Ingrese el rango mínimo de la serie aleatoria [1-%d]: " ANSI_YELLOW, A_MAX);
+        validador = scanf("%d", &min);
+        vaciar_buffer();
+    }
+
+    // Rango máximo
+    printf(ANSI_bMAGENTA "Ingrese el rango máximo de la serie aleatoria [%d-999.999]\n" ANSI_YELLOW, (min * 2));
+    printf(ANSI_bRED "Tener en cuenta que la diferencia entre el máximo y el mínimo tiene que ser superior a la cantidad de nodos x2: " ANSI_YELLOW);
+    validador = scanf("%d", &max);
+    vaciar_buffer();
+    while ((validador != 1) || ((max - min) < (clave * 2)) || (max > 999999))
+    {
+        printf("ERROR\n");
+        printf("datos fuera de rango\nPor favor Ingrese nuevamente el rango máximo de la serie aleatoria [%d-999.999]: " ANSI_YELLOW, (min * 2));
+        validador = scanf("%d", &max);
+        vaciar_buffer();
+    }
+
+    cargar_AVL_HASH(repeticiones, clave, min, max);
+    pausa();
+    limpiar_pantalla();
+ }
+
 /// @brief Menú principal del TP de tabla hash
 void menu_principal()
 {
@@ -145,10 +211,10 @@ int main()
             main_punto4();
             break;
         case 2:
-            // main_punto5()
+            main_punto5();
             break;
         case 3:
-            // main_punto6()
+            // main_punto6();
             break;
         case 0:
             salir = true;

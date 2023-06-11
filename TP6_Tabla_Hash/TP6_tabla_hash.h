@@ -56,4 +56,6 @@ void cargarPersona();
 
 int FuncionHash (int n);
 
+void cargar_AVL_HASH(int repeticiones, int claves, int rango_min, int rango_max);
+
 #endif // Tabla hash
