@@ -42,12 +42,11 @@ void main_baja(TablaHash th)
         validador = scanf("%d", &legajo);
         vaciar_buffer();
     }
-    bajas(th, legajo);
+    baja(th, legajo);
 }
 
 void main_modificar(TablaHash th)
 {
-    FILE *archivo;
     int validador;
     int legajo;
     printf(ANSI_bMAGENTA "Ingrese el legajo [1 - 999999]: " ANSI_YELLOW);
@@ -62,15 +61,15 @@ void main_modificar(TablaHash th)
         validador = scanf("%d", &legajo);
         vaciar_buffer();
     }
-    modificar(archivo, th, legajo);
+    modificar(th, legajo);
 }
 
 void main_punto4()
 {
     bool salir_p4 = false;
     int opcion;
-    crear_txt();
-
+    FILE *archivo;
+    crear_archivo_binario();
     TablaHash th = th_crear(TAMANIO_MAXIMO, &FuncionHash);
     while (!salir_p4)
     {

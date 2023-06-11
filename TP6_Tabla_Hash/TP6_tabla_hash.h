@@ -29,16 +29,10 @@ struct AlumnoRep{
     char nombre[20];
     char apellido[20];
     char domicilio [20];
-    int TE;
+    long long TE;
+    bool estado;
 };
 typedef struct AlumnoRep *Alumno;
-
-struct PosicionEstadoRep{
-    int legajo;
-    bool estado;
-    long long posicion;
-};
-typedef struct PosicionEstadoRep *PosicionEstado;
 
 struct PersonaRep{
     int fecha;

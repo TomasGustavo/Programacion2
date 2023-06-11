@@ -5,224 +5,6 @@
 #include "tabla_hash.h"
 #include "archivos.h"
 
-void crear_txt()
-{
-    FILE *archivo;
-    archivo = fopen("alumnos.dat", "wb");
-    if (archivo == NULL)
-    {
-        printf("No se pudo crear el archivo.\n");
-        return;
-    }
-    fclose(archivo);
-}
-
-void alta(TablaHash th)
-{
-    FILE *archivo = fopen("alumnos.dat", "r+b");
-
-    Alumno alumno = (Alumno)malloc(sizeof(struct AlumnoRep));
-    PosicionEstado pe = (PosicionEstado)malloc(sizeof(struct PosicionEstadoRep));
-    printf("Ingrese Legajo del alumno: ");
-    scanf("%d", &(alumno->legajo));
-    vaciar_buffer();
-
-    if (buscarAlumnoEnTabla(th, alumno->legajo))
-    {
-        if (!pe->estado)
-        {
-            pe->estado = true;
-            printf("Alumno existente, se realizo una alta lógica");
-        }
-        else
-        {
-            printf("El alumno ya se encuentra cargado, no se realizo ningún cambio");
-        }
-    }
-    else
-    {
-        printf("Ingrese Nombre del alumno: ");
-        fgets(alumno->nombre, 20, stdin);
-        vaciar_buffer();
-        printf("Ingrese Apellido del alumno: ");
-        fgets(alumno->apellido, 20, stdin);
-        vaciar_buffer();
-        printf("Ingrese Domicilio del alumno: ");
-        fgets(alumno->domicilio, 20, stdin);
-        vaciar_buffer();
-        printf("Ingrese Telefono del alumno: ");
-        scanf("%d", &alumno->TE);
-        vaciar_buffer();
-        pe->estado = true;
-
-        fseek(archivo, 0, SEEK_END);
-        fwrite(alumno, sizeof(struct AlumnoRep), 1, archivo);
-        long pos = ftell(archivo);
-
-        pe->posicion = pos - sizeof(struct AlumnoRep);
-    }
-
-    fclose(archivo);
-    TipoElemento x = te_crear_con_valor(alumno->legajo,pe);
-    th_insertar(th, x);
-
-    mostrarArchivo(th, archivo);
-    pausa();
-}
-
-void bajas(TablaHash th, int legajo)
-{
-
-    PosicionEstado pe = (PosicionEstado)malloc(sizeof(struct PosicionEstadoRep));
-    TipoElemento x;
-
-    x = th_recuperar(th, legajo);
-
-    if (x != NULL)
-    {
-        pe = x->valor;
-        pe->estado = false;
-
-        th_eliminar(th, legajo);
-        x = te_crear_con_valor(legajo, pe);
-        th_insertar(th, x);
-
-        printf("Baja dada correctamente!");
-    }
-}
-
-void modificar(FILE *archivo, TablaHash th, int legajo)
-{
-    archivo = fopen("alumnos.dat", "r+b");
-    if (archivo == NULL)
-    {
-        printf("No se pudo abrir el archivo.\n");
-        return;
-    }
-
-    Alumno alumno = (Alumno)malloc(sizeof(struct AlumnoRep));
-    PosicionEstado pe = (PosicionEstado)malloc(sizeof(struct PosicionEstadoRep));
-    int opc;
-    TipoElemento x;
-
-    x = th_recuperar(th, legajo);
-    if (x != NULL)
-    {
-        pe = (PosicionEstado)x->valor;
-    }
-    if (pe->estado != false)
-    {
-        fseek(archivo, pe->posicion, SEEK_SET);
-        fread(alumno, sizeof(Alumno), 1, archivo);
-        menu_modificar();
-        scanf("%d", &opc);
-        vaciar_buffer();
-        switch (opc)
-        {
-        case 1:
-            //memset(&alumno->nombre, 0, sizeof(alumno->nombre));
-            printf("escriba el nuevo nombre\n");
-            fgets(alumno->nombre, 20, stdin);
-            vaciar_buffer();
-            break;
-        case 2:
-            memset(&alumno->apellido, 0, sizeof(alumno->nombre));
-            printf("escriba el nuevo apellido\n");
-            fgets(alumno->apellido, 20, stdin);
-            vaciar_buffer();
-            break;
-        case 3:
-            memset(&alumno->domicilio, 0, sizeof(alumno->nombre));
-            printf("escriba el nuevo domicilio\n");
-            fgets(alumno->domicilio, 20, stdin);
-            vaciar_buffer();
-            break;
-        case 4:
-            alumno->TE = 0;
-            printf("escriba el nuevo numero de telefono\n");
-            scanf("%d", &alumno->TE);
-            vaciar_buffer();
-            break;
-        default:
-            break;
-        }
-        fseek(archivo, pe->posicion, SEEK_CUR);
-        fwrite(alumno, sizeof(Alumno), 1, archivo);
-        fclose(archivo);
-        vaciar_buffer();
-        mostrarArchivo(th, archivo);
-    }
-}
-
-/* MOdificar VIEJO
-void modificar(FILE *archivo,TablaHash th,int legajo){
-    FILE *archivo = fopen("alumnos.dat","r+b");
-    Alumno alumno = (Alumno) malloc (sizeof(struct AlumnoRep));
-    PosicionEstado pe = (PosicionEstado) malloc (sizeof(struct PosicionEstadoRep));
-    int opc;
-    TipoElemento x;
-
-    x = th_recuperar(th,legajo);
-    pe = x->valor;
-    if (x != NULL && pe->estado!= false){
-
-        fseek(archivo,pe->posicion,SEEK_SET);
-        fread(&alumno,sizeof(Alumno),1,archivo);
-
-    }
-
-    flcose(archivo);
-
-
-
-    /*rewind(archivo);
-
-    while (fread(&alumno, sizeof(Alumno), 1, archivo) == 1) {
-        if (alumno->legajo == legajo) {
-            menu_modificar();
-            scanf("%d",&opc);
-            vaciar_buffer();
-            switch (opc)
-            {
-            case 1:
-
-                break;
-            case 2:
-                // modificar apellido
-                break;
-            case 3:
-                // modificar dni
-                break;
-            default:
-                break;
-            }
-
-        }
-    }*/
-
-void mostrarArchivo(TablaHash th, FILE *archivo)
-{
-
-    Alumno alumno = (Alumno)malloc(sizeof(struct AlumnoRep));
-    archivo = fopen("alumnos.dat", "rb");
-
-    if (archivo == NULL)
-    {
-        printf("No se pudo abrir el archivo.\n");
-        return;
-    }
-    while (fread(alumno, sizeof(struct AlumnoRep), 1, archivo) == 1)
-    {
-        printf("Legajo: %i \n", alumno->legajo);
-        printf("Apellido: %s \n", alumno->apellido);
-        printf("Nombre: %s \n", alumno->nombre);
-        printf("Domicilio: %s \n", alumno->domicilio);
-        printf("Telefono: %i \n", alumno->TE);
-    }
-    vaciar_buffer();
-    fclose(archivo);
-}
-
 bool buscarAlumnoEnTabla(TablaHash th, int legajo)
 {
     TipoElemento x;
@@ -237,63 +19,207 @@ bool buscarAlumnoEnTabla(TablaHash th, int legajo)
     }
 }
 
-bool buscarAlumnoArchivo(FILE *archivo, int legajo)
+// OK
+void crear_archivo_binario()
 {
-    Alumno alumno = (Alumno)malloc(sizeof(struct AlumnoRep));
-    int encontrado = 0;
-
-    rewind(archivo);
-
-    while (fread(&alumno, sizeof(Alumno), 1, archivo) == 1)
+    FILE *archivo;
+    archivo = fopen("alumnos.dat", "wb");
+    if (archivo == NULL)
     {
-        if (alumno->legajo == legajo)
-        {
-            printf("Legajo: %d, Nombre: %s, Apellido: %s\n",
-                   alumno->legajo, alumno->nombre, alumno->apellido);
-            encontrado = 1;
-            break;
-        }
+        printf("No se pudo crear el archivo.\n");
+        return;
     }
+    fclose(archivo);
+}
 
-    if (!encontrado)
+// OK
+void alta(TablaHash th)
+{
+    FILE* archivo;
+    archivo = fopen("alumnos.dat", "r+b");
+    Alumno alumno = (Alumno)malloc(sizeof(struct AlumnoRep));
+    TipoElemento x;
+    int posicion;
+    int legajo_buscar;
+    printf("Ingrese Legajo del alumno: ");
+    scanf("%d", &legajo_buscar);
+    vaciar_buffer();
+
+    if (buscarAlumnoEnTabla(th, legajo_buscar))
     {
-        return false;
+        x = th_recuperar(th, legajo_buscar);
+        posicion = *(int *)x->valor; // A CHEQUEAR
+        fseek(archivo, posicion, SEEK_SET);
+        fread(alumno, sizeof(struct AlumnoRep), 1, archivo);
+        if (!alumno->estado)
+        {
+            alumno->estado = true;
+            fseek(archivo, posicion, SEEK_SET);
+            fwrite(alumno, sizeof(struct AlumnoRep), 1, archivo);
+            printf("Alumno existente, se realizo una alta lógica");
+        }
+        else
+        {
+            printf("El alumno ya se encuentra cargado, no se realizo ningún cambio");
+        }
     }
     else
     {
-        return true;
+        alumno->legajo = legajo_buscar;
+        printf("Ingrese Nombre del alumno: ");
+        fgets(alumno->nombre, 20, stdin);
+        printf("Ingrese Apellido del alumno: ");
+        fgets(alumno->apellido, 20, stdin);
+        printf("Ingrese Domicilio del alumno: ");
+        fgets(alumno->domicilio, 20, stdin);
+        printf("Ingrese Telefono del alumno: ");
+        scanf("%d", &alumno->TE);
+        alumno->estado = true;
+        fseek(archivo, 0, SEEK_END);
+        fwrite(alumno, sizeof(struct AlumnoRep), 1, archivo);
+        long pos = ftell(archivo);
+        posicion = pos - sizeof(struct AlumnoRep);
+        vaciar_buffer();
+    }
+    fclose(archivo);
+    x = te_crear_con_valor(alumno->legajo, &posicion);
+    th_insertar(th, x);
+    mostrarArchivo();
+    pausa();
+}
+
+// OK
+void baja(TablaHash th, int legajo)
+{
+    FILE* archivo;
+    archivo = fopen("alumnos.dat", "r+b");
+    if (archivo == NULL)
+    {
+        printf("No se pudo abrir el archivo.\n");
+        return;
+    }
+    Alumno alumno = (Alumno)malloc(sizeof(struct AlumnoRep));
+    TipoElemento x;
+    int posicion;
+    x = th_recuperar(th, legajo);
+    if (x != NULL)
+    {
+        posicion = (intptr_t)x->valor; // A CHEQUEAR
+        fseek(archivo, posicion, SEEK_SET);
+        fread(alumno, sizeof(struct AlumnoRep), 1, archivo);
+        alumno->estado = false;
+        fseek(archivo, posicion, SEEK_SET);
+        fwrite(alumno, sizeof(struct AlumnoRep), 1, archivo);
+        printf("Baja logica correctamente!");
+        
+    }
+    fclose(archivo);
+    mostrarArchivo();
+}
+
+// OK
+void modificar(TablaHash th, int legajo)
+{
+    FILE* archivo;
+    bool salir = false;
+    archivo = fopen("alumnos.dat", "r+b");
+    if (archivo == NULL)
+    {
+        printf("No se pudo abrir el archivo.\n");
+        return;
+    }
+    Alumno alumno = (Alumno)malloc(sizeof(struct AlumnoRep));
+    int opc, posicion;
+    TipoElemento x;
+    x = th_recuperar(th, legajo);
+    if (x != NULL)
+    {
+        posicion = *(int *)x->valor; // A CHEQUEAR
+        fseek(archivo, posicion, SEEK_SET);
+        fread(alumno, sizeof(struct AlumnoRep), 1, archivo);
+        if (alumno->estado)
+        {
+            while (!salir)
+            {
+                menu_modificar();
+                int validador = scanf("%i", &opc);
+                while (validador != 1 || opc < 0 || opc > 4)
+                {
+                    printf(ANSI_RED "Opción incorrecta\n" ANSI_RESET);
+                    printf(ANSI_BLUE "  Por favor seleccione una opción: " ANSI_YELLOW);
+                    while (getchar() != '\n')
+                        ;
+                    validador = scanf("%i", &opc);
+                }
+
+                switch (opc)
+                {
+                case 1:
+                    printf("Escriba el nuevo nombre\n");
+                    fgets(alumno->nombre, 20, stdin);
+                    break;
+                case 2:
+                    printf("Escriba el nuevo apellido\n");
+                    fgets(alumno->apellido, 20, stdin);
+                    break;
+                case 3:
+                    printf("Escriba el nuevo domicilio\n");
+                    fgets(alumno->domicilio, 20, stdin);
+                    break;
+                case 4:
+                    printf("Escriba el nuevo numero de telefono\n");
+                    scanf("%d", &alumno->TE);
+                    break;
+                case 0:
+                    salir = true;
+                    fclose(archivo);
+                    return;
+                }
+                vaciar_buffer();
+                fseek(archivo, posicion, SEEK_SET);
+                fwrite(alumno, sizeof(struct AlumnoRep), 1, archivo);
+                fclose(archivo);
+                mostrarArchivo();
+            }
+        }
+        else
+        {
+            printf("El legajo se encuentra dado de baja, debera darlo de alta primero");
+            return;
+        }
+    }
+    else
+    {
+        printf("El lejago no existe");
+        return;
     }
 }
 
-void mostrar_modificacion(FILE *archivo, TablaHash th, int legajo)
+// OK
+void mostrarArchivo()
 {
-    archivo = fopen("alumnos.dat", "rb");
+    FILE* archivo;
+    int posicion;
     Alumno alumno = (Alumno)malloc(sizeof(struct AlumnoRep));
-    PosicionEstado pe = (PosicionEstado)malloc(sizeof(struct PosicionEstadoRep));
-    int opc;
-    TipoElemento x;
-
-    x = th_recuperar(th, legajo);
-    pe = (PosicionEstado)x->valor;
-    fseek(archivo, pe->posicion, SEEK_SET);
-    fread(&alumno, sizeof(Alumno), 1, archivo);
-    printf("legajo\tapellido\tnombre\tdomicilio\ttelefono\n");
-    printf("%d\t", alumno->legajo);
-    for (int i = 0; i < sizeof(alumno->apellido); i++)
+    archivo = fopen("alumnos.dat", "rb");
+    if (archivo == NULL)
     {
-        printf("%c", alumno->apellido[i]);
+        printf("No se pudo abrir el archivo.\n");
+        return;
     }
-    for (int i = 0; i < sizeof(alumno->nombre); i++)
+    while (fread(alumno, sizeof(struct AlumnoRep), 1, archivo) == 1)
     {
-        printf("%c", alumno->nombre[i]);
+        printf("Legajo: %i \n", alumno->legajo);
+        printf("Apellido: %s \n", alumno->apellido);
+        printf("Nombre: %s \n", alumno->nombre);
+        printf("Domicilio: %s \n", alumno->domicilio);
+        printf("Telefono: %i \n", alumno->TE);
+        printf("Estado: %s\n", alumno->estado ? "Dado de alta" : "Dado de baja");
     }
-    for (int i = 0; i < sizeof(alumno->domicilio); i++)
-    {
-        printf("%c", alumno->domicilio[i]);
-    }
-    printf("%d\n", alumno->TE);
     fclose(archivo);
 }
+
+// OK
 
 void menu_modificar()
 {
@@ -304,15 +230,12 @@ void menu_modificar()
     printf("\n");
     printf("  1   Modificar Nombre\n");
     printf("  2   Modificar Apellido\n");
-    printf("  3   Modificar dni\n");
+    printf("  3   Modificar Domicilio\n");
+    printf("  4   Modificar Telefono\n");
     printf("\n");
     printf("  0   Salir\n");
     printf("\n");
     printf(" ------------------------------------------------------------------------------\n");
     printf("\n");
     printf("  Por favor seleccione una opción: " ANSI_YELLOW);
-}
-
-void modificar_nombre()
-{
 }

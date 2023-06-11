@@ -2,20 +2,16 @@
 #define ARCHIVOS_H
 #include "TP6_tabla_hash.h"
 
-void crear_txt();
-
-void mostrarArchivo(TablaHash th, FILE * archivo);
+void crear_archivo_binario();
 
 void alta(TablaHash th);
 
-void bajas(TablaHash th, int legajo);
+void baja(TablaHash th, int legajo);
 
-void modificar(FILE *archivo,TablaHash th,int legajo);
+void modificar(TablaHash th, int legajo);
 
-bool buscarAlumnoEnTabla(TablaHash th, int legajo);
+void mostrarArchivo();
 
 void menu_modificar();
 
-void mostrar_modificacion(FILE *archivo, TablaHash th, int legajo );
-
-#endif //ARCHIVOS_H
+#endif // ARCHIVOS_H
