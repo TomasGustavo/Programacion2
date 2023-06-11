@@ -73,6 +73,7 @@ void main_punto4()
     TablaHash th = th_crear(TAMANIO_MAXIMO, &FuncionHash);
     while (!salir_p4)
     {
+        limpiar_pantalla();
         menu_alumnos();
         int validador = scanf("%i", &opcion);
         while (validador != 1 || opcion < 0 || opcion > 9)
@@ -100,8 +101,9 @@ void main_punto4()
     }
 }
 
- void main_punto5(){
-     const int N_MIN = 1;
+void main_punto5()
+{
+    const int N_MIN = 1;
     const int N_MAX = 2000;
     const int A_MAX = 10000;
 
@@ -164,7 +166,7 @@ void main_punto4()
     cargar_AVL_HASH(repeticiones, clave, min, max);
     pausa();
     limpiar_pantalla();
- }
+}
 
 /// @brief Menú principal del TP de tabla hash
 void menu_principal()
@@ -207,7 +209,6 @@ int main()
         {
 
         case 1:
-            menu_alumnos();
             main_punto4();
             break;
         case 2:
