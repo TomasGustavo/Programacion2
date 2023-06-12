@@ -113,7 +113,7 @@ void main_punto5()
 
     int min, max, repeticiones, clave, validador;
     // Cantidad de repeticiones
-    printf(ANSI_bMAGENTA "Ingrese la cantidad de repeticiones que se ejecutara la búsqueda de un clave en las estructuras [1-100000]: " ANSI_YELLOW);
+    printf(ANSI_bMAGENTA "Ingrese la cantidad de repeticiones que se ejecutara la búsqueda de un clave en las estructuras [2-100000]: " ANSI_YELLOW);
     validador = scanf("%d", &repeticiones);
     vaciar_buffer();
     while (validador != 1 || repeticiones < N_MIN || repeticiones > 100000)
@@ -121,7 +121,7 @@ void main_punto5()
         printf(ANSI_RED "\t\t-------- ERROR -------- \n");
         printf("DATO FUERA DE RANGO\n\n" ANSI_RESET);
         pausa();
-        printf(ANSI_bMAGENTA "Ingrese la cantidad de repeticiones que se ejecutara la búsqueda de un clave en las estructuras [1-100000]: " ANSI_YELLOW);
+        printf(ANSI_bMAGENTA "Ingrese la cantidad de repeticiones que se ejecutara la búsqueda de un clave en las estructuras [2-100000]: " ANSI_YELLOW);
         validador = scanf("%d", &repeticiones);
         vaciar_buffer();
     }
@@ -232,7 +232,7 @@ void main_6b(TablaHash *th)
         printf(ANSI_bMAGENTA "Año: " ANSI_YELLOW);
         validador = scanf("%u", &anio);
         vaciar_buffer();
-        while (validador != 1 || anio < 2020 || anio > 2023)
+        while (validador != 1 || anio < 2020 || anio > 2025)
         {
             printf(ANSI_RED "\t\t-------- ERROR -------- \n");
             printf("DATO FUERA DE RANGO\n\n" ANSI_RESET);

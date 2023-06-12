@@ -326,7 +326,7 @@ void modificar(TablaHash th, int legajo)
                     break;
                 case 4:
                     printf(ANSI_BLUE "\nEscriba el nuevo numero de teléfono: " ANSI_YELLOW);
-                    scanf("%lld", &alumno->TE);
+                    validador = scanf("%lld", &alumno->TE);
                     vaciar_buffer();
                     while(validador!=1 || alumno->TE <= 0){
                         if(validador!=1){
