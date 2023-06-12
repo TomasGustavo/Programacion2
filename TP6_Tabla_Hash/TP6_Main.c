@@ -82,9 +82,8 @@ void main_punto4()
         {
             printf(ANSI_RED "Opción incorrecta\n" ANSI_RESET);
             printf(ANSI_BLUE "  Por favor seleccione una opción: " ANSI_YELLOW);
-            while (getchar() != '\n')
-                ;
             validador = scanf("%i", &opcion);
+            vaciar_buffer();
         }
         switch (opcion)
         {

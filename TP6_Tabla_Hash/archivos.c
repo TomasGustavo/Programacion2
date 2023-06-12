@@ -6,8 +6,23 @@
 #include "tabla_hash.h"
 #include "archivos.h"
 
-// Valida si todos los elementos de una cadena son letras o espacios
-bool validarCadenaAlfa(const char* cadena) {
+/// @brief Elimina los espacios a la izquierda de una cadena
+/// @param cadena string a modificar
+void eliminar_espacios_izquierda(char *cadena)
+{
+    while (cadena[0] == ' ')
+    {
+        for (int j = 0; j < strlen(cadena); j++)
+        {
+            cadena[j] = cadena[j + 1];
+        }
+    }
+}
+
+/// @brief Valida si todos los elementos de una cadena son letras o espacios, de ser así, elimina todos los espacios a su izquierda
+/// @param cadena string a evaluar
+/// @return true si es valida, false si no lo es
+bool validarCadenaAlfa(char* cadena) {
     int i = 0;
     
     while (cadena[i] != '\0') {
@@ -16,19 +31,51 @@ bool validarCadenaAlfa(const char* cadena) {
         }
         i++;
     }
+
+    eliminar_espacios_izquierda(cadena);
     
     return true;
 }
 
-// valida si el string es valido, si es valido lo de vuelve tal cual, sino pide reingresar dato.
+/// @brief corrobora si la cadena solo contiene espacios
+/// @param cadena string a evaluar
+/// @return true si son solo espacios, false si no lo son
+bool soloEspacios (const char* cadena){
+    int i = 0;
+
+    while(cadena[i] != '\0'){
+        if (!isspace(cadena[i])){
+            return false;
+        }
+        i++;
+           
+    }
+    return true;
+    
+}
+
+/// @brief valida si el string es valido, si es valido lo de vuelve tal cual, sino pide reingresar dato.
+/// @param cadena string a evaluar
+/// @param atributo atributo del alumno que recibe ("nombre","apellido", etc.)
 void validarString(char *cadena, char atributo[]){
-    while(!validarCadenaAlfa(cadena)){
-        printf(ANSI_bRED"\t\t-----ERROR-----\n");
-        printf(ANSI_bRED"Por favor solo ingresar caracteres alfabéticos");
-        printf(ANSI_GREEN "Ingrese %s del alumno: ",atributo);
-        printf(ANSI_YELLOW"");
-        fgets(cadena, 20, stdin);
-        cadena[strcspn(cadena, "\n")] = '\0'; // Eliminar el carácter de nueva línea 
+    while(!validarCadenaAlfa(cadena)  || soloEspacios(cadena)){
+        if(!validarCadenaAlfa(cadena)){
+            printf(ANSI_bRED"\t\t-----ERROR-----\n");
+            printf(ANSI_bRED"Por favor solo ingresar caracteres alfabéticos\n");
+            printf(ANSI_GREEN "Ingrese %s del alumno: ",atributo);
+            printf(ANSI_YELLOW"");
+            fgets(cadena, 20, stdin);
+            cadena[strcspn(cadena, "\n")] = '\0'; // Eliminar el carácter de nueva línea 
+        }
+        else{
+            printf(ANSI_bRED"\t\t-----ERROR-----\n");
+            printf(ANSI_bRED"Por favor de no ingresar solo espacios\n");
+            printf(ANSI_GREEN "Ingrese %s del alumno: ",atributo);
+            printf(ANSI_YELLOW"");
+            fgets(cadena, 20, stdin);
+            cadena[strcspn(cadena, "\n")] = '\0'; // Eliminar el carácter de nueva línea 
+        }
+        
     }
 }
 
@@ -142,7 +189,7 @@ void alta(TablaHash th)
         printf(ANSI_GREEN "Ingrese Teléfono del alumno: " ANSI_YELLOW);
         validador = scanf("%lld", &alumno->TE);
         vaciar_buffer();
-        while(validador!=1 || alumno->TE <= 0){
+        while(validador!=1 || alumno->TE <= 0 || alumno->TE>999999999999){
             if(validador!=1){
                 printf(ANSI_bRED"\t\t-----ERROR-----\n");
                 printf(ANSI_bRED"Por favor solo ingresar números, ingresar teléfono nuevamente: ");
@@ -151,7 +198,8 @@ void alta(TablaHash th)
             }
             else{
                 printf(ANSI_bRED"\t\t-----ERROR-----\n");
-                printf(ANSI_bRED"Dato fuera de rango, ingresar teléfono nuevamente: ");
+                printf(ANSI_bRED"numero de teléfono demasiado largo, por favor ingresar menos de 12 dígitos\n");
+                printf(ANSI_bRED"ingresar teléfono nuevamente: ");
                 validador = scanf("%lld", &alumno->TE);
                 vaciar_buffer();
             }    
