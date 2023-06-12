@@ -6,6 +6,32 @@
 #include "tabla_hash.h"
 #include "archivos.h"
 
+// Valida si todos los elementos de una cadena son letras o espacios
+bool validarCadenaAlfa(const char* cadena) {
+    int i = 0;
+    
+    while (cadena[i] != '\0') {
+        if (!isalpha(cadena[i]) && !isspace(cadena[i])) {
+            return false;
+        }
+        i++;
+    }
+    
+    return true;
+}
+
+// valida si el string es valido, si es valido lo de vuelve tal cual, sino pide reingresar dato.
+void validarString(char *cadena, char atributo[]){
+    while(!validarCadenaAlfa(cadena)){
+        printf(ANSI_bRED"\t\t-----ERROR-----\n");
+        printf(ANSI_bRED"Por favor solo ingresar caracteres alfabéticos");
+        printf(ANSI_GREEN "Ingrese %s del alumno: ",atributo);
+        printf(ANSI_YELLOW"");
+        fgets(cadena, 20, stdin);
+        cadena[strcspn(cadena, "\n")] = '\0'; // Eliminar el carácter de nueva línea 
+    }
+}
+
 void continuar()
 {
     printf(ANSI_bMAGENTA "\nPresione 'Y' si desea ver el archivo.dat, cualquier otra tecla para omitir: " ANSI_YELLOW);
@@ -64,8 +90,22 @@ void alta(TablaHash th)
     int *posicion = malloc(sizeof(int));
     int legajo_buscar;
     printf(ANSI_RED "\nIngrese legajo del alumno: " ANSI_YELLOW);
-    scanf("%d", &legajo_buscar);
+    int validador = scanf("%d", &legajo_buscar);
     vaciar_buffer();
+    while(validador != 1 || legajo_buscar < 1 || legajo_buscar > 999999){
+        if(validador!=1){
+            printf(ANSI_bRED"\t\t-----ERROR-----\n");
+            printf(ANSI_bRED"Por favor solo ingresar números, ingresar legajo nuevamente [1 - 999.999]: ");
+            validador = scanf("%d", &legajo_buscar);
+            vaciar_buffer();
+        }
+        else{
+            printf(ANSI_bRED"\t\t-----ERROR-----\n");
+            printf(ANSI_bRED"Dato fuera de rango, ingresar legajo nuevamente [1 - 999.999]: ");
+            validador = scanf("%d", &legajo_buscar);
+            vaciar_buffer();
+        }    
+    }
     if (buscarAlumnoEnTabla(th, legajo_buscar))
     {
         x = th_recuperar(th, legajo_buscar);
@@ -90,14 +130,32 @@ void alta(TablaHash th)
         printf(ANSI_GREEN "Ingrese Nombre del alumno: " ANSI_YELLOW);
         fgets(alumno->nombre, 20, stdin);
         alumno->nombre[strcspn(alumno->nombre, "\n")] = '\0'; // Eliminar el carácter de nueva línea
+        validarString(alumno->nombre,"Nombre");
         printf(ANSI_GREEN "Ingrese Apellido del alumno: " ANSI_YELLOW);
         fgets(alumno->apellido, 20, stdin);
         alumno->apellido[strcspn(alumno->apellido, "\n")] = '\0'; // Eliminar el carácter de nueva línea
+        validarString(alumno->apellido,"Apellido");
         printf(ANSI_GREEN "Ingrese Domicilio del alumno: " ANSI_YELLOW);
         fgets(alumno->domicilio, 20, stdin);
         alumno->domicilio[strcspn(alumno->domicilio, "\n")] = '\0'; // Eliminar el carácter de nueva línea
+        validarString(alumno->domicilio,"Domicilio");
         printf(ANSI_GREEN "Ingrese Teléfono del alumno: " ANSI_YELLOW);
-        scanf("%lld", &alumno->TE);
+        validador = scanf("%lld", &alumno->TE);
+        vaciar_buffer();
+        while(validador!=1 || alumno->TE <= 0){
+            if(validador!=1){
+                printf(ANSI_bRED"\t\t-----ERROR-----\n");
+                printf(ANSI_bRED"Por favor solo ingresar números, ingresar teléfono nuevamente: ");
+                validador = scanf("%lld", &alumno->TE);
+                vaciar_buffer();
+            }
+            else{
+                printf(ANSI_bRED"\t\t-----ERROR-----\n");
+                printf(ANSI_bRED"Dato fuera de rango, ingresar teléfono nuevamente: ");
+                validador = scanf("%lld", &alumno->TE);
+                vaciar_buffer();
+            }    
+        }
         alumno->estado = true;
         fseek(archivo, 0, SEEK_END);
         fwrite(alumno, sizeof(struct AlumnoRep), 1, archivo);
@@ -200,21 +258,38 @@ void modificar(TablaHash th, int legajo)
                     printf(ANSI_BLUE "\nEscriba el nuevo nombre: " ANSI_YELLOW);
                     fgets(alumno->nombre, 20, stdin);
                     alumno->nombre[strcspn(alumno->nombre, "\n")] = '\0'; // Eliminar el carácter de nueva línea
+                    validarString(alumno->nombre,"Nombre");
                     break;
                 case 2:
                     printf(ANSI_BLUE "\nEscriba el nuevo apellido: " ANSI_YELLOW);
                     fgets(alumno->apellido, 20, stdin);
                     alumno->apellido[strcspn(alumno->apellido, "\n")] = '\0'; // Eliminar el carácter de nueva línea
+                    validarString(alumno->apellido,"Apellido");
                     break;
                 case 3:
                     printf(ANSI_BLUE "\nEscriba el nuevo domicilio: " ANSI_YELLOW);
                     fgets(alumno->domicilio, 20, stdin);
                     alumno->domicilio[strcspn(alumno->domicilio, "\n")] = '\0'; // Eliminar el carácter de nueva línea
+                    validarString(alumno->domicilio,"Domicilio");
                     break;
                 case 4:
                     printf(ANSI_BLUE "\nEscriba el nuevo numero de teléfono: " ANSI_YELLOW);
                     scanf("%lld", &alumno->TE);
                     vaciar_buffer();
+                    while(validador!=1 || alumno->TE <= 0){
+                        if(validador!=1){
+                            printf(ANSI_bRED"\t\t-----ERROR-----\n");
+                            printf(ANSI_bRED"Por favor solo ingresar números, ingresar teléfono nuevamente: ");
+                            validador = scanf("%lld", &alumno->TE);
+                            vaciar_buffer();
+                        }
+                        else{
+                            printf(ANSI_bRED"\t\t-----ERROR-----\n");
+                            printf(ANSI_bRED"Dato fuera de rango, ingresar teléfono nuevamente: ");
+                            validador = scanf("%lld", &alumno->TE);
+                            vaciar_buffer();
+                        }    
+                    }
                     break;
                 case 0:
                     salir = true;
