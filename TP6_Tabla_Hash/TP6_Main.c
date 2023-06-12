@@ -108,7 +108,7 @@ void main_punto4()
 
 void main_punto5()
 {
-    const int N_MIN = 1;
+    const int N_MIN = 2;
     const int N_MAX = 2000;
     const int A_MAX = 10000;
 
