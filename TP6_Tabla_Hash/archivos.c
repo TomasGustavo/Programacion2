@@ -245,6 +245,10 @@ void baja(TablaHash th, int legajo)
         fwrite(alumno, sizeof(struct AlumnoRep), 1, archivo);
         printf(ANSI_GREEN "Baja lógica correctamente!\n" ANSI_RESET);
     }
+    else{
+       printf(ANSI_RED "\n\tEl alumno no existe!" ANSI_RESET);
+        pausa(); 
+    }
     fclose(archivo);
     continuar();
 }
