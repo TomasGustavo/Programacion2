@@ -245,6 +245,10 @@ void baja(TablaHash th, int legajo)
         fwrite(alumno, sizeof(struct AlumnoRep), 1, archivo);
         printf(ANSI_GREEN "Baja lógica correctamente!\n" ANSI_RESET);
     }
+    else{
+       printf(ANSI_RED "\n\tEl alumno no existe!" ANSI_RESET);
+        pausa(); 
+    }
     fclose(archivo);
     continuar();
 }
@@ -322,7 +326,7 @@ void modificar(TablaHash th, int legajo)
                     break;
                 case 4:
                     printf(ANSI_BLUE "\nEscriba el nuevo numero de teléfono: " ANSI_YELLOW);
-                    scanf("%lld", &alumno->TE);
+                    validador = scanf("%lld", &alumno->TE);
                     vaciar_buffer();
                     while(validador!=1 || alumno->TE <= 0){
                         if(validador!=1){
