@@ -257,8 +257,8 @@ void mostrarArchivo()
     Alumno alumno = (Alumno)malloc(sizeof(struct AlumnoRep));
     archivo = fopen("alumnos.dat", "rb");
     fseek(archivo, 0, SEEK_END);
-    long tamaño = ftell(archivo);
-    if ((archivo == NULL) || (tamaño == 0))
+    long tamanio = ftell(archivo);
+    if ((archivo == NULL) || (tamanio == 0))
     {
         printf(ANSI_RED "No se pudo abrir el archivo.\n" ANSI_RESET);
         pausa();
