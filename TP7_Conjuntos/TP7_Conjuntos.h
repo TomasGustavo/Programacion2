@@ -28,4 +28,14 @@ void pausa();
 
 void limpiar_pantalla();
 
+Conjunto cargarConjunto();
+
+Conjunto p2_interseccion(Conjunto conjunto_a, Conjunto conjunto_b);
+
+Conjunto p2_union(Conjunto A, Conjunto B);
+
+Conjunto p2_diferencia(Conjunto A, Conjunto B);
+
+
+
 #endif // Conjuntos

@@ -6,6 +6,39 @@
 #include <string.h>
 #include "TP7_Conjuntos.h"
 
+
+/// @brief Main punto 2
+void main_punto2(){
+    Conjunto Cinterseccion, Cunion, Cdiferencia;
+    Conjunto A = cto_crear();
+    Conjunto B = cto_crear();
+    printf(ANSI_bMAGENTA"Carga del primer conjunto\n");
+    A = cargarConjunto();
+    printf(ANSI_bMAGENTA"Carga del segundo conjunto\n");
+    B = cargarConjunto();
+
+    int cardA = cto_cantidad_elementos(A);
+    int cardB = cto_cantidad_elementos(B);
+
+    if (cardA == 0 && cardB == 0){
+         printf(ANSI_bMAGENTA"Los conjuntos estan vacios\n");
+    } else {
+        Cinterseccion = p2_interseccion(A, B);
+        Cdiferencia = p2_diferencia(A, B);
+        Cunion = p2_union(A,B);
+        printf(ANSI_bMAGENTA"Interseccion: \n"ANSI_bBLUE);
+        cto_mostrar(Cinterseccion);
+        printf(ANSI_bMAGENTA"Diferencia: \n"ANSI_bBLUE);
+        cto_mostrar(Cdiferencia);
+        printf(ANSI_bMAGENTA"Unión: \n"ANSI_bBLUE);
+        cto_mostrar(Cunion);
+        printf(ANSI_bMAGENTA"Pertenencia: \n"ANSI_bBLUE);
+        vaciar_buffer();
+        pausa();
+        limpiar_pantalla();
+    }
+}
+
 /// @brief Menú principal del TP de conjuntos
 void menu_principal()
 {
@@ -50,14 +83,11 @@ int main()
 
         switch (opcion)
         {
-        case 1:
-            // main_punto2();
-            break;
         case 2:
-            // main_punto3();
+            main_punto2();
             break;
         case 3:
-            // main_punto4();
+            // main_punto3();
             break;
         case 4:
             // main_punto4();
