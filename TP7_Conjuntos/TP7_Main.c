@@ -39,12 +39,43 @@ void main_punto2(){
     }
 }
 
+void main_punto3(){
+    const int MIN = 2;
+    const int MAX = 10;
+    int cant_c;
+    Lista lista_c = l_crear();
+    printf("Cuantos conjuntos desea cargar? entre [2 - 10]: ");
+    int validador = scanf("%d",&cant_c);
+    vaciar_buffer();
+    while (validador != 1 || cant_c < MIN || cant_c > MAX){
+        printf("----- ERROR -----");
+        printf("DATO fuera de rango, ingrese una cantidad entre 2 y 10: ");
+        validador = scanf("%d",&cant_c);
+        vaciar_buffer();
+    }
+    for(int i=0; i<cant_c; i++){
+        Conjunto conjunto = cto_crear();
+        conjunto = cargarConjunto();
+        TipoElemento x = te_crear_con_valor(i,conjunto);
+        l_agregar(lista_c,x);
+        free(conjunto);
+        free(x);
+    }
+    /*for(int i=0; i<cant_c; i++){
+        TipoElemento x = l_recuperar(lista_c,i+1);
+        Conjunto conjunto = (Conjunto*)x->valor;
+        cto_mostrar(conjunto);
+    }*/
+    
+    pausa();
+}
+
 /// @brief Menú principal del TP de conjuntos
 void menu_principal()
 {
     printf("\n");
     printf(ANSI_BLUE "  ============================================================================\n");
-    printf(" |                               TP6 TABLA HASH                               |\n");
+    printf(" |                               TP6 CONJUNTOS                               |\n");
     printf("  ============================================================================\n");
     printf("\n");
     printf("  2   Operaciones de conjuntos\n");
@@ -87,7 +118,7 @@ int main()
             main_punto2();
             break;
         case 3:
-            // main_punto3();
+            main_punto3();
             break;
         case 4:
             // main_punto4();
