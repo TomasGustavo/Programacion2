@@ -70,6 +70,34 @@ void main_punto3(){
     pausa();
 }
 
+void main_punto8(){
+    Conjunto A = cto_crear();
+    Conjunto B = cto_crear();
+    bool iguales;
+   
+    printf(ANSI_bMAGENTA"Carga del primer conjunto\n");
+    A = cargarConjunto();
+    vaciar_buffer();
+    printf(ANSI_bMAGENTA"Carga del segundo conjunto\n");
+    B = cargarConjunto();
+    vaciar_buffer();
+
+    if (cto_cantidad_elementos(A) != cto_cantidad_elementos(B)){
+        printf(ANSI_RED"\n\n\tLos conjuntos NO son iguales pues no tiene el mismo tamaño uno del otro!\n");
+    }
+    else{
+        iguales = conjuntos_iguales(A,B);
+        if(iguales==true){
+            printf(ANSI_bGREEN"\n\n\tEl conjunto A es igual al B y viceversa!\n");
+        }
+        else{
+            printf(ANSI_bRED"\n\n\tLos conjuntos son distintos!\n");
+        }
+    }
+    pausa();
+}
+
+
 /// @brief Menú principal del TP de conjuntos
 void menu_principal()
 {
@@ -133,7 +161,7 @@ int main()
             // main_punto7();
             break;
         case 8:
-            // main_punto8();
+            main_punto8();
             break;
         case 0:
             salir = true;

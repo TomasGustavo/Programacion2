@@ -40,4 +40,6 @@ Conjunto p3_union(Lista lista_c);
 
 Conjunto p3_interseccion(Lista lista_c);
 
+bool conjuntos_iguales(Conjunto a, Conjunto b);
+
 #endif // Conjuntos

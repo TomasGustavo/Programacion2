@@ -43,8 +43,7 @@ Conjunto cargarConjunto()
     {
         printf(ANSI_RED "Entrada invalida.\n" ANSI_RESET);
         printf(ANSI_BLUE "Ingrese la cardinalidad del conjunto: " ANSI_YELLOW);
-        while (getchar() != '\n')
-            ;
+        vaciar_buffer();
         validador = scanf("%i", &tamano);
     }
     if (tamano > 0)
@@ -59,8 +58,7 @@ Conjunto cargarConjunto()
             {
                 printf(ANSI_RED "Entrada invalida.\n" ANSI_RESET);
                 printf(ANSI_bBLUE "Ingrese el elemento #%d del conjunto: " ANSI_YELLOW, i);
-                while (getchar() != '\n')
-                    ;
+                vaciar_buffer();
                 validador = scanf("%d", &claveIngresada);
                 pertenece = cto_pertenece(A, claveIngresada);
             }
@@ -74,6 +72,8 @@ Conjunto cargarConjunto()
         printf(ANSI_bGREEN "El conjunto fue creado vacío \n");
     return A;
 }
+
+// ------------------------------------ PUNTO 2 ------------------------------------------
 
 Conjunto p2_interseccion(Conjunto A, Conjunto B)
 {
@@ -137,7 +137,7 @@ Conjunto p2_diferencia(Conjunto A, Conjunto B){
 }
 
 
-// punto 3
+// ------------------------------------ PUNTO 3 ------------------------------------------
 
 Conjunto p3_union(Lista lista_c){
     Conjunto rta = cto_crear();
@@ -184,4 +184,19 @@ Conjunto p3_interseccion(Lista lista_c){
         existe=0;
     }
     return rta;
+}
+
+// ------------------------------------ PUNTO 8 ------------------------------------------
+
+bool conjuntos_iguales(Conjunto a, Conjunto b){
+    TipoElemento x = te_crear(0);
+    int cantidad = cto_cantidad_elementos(a);
+
+    for (int i = 1;i<=cantidad;i++){
+        x = cto_recuperar(a,i);
+        if(!cto_pertenece(b,x->clave)){
+            return false;
+        }
+    }
+    return true;
 }
