@@ -6,68 +6,231 @@
 #include <string.h>
 #include "TP7_Conjuntos.h"
 
-
 /// @brief Main punto 2
-void main_punto2(){
+void main_punto2()
+{
     Conjunto Cinterseccion, Cunion, Cdiferencia;
     Conjunto A = cto_crear();
     Conjunto B = cto_crear();
-    printf(ANSI_bMAGENTA"Carga del primer conjunto\n");
+    printf(ANSI_bMAGENTA "Carga del conjunto A\n");
     A = cargarConjunto();
-    printf(ANSI_bMAGENTA"Carga del segundo conjunto\n");
+    printf(ANSI_bMAGENTA "Carga del conjunto B\n");
     B = cargarConjunto();
 
     int cardA = cto_cantidad_elementos(A);
     int cardB = cto_cantidad_elementos(B);
 
-    if (cardA == 0 && cardB == 0){
-         printf(ANSI_bMAGENTA"Los conjuntos estan vacios\n");
-    } else {
+    if (cardA == 0 && cardB == 0)
+    {
+        printf(ANSI_bMAGENTA "Los conjuntos estan vacios\n");
+    }
+    else
+    {
+        limpiar_pantalla();
+        printf(ANSI_bMAGENTA "CONJUNTO A\n" ANSI_bYELLOW);
+        cto_mostrar(A);
+        printf(ANSI_bMAGENTA "CONJUNTO B\n" ANSI_bYELLOW);
+        cto_mostrar(B);
         Cinterseccion = p2_interseccion(A, B);
         Cdiferencia = p2_diferencia(A, B);
-        Cunion = p2_union(A,B);
-        printf(ANSI_bMAGENTA"Interseccion: \n"ANSI_bBLUE);
+        Cunion = p2_union(A, B);
+        printf(ANSI_bMAGENTA "Interseccion: \n" ANSI_bBLUE);
         cto_mostrar(Cinterseccion);
-        printf(ANSI_bMAGENTA"Diferencia: \n"ANSI_bBLUE);
+        printf(ANSI_bMAGENTA "Diferencia de A con B: \n" ANSI_bBLUE);
         cto_mostrar(Cdiferencia);
-        printf(ANSI_bMAGENTA"Unión: \n"ANSI_bBLUE);
+        printf(ANSI_bMAGENTA "Diferencia de B con A: \n" ANSI_bBLUE);
+        Cdiferencia = p2_diferencia(B, A);
+        cto_mostrar(Cdiferencia);
+        printf(ANSI_bMAGENTA "Unión: \n" ANSI_bBLUE);
         cto_mostrar(Cunion);
-        printf(ANSI_bMAGENTA"Pertenencia: \n"ANSI_bBLUE);
+        printf(ANSI_bMAGENTA "Pertenencia: \n" ANSI_bBLUE);
         vaciar_buffer();
         pausa();
         limpiar_pantalla();
     }
 }
 
-void main_punto3(){
+void main_punto3()
+{
     const int MIN = 2;
     const int MAX = 10;
     int cant_c;
     Lista lista_c = l_crear();
-    Conjunto C= cto_crear();
-    Conjunto C2= cto_crear();
+    Conjunto C = cto_crear();
+    Conjunto C2 = cto_crear();
     printf("Cuantos conjuntos desea cargar? entre [2 - 10]: ");
-    int validador = scanf("%d",&cant_c);
+    int validador = scanf("%d", &cant_c);
     vaciar_buffer();
-    while (validador != 1 || cant_c < MIN || cant_c > MAX){
+    while (validador != 1 || cant_c < MIN || cant_c > MAX)
+    {
         printf("----- ERROR -----");
         printf("DATO fuera de rango, ingrese una cantidad entre 2 y 10: ");
-        validador = scanf("%d",&cant_c);
+        validador = scanf("%d", &cant_c);
         vaciar_buffer();
     }
-    for(int i=0; i<cant_c; i++){
+    for (int i = 0; i < cant_c; i++)
+    {
         Conjunto conjunto = cto_crear();
         conjunto = cargarConjunto();
-        TipoElemento x = te_crear_con_valor(i,conjunto);
-        l_agregar(lista_c,x);
-        
+        TipoElemento x = te_crear_con_valor(i, conjunto);
+        l_agregar(lista_c, x);
     }
-    
+
     C = p3_union(lista_c);
     cto_mostrar(C);
     C2 = p3_interseccion(lista_c);
     cto_mostrar(C2);
     pausa();
+}
+
+void main_punto5()
+{
+    Conjunto Cdiferencia;
+    Conjunto A = cto_crear();
+    Conjunto B = cto_crear();
+    printf(ANSI_bMAGENTA "Carga del conjunto A\n");
+    A = cargarConjunto();
+    printf(ANSI_bMAGENTA "Carga del conjunto B\n");
+    B = cargarConjunto();
+
+    int cardA = cto_cantidad_elementos(A);
+    int cardB = cto_cantidad_elementos(B);
+
+    if (cardA == 0 && cardB == 0)
+    {
+        printf(ANSI_bMAGENTA "Los conjuntos estan vacios\n");
+    }
+    else
+    {
+        limpiar_pantalla();
+        printf(ANSI_bMAGENTA "CONJUNTO A\n" ANSI_bYELLOW);
+        cto_mostrar(A);
+        printf(ANSI_bMAGENTA "CONJUNTO B\n" ANSI_bYELLOW);
+        cto_mostrar(B);
+        printf(ANSI_bMAGENTA "Diferencia simétrica: \n" ANSI_bBLUE);
+        Cdiferencia = diferencia_simetrica(A, B);
+        cto_mostrar(Cdiferencia);
+        vaciar_buffer();
+        pausa();
+        limpiar_pantalla();
+    }
+}
+
+void main_punto6()
+{
+    Conjunto Cdiferencia;
+    Conjunto A = cto_crear();
+    Conjunto B = cto_crear();
+    bool AsubB, BsubA;
+    printf(ANSI_bMAGENTA "Carga del conjunto A\n");
+    A = cargarConjunto();
+    printf(ANSI_bMAGENTA "Carga del conjunto B\n");
+    B = cargarConjunto();
+
+    int cardA = cto_cantidad_elementos(A);
+    int cardB = cto_cantidad_elementos(B);
+
+    if (cardA == 0 && cardB == 0)
+    {
+        printf(ANSI_bMAGENTA "Los conjuntos estan vacios\n");
+    }
+    else
+    {
+        limpiar_pantalla();
+        printf(ANSI_bMAGENTA "CONJUNTO A\n" ANSI_bYELLOW);
+        cto_mostrar(A);
+        printf(ANSI_bMAGENTA "CONJUNTO B\n" ANSI_bYELLOW);
+        cto_mostrar(B);
+        AsubB = esSubconjunto(A, B);
+        BsubA = esSubconjunto(B, A);
+        if (AsubB && BsubA)
+        {
+            printf(ANSI_RED "No son subconjuntos propios porque son iguales\n" ANSI_bBLUE);
+        }
+        else if (AsubB)
+        {
+            printf(ANSI_bGREEN "A es subconjunto propio de B\n" ANSI_bBLUE);
+        }
+        else if (BsubA)
+        {
+            printf(ANSI_bGREEN "B es subconjunto propio de A\n" ANSI_bBLUE);
+        }
+        else
+        {
+            printf(ANSI_RED "Ninguno es subconjunto propio del otro\n" ANSI_bBLUE);
+        }
+        printf(ANSI_bMAGENTA "La complejidad es \n" ANSI_bBLUE);
+        vaciar_buffer();
+        pausa();
+        limpiar_pantalla();
+    }
+}
+
+void main_punto7()
+{
+    Conjunto Cdiferencia;
+    Conjunto A = cto_crear();
+    Conjunto B = cto_crear();
+    Conjunto C = cto_crear();
+    printf(ANSI_bMAGENTA "Carga del conjunto A\n");
+    A = cargarConjunto();
+    printf(ANSI_bMAGENTA "Carga del conjunto B\n");
+    B = cargarConjunto();
+    printf(ANSI_bMAGENTA "Carga del conjunto C\n");
+    C = cargarConjunto();
+
+    int cardA = cto_cantidad_elementos(A);
+    int cardB = cto_cantidad_elementos(B);
+    int cardC = cto_cantidad_elementos(C);
+
+    if (cardA == 0 && cardB == 0 && cardC == 0)
+    {
+        printf(ANSI_bMAGENTA "Los conjuntos estan vacios\n");
+    }
+    else
+    {
+        limpiar_pantalla();
+        printf(ANSI_bMAGENTA "CONJUNTO A\n" ANSI_bYELLOW);
+        cto_mostrar(A);
+        printf(ANSI_bMAGENTA "CONJUNTO B\n" ANSI_bYELLOW);
+        cto_mostrar(B);
+        printf(ANSI_bMAGENTA "CONJUNTO C\n" ANSI_bYELLOW);
+        cto_mostrar(C);
+        if (esSubconjunto(A, B))
+            printf(ANSI_bMAGENTA "A es subconjunto total de B\n");
+        else if (esSubconjuntoParcial(A, B))
+            printf(ANSI_bMAGENTA "A es subconjunto parcial de B\n");
+
+        if (esSubconjunto(A, C))
+            printf(ANSI_bMAGENTA "A es subconjunto total de C\n");
+        else if (esSubconjuntoParcial(A, C))
+            printf(ANSI_bMAGENTA "A es subconjunto parcial de C\n");
+
+        if (esSubconjunto(B, A))
+            printf(ANSI_bMAGENTA "B es subconjunto total de A\n");
+        else if (esSubconjuntoParcial(B, A))
+            printf(ANSI_bMAGENTA "B es subconjunto parcial de A\n");
+
+        if (esSubconjunto(B, C))
+            printf(ANSI_bMAGENTA "B es subconjunto total de C\n");
+        else if (esSubconjuntoParcial(B, C))
+            printf(ANSI_bMAGENTA "B es subconjunto parcial de C\n");
+
+        if (esSubconjunto(C, A))
+            printf(ANSI_bMAGENTA "C es subconjunto total de A\n");
+        else if (esSubconjuntoParcial(C, A))
+            printf(ANSI_bMAGENTA "C es subconjunto parcial de A\n");
+
+        if (esSubconjunto(C, B))
+            printf(ANSI_bMAGENTA "C es subconjunto total de B\n");
+        else if (esSubconjuntoParcial(C, B))
+            printf(ANSI_bMAGENTA "C es subconjunto parcial de B\n");
+
+        printf(ANSI_bMAGENTA "La complejidad es \n" ANSI_bBLUE);
+        vaciar_buffer();
+        pausa();
+        limpiar_pantalla();
+    }
 }
 
 /// @brief Menú principal del TP de conjuntos
@@ -124,13 +287,13 @@ int main()
             // main_punto4();
             break;
         case 5:
-            // main_punto5();
+            main_punto5();
             break;
         case 6:
-            // main_punto6();
+            main_punto6();
             break;
         case 7:
-            // main_punto7();
+            main_punto7();
             break;
         case 8:
             // main_punto8();

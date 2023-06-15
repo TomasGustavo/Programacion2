@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
+#include <math.h>
 #include "listas.h"
 #include "tipo_elemento.h"
 #include "arbol-avl.h"
@@ -124,15 +125,18 @@ Conjunto p2_diferencia(Conjunto A, Conjunto B){
             cto_agregar(res,X);
         }
     }
-    card = cto_cantidad_elementos(B);
-        for (int i = 1; i <= card; i++)
-    {
-        X = cto_recuperar(B,i);
-        if (!cto_pertenece(A, X->clave))
-        {
-            cto_agregar(res,X);
-        }
-    }
+    return res;
+}
+
+
+Conjunto diferencia_simetrica(Conjunto A, Conjunto B){
+    Conjunto res = cto_crear();
+    TipoElemento X = te_crear(0);
+    Conjunto difA = cto_diferencia(A,B);
+    Conjunto difB = cto_diferencia(B,A);
+    res = cto_union(difA,difB);
+    free(difA);
+    free(difB);
     return res;
 }
 
@@ -184,4 +188,35 @@ Conjunto p3_interseccion(Lista lista_c){
         existe=0;
     }
     return rta;
+}
+
+bool esSubconjunto(Conjunto A, Conjunto B){
+    bool res = true;
+    TipoElemento X = te_crear(0);
+    int card = cto_cantidad_elementos(A);
+    int i = 1;
+    while (i <= card && res)
+    {
+        X = cto_recuperar(A, i);
+        if(!cto_pertenece(B,X->clave)) res = false;
+        i++;
+    }
+    return res;
+}
+
+bool esSubconjuntoParcial(Conjunto A, Conjunto B){
+    bool res = true;
+    TipoElemento X = te_crear(0);
+    int card = cto_cantidad_elementos(A);
+    int elementos = 0;
+    int i = 1;
+    while (i <= card)
+    {
+        X = cto_recuperar(A, i);
+        if(cto_pertenece(B,X->clave)) elementos++;
+        i++;
+    }
+    int cant = ceil((float)card / 2);
+    if (elementos < cant) res = false;
+    return res;
 }

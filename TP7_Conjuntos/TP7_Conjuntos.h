@@ -40,4 +40,10 @@ Conjunto p3_union(Lista lista_c);
 
 Conjunto p3_interseccion(Lista lista_c);
 
+Conjunto diferencia_simetrica(Conjunto A, Conjunto B);
+
+bool esSubconjunto(Conjunto A, Conjunto B);
+
+bool esSubconjuntoParcial(Conjunto A, Conjunto B);
+
 #endif // Conjuntos
