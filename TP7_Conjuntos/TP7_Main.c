@@ -70,6 +70,40 @@ void main_punto3(){
     pausa();
 }
 
+void main_punto4(){
+    Conjunto A = cto_crear();
+    Conjunto B = cto_crear();
+    Conjunto C = cto_crear();
+    int rta;
+   
+    printf(ANSI_bMAGENTA"Carga del primer conjunto\n");
+    A = cargarConjunto();
+    vaciar_buffer();
+    printf(ANSI_bMAGENTA"Carga del segundo conjunto\n");
+    B = cargarConjunto();
+    vaciar_buffer();
+    printf(ANSI_bMAGENTA"Carga del tercer conjunto\n");
+    C = cargarConjunto();
+    vaciar_buffer();
+
+    rta = transitividad(A,B,C);
+    switch (rta)
+    {
+    case 0:
+        printf(ANSI_bGREEN"\n\n\tA es subConjunto de B y B es subconjunto de C, por lo tanto A es subconjunto de C");
+        break;
+    case 1:
+        printf(ANSI_bRED"\n\n\tA es subConjunto de B pero B NO es subconjunto de C, por lo tanto A NO es subconjunto de C");
+        break;
+    case 2:
+        printf(ANSI_bGREEN"\n\n\tA No es subConjunto de B, por lo tanto no cumple con la regla de transitividad por mas que B sea subconjunto de C");
+        break;
+    default:
+        break;
+    }
+    pausa();
+}
+
 void main_punto8(){
     Conjunto A = cto_crear();
     Conjunto B = cto_crear();
@@ -149,7 +183,7 @@ int main()
             main_punto3();
             break;
         case 4:
-            // main_punto4();
+            main_punto4();
             break;
         case 5:
             // main_punto5();

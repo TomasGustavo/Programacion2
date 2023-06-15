@@ -40,6 +40,10 @@ Conjunto p3_union(Lista lista_c);
 
 Conjunto p3_interseccion(Lista lista_c);
 
+bool esSubConjunto(Conjunto A, Conjunto B);
+
+int transitividad(Conjunto A, Conjunto B, Conjunto C);
+
 bool conjuntos_iguales(Conjunto a, Conjunto b);
 
 #endif // Conjuntos

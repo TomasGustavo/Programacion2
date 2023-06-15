@@ -186,6 +186,38 @@ Conjunto p3_interseccion(Lista lista_c){
     return rta;
 }
 
+// ------------------------------------ PUNTO 4 ------------------------------------------
+
+bool esSubConjunto(Conjunto A, Conjunto B){
+    TipoElemento x = te_crear(0);
+    int cantidad = cto_cantidad_elementos(A);
+    for(int i=1;i<=cantidad;i++){
+        x = cto_recuperar(A,i);
+        if(!cto_pertenece(B,x->clave)){
+            return false;
+        }
+    }
+    return true;
+}
+
+int transitividad(Conjunto A, Conjunto B, Conjunto C){
+    bool ab,bc;
+
+   
+/**/if(ab = esSubConjunto(A,B)){
+        if(bc = esSubConjunto(B,C)){
+            return 0;  // 0 = A es subconjunto de C
+        }
+        else{
+            return 1; // 1 = A es subconjunto de B pero B no es subconjunto de C
+        }
+    }
+    else{
+        return 2; // 2 = A no es subconjunto de B
+    }
+    
+}
+
 // ------------------------------------ PUNTO 8 ------------------------------------------
 
 bool conjuntos_iguales(Conjunto a, Conjunto b){
