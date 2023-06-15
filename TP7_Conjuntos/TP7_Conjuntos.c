@@ -44,8 +44,7 @@ Conjunto cargarConjunto()
     {
         printf(ANSI_RED "Entrada invalida.\n" ANSI_RESET);
         printf(ANSI_BLUE "Ingrese la cardinalidad del conjunto: " ANSI_YELLOW);
-        while (getchar() != '\n')
-            ;
+        vaciar_buffer();
         validador = scanf("%i", &tamano);
     }
     if (tamano > 0)
@@ -60,8 +59,7 @@ Conjunto cargarConjunto()
             {
                 printf(ANSI_RED "Entrada invalida.\n" ANSI_RESET);
                 printf(ANSI_bBLUE "Ingrese el elemento #%d del conjunto: " ANSI_YELLOW, i);
-                while (getchar() != '\n')
-                    ;
+                vaciar_buffer();
                 validador = scanf("%d", &claveIngresada);
                 pertenece = cto_pertenece(A, claveIngresada);
             }
@@ -75,6 +73,8 @@ Conjunto cargarConjunto()
         printf(ANSI_bGREEN "El conjunto fue creado vacío \n");
     return A;
 }
+
+// ------------------------------------ PUNTO 2 ------------------------------------------
 
 Conjunto p2_interseccion(Conjunto A, Conjunto B)
 {
@@ -128,6 +128,7 @@ Conjunto p2_diferencia(Conjunto A, Conjunto B){
     return res;
 }
 
+// ------------------------------------ PUNTO 5 ------------------------------------------
 
 Conjunto diferencia_simetrica(Conjunto A, Conjunto B){
     Conjunto res = cto_crear();
@@ -141,7 +142,7 @@ Conjunto diferencia_simetrica(Conjunto A, Conjunto B){
 }
 
 
-// punto 3
+// ------------------------------------ PUNTO 3 ------------------------------------------
 
 Conjunto p3_union(Lista lista_c){
     Conjunto rta = cto_crear();
@@ -190,6 +191,8 @@ Conjunto p3_interseccion(Lista lista_c){
     return rta;
 }
 
+// ------------------------------------ PUNTO 6 y 7 ------------------------------------------
+/*
 bool esSubconjunto(Conjunto A, Conjunto B){
     bool res = true;
     TipoElemento X = te_crear(0);
@@ -203,6 +206,9 @@ bool esSubconjunto(Conjunto A, Conjunto B){
     }
     return res;
 }
+*/
+
+// ------------------------------------ PUNTO 7 ------------------------------------------
 
 bool esSubconjuntoParcial(Conjunto A, Conjunto B){
     bool res = true;
@@ -219,4 +225,50 @@ bool esSubconjuntoParcial(Conjunto A, Conjunto B){
     int cant = ceil((float)card / 2);
     if (elementos < cant) res = false;
     return res;
+}
+// ------------------------------------ PUNTO 4 ------------------------------------------
+
+bool esSubConjunto(Conjunto A, Conjunto B){
+    TipoElemento x = te_crear(0);
+    int cantidad = cto_cantidad_elementos(A);
+    for(int i=1;i<=cantidad;i++){
+        x = cto_recuperar(A,i);
+        if(!cto_pertenece(B,x->clave)){
+            return false;
+        }
+    }
+    return true;
+}
+
+int transitividad(Conjunto A, Conjunto B, Conjunto C){
+    bool ab,bc;
+
+   
+/**/if(ab = esSubConjunto(A,B)){
+        if(bc = esSubConjunto(B,C)){
+            return 0;  // 0 = A es subconjunto de C
+        }
+        else{
+            return 1; // 1 = A es subconjunto de B pero B no es subconjunto de C
+        }
+    }
+    else{
+        return 2; // 2 = A no es subconjunto de B
+    }
+    
+}
+
+// ------------------------------------ PUNTO 8 ------------------------------------------
+
+bool conjuntos_iguales(Conjunto a, Conjunto b){
+    TipoElemento x = te_crear(0);
+    int cantidad = cto_cantidad_elementos(a);
+
+    for (int i = 1;i<=cantidad;i++){
+        x = cto_recuperar(a,i);
+        if(!cto_pertenece(b,x->clave)){
+            return false;
+        }
+    }
+    return true;
 }

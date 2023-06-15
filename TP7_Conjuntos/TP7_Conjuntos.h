@@ -46,4 +46,8 @@ bool esSubconjunto(Conjunto A, Conjunto B);
 
 bool esSubconjuntoParcial(Conjunto A, Conjunto B);
 
+int transitividad(Conjunto A, Conjunto B, Conjunto C);
+
+bool conjuntos_iguales(Conjunto a, Conjunto b);
+
 #endif // Conjuntos

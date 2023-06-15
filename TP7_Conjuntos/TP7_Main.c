@@ -233,6 +233,68 @@ void main_punto7()
     }
 }
 
+void main_punto4(){
+    Conjunto A = cto_crear();
+    Conjunto B = cto_crear();
+    Conjunto C = cto_crear();
+    int rta;
+   
+    printf(ANSI_bMAGENTA"Carga del primer conjunto\n");
+    A = cargarConjunto();
+    vaciar_buffer();
+    printf(ANSI_bMAGENTA"Carga del segundo conjunto\n");
+    B = cargarConjunto();
+    vaciar_buffer();
+    printf(ANSI_bMAGENTA"Carga del tercer conjunto\n");
+    C = cargarConjunto();
+    vaciar_buffer();
+
+    rta = transitividad(A,B,C);
+    switch (rta)
+    {
+    case 0:
+        printf(ANSI_bGREEN"\n\n\tA es subConjunto de B y B es subconjunto de C, por lo tanto A es subconjunto de C");
+        break;
+    case 1:
+        printf(ANSI_bRED"\n\n\tA es subConjunto de B pero B NO es subconjunto de C, por lo tanto A NO es subconjunto de C");
+        break;
+    case 2:
+        printf(ANSI_bGREEN"\n\n\tA No es subConjunto de B, por lo tanto no cumple con la regla de transitividad por mas que B sea subconjunto de C");
+        break;
+    default:
+        break;
+    }
+    pausa();
+}
+
+void main_punto8(){
+    Conjunto A = cto_crear();
+    Conjunto B = cto_crear();
+    bool iguales;
+   
+    printf(ANSI_bMAGENTA"Carga del primer conjunto\n");
+    A = cargarConjunto();
+    vaciar_buffer();
+    printf(ANSI_bMAGENTA"Carga del segundo conjunto\n");
+    B = cargarConjunto();
+    vaciar_buffer();
+
+    if (cto_cantidad_elementos(A) != cto_cantidad_elementos(B)){
+        printf(ANSI_RED"\n\n\tLos conjuntos NO son iguales pues no tiene el mismo tamaño uno del otro!\n");
+    }
+    else{
+        iguales = conjuntos_iguales(A,B);
+        if(iguales==true){
+            printf(ANSI_bGREEN"\n\n\tEl conjunto A es igual al B y viceversa!\n");
+        }
+        else{
+            printf(ANSI_bRED"\n\n\tLos conjuntos son distintos!\n");
+        }
+    }
+    pausa();
+}
+
+
 /// @brief Menú principal del TP de conjuntos
 void menu_principal()
 {
@@ -284,7 +346,7 @@ int main()
             main_punto3();
             break;
         case 4:
-            // main_punto4();
+            main_punto4();
             break;
         case 5:
             main_punto5();
@@ -296,7 +358,7 @@ int main()
             main_punto7();
             break;
         case 8:
-            // main_punto8();
+            main_punto8();
             break;
         case 0:
             salir = true;
