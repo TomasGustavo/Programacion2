@@ -44,6 +44,8 @@ Conjunto diferencia_simetrica(Conjunto A, Conjunto B);
 
 bool esSubconjunto(Conjunto A, Conjunto B);
 
+bool esSubConjunto4(Conjunto A, Conjunto B);
+
 bool esSubconjuntoParcial(Conjunto A, Conjunto B);
 
 int transitividad(Conjunto A, Conjunto B, Conjunto C);

@@ -192,7 +192,7 @@ Conjunto p3_interseccion(Lista lista_c){
 }
 
 // ------------------------------------ PUNTO 6 y 7 ------------------------------------------
-/*
+/**/
 bool esSubconjunto(Conjunto A, Conjunto B){
     bool res = true;
     TipoElemento X = te_crear(0);
@@ -206,7 +206,7 @@ bool esSubconjunto(Conjunto A, Conjunto B){
     }
     return res;
 }
-*/
+
 
 // ------------------------------------ PUNTO 7 ------------------------------------------
 
@@ -228,7 +228,7 @@ bool esSubconjuntoParcial(Conjunto A, Conjunto B){
 }
 // ------------------------------------ PUNTO 4 ------------------------------------------
 
-bool esSubConjunto(Conjunto A, Conjunto B){
+bool esSubConjunto4(Conjunto A, Conjunto B){
     TipoElemento x = te_crear(0);
     int cantidad = cto_cantidad_elementos(A);
     for(int i=1;i<=cantidad;i++){
@@ -242,10 +242,8 @@ bool esSubConjunto(Conjunto A, Conjunto B){
 
 int transitividad(Conjunto A, Conjunto B, Conjunto C){
     bool ab,bc;
-
-   
-/**/if(ab = esSubConjunto(A,B)){
-        if(bc = esSubConjunto(B,C)){
+    if(ab = esSubConjunto4(A,B)){
+        if(bc = esSubConjunto4(B,C)){
             return 0;  // 0 = A es subconjunto de C
         }
         else{
