@@ -40,12 +40,12 @@ bool cto_pertenece(Conjunto conjunto, int clave) {
     while (hay_siguiente(iter)) {
         elemento = siguiente(iter);
         if (elemento->clave == clave) {
-            break;
+            return true;
         }
     }
     free(iter);
 
-    return elemento->clave == clave;
+    return false;
 }
 
 Conjunto cto_union(Conjunto conjunto_a, Conjunto conjunto_b) {

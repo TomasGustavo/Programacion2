@@ -44,6 +44,8 @@ void main_punto3(){
     const int MAX = 10;
     int cant_c;
     Lista lista_c = l_crear();
+    Conjunto C= cto_crear();
+    Conjunto C2= cto_crear();
     printf("Cuantos conjuntos desea cargar? entre [2 - 10]: ");
     int validador = scanf("%d",&cant_c);
     vaciar_buffer();
@@ -58,15 +60,13 @@ void main_punto3(){
         conjunto = cargarConjunto();
         TipoElemento x = te_crear_con_valor(i,conjunto);
         l_agregar(lista_c,x);
-        free(conjunto);
-        free(x);
+        
     }
-    /*for(int i=0; i<cant_c; i++){
-        TipoElemento x = l_recuperar(lista_c,i+1);
-        Conjunto conjunto = (Conjunto*)x->valor;
-        cto_mostrar(conjunto);
-    }*/
     
+    C = p3_union(lista_c);
+    cto_mostrar(C);
+    C2 = p3_interseccion(lista_c);
+    cto_mostrar(C2);
     pausa();
 }
 

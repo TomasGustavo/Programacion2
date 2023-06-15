@@ -135,3 +135,53 @@ Conjunto p2_diferencia(Conjunto A, Conjunto B){
     }
     return res;
 }
+
+
+// punto 3
+
+Conjunto p3_union(Lista lista_c){
+    Conjunto rta = cto_crear();
+    Conjunto A = cto_crear();
+    TipoElemento x = te_crear(0);
+    TipoElemento c = te_crear(0);
+    int card;
+    int largo = l_longitud(lista_c);
+    
+    for(int i = 0;i < largo; i++){
+        x = l_recuperar(lista_c,i+1);
+        card = cto_cantidad_elementos((Conjunto)x->valor);
+        for(int j =1; j<=card;j++){
+            c = cto_recuperar(x->valor,j);
+            if(!cto_pertenece(rta,c->clave)){
+                cto_agregar(rta,c);
+            }
+        }
+    }
+    return rta;
+}
+
+Conjunto p3_interseccion(Lista lista_c){
+    Conjunto rta = cto_crear();
+    TipoElemento x = te_crear(0);
+    TipoElemento c = te_crear(0);
+    TipoElemento c2 = te_crear(0);
+    int card,card2,existe=0;
+    int largo = l_longitud(lista_c);
+
+    c = l_recuperar(lista_c,1);
+    card = cto_cantidad_elementos((Conjunto)c->valor);
+    for (int i=1;i<=card;i++){
+        x = cto_recuperar(c->valor,i);
+        for(int j = largo;j>1;j--){
+            c2 = l_recuperar(lista_c,j);
+            if(cto_pertenece(c2->valor,x->clave)){
+                existe++;
+            }
+        }
+        if(existe==(largo-1)){
+            cto_agregar(rta,x);
+        }
+        existe=0;
+    }
+    return rta;
+}
