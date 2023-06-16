@@ -22,7 +22,7 @@ void main_punto2()
 
     if (cardA == 0 && cardB == 0)
     {
-        printf(ANSI_bMAGENTA "Los conjuntos estan vacios\n");
+        printf(ANSI_bMAGENTA "Los conjuntos estan vacíos\n");
     }
     else
     {
@@ -34,7 +34,7 @@ void main_punto2()
         Cinterseccion = p2_interseccion(A, B);
         Cdiferencia = p2_diferencia(A, B);
         Cunion = p2_union(A, B);
-        printf(ANSI_bMAGENTA "Interseccion: \n" ANSI_bBLUE);
+        printf(ANSI_bMAGENTA "Intersección: \n" ANSI_bBLUE);
         cto_mostrar(Cinterseccion);
         printf(ANSI_bMAGENTA "Diferencia de A con B: \n" ANSI_bBLUE);
         cto_mostrar(Cdiferencia);
@@ -98,7 +98,7 @@ void main_punto5()
 
     if (cardA == 0 && cardB == 0)
     {
-        printf(ANSI_bMAGENTA "Los conjuntos estan vacios\n");
+        printf(ANSI_bMAGENTA "Los conjuntos estan vacíos\n");
     }
     else
     {
@@ -123,16 +123,16 @@ void main_punto6()
     Conjunto B = cto_crear();
     bool AsubB, BsubA;
     printf(ANSI_bMAGENTA "Carga del conjunto A\n");
-    A = cargarConjunto();
+    A = cargarConjuntoPositivos();
     printf(ANSI_bMAGENTA "Carga del conjunto B\n");
-    B = cargarConjunto();
+    B = cargarConjuntoPositivos();
 
     int cardA = cto_cantidad_elementos(A);
     int cardB = cto_cantidad_elementos(B);
 
     if (cardA == 0 && cardB == 0)
     {
-        printf(ANSI_bMAGENTA "Los conjuntos estan vacios\n");
+        printf(ANSI_bMAGENTA "Los conjuntos estan vacíos\n");
     }
     else
     {
@@ -185,7 +185,7 @@ void main_punto7()
 
     if (cardA == 0 && cardB == 0 && cardC == 0)
     {
-        printf(ANSI_bMAGENTA "Los conjuntos estan vacios\n");
+        printf(ANSI_bMAGENTA "Los conjuntos estan vacíos\n");
     }
     else
     {
@@ -239,6 +239,10 @@ void main_punto4(){
     Conjunto C = cto_crear();
     int rta;
    
+    printf(ANSI_bRED"\n\n\t----- Atención -----\n\n");
+    printf(ANSI_bMAGENTA"Los conjuntos se cargaran en orden, esto quiere decir que para demostrar la transitividad primero se cargara el conjunto A, luego el conjunto B y por ultimo el C, TENER ESTO EN CUENTA!\n");
+    pausa();
+    limpiar_pantalla();
     printf(ANSI_bMAGENTA"Carga del primer conjunto\n");
     A = cargarConjunto();
     vaciar_buffer();

@@ -30,6 +30,8 @@ void limpiar_pantalla();
 
 Conjunto cargarConjunto();
 
+Conjunto cargarConjuntoPositivos();
+
 Conjunto p2_interseccion(Conjunto conjunto_a, Conjunto conjunto_b);
 
 Conjunto p2_union(Conjunto A, Conjunto B);

@@ -74,6 +74,48 @@ Conjunto cargarConjunto()
     return A;
 }
 
+Conjunto cargarConjuntoPositivos()
+{
+    int tamano, validador, claveIngresada;
+    TipoElemento X;
+    bool pertenece;
+    Conjunto A = cto_crear();
+    printf(ANSI_BLUE "Ingrese la cardinalidad del conjunto: " ANSI_YELLOW);
+    validador = scanf("%i", &tamano);
+    while ((validador != 1) || (tamano < 0) || (tamano > 99))
+    {
+        printf(ANSI_RED "Entrada invalida.\n" ANSI_RESET);
+        printf(ANSI_BLUE "Ingrese la cardinalidad del conjunto: " ANSI_YELLOW);
+        vaciar_buffer();
+        validador = scanf("%i", &tamano);
+    }
+    if (tamano > 0)
+    {
+        for (int i = 1; i <= tamano; i++)
+        {
+            printf(ANSI_bBLUE "Ingrese el elemento #%d del conjunto: " ANSI_YELLOW, i);
+            validador = scanf("%d", &claveIngresada);
+            pertenece = cto_pertenece(A, claveIngresada);
+            while ((validador != 1) || (claveIngresada < 0) || (claveIngresada >= 10000) ||
+                   pertenece)
+            {
+                printf(ANSI_RED "Entrada invalida. Ingresar solo numero naturales (> 0)\n" ANSI_RESET);
+                printf(ANSI_bBLUE "Ingrese el elemento #%d del conjunto: " ANSI_YELLOW, i);
+                vaciar_buffer();
+                validador = scanf("%d", &claveIngresada);
+                pertenece = cto_pertenece(A, claveIngresada);
+            }
+            X = te_crear(claveIngresada);
+            cto_agregar(A,X);
+        }
+        printf(ANSI_bGREEN "El conjunto fue cargado con éxito \n");
+        cto_mostrar(A);
+    }
+    else
+        printf(ANSI_bGREEN "El conjunto fue creado vacío \n");
+    return A;
+}
+
 // ------------------------------------ PUNTO 2 ------------------------------------------
 
 Conjunto p2_interseccion(Conjunto A, Conjunto B)
