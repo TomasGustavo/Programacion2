@@ -159,7 +159,7 @@ void main_punto6()
         {
             printf(ANSI_RED "Ninguno es subconjunto propio del otro\n" ANSI_bBLUE);
         }
-        printf(ANSI_bMAGENTA "La complejidad es \n" ANSI_bBLUE);
+        printf(ANSI_bMAGENTA "\nLa complejidad algorítmica utilizando la implementación de Arboles AVL seria O(n * log n) ya que el 'cto_recuperar' es O(n) y el 'cto_pertenece' es O(log n), resultado en Orden lineal * logaritmo, que su vez se repite n veces por el while que depende de la cantidad de elementos del subconjunto.\n\nLa complejidad algorítmica utilizando la implementación de listas seria O(n^2) ya que 'cto_recuperar' es O(n) y el 'cto_pertenece' O(n) que su vez se repite n veces por el while que depende de la cantidad de elementos del subconjunto.\n" ANSI_bBLUE);
         vaciar_buffer();
         pausa();
         limpiar_pantalla();
@@ -225,45 +225,45 @@ void main_punto7()
             printf(ANSI_bMAGENTA "C es subconjunto total de B\n");
         else if (esSubconjuntoParcial(C, B))
             printf(ANSI_bMAGENTA "C es subconjunto parcial de B\n");
-
-        printf(ANSI_bMAGENTA "La complejidad es \n" ANSI_bBLUE);
+        printf(ANSI_bMAGENTA "\nLa complejidad algorítmica infiere de la misma manera ya sea para 'esSubconjunto' como para 'esSubconjuntoParcial; utilizando la implementación de Arboles AVL seria O(n * log n) ya que el 'cto_recuperar' es O(n) y el 'cto_pertenece' es O(log n), resultado en Orden lineal * logaritmo, que su vez se repite n veces por el while que depende de la cantidad de elementos del subconjunto. Estos procesos se repiten 6 veces, lo cual no aumenta el nivel de complejidad.\n\nLa complejidad algorítmica infiere de la misma manera ya sea para 'esSubconjunto' como para 'esSubconjuntoParcial; utilizando la implementación de listas seria O(n^2) ya que 'cto_recuperar' es O(n) y el 'cto_pertenece' O(n) que su vez se repite n veces por el while que depende de la cantidad de elementos del subconjunto. Estos procesos se repiten 6 veces, lo cual no aumenta el nivel de complejidad.\n" ANSI_bBLUE);
         vaciar_buffer();
         pausa();
         limpiar_pantalla();
     }
 }
 
-void main_punto4(){
+void main_punto4()
+{
     Conjunto A = cto_crear();
     Conjunto B = cto_crear();
     Conjunto C = cto_crear();
     int rta;
-   
-    printf(ANSI_bRED"\n\n\t----- Atención -----\n\n");
-    printf(ANSI_bMAGENTA"Los conjuntos se cargaran en orden, esto quiere decir que para demostrar la transitividad primero se cargara el conjunto A, luego el conjunto B y por ultimo el C, TENER ESTO EN CUENTA!\n");
+
+    printf(ANSI_bRED "\n\n\t----- Atención -----\n\n");
+    printf(ANSI_bMAGENTA "Los conjuntos se cargaran en orden, esto quiere decir que para demostrar la transitividad primero se cargara el conjunto A, luego el conjunto B y por ultimo el C, TENER ESTO EN CUENTA!\n");
     pausa();
     limpiar_pantalla();
-    printf(ANSI_bMAGENTA"Carga del primer conjunto\n");
+    printf(ANSI_bMAGENTA "Carga del primer conjunto\n");
     A = cargarConjunto();
     vaciar_buffer();
-    printf(ANSI_bMAGENTA"Carga del segundo conjunto\n");
+    printf(ANSI_bMAGENTA "Carga del segundo conjunto\n");
     B = cargarConjunto();
     vaciar_buffer();
-    printf(ANSI_bMAGENTA"Carga del tercer conjunto\n");
+    printf(ANSI_bMAGENTA "Carga del tercer conjunto\n");
     C = cargarConjunto();
     vaciar_buffer();
 
-    rta = transitividad(A,B,C);
+    rta = transitividad(A, B, C);
     switch (rta)
     {
     case 0:
-        printf(ANSI_bGREEN"\n\n\tA es subConjunto de B y B es subconjunto de C, por lo tanto A es subconjunto de C");
+        printf(ANSI_bGREEN "\n\n\tA es subConjunto de B y B es subconjunto de C, por lo tanto A es subconjunto de C");
         break;
     case 1:
-        printf(ANSI_bRED"\n\n\tA es subConjunto de B pero B NO es subconjunto de C, por lo tanto A NO es subconjunto de C");
+        printf(ANSI_bRED "\n\n\tA es subConjunto de B pero B NO es subconjunto de C, por lo tanto A NO es subconjunto de C");
         break;
     case 2:
-        printf(ANSI_bGREEN"\n\n\tA No es subConjunto de B, por lo tanto no cumple con la regla de transitividad por mas que B sea subconjunto de C");
+        printf(ANSI_bGREEN "\n\n\tA No es subConjunto de B, por lo tanto no cumple con la regla de transitividad por mas que B sea subconjunto de C");
         break;
     default:
         break;
@@ -271,33 +271,38 @@ void main_punto4(){
     pausa();
 }
 
-void main_punto8(){
+void main_punto8()
+{
     Conjunto A = cto_crear();
     Conjunto B = cto_crear();
     bool iguales;
-   
-    printf(ANSI_bMAGENTA"Carga del primer conjunto\n");
+
+    printf(ANSI_bMAGENTA "Carga del primer conjunto\n");
     A = cargarConjunto();
     vaciar_buffer();
-    printf(ANSI_bMAGENTA"Carga del segundo conjunto\n");
+    printf(ANSI_bMAGENTA "Carga del segundo conjunto\n");
     B = cargarConjunto();
     vaciar_buffer();
 
-    if (cto_cantidad_elementos(A) != cto_cantidad_elementos(B)){
-        printf(ANSI_RED"\n\n\tLos conjuntos NO son iguales pues no tiene el mismo tamaño uno del otro!\n");
+    if (cto_cantidad_elementos(A) != cto_cantidad_elementos(B))
+    {
+        printf(ANSI_RED "\n\nLos conjuntos NO son iguales pues no tiene el mismo tamaño uno del otro!\n");
     }
-    else{
-        iguales = conjuntos_iguales(A,B);
-        if(iguales==true){
-            printf(ANSI_bGREEN"\n\n\tEl conjunto A es igual al B y viceversa!\n");
+    else
+    {
+        iguales = conjuntos_iguales(A, B);
+        if (iguales == true)
+        {
+            printf(ANSI_bGREEN "\n\nEl conjunto A es igual al B y viceversa!\n");
         }
-        else{
-            printf(ANSI_bRED"\n\n\tLos conjuntos son distintos!\n");
+        else
+        {
+            printf(ANSI_bRED "\n\nLos conjuntos son distintos!\n");
         }
     }
+    printf(ANSI_bMAGENTA "\nLa complejidad algorítmica utilizando la implementación de Arboles AVL seria O(n * log n) ya que el 'cto_recuperar' es O(n) y el 'cto_pertenece' es O(log n), resultado en Orden lineal * logaritmo, que su vez se repite n veces por el while que depende de la cantidad de elementos del subconjunto.\n\nLa complejidad algorítmica utilizando la implementación de listas seria O(n^2) ya que 'cto_recuperar' es O(n) y el 'cto_pertenece' O(n) que su vez se repite n veces por el while que depende de la cantidad de elementos del subconjunto.\n" ANSI_bBLUE);
     pausa();
 }
-
 
 /// @brief Menú principal del TP de conjuntos
 void menu_principal()
