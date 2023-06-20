@@ -38,6 +38,8 @@ Conjunto p2_union(Conjunto A, Conjunto B);
 
 Conjunto p2_diferencia(Conjunto A, Conjunto B);
 
+bool p2_pertenece(Conjunto A, Conjunto B);
+
 Conjunto p3_union(Lista lista_c);
 
 Conjunto p3_interseccion(Lista lista_c);

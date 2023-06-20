@@ -172,6 +172,37 @@ Conjunto p2_diferencia(Conjunto A, Conjunto B)
     return res;
 }
 
+bool p2_pertenece(Conjunto A, Conjunto B){
+    bool resultado = true;
+    int card_A = cto_cantidad_elementos(A);
+    int card_B = cto_cantidad_elementos(B);
+    TipoElemento X;
+    if (card_A <= card_B)
+    {
+        for (int i = 0; i < card_A; i++)
+        {
+            X = cto_recuperar(A, i);
+            resultado = cto_pertenece(B, X->clave);
+            if (resultado == false)
+            {
+                return resultado;
+            }
+        }
+    }
+    else{
+        for (int i = 0; i < card_B; i++)
+        {
+            X = cto_recuperar(B, i);
+            resultado = cto_pertenece(A, X->clave);
+            if (resultado == false)
+            {
+                return resultado;
+            }
+        }
+    }
+    return resultado;
+}
+
 // ------------------------------------ PUNTO 5 ------------------------------------------
 
 Conjunto diferencia_simetrica(Conjunto A, Conjunto B)
