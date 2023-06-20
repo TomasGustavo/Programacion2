@@ -56,4 +56,6 @@ int transitividad(Conjunto A, Conjunto B, Conjunto C);
 
 bool conjuntos_iguales(Conjunto a, Conjunto b);
 
+bool p2_perteneceClave(Conjunto A, int clave);
+
 #endif // Conjuntos

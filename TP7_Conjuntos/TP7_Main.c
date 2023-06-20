@@ -9,6 +9,7 @@
 /// @brief Main punto 2
 void main_punto2()
 {
+    int validador, clave;
     Conjunto Cinterseccion, Cunion, Cdiferencia;
     Conjunto A = cto_crear();
     Conjunto B = cto_crear();
@@ -16,11 +17,22 @@ void main_punto2()
     A = cargarConjunto();
     printf(ANSI_bMAGENTA "Carga del conjunto B\n");
     B = cargarConjunto();
+    printf(ANSI_bMAGENTA "Ingrese una clave: \n");
+        validador = scanf("%d", &clave);
+        while ((validador != 1) || (clave < -10000) || (clave >= 10000))
+        {
+            printf(ANSI_RED "Entrada invalida.\n" ANSI_RESET);
+            printf(ANSI_bBLUE "Ingrese una clave: " ANSI_YELLOW);
+            vaciar_buffer();
+            validador = scanf("%d", &clave);
+        }
 
     int cardA = cto_cantidad_elementos(A);
     int cardB = cto_cantidad_elementos(B);
 
-    bool pertenece = false;
+    bool perteneceA = false;
+    bool perteneceB = false;
+
 
     if (cardA == 0 && cardB == 0)
     {
@@ -36,7 +48,6 @@ void main_punto2()
         Cinterseccion = p2_interseccion(A, B);
         Cdiferencia = p2_diferencia(A, B);
         Cunion = p2_union(A, B);
-        pertenece = p2_pertenece(A, B);
         printf(ANSI_bMAGENTA "Intersección: \n" ANSI_bBLUE);
         cto_mostrar(Cinterseccion);
         printf(ANSI_bMAGENTA "Diferencia de A con B: \n" ANSI_bBLUE);
@@ -47,25 +58,12 @@ void main_punto2()
         printf(ANSI_bMAGENTA "Unión: \n" ANSI_bBLUE);
         cto_mostrar(Cunion);
         printf(ANSI_bMAGENTA "Pertenencia: \n" ANSI_bBLUE);
-        if (cardA <= cardB)
-        {
-            if (pertenece)
-            {
-                printf("El conjunto de A pertenece al conjunto de B\n");
-            }
-            else{
-                printf("El conjunto de A NO pertenece al conjunto de B y viceversa\n");
-            }
-        }
-        else{
-            if (pertenece)
-            {
-                printf("El conjunto de B pertenece al conjunto de A\n");
-            }
-            else{
-                printf("El conjunto de B NO pertenece al conjunto de A y viceversa\n");
-            }
-        }
+        perteneceA = p2_perteneceClave(A, clave);
+        perteneceB = p2_perteneceClave(B, clave);
+        if (perteneceA && perteneceB) printf(ANSI_bGREEN "La clave pertenece a ambos conjuntos");
+        else if (perteneceA) printf(ANSI_bGREEN "La clave pertenece al conjunto A");
+        else if (perteneceB) printf(ANSI_bGREEN "La clave pertenece al conjunto B");
+        else printf(ANSI_bRED "La clave no pertenece a ningun conjunto");
         vaciar_buffer();
         pausa();
         limpiar_pantalla();

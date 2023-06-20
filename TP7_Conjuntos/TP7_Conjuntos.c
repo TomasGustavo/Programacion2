@@ -172,6 +172,10 @@ Conjunto p2_diferencia(Conjunto A, Conjunto B)
     return res;
 }
 
+bool p2_perteneceClave(Conjunto A, int clave){
+    return cto_pertenece(A, clave);
+}
+
 bool p2_pertenece(Conjunto A, Conjunto B){
     bool resultado = true;
     int card_A = cto_cantidad_elementos(A);
