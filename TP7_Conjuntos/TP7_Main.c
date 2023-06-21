@@ -173,13 +173,10 @@ void main_punto6()
         {
             printf(ANSI_bGREEN "A es subconjunto propio de B\n" ANSI_bBLUE);
         }
-        else if (BsubA)
-        {
-            printf(ANSI_bGREEN "B es subconjunto propio de A\n" ANSI_bBLUE);
-        }
+        /*}*/
         else
         {
-            printf(ANSI_RED "Ninguno es subconjunto propio del otro\n" ANSI_bBLUE);
+            printf(ANSI_RED "A no es subconjunto propio de B\n" ANSI_bBLUE);
         }
     }
     printf(ANSI_bMAGENTA "\nLa complejidad algorítmica utilizando la implementación de Arboles AVL seria O(n * log n) ya que el 'cto_recuperar' es O(n) y el 'cto_pertenece' es O(log n), resultado en Orden lineal * logaritmo, que su vez se repite n veces por el while que depende de la cantidad de elementos del subconjunto.\n\nLa complejidad algorítmica utilizando la implementación de listas seria O(n^2) ya que 'cto_recuperar' es O(n) y el 'cto_pertenece' O(n) que su vez se repite n veces por el while que depende de la cantidad de elementos del subconjunto.\n" ANSI_bBLUE);
