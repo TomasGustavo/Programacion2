@@ -36,7 +36,7 @@ void main_punto2()
 
     if (cardA == 0 && cardB == 0)
     {
-        printf(ANSI_bMAGENTA "Los conjuntos estan vacíos\n");
+        printf(ANSI_bMAGENTA "\nLos conjuntos estan vacíos\n");
     }
     else
     {
@@ -64,10 +64,10 @@ void main_punto2()
         else if (perteneceA) printf(ANSI_bGREEN "La clave pertenece al conjunto A");
         else if (perteneceB) printf(ANSI_bGREEN "La clave pertenece al conjunto B");
         else printf(ANSI_bRED "La clave no pertenece a ningun conjunto");
-        vaciar_buffer();
-        pausa();
-        limpiar_pantalla();
     }
+    vaciar_buffer();
+    pausa();
+    limpiar_pantalla();
 }
 
 void main_punto3()
@@ -100,7 +100,9 @@ void main_punto3()
     cto_mostrar(C);
     C2 = p3_interseccion(lista_c);
     cto_mostrar(C2);
+    vaciar_buffer();
     pausa();
+    limpiar_pantalla();
 }
 
 void main_punto5()
@@ -118,7 +120,7 @@ void main_punto5()
 
     if (cardA == 0 && cardB == 0)
     {
-        printf(ANSI_bMAGENTA "Los conjuntos estan vacíos\n");
+        printf(ANSI_bMAGENTA "\nLos conjuntos estan vacíos\n");
     }
     else
     {
@@ -130,10 +132,10 @@ void main_punto5()
         printf(ANSI_bMAGENTA "Diferencia simétrica: \n" ANSI_bBLUE);
         Cdiferencia = diferencia_simetrica(A, B);
         cto_mostrar(Cdiferencia);
-        vaciar_buffer();
-        pausa();
-        limpiar_pantalla();
     }
+    vaciar_buffer();
+    pausa();
+    limpiar_pantalla();
 }
 
 void main_punto6()
@@ -152,7 +154,7 @@ void main_punto6()
 
     if (cardA == 0 && cardB == 0)
     {
-        printf(ANSI_bMAGENTA "Los conjuntos estan vacíos\n");
+        printf(ANSI_bMAGENTA "\nLos conjuntos estan vacíos\n");
     }
     else
     {
@@ -179,11 +181,11 @@ void main_punto6()
         {
             printf(ANSI_RED "Ninguno es subconjunto propio del otro\n" ANSI_bBLUE);
         }
-        printf(ANSI_bMAGENTA "\nLa complejidad algorítmica utilizando la implementación de Arboles AVL seria O(n * log n) ya que el 'cto_recuperar' es O(n) y el 'cto_pertenece' es O(log n), resultado en Orden lineal * logaritmo, que su vez se repite n veces por el while que depende de la cantidad de elementos del subconjunto.\n\nLa complejidad algorítmica utilizando la implementación de listas seria O(n^2) ya que 'cto_recuperar' es O(n) y el 'cto_pertenece' O(n) que su vez se repite n veces por el while que depende de la cantidad de elementos del subconjunto.\n" ANSI_bBLUE);
-        vaciar_buffer();
-        pausa();
-        limpiar_pantalla();
     }
+    printf(ANSI_bMAGENTA "\nLa complejidad algorítmica utilizando la implementación de Arboles AVL seria O(n * log n) ya que el 'cto_recuperar' es O(n) y el 'cto_pertenece' es O(log n), resultado en Orden lineal * logaritmo, que su vez se repite n veces por el while que depende de la cantidad de elementos del subconjunto.\n\nLa complejidad algorítmica utilizando la implementación de listas seria O(n^2) ya que 'cto_recuperar' es O(n) y el 'cto_pertenece' O(n) que su vez se repite n veces por el while que depende de la cantidad de elementos del subconjunto.\n" ANSI_bBLUE);
+    vaciar_buffer();
+    pausa();
+    limpiar_pantalla();
 }
 
 void main_punto7()
@@ -205,7 +207,7 @@ void main_punto7()
 
     if (cardA == 0 && cardB == 0 && cardC == 0)
     {
-        printf(ANSI_bMAGENTA "Los conjuntos estan vacíos\n");
+        printf(ANSI_bMAGENTA "\nLos conjuntos estan vacíos\n");
     }
     else
     {
@@ -245,11 +247,11 @@ void main_punto7()
             printf(ANSI_bMAGENTA "C es subconjunto total de B\n");
         else if (esSubconjuntoParcial(C, B))
             printf(ANSI_bMAGENTA "C es subconjunto parcial de B\n");
-        printf(ANSI_bMAGENTA "\nLa complejidad algorítmica infiere de la misma manera ya sea para 'esSubconjunto' como para 'esSubconjuntoParcial; utilizando la implementación de Arboles AVL seria O(n * log n) ya que el 'cto_recuperar' es O(n) y el 'cto_pertenece' es O(log n), resultado en Orden lineal * logaritmo, que su vez se repite n veces por el while que depende de la cantidad de elementos del subconjunto. Estos procesos se repiten 6 veces, lo cual no aumenta el nivel de complejidad.\n\nLa complejidad algorítmica infiere de la misma manera ya sea para 'esSubconjunto' como para 'esSubconjuntoParcial; utilizando la implementación de listas seria O(n^2) ya que 'cto_recuperar' es O(n) y el 'cto_pertenece' O(n) que su vez se repite n veces por el while que depende de la cantidad de elementos del subconjunto. Estos procesos se repiten 6 veces, lo cual no aumenta el nivel de complejidad.\n" ANSI_bBLUE);
-        vaciar_buffer();
-        pausa();
-        limpiar_pantalla();
     }
+    printf(ANSI_bMAGENTA "\nLa complejidad algorítmica infiere de la misma manera ya sea para 'esSubconjunto' como para 'esSubconjuntoParcial; utilizando la implementación de Arboles AVL seria O(n * log n) ya que el 'cto_recuperar' es O(n) y el 'cto_pertenece' es O(log n), resultado en Orden lineal * logaritmo, que su vez se repite n veces por el while que depende de la cantidad de elementos del subconjunto. Estos procesos se repiten 6 veces, lo cual no aumenta el nivel de complejidad.\n\nLa complejidad algorítmica infiere de la misma manera ya sea para 'esSubconjunto' como para 'esSubconjuntoParcial; utilizando la implementación de listas seria O(n^2) ya que 'cto_recuperar' es O(n) y el 'cto_pertenece' O(n) que su vez se repite n veces por el while que depende de la cantidad de elementos del subconjunto. Estos procesos se repiten 6 veces, lo cual no aumenta el nivel de complejidad.\n" ANSI_bBLUE);
+    vaciar_buffer();
+    pausa();
+    limpiar_pantalla();
 }
 
 void main_punto4()
